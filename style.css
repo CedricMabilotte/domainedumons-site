@@ -222,12 +222,16 @@ footer ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 1px;
-  background: var(--trait);
-  border: 1px solid var(--trait);
   margin: 1.5rem 0 2rem;
 }
 
-.tuile { background: var(--papier); padding: 1rem 1.1rem 1.1rem; }
+/* Le filet est porté par chaque tuile, pas par la grille : une case vide
+   reste couleur papier au lieu d'afficher un pavé gris. */
+.tuile {
+  background: var(--papier);
+  padding: 1rem 1.1rem 1.1rem;
+  box-shadow: 0 0 0 1px var(--trait);
+}
 
 .tuile .libelle {
   font-size: 0.75rem;
@@ -278,7 +282,7 @@ footer ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0
 .trace-tendance { fill: none; stroke: var(--alerte); stroke-width: 2; stroke-dasharray: 5 4; }
 .trace-zero { stroke: var(--encre-douce); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.6; }
 
-.curseur { stroke: var(--encre-douce); stroke-width: 1; opacity: 0.45; }
+.curseur { stroke: var(--encre-douce); stroke-width: 1; }
 .point-actif { fill: var(--trace); stroke: var(--papier); stroke-width: 2; }
 
 .infobulle {

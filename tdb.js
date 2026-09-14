@@ -101,8 +101,9 @@ function graphe(opts) {
     el("polyline", { class: "trace-ligne", points: points.map((p, i) => `${X(i)},${Y(p.y)}`).join(" "), opacity: 0.55 }, svg);
   } else if (type === "barres") {
     points.forEach((p, i) => {
+      if (!p.y) return;                       /* une valeur nulle ne dessine pas de trait */
       const y0 = Y(Math.max(0, e.bas)), y1 = Y(p.y);
-      el("rect", { class: "trace-barre", x: Xb(i) - larg / 2, y: Math.min(y0, y1), width: larg, height: Math.max(1, Math.abs(y1 - y0)), rx: Math.min(2, larg / 2) }, svg);
+      el("rect", { class: "trace-barre", x: Xb(i) - larg / 2, y: Math.min(y0, y1), width: larg, height: Math.max(1.5, Math.abs(y1 - y0)), rx: Math.min(2, larg / 2) }, svg);
     });
   } else {
     el("polyline", { class: "trace-ligne", points: points.map((p, i) => `${X(i)},${Y(p.y)}`).join(" ") }, svg);
@@ -113,8 +114,8 @@ function graphe(opts) {
   }
 
   /* survol */
-  const curseur = el("line", { class: "curseur", y1: mg.t, y2: mg.t + ih, opacity: 0 }, svg);
-  const pt = el("circle", { class: "point-actif", r: 4, opacity: 0 }, svg);
+  const curseur = el("line", { class: "curseur", y1: mg.t, y2: mg.t + ih, style: "opacity:0" }, svg);
+  const pt = el("circle", { class: "point-actif", r: 4, style: "opacity:0" }, svg);
   const zone = el("rect", { x: mg.l, y: mg.t, width: iw, height: ih, fill: "transparent" }, svg);
 
   function viser(clientX) {
@@ -125,15 +126,15 @@ function graphe(opts) {
       : Math.round(((rel - mg.l) / iw) * (n - 1));
     i = Math.max(0, Math.min(n - 1, i));
     const p = points[i], px = type === "barres" ? Xb(i) : X(i);
-    curseur.setAttribute("x1", px); curseur.setAttribute("x2", px); curseur.setAttribute("opacity", 1);
-    if (type !== "barres") { pt.setAttribute("cx", px); pt.setAttribute("cy", Y(p.y2 ?? p.y)); pt.setAttribute("opacity", 1); }
+    curseur.setAttribute("x1", px); curseur.setAttribute("x2", px); curseur.style.opacity = 0.45;
+    if (type !== "barres") { pt.setAttribute("cx", px); pt.setAttribute("cy", Y(p.y2 ?? p.y)); pt.style.opacity = 1; }
     const txt = p.y2 !== undefined && p.y2 !== null
       ? `${nf(p.y)} à ${nf(p.y2)} ${unite}`
       : `${nf(p.y, Number.isInteger(p.y) ? 0 : 1)} ${unite}`;
     montrerBulle(env, (px / W) * env.clientWidth, (Y(p.y2 ?? p.y) / H) * env.clientHeight, `<strong>${p.cle}</strong>${txt}`);
   }
   zone.addEventListener("mousemove", (ev) => viser(ev.clientX));
-  zone.addEventListener("mouseleave", () => { cacherBulle(); curseur.setAttribute("opacity", 0); pt.setAttribute("opacity", 0); });
+  zone.addEventListener("mouseleave", () => { cacherBulle(); curseur.style.opacity = 0; pt.style.opacity = 0; });
   zone.addEventListener("touchmove", (ev) => { if (ev.touches[0]) viser(ev.touches[0].clientX); }, { passive: true });
 }
 
