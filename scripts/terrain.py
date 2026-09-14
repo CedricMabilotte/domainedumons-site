@@ -32,6 +32,20 @@ def get(url, timeout=60):
         return json.load(r)
 
 
+LIEUX = ["Mons", "Reix", "Eyrein", "Vitrac", "Montane", "Bouysse", "Graule", "Monteil",
+         "Croix", "Saint Pierre", "Fieyre", "Gare", "Z.I."]
+
+
+def joli(t):
+    """Les libellés arrivent en capitales sans accent : on les rend lisibles."""
+    t = " ".join(t.split()).lower()
+    t = t[:1].upper() + t[1:]
+    for l in LIEUX:
+        t = t.replace(l.lower(), l)
+    return (t.replace("prise d'eau", "prise d'eau").replace("z.i", "Z.I")
+             .replace("tres faible", "très faible"))
+
+
 def km(la, lo):
     return round(6371 * math.acos(min(1, math.sin(math.radians(LAT)) * math.sin(math.radians(la))
                 + math.cos(math.radians(LAT)) * math.cos(math.radians(la))
@@ -43,7 +57,7 @@ def georisques():
     ll = "latlon=%s%%2C%s" % (LON, LAT)
     out = {}
     d = get(B + "zonage_sismique?code_insee=" + INSEE)["data"]
-    out["sismicite"] = d[0]["zone_sismicite"] if d else None
+    out["sismicite"] = joli(d[0]["zone_sismicite"]) if d else None
     d = get(B + "radon?code_insee=" + INSEE)["data"]
     out["radon"] = d[0]["classe_potentiel"] if d else None
     out["argiles"] = get(B + "rga?" + ll)
@@ -149,7 +163,7 @@ def forages():
             p = f["properties"]
             prof = p.get("prof_invest")
             out.append({"code": p.get("code_bss"), "nature": p.get("nature_pe"),
-                        "lieu": (p.get("adresse") or "").title(),
+                        "lieu": joli(p.get("adresse") or ""),
                         "profondeur_m": float(prof) if prof else None,
                         "distance_km": km(la, lo)})
         out.sort(key=lambda o: o["distance_km"])

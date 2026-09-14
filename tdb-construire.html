@@ -95,7 +95,8 @@
   }
   const r = d.risques, u = d.urbanisme || {}, g = d.geothermie || {}, s = d.sol, z = d.zonages;
   const radon = String(r.radon);
-  const forages = (d.forages || []).filter((f) => f.profondeur_m);
+  /* les piézomètres de la zone d'activité voisine ne renseignent pas la nappe d'ici */
+  const forages = (d.forages || []).filter((f) => f.profondeur_m && f.distance_km < 1 && f.nature === "Forage");
 
   document.getElementById("synthese").innerHTML =
     tuile("Urbanisme", u.rnu ? "RNU" : "document local", "", u.rnu ? "aucun PLU, avis du préfet" : "à consulter au GPU", u.rnu ? "vigilance" : null) +
@@ -150,8 +151,9 @@
           "</td><td>" + nf(f.distance_km, 2) + " km</td><td>" + (f.profondeur_m ? nf0(f.profondeur_m) + " m" : "—") + "</td></tr>").join("") +
         "</tbody></table></div>" +
         "<p>Sur ce socle, l'eau n'est pas dans une nappe continue mais dans les fissures du granite et dans l'arène qui le recouvre. " +
-        "Les deux forages voisins descendent à <strong>" + forages.map((f) => nf0(f.profondeur_m)).join(" et ") + " mètres</strong>&nbsp;: " +
+        "Les deux forages du voisinage immédiat descendent à <strong>" + forages.map((f) => nf0(f.profondeur_m)).join(" et ") + " mètres</strong>&nbsp;: " +
         "c'est l'ordre de grandeur à inscrire dans un devis, et la raison de ne pas espérer un puits à quinze mètres. " +
+        "Les ouvrages à dix mètres de la liste sont des piézomètres de surveillance de la zone d'activité voisine&nbsp;: ils ne disent rien de la nappe utile. " +
         "Les coupes détaillées n'existent qu'en fiches papier, à demander au BRGM.</p>"
       : "<p>Aucun ouvrage déclaré à proximité.</p>") +
     "<p class='nb'>Un forage domestique se déclare en mairie&nbsp;; au-delà de 1 000 m³ par an, le régime change. Et la commune prélève déjà de l'eau potable ici même — voir <a href='tdb-eau.html#ou-va-l-eau'>la page eau</a>.</p>";
