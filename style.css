@@ -250,3 +250,27 @@ footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: w
 
 h1 { font-size: 1.35rem; line-height: 1.2; font-weight: 600; margin: 0 0 .7rem; letter-spacing: -.008em; }
 h1 + .chapeau { margin-top: -.25rem; }
+
+/* ------------------------------------------------------------- les cartes */
+.carte figure { margin: 0 0 1.1rem; }
+.carte img {
+  display: block; width: 100%; height: auto;
+  box-shadow: 0 0 0 1px var(--trait); background: var(--surface);
+}
+.carte figcaption { margin-top: .4rem; font-size: .84rem; color: var(--douce); }
+.legende-carte {
+  display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none;
+  padding: 0; margin: .5rem 0 0; font-size: .84rem;
+}
+.legende-carte li { display: flex; align-items: center; gap: .35rem; margin: 0; }
+.pastille-carte {
+  width: .8rem; height: .8rem; flex: none; border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.18);
+}
+.epoques { display: flex; gap: .4rem; margin: 0 0 .6rem; flex-wrap: wrap; }
+.epoques button {
+  font: inherit; font-size: .88rem; padding: .22rem .7rem; cursor: pointer;
+  background: var(--papier); color: var(--encre);
+  border: 1px solid var(--trait); border-radius: 2px;
+}
+.epoques button[aria-pressed="true"] { background: var(--encre); color: var(--papier); border-color: var(--encre); }

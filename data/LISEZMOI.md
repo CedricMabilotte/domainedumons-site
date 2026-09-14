@@ -118,6 +118,39 @@ courant, et aucun jeu de données national ne rejoue la série pour la Corrèze 
 14 septembre 2026). Une journée non relevée est définitivement perdue. La série commence donc
 au premier relevé et ne peut pas être reconstituée en arrière.
 
+## `terrain.json`
+
+Contraintes réglementaires et physiques au point du lieu, produites par `scripts/terrain.py` :
+zonage sismique, potentiel radon, exposition au retrait-gonflement des argiles, cavités et
+mouvements de terrain dans un rayon de 2 km, arrêtés de catastrophe naturelle, sites et sols
+pollués, installations classées à moins de 6 km (Géorisques) ; document d'urbanisme en vigueur
+(Géoportail de l'urbanisme) ; faisabilité des sondes géothermiques verticales et ouvrages
+déclarés à la Banque du Sous-Sol (BRGM). Les valeurs de sol (`sol`) sont figées : elles
+proviennent du site RMQS le plus proche, à 5,1 km, et ne sont pas interrogeables par point.
+
+## `relief.json`
+
+Analyse du modèle numérique de terrain LiDAR HD de l'IGN (vol du 24 août 2022), rééchantillonné
+à 2 m sur une fenêtre de 2,4 km, par `scripts/relief.py`.
+
+| Clé | Contenu |
+|---|---|
+| `point` | Altitude, pente locale et pente du versant ajustée sur 500 m, exposition, position topographique à 100 et 400 m, classe d'accumulation d'air froid, indice d'humidité topographique |
+| `fenetre` | Altitudes extrêmes, part du terrain plus bas que le point, part de chaque classe d'air froid, part de couvert ligneux au-dessus de 3 et 10 m, profondeur de la cuvette la plus creuse, dénivelé sous le point dans 400 m |
+| `poche_proche` | Distance, dénivelé et direction de la première accumulation d'air froid marquée |
+
+L'indice d'air froid combine la profondeur de cuvette après remplissage des dépressions, la
+position topographique, la surface amont et la platitude locale. **C'est un modèle d'écoulement
+gravitaire, pas une mesure de température** : il classe des endroits les uns par rapport aux
+autres, il ne prédit pas des degrés. Les cartes correspondantes sont `dessins/relief-airfroid.png`
+et `dessins/relief-eau.png`.
+
+## `ortho.json`
+
+Emprise et millésimes des photographies aériennes enregistrées dans `dessins/ortho-*.jpg`
+par `scripts/ortho.py` : vol du 30 juillet 1959, vol de 1972, orthophotographie actuelle,
+sur 900 m de côté autour du chemin du Mons. Source : Géoplateforme IGN.
+
 ## `registre-interet-general.json`
 
 Comptages mensuels de l'activité tournée vers l'extérieur : accueil, chantiers ouverts,
