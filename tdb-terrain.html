@@ -60,7 +60,8 @@
 <h2 id="1959">Le même carré de terrain, en 1959</h2>
 <p>L'IGN met en ligne ses campagnes photographiques depuis les années cinquante. Sur cette emprise, le plus ancien vol exploitable date du <strong>30 juillet 1959</strong>, avant le remembrement. Comparer les deux images dit ce qui a été perdu — et où le remettre.</p>
 <div class="carte" id="c-ortho"><p class="chargement">Chargement…</p></div>
-<p>Ce qui saute aux yeux&nbsp;: le parcellaire de 1959 est <strong>découpé, bordé, et partout marqué de lignes d'arbres</strong> qui ont disparu depuis. Ces lignes n'étaient pas décoratives&nbsp;: une haie en travers de pente freine l'écoulement de l'air froid autant que le ruissellement, et une haie dans le sens de la pente le canalise. Replanter au hasard peut donc aggraver le gel au lieu de l'atténuer — la carte du dessus dit où.</p>
+<p>Deux choses se voient sans loupe. <strong>Le parcellaire était plus fin</strong>, et ses limites étaient soulignées par des lignes d'arbres — la grande prairie d'un seul tenant qu'on voit aujourd'hui au sud du hameau en réunit plusieurs, et les alignements qui les séparaient ont disparu. <strong>Le bois, lui, n'a pas reculé&nbsp;: il a changé de nature.</strong> Les masses sombres de 1959 ont la texture irrégulière du taillis&nbsp;; celles d'aujourd'hui sont des blocs réguliers de résineux, et le relevé laser leur donne jusqu'à <span id="h-arbres">40</span> mètres de haut.</p>
+<p>Ce n'est pas un constat nostalgique, c'est une contrainte de plantation. Une haie en travers de pente freine l'écoulement de l'air froid autant que le ruissellement&nbsp;; une haie dans le sens de la pente le canalise. <strong>Replanter au mauvais endroit peut aggraver le gel au lieu de l'atténuer</strong> — la carte du dessus dit lequel.</p>
 
 <h2>Méthode</h2>
 <p>Le modèle numérique de terrain provient du programme <strong>LiDAR HD de l'IGN</strong>, qui couvre désormais toute la Corrèze. La dalle utilisée ici est celle du vol du 24 août 2022, rééchantillonnée à deux mètres sur une fenêtre de 2,4 km de côté. Le <strong>modèle de hauteur de végétation</strong>, issu du même relevé, donne les boisements et les haies à cinquante centimètres près.</p>
@@ -169,6 +170,9 @@ function legende(items) {
   } else {
     document.getElementById("c-ortho").innerHTML = "<p class='echec'>Photographies aériennes indisponibles.</p>";
   }
+
+  const ha = document.getElementById("h-arbres");
+  if (ha) ha.textContent = nf(f.hauteur_vegetation_max_m, 0);
 
   document.getElementById("horodatage").textContent =
     "Relief calculé le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +

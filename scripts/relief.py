@@ -138,8 +138,14 @@ def melange(base, couleur, masque, force):
     return out
 
 
-def croix(rgb, i, j, couleur=(217, 77, 8), taille=9):
+def croix(rgb, i, j, couleur=(217, 77, 8), taille=16):
+    """Une croix cerclée de blanc, lisible sur n'importe quel fond."""
     n = rgb.shape[0]
+    for d in range(-taille, taille + 1):
+        for e in (-3, -2, 2, 3):
+            for a, b in ((i + e, j + d), (i + d, j + e)):
+                if 0 <= a < n and 0 <= b < n:
+                    rgb[a, b] = (255, 255, 255)
     for d in range(-taille, taille + 1):
         for e in (-1, 0, 1):
             for a, b in ((i + e, j + d), (i + d, j + e)):
@@ -200,7 +206,7 @@ def main():
     carte = melange(carte, (40, 95, 160), classes == 3, 0.62)
     # les boisements et haies, qui font barrage
     ligneux = np.where(np.isnan(mnh), 0, mnh) > 3
-    carte = melange(carte, (70, 92, 58), ligneux, 0.22)
+    carte = melange(carte, (74, 96, 58), ligneux, 0.34)
     carte = croix(carte, c, c)
     png(os.path.join(RACINE, "dessins", "relief-airfroid.png"), carte)
 
@@ -233,7 +239,8 @@ def main():
             "part_air_froid_3": part(classes == 3),
             "part_ligneux_3m": part(ligneux),
             "part_ligneux_10m": part(np.where(np.isnan(mnh), 0, mnh) > 10),
-            "hauteur_vegetation_max_m": round(float(np.nanmax(mnh)), 1),
+            "hauteur_vegetation_max_m": round(float(np.nanpercentile(mnh[~np.isnan(mnh)], 99.9)), 1),
+            "hauteur_vegetation_extreme_m": round(float(np.nanmax(mnh)), 1),
             "creux_max_m": round(float(creux.max()), 2),
             "part_twi_humide": part(twi > 9.0),
         },
