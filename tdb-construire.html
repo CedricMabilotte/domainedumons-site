@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construire ici — Domaine du Mons</title>
+<meta name="description" content="Radon, argiles, règles d'urbanisme, forages, sol : ce qui commande la construction et la plantation au Domaine du Mons, à partir des données publiques.">
+<link rel="stylesheet" href="style.css?v=7">
+</head>
+<body>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="m-tdb" aria-current="page">Tableaux de bord</button>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li class="groupe">La semaine</li>
+            <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li class="groupe">La longue durée</li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
+            <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
+            <li class="groupe">Le lieu</li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-construire.html">Construire ici</a></li>
+            <li class="groupe">Le collectif</li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<main class="tdb">
+<p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
+<h1>Construire ici</h1>
+<p>Ce que les données publiques disent du terrain avant qu'on y pose quoi que ce soit&nbsp;: le règlement qui s'applique, ce que le sous-sol impose, ce que le sol contient, et ce qui se trouve autour. Rassemblé une fois, pour ne pas le redécouvrir au moment du devis.</p>
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Lecture</p><p class="valeur chargement">…</p><p class="detail">chargement de la fiche</p></div></div>
+
+<h2 id="urbanisme">Les règles qui s'appliquent</h2>
+<div id="regles"><p class="chargement">Chargement…</p></div>
+
+<h2 id="sous-sol">Ce que le sous-sol impose au bâti</h2>
+<div id="batir"><p class="chargement">Chargement…</p></div>
+
+<h2 id="eau-souterraine">Forer, et à quelle profondeur</h2>
+<div id="forages"><p class="chargement">Chargement…</p></div>
+
+<h2 id="la-terre">Le sol, et l'analyse qui reste à faire</h2>
+<div id="sol"><p class="chargement">Chargement…</p></div>
+
+<h2 id="autour">Ce qu'il y a autour</h2>
+<div id="voisinage"><p class="chargement">Chargement…</p></div>
+
+<h2>Méthode et réserves</h2>
+<p>Tout ce qui précède vient d'interrogations faites sur les coordonnées exactes du lieu ou sur le code de la commune, auprès de <a href="https://www.georisques.gouv.fr/">Géorisques</a>, du <a href="https://www.geoportail-urbanisme.gouv.fr/">Géoportail de l'urbanisme</a> et du <a href="https://infoterre.brgm.fr/">BRGM</a>. Le fichier est recalculé sur demande, pas tous les jours&nbsp;: ces données bougent d'une année à l'autre, pas d'une semaine à l'autre.</p>
+<div class="note">
+  <span class="etiquette">Ce que cette page ne remplace pas</span>
+  <p>Un classement de potentiel radon est une probabilité géologique à l'échelle de la commune, pas une mesure&nbsp;: <strong>seul un dosimètre posé deux mois en hiver dans une pièce de vie dit ce qu'il en est</strong>. Une exposition aux argiles est une carte au 1/50&nbsp;000, pas une étude de sol&nbsp;: c'est un G2 qui engage un constructeur. Et les valeurs de sol viennent d'un point situé à cinq kilomètres.</p>
+  <p>Ces chiffres servent à poser les bonnes questions à un artisan, un bureau d'étude ou un notaire — pas à s'en passer.</p>
+</div>
+<p>Données téléchargeables — <a href="data/terrain.json">JSON</a> — sous Licence Ouverte 2.0.</p>
+<p class="horodatage" id="horodatage"></p>
+</main>
+<footer>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="tdb.js?v=7"></script>
+<script>
+(async () => {
+  let d;
+  try { d = await json("data/terrain.json"); }
+  catch (e) {
+    echec("synthese", "Fiche de terrain indisponible.");
+    ["regles", "batir", "forages", "sol", "voisinage"].forEach((i) => echec(i, ""));
+    return;
+  }
+  const r = d.risques, u = d.urbanisme || {}, g = d.geothermie || {}, s = d.sol, z = d.zonages;
+  const radon = String(r.radon);
+  const forages = (d.forages || []).filter((f) => f.profondeur_m);
+
+  document.getElementById("synthese").innerHTML =
+    tuile("Urbanisme", u.rnu ? "RNU" : "document local", "", u.rnu ? "aucun PLU, avis du préfet" : "à consulter au GPU", u.rnu ? "vigilance" : null) +
+    tuile("Radon", "classe " + radon, "sur 3", radon === "3" ? "potentiel significatif" : "potentiel faible", radon === "3" ? "alerte" : null) +
+    tuile("Argiles", (r.argiles || {}).exposition || "—", "", "retrait-gonflement") +
+    tuile("Séisme", (r.sismicite || "").split(" - ")[1] ? (r.sismicite || "").split(" - ")[1].toLowerCase() : r.sismicite, "", "zone " + (r.sismicite || "").split(" ")[0]) +
+    tuile("Sondes géothermiques", g.sonde_200m === "vert" ? "possibles" : (g.sonde_200m || "—"), "", g.profondeur ? g.profondeur.toLowerCase() : "");
+
+  /* --- règles --- */
+  document.getElementById("regles").innerHTML =
+    (u.rnu
+      ? "<p><strong>La commune n'a ni plan local d'urbanisme ni carte communale.</strong> Elle relève du règlement national d'urbanisme&nbsp;: " +
+        "hors des parties actuellement urbanisées, la construction est en principe interdite, et chaque autorisation passe par " +
+        "<strong>l'avis conforme du préfet</strong>. C'est la contrainte qui structure tout projet d'habitat ici — elle se prépare, elle ne se contourne pas, " +
+        "et elle rend décisive la question de savoir ce qui est considéré comme partie actuellement urbanisée au hameau.</p>"
+      : "<p>Un document d'urbanisme local est en vigueur&nbsp;: le zonage est à consulter au Géoportail de l'urbanisme.</p>") +
+    "<p>La commune est classée <strong>" + z.frr + "</strong> — France ruralités revitalisation, niveau renforcé — depuis le " + z.frr_date +
+    ". Une activité créée ici ouvre droit à des exonérations d'impôt sur les bénéfices et de cotisation foncière des entreprises, sous conditions. " +
+    "Elle appartient aussi au périmètre du <strong>" + z.pnr + "</strong>, ce qui donne un interlocuteur et une charte, pas une servitude.</p>" +
+    (r.risques_gaspar === 0 ? "<p>Aucun plan de prévention des risques ne s'applique&nbsp;: la commune n'a aucun risque majeur recensé au fichier national.</p>" : "") +
+    (r.catnat && r.catnat.length
+      ? "<p>Quatre arrêtés de catastrophe naturelle ont visé la commune depuis 1982&nbsp;: " +
+        r.catnat.map((c) => c.risque.toLowerCase() + " (" + c.debut.slice(6) + ")").join(", ") +
+        ". Le mouvement de terrain de décembre 1999 est le seul qui engage vraiment une précaution — <strong>attention aux talus lors des terrassements</strong>.</p>"
+      : "");
+
+  /* --- bâtir --- */
+  document.getElementById("batir").innerHTML =
+    "<p><strong>Le radon est le point dur.</strong> La commune est en classe " + radon + ", le niveau le plus élevé du classement&nbsp;: " +
+    "les granites du socle en émettent, et le gaz s'accumule dans les volumes clos mal ventilés. Ce que ça commande, concrètement&nbsp;: " +
+    "<strong>soubassement ventilé ou vide sanitaire, dalle étanche, ventilation mécanique</strong>, et pas de pièce de vie en cave ou en sous-sol. " +
+    "C'est décisif pour une construction en terre-paille, où l'étanchéité au sol se traite au moment des fondations, jamais après.</p>" +
+    "<p>Un classement n'est pas une mesure. Un dosimètre passif coûte une vingtaine d'euros, se pose deux mois en hiver, et tranche.</p>" +
+    "<p><strong>Les argiles sont en " + ((r.argiles || {}).exposition || "—").toLowerCase() + ".</strong> " +
+    "Le retrait-gonflement fissure les maisons mal fondées après les étés secs — et les étés secs se multiplient. " +
+    "Semelles descendues à 0,80 m au moins, chaînage horizontal et vertical, trottoir périphérique, et surtout " +
+    "<strong>pas de plantation d'arbre à moins de sa hauteur adulte du bâti</strong>.</p>" +
+    "<p>La sismicité est " + ((r.sismicite || "").split(" - ")[1] || "").toLowerCase() + " — aucune règle parasismique particulière. " +
+    "Aucune cavité ni mouvement de terrain recensé dans un rayon de deux kilomètres.</p>" +
+    (g.sonde_200m === "vert"
+      ? "<p><strong>Et une bonne nouvelle.</strong> Les sondes géothermiques verticales sont en vert sur cette maille, sans aucun critère d'exclusion&nbsp;: " +
+        "ni évaporite, ni cavité, ni artésianisme, ni communication d'aquifères. Elles relèvent donc de la simple télédéclaration, " +
+        "sans étude hydrogéologique préalable. C'est la solution de chauffage la moins contrainte du site.</p>"
+      : "");
+
+  /* --- forages --- */
+  document.getElementById("forages").innerHTML =
+    (forages.length
+      ? "<p>Deux forages déclarés à moins de huit cents mètres donnent la réponse locale à la question de la profondeur.</p>" +
+        "<div class='defilant'><table class='donnees'><thead><tr><th>Ouvrage</th><th>Nature</th><th>Lieu-dit</th><th>Distance</th><th>Profondeur</th></tr></thead><tbody>" +
+        (d.forages || []).map((f) => "<tr><td>" + f.code + "</td><td>" + (f.nature || "—") + "</td><td>" + (f.lieu || "—") +
+          "</td><td>" + nf(f.distance_km, 2) + " km</td><td>" + (f.profondeur_m ? nf0(f.profondeur_m) + " m" : "—") + "</td></tr>").join("") +
+        "</tbody></table></div>" +
+        "<p>Sur ce socle, l'eau n'est pas dans une nappe continue mais dans les fissures du granite et dans l'arène qui le recouvre. " +
+        "Les deux forages voisins descendent à <strong>" + forages.map((f) => nf0(f.profondeur_m)).join(" et ") + " mètres</strong>&nbsp;: " +
+        "c'est l'ordre de grandeur à inscrire dans un devis, et la raison de ne pas espérer un puits à quinze mètres. " +
+        "Les coupes détaillées n'existent qu'en fiches papier, à demander au BRGM.</p>"
+      : "<p>Aucun ouvrage déclaré à proximité.</p>") +
+    "<p class='nb'>Un forage domestique se déclare en mairie&nbsp;; au-delà de 1 000 m³ par an, le régime change. Et la commune prélève déjà de l'eau potable ici même — voir <a href='tdb-eau.html#ou-va-l-eau'>la page eau</a>.</p>";
+
+  /* --- sol --- */
+  document.getElementById("sol").innerHTML =
+    "<p>Le point de mesure public le plus proche est à <strong>" + nf(s.site_distance_km, 1) + " km</strong>, sur le même socle, prélevé en " + s.annee +
+    ". Sur l'horizon " + s.horizon + "&nbsp;:</p>" +
+    "<div class='defilant'><table class='donnees'><tbody>" +
+    "<tr><td>Texture</td><td>" + s.texture + ", " + s.argile_g_kg + " g/kg d'argile</td></tr>" +
+    "<tr><td>pH (eau)</td><td><strong>" + nf(s.ph_eau, 1) + "</strong></td></tr>" +
+    "<tr><td>Matière organique</td><td><strong>" + s.matiere_organique_g_kg + " g/kg</strong></td></tr>" +
+    "<tr><td>Capacité d'échange</td><td>" + nf(s.cec_cmol_kg, 2) + " cmol/kg</td></tr>" +
+    "<tr><td>Aluminium échangeable</td><td><strong>" + nf(s.aluminium_echangeable_cmol_kg, 2) + " cmol/kg</strong>, soit " +
+      nf0(100 * s.aluminium_echangeable_cmol_kg / s.cec_cmol_kg) + " % du complexe</td></tr>" +
+    "<tr><td>Calcium, magnésium, potassium</td><td>" + nf(s.calcium_cmol_kg, 2) + " · " + nf(s.magnesium_cmol_kg, 2) + " · " + nf(s.potassium_cmol_kg, 2) + " cmol/kg</td></tr>" +
+    "<tr><td>Phosphore assimilable</td><td>" + s.phosphore_assimilable + "</td></tr>" +
+    "</tbody></table></div>" +
+    "<p><strong>Un sol acide, riche en matière organique, et probablement en toxicité aluminique.</strong> " +
+    "À pH " + nf(s.ph_eau, 1) + ", l'aluminium occupe les trois quarts du complexe absorbant&nbsp;: il brûle les jeunes racines, " +
+    "et les légumineuses, les brassicacées et les fruitiers à pépins y végètent. Le phosphore est sous le seuil de détection, " +
+    "le magnésium très bas.</p>" +
+    "<p>Dans l'autre sens, " + s.matiere_organique_g_kg + " g/kg de matière organique est une valeur remarquable&nbsp;: réserve en eau, structure, " +
+    "vie du sol. <strong>Ce sol ne se laboure pas</strong>, il se couvre.</p>" +
+    "<div class='note'><span class='etiquette'>Ce qu'il faut faire, et dans cet ordre</span>" +
+    "<p>Ces valeurs viennent d'un point situé à cinq kilomètres. Elles justifient <strong>une analyse de terre</strong> — 40 à 80 € le point, " +
+    "trois points suffisent pour commencer — <strong>pas un camion d'amendement</strong>. Si l'analyse locale confirme un pH sous 5,0 avec l'aluminium dominant, " +
+    "alors chaulage calcaro-magnésien avant toute plantation de fruitiers, et apport de phosphore.</p>" +
+    "<p>Toujours le même laboratoire et la même méthode d'une campagne à l'autre, sinon les séries ne se comparent pas.</p></div>";
+
+  /* --- voisinage --- */
+  const icpe = (r.icpe || []).slice(0, 6);
+  const elevages = icpe.filter((i) => i.porcs || i.bovins || i.volailles);
+  document.getElementById("voisinage").innerHTML =
+    "<p>Les installations classées pour la protection de l'environnement les plus proches&nbsp;:</p>" +
+    "<div class='defilant'><table class='donnees'><thead><tr><th>Établissement</th><th>Commune</th><th>Régime</th><th>Distance</th></tr></thead><tbody>" +
+    icpe.map((i) => "<tr><td>" + (i.nom || "—") + (i.porcs ? " <span class='nb'>(porcs)</span>" : i.bovins ? " <span class='nb'>(bovins)</span>" : "") +
+      "</td><td>" + (i.commune || "") + "</td><td>" + (i.regime || "") + "</td><td>" + nf(i.distance_km, 2) + " km</td></tr>").join("") +
+    "</tbody></table></div>" +
+    (elevages.length
+      ? "<p>Un élevage porcin sous régime d'enregistrement est à " + nf(elevages[0].distance_km, 2) + " km. " +
+        "À cette distance, aucune règle de recul réciproque ne s'applique, mais <strong>son plan d'épandage se vérifie avant tout forage</strong>&nbsp;: " +
+        "c'est ce qui décide de la potabilité d'une eau captée à l'aval.</p>"
+      : "") +
+    "<p class='nb'>Une précision qui évite un contresens&nbsp;: une entreprise de la zone d'activité voisine porte le mot « Seveso » dans sa raison sociale, " +
+    "et le registre national la classe pourtant <em>non Seveso</em>. Le nom trompe, le régime fait foi.</p>" +
+    ((r.sites_pollues || []).length
+      ? "<p>Côté sols pollués, l'inventaire recense " + r.sites_pollues_total + " anciens sites industriels dans un rayon de cinq kilomètres&nbsp;; " +
+        "le plus proche est à " + nf(r.sites_pollues[0].distance_km, 1) + " km (" + (r.sites_pollues[0].nom || "").toLowerCase() + "). " +
+        "Aucun site pollué appelant une action des pouvoirs publics.</p>"
+      : "");
+
+  document.getElementById("horodatage").textContent =
+    "Fiche établie le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · Géorisques, Géoportail de l'urbanisme, BRGM, RMQS · Licence Ouverte 2.0.";
+})();
+</script>
+<script src="site.js?v=7"></script>
+</body>
+</html>
