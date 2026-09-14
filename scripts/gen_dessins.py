@@ -4,16 +4,20 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from croquis import Crayon, chemin
 
 # ---------------------------------------------------------------- le montage
-c = Crayon(graine=11, rugosite=1.15)
+c = Crayon(graine=11, rugosite=1.4)
 p = []
 p += c.cadre(14, 16, 250, 92)          # fonds de dotation
 p += c.cadre(352, 24, 268, 92)         # association
-p += c.cadre(120, 224, 400, 104)       # le foncier
-p += c.hachures(126, 230, 388, 92, pas=13, angle=-0.72)
-p += c.fleche(138, 110, 250, 220)
-p += c.fleche(480, 118, 392, 220)
+p += c.cadre(120, 222, 400, 100)       # le foncier
+p += c.fleche(138, 110, 250, 218)
+p += c.fleche(480, 118, 392, 218)
+# la terre : des touffes sous la boite, plutot que des hachures sur le texte
+for i in range(24):
+    x = 128 + i * 16.6
+    p += c.trait(x, 322, x - 3, 336, passes=1)
+    p += c.trait(x + 4, 322, x + 7, 335, passes=1)
 
-montage = f'''<svg viewBox="0 0 640 350" role="img" aria-labelledby="t-mont d-mont" class="croquis">
+montage = f'''<svg viewBox="0 0 640 348" role="img" aria-labelledby="t-mont d-mont" class="croquis">
   <title id="t-mont">Le montage, dessiné</title>
   <desc id="d-mont">Un fonds de dotation détient la nue-propriété du foncier et ne peut pas le vendre. Une association d'intérêt général, autogérée par ses membres, en détient l'usage. Les deux se rattachent à la même terre.</desc>
   {chemin(p[:len(p)-0], "trait-croquis")}
@@ -31,7 +35,7 @@ montage = f'''<svg viewBox="0 0 640 350" role="img" aria-labelledby="t-mont d-mo
 </svg>'''
 
 # ------------------------------------------------------- la coupe du terrain
-c2 = Crayon(graine=23, rugosite=1.0)
+c2 = Crayon(graine=23, rugosite=1.25)
 sol = [(8, 250), (70, 236), (130, 214), (200, 178), (270, 150), (340, 140),
        (430, 137), (500, 142), (560, 160), (612, 186)]
 q = c2.courbe(sol, passes=2)
