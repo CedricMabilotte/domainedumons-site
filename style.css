@@ -189,3 +189,144 @@ footer {
 
 footer p { margin-bottom: 0.5rem; }
 footer ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+
+/* ===================================================================
+   Tableaux de bord
+   Statuts : palette validée (six checks, thèmes clair et sombre).
+   Le statut est TOUJOURS accompagné d'un libellé écrit — jamais couleur seule.
+   =================================================================== */
+
+:root {
+  --calme: #0b7f4e;
+  --vigilance: #bb9008;
+  --alerte: #d94d08;
+  --trace: #6b7f5c;
+  --grille: #e4ddd0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --calme: #17a183;
+    --vigilance: #b0921f;
+    --alerte: #e3536f;
+    --trace: #9cb388;
+    --grille: #2b2823;
+  }
+}
+
+.tdb { max-width: 46rem; }
+
+/* ---- Tuiles ---- */
+
+.tuiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1px;
+  background: var(--trait);
+  border: 1px solid var(--trait);
+  margin: 1.5rem 0 2rem;
+}
+
+.tuile { background: var(--papier); padding: 1rem 1.1rem 1.1rem; }
+
+.tuile .libelle {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--encre-douce);
+  margin: 0 0 0.5rem;
+}
+
+.tuile .valeur {
+  font-size: 1.75rem;
+  line-height: 1.1;
+  margin: 0 0 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tuile .valeur .unite { font-size: 0.9rem; color: var(--encre-douce); }
+.tuile .detail { font-size: 0.85rem; color: var(--encre-douce); margin: 0; }
+
+.tuile[data-etat="calme"] .valeur { color: var(--calme); }
+.tuile[data-etat="vigilance"] .valeur { color: var(--vigilance); }
+.tuile[data-etat="alerte"] .valeur { color: var(--alerte); }
+
+/* Pastille de statut — toujours doublée d'un mot */
+.pastille {
+  display: inline-block;
+  width: 0.55rem; height: 0.55rem;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  vertical-align: 0.02em;
+}
+.pastille.calme { background: var(--calme); }
+.pastille.vigilance { background: var(--vigilance); }
+.pastille.alerte { background: var(--alerte); }
+
+/* ---- Graphiques ---- */
+
+.graphe { margin: 1.5rem 0 2.25rem; }
+.graphe h3 { margin: 0 0 0.15rem; font-size: 1rem; }
+.graphe .legende-axe { font-size: 0.8rem; color: var(--encre-douce); margin: 0 0 0.75rem; }
+.graphe svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.grille-ligne { stroke: var(--grille); stroke-width: 1; }
+.axe-texte { fill: var(--encre-douce); font-size: 11px; font-family: Georgia, serif; }
+.trace-ligne { fill: none; stroke: var(--trace); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.trace-bande { fill: var(--trace); opacity: 0.16; }
+.trace-barre { fill: var(--trace); }
+.trace-tendance { fill: none; stroke: var(--alerte); stroke-width: 2; stroke-dasharray: 5 4; }
+.trace-zero { stroke: var(--encre-douce); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.6; }
+
+.curseur { stroke: var(--encre-douce); stroke-width: 1; opacity: 0.45; }
+.point-actif { fill: var(--trace); stroke: var(--papier); stroke-width: 2; }
+
+.infobulle {
+  position: absolute;
+  pointer-events: none;
+  background: var(--papier);
+  border: 1px solid var(--trait);
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  white-space: nowrap;
+  z-index: 5;
+}
+.infobulle strong { display: block; font-weight: 600; margin-bottom: 0.15rem; }
+.enveloppe-graphe { position: relative; }
+
+/* ---- Tableau de données ---- */
+
+.donnees { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1rem 0; }
+.donnees th, .donnees td { text-align: left; padding: 0.4rem 0.7rem 0.4rem 0; border-bottom: 1px solid var(--trait); }
+.donnees th { font-weight: 600; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--encre-douce); }
+.donnees td { font-variant-numeric: tabular-nums; }
+.defilant { overflow-x: auto; }
+
+details.tableau-brut { margin: 0.5rem 0 2rem; }
+details.tableau-brut summary { cursor: pointer; font-size: 0.875rem; color: var(--encre-douce); }
+
+/* ---- Cartes de la page d'accueil de la section ---- */
+
+.cartes { list-style: none; padding: 0; margin: 1.5rem 0; }
+.cartes li { border-top: 1px solid var(--trait); padding: 1.15rem 0; margin: 0; }
+.cartes li:last-child { border-bottom: 1px solid var(--trait); }
+.cartes h3 { margin: 0 0 0.3rem; font-size: 1.0625rem; }
+.cartes h3 a { text-decoration: none; border-bottom: 1px solid var(--trait); }
+.cartes h3 a:hover { border-bottom-color: var(--encre); }
+.cartes p { margin: 0 0 0.35rem; font-size: 0.9375rem; }
+.cartes .source { font-size: 0.8125rem; color: var(--encre-douce); margin: 0; }
+.cartes .bientot h3 { color: var(--encre-douce); }
+
+/* ---- États de chargement et d'erreur ---- */
+
+.chargement { color: var(--encre-douce); font-style: italic; }
+.echec {
+  border-left: 3px solid var(--vigilance);
+  padding-left: 0.85rem;
+  font-size: 0.9rem;
+  color: var(--encre-douce);
+}
+
+.horodatage { font-size: 0.8125rem; color: var(--encre-douce); margin-top: 2rem; }

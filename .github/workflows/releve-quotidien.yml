@@ -1,0 +1,33 @@
+name: Relevé quotidien
+
+# Chaque matin, on relève la veille et on l'ajoute à l'archive ouverte.
+# Sur un territoire de 250 habitants, personne d'autre ne produira cette donnée.
+
+on:
+  schedule:
+    - cron: "20 6 * * *"   # 06h20 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Relever les sources publiques
+        run: python3 scripts/releve.py
+
+      - name: Publier si quelque chose a changé
+        run: |
+          if git diff --quiet -- data/; then
+            echo "aucun changement"
+            exit 0
+          fi
+          git config user.name "Relevé automatique"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "Relevé du $(date -u -d yesterday +%Y-%m-%d)"
+          git push

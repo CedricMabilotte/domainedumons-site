@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tableaux de bord — Domaine du Mons</title>
+<meta name="description" content="Les tableaux de bord du Domaine du Mons : eau et météo en direct, climat sur trois quarts de siècle, registre d'intérêt général. Données publiques ouvertes.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1 class="titre"><a href="index.html">Domaine du Mons</a></h1>
+  <p class="sous-titre">Collectif expérimental — Vitrac-sur-Montane, Corrèze</p>
+  <nav aria-label="Navigation principale">
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="tdb">
+
+<p class="chapeau">Conduire un lieu vivrier demande de savoir ce qu'il fait beau demain, ce que la rivière a dans le ventre, et ce que le climat d'ici sera devenu dans vingt ans. Ces trois questions n'ont pas la même échelle de temps, alors elles n'ont pas la même page.</p>
+
+<h2>Les tableaux</h2>
+
+<ul class="cartes">
+  <li>
+    <h3><a href="tdb-eau-meteo.html">Eau et météo — la semaine qui vient</a></h3>
+    <p>Risque de gelée, pluie tombée et pluie à venir, bilan hydrique, débit de la Montane, restrictions de sécheresse en vigueur. Ce qui décide du travail des prochains jours.</p>
+    <p class="source">Open-Meteo · Hub'Eau, station de la Montane à Eyrein · VigiEau. Mise à jour à chaque visite.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-climat.html">Climat — trois quarts de siècle</a></h3>
+    <p>Température, jours de gel, jours de forte chaleur, pluie et déficit hydrique estival, année après année depuis 1950. Avec les tendances, et l'honnêteté statistique de dire quand il n'y en a pas.</p>
+    <p class="source">Réanalyse Open-Meteo au point du lieu, 1950-2025. Recalculé une fois par an.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-registre.html">Registre d'intérêt général</a></h3>
+    <p>Ce que le lieu fait au-delà de ceux qui l'habitent : personnes accueillies, chantiers ouverts, transmissions, partenariats, documentation reprise ailleurs. Compté au fil de l'eau.</p>
+    <p class="source">Tenu par le collectif. Publié en données ouvertes.</p>
+  </li>
+</ul>
+
+<h2>Pourquoi ces trois-là, et pas douze</h2>
+
+<p>Un tableau de bord grossit tout seul. On ajoute un indicateur parce qu'il est joli, un autre parce que la donnée existe, et au bout d'un an la page ne sert plus à rien parce qu'on ne sait plus où regarder.</p>
+
+<p>Nous nous sommes donné une règle&nbsp;:</p>
+
+<div class="note">
+  <span class="etiquette">Règle d'admission</span>
+  <p>Un indicateur n'entre dans une de ces pages que si l'on sait écrire la phrase&nbsp;: <strong>«&nbsp;si X franchit S, alors on fait Y avant Z&nbsp;»</strong>. Si la phrase ne s'écrit pas, l'indicateur est décoratif et il reste dehors.</p>
+</div>
+
+<p>C'est ce qui explique les absences. Pas de pression atmosphérique, pas de «&nbsp;ressenti&nbsp;», pas d'indice UV, pas de cumul de pluie depuis le 1<sup>er</sup> janvier — aucun de ces chiffres ne déclenche jamais rien.</p>
+
+<h2>D'où viennent les données</h2>
+
+<p>Uniquement de sources publiques ouvertes, interrogées directement par votre navigateur. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
+
+<table class="donnees">
+  <thead><tr><th>Source</th><th>Ce qu'elle donne ici</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau</a></td><td>Débit de la Montane, station d'Eyrein, à 3 km, relevé toutes les 5 minutes</td></tr>
+    <tr><td><a href="https://vigieau.gouv.fr">VigiEau</a></td><td>Arrêtés sécheresse applicables, zone Corrèze amont</td></tr>
+    <tr><td><a href="https://open-meteo.com/">Open-Meteo</a></td><td>Prévision à 16 jours, et réanalyse quotidienne depuis 1950</td></tr>
+  </tbody>
+</table>
+
+<p>Ces trois sources sont libres et gratuites. Les chiffres que nous en tirons, ainsi que nos propres relevés, seront republiés en données ouvertes&nbsp;: sur un territoire de deux cent cinquante habitants, personne d'autre ne produira la donnée fine, et c'est une raison suffisante pour la produire.</p>
+
+<h2>Ce qui viendra, et à quelle condition</h2>
+
+<ul class="cartes">
+  <li class="bientot">
+    <h3>Sols et sources</h3>
+    <p>Humidité du sol, tarissement des sources, hauteur de nappe. Aucune donnée publique ne descend à cette finesse&nbsp;: il faut mesurer nous-mêmes. Un seau gradué et un chronomètre suffisent pour le débit d'une source — c'est la mesure la plus stratégique et la plus absente.</p>
+    <p class="source">Condition&nbsp;: un relevé hebdomadaire tenu.</p>
+  </li>
+  <li class="bientot">
+    <h3>Gelées réelles du fond de vallée</h3>
+    <p>Les modèles météo raisonnent sur des mailles de plusieurs kilomètres et placent ce point à 576&nbsp;m. Par nuit claire et calme, l'air froid draine vers le fond de vallée et la température réelle peut descendre 3 à 6&nbsp;°C plus bas. Deux capteurs, un en bas, un sur le replat, règlent la question pour une soixantaine d'euros.</p>
+    <p class="source">Condition&nbsp;: deux capteurs posés.</p>
+  </li>
+  <li class="bientot">
+    <h3>Récoltes et autonomie</h3>
+    <p>Couverture calorique, part autoconsommée, rendement par heure de travail — ce dernier étant, en polyactivité, le seul chiffre qui fasse vraiment abandonner ou étendre une culture.</p>
+    <p class="source">Condition&nbsp;: une pesée tenue à la récolte.</p>
+  </li>
+</ul>
+
+<p>Chacune attend un signal, pas une date. C'est la même règle que pour le reste du site&nbsp;: on ne construit un outil que quand l'usage déborde.</p>
+
+</main>
+
+<footer>
+  <p>Collectif expérimental du Domaine du Mons — Vitrac-sur-Montane (19).</p>
+  <ul>
+    <li><a href="index.html">Le lieu</a></li>
+    <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+    <li><a href="nous-joindre.html">Nous joindre</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

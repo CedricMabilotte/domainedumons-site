@@ -1,0 +1,17 @@
+{
+  "titre": "Registre d'intérêt général — Domaine du Mons",
+  "licence": "Licence Ouverte 2.0",
+  "mis_a_jour": "2026-09-14",
+  "note": "Agrégats mensuels uniquement. Aucune donnée nominative, aucune coordonnée : ce fichier est public.",
+  "indicateurs": [
+    { "cle": "accueil", "libelle": "Personnes accueillies", "unite": "personnes", "aide": "Visites, séjours, passages — toute personne extérieure venue sur le lieu." },
+    { "cle": "chantiers", "libelle": "Journées de chantier ouvertes", "unite": "journées", "aide": "Journées de travail auxquelles des personnes extérieures pouvaient participer." },
+    { "cle": "formations", "libelle": "Transmissions et formations", "unite": "séances", "aide": "Ateliers, visites commentées, interventions — avec le nombre de participants en note." },
+    { "cle": "participants", "libelle": "Participants aux transmissions", "unite": "personnes", "aide": "Total des participants aux séances ci-dessus." },
+    { "cle": "partenariats", "libelle": "Partenariats actifs", "unite": "structures", "aide": "Associations, collectivités, établissements avec lesquels une action est menée." },
+    { "cle": "fiches", "libelle": "Fiches publiées", "unite": "fiches", "aide": "Documentation mise en ligne sous licence libre." },
+    { "cle": "reprises", "libelle": "Reprises constatées", "unite": "reprises", "aide": "Fois où un tiers déclare avoir utilisé une de nos fiches." },
+    { "cle": "observations", "libelle": "Observations naturalistes versées", "unite": "observations", "aide": "Données versées aux bases publiques (SINP, GBIF)." }
+  ],
+  "mois": []
+}

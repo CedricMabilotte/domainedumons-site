@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eau et météo — Domaine du Mons</title>
+<meta name="description" content="Risque de gelée, pluie, bilan hydrique, débit de la Montane et restrictions sécheresse à Vitrac-sur-Montane. Données publiques ouvertes.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1 class="titre"><a href="index.html">Domaine du Mons</a></h1>
+  <p class="sous-titre">Collectif expérimental — Vitrac-sur-Montane, Corrèze</p>
+  <nav aria-label="Navigation principale">
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="tdb">
+
+<p class="chapeau"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
+
+<h2>Eau et météo</h2>
+
+<p>Ce qui décide du travail des prochains jours. Chaque chiffre est relevé à l'instant où vous ouvrez la page.</p>
+
+<div class="tuiles" id="tuiles">
+  <div class="tuile"><p class="libelle">Relevé</p><p class="valeur chargement">…</p><p class="detail">interrogation des sources</p></div>
+</div>
+
+<div class="graphe">
+  <h3>Températures, de la semaine passée à la semaine prochaine</h3>
+  <p class="legende-axe">Minimale et maximale du jour, en degrés. La ligne pointillée marque le zéro.</p>
+  <div id="g-temp"><p class="chargement">Chargement…</p></div>
+</div>
+
+<div class="graphe">
+  <h3>Pluie quotidienne</h3>
+  <p class="legende-axe">Cumul par jour, en millimètres.</p>
+  <div id="g-pluie"><p class="chargement">Chargement…</p></div>
+</div>
+
+<details class="tableau-brut">
+  <summary>Voir les chiffres jour par jour</summary>
+  <div class="defilant"><table class="donnees" id="table-jours">
+    <thead><tr><th>Jour</th><th>Min</th><th>Max</th><th>Pluie</th><th>ETP</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</details>
+
+<h2>La Montane</h2>
+<div id="riviere"><p class="chargement">Chargement…</p></div>
+
+<h2>Sécheresse</h2>
+<div id="secheresse"><p class="chargement">Chargement…</p></div>
+
+<h2>Comment lire ces chiffres</h2>
+
+<div class="note">
+  <span class="etiquette">Un avertissement qui compte</span>
+  <p>Le modèle météo raisonne sur une maille de plusieurs kilomètres et place ce point à <strong>576&nbsp;m d'altitude</strong>, alors que le lieu est plus bas dans la vallée. Par nuit claire et sans vent, l'air froid draine vers le fond de vallée&nbsp;: la température réelle peut y descendre <strong>3 à 6&nbsp;°C sous la valeur affichée ici</strong>. Pour suivre une tendance, c'est excellent. Pour décider de bâcher ce soir, il faut un thermomètre sur place.</p>
+</div>
+
+<p>Le <strong>bilan hydrique</strong> est la différence entre ce qui est tombé et ce que l'atmosphère a évaporé sur sept jours. Négatif, le sol se vide&nbsp;; positif, il se recharge. C'est une approximation&nbsp;: la réserve réelle dépend de la profondeur du sol et de sa charge en cailloux, qui se mesurent à la bêche et pas au modèle.</p>
+
+<p>Le <strong>risque de gelée</strong> est déclenché à +2&nbsp;°C et non à 0, parce que la température au niveau du sol est de 2 à 5&nbsp;°C inférieure à la mesure sous abri. Une gelée blanche se produit couramment quand le thermomètre annonce encore +3.</p>
+
+<p class="horodatage" id="horodatage"></p>
+
+</main>
+
+<footer>
+  <p>Collectif expérimental du Domaine du Mons — Vitrac-sur-Montane (19).</p>
+  <ul>
+    <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+    <li><a href="index.html">Le lieu</a></li>
+  </ul>
+</footer>
+
+<script src="tdb.js"></script>
+<script>
+const LAT = 45.3706, LON = 1.938, STATION = "P361401001";
+const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
+const jourLong = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+
+async function meteo() {
+  const u = "https://api.open-meteo.com/v1/forecast?latitude=" + LAT + "&longitude=" + LON +
+    "&timezone=Europe%2FParis&past_days=7&forecast_days=14" +
+    "&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,et0_fao_evapotranspiration,wind_gusts_10m_max";
+  const d = await json(u);
+  const j = d.daily, t = j.time;
+  const auj = t.indexOf(new Date().toISOString().slice(0, 10));
+  const i0 = auj < 0 ? 7 : auj;
+
+  /* --- indicateurs --- */
+  const min72 = Math.min(...j.temperature_2m_min.slice(i0, i0 + 3));
+  let etatGel = "calme", motGel = "aucun risque";
+  if (min72 <= 0) { etatGel = "alerte"; motGel = "gelée probable"; }
+  else if (min72 <= 2) { etatGel = "vigilance"; motGel = "gelée blanche possible"; }
+
+  const pluie7 = j.precipitation_sum.slice(i0 - 7, i0).reduce((a, b) => a + (b || 0), 0);
+  const etp7 = j.et0_fao_evapotranspiration.slice(i0 - 7, i0).reduce((a, b) => a + (b || 0), 0);
+  const bilan = pluie7 - etp7;
+  let etatBilan = "calme", motBilan = "le sol se recharge";
+  if (bilan < -25) { etatBilan = "alerte"; motBilan = "le sol se vide vite"; }
+  else if (bilan < 0) { etatBilan = "vigilance"; motBilan = "le sol se vide"; }
+
+  const pluie7av = j.precipitation_sum.slice(i0, i0 + 7).reduce((a, b) => a + (b || 0), 0);
+  let secs = 0;
+  for (let k = i0; k < t.length; k++) { if ((j.precipitation_sum[k] || 0) < 1) secs++; else break; }
+  const rafale = Math.max(...j.wind_gusts_10m_max.slice(i0, i0 + 3));
+
+  document.getElementById("tuiles").innerHTML =
+    tuile("Gelée sous 72 h", nf(min72), "°C", '<span class="pastille ' + etatGel + '"></span>' + motGel, etatGel) +
+    tuile("Pluie, 7 jours passés", nf0(pluie7), "mm", "puis " + nf0(pluie7av) + " mm attendus") +
+    tuile("Bilan hydrique, 7 j", (bilan > 0 ? "+" : "") + nf0(bilan), "mm", '<span class="pastille ' + etatBilan + '"></span>' + motBilan, etatBilan) +
+    tuile("Jours secs devant", secs, secs > 1 ? "jours" : "jour", secs >= 3 ? "fenêtre de fenaison ouverte" : "pas de fenêtre franche") +
+    tuile("Rafales max, 72 h", nf0(rafale), "km/h", rafale > 80 ? '<span class="pastille alerte"></span>pas de travail en hauteur' : "rien à signaler", rafale > 80 ? "alerte" : null);
+
+  /* --- graphiques --- */
+  const pts = t.map((d0, k) => ({ cle: jourLong(d0), libelle: jourCourt(d0), y: j.temperature_2m_min[k], y2: j.temperature_2m_max[k] }));
+  graphe({ conteneur: document.getElementById("g-temp"), points: pts, type: "bande", unite: "°C" });
+  graphe({
+    conteneur: document.getElementById("g-pluie"),
+    points: t.map((d0, k) => ({ cle: jourLong(d0), libelle: jourCourt(d0), y: j.precipitation_sum[k] || 0 })),
+    type: "barres", unite: "mm", hauteur: 150
+  });
+
+  /* --- tableau --- */
+  document.querySelector("#table-jours tbody").innerHTML = t.map((d0, k) =>
+    "<tr><td>" + jourCourt(d0) + "</td><td>" + nf(j.temperature_2m_min[k]) + "</td><td>" + nf(j.temperature_2m_max[k]) +
+    "</td><td>" + nf(j.precipitation_sum[k] || 0) + "</td><td>" + nf(j.et0_fao_evapotranspiration[k]) + "</td></tr>").join("");
+}
+
+async function riviere() {
+  const d = await json("https://hubeau.eaufrance.fr/api/v2/hydrometrie/observations_tr?code_entite=" + STATION + "&grandeur_hydro=Q&size=1&sort=desc");
+  const o = d.data && d.data[0];
+  if (!o) throw new Error("aucune observation");
+  const q = o.resultat_obs;
+  let etat = "calme", mot = "débit courant";
+  if (q < 20) { etat = "alerte"; mot = "étiage sévère"; }
+  else if (q < 60) { etat = "vigilance"; mot = "étiage marqué"; }
+  const quand = new Date(o.date_obs).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" });
+  document.getElementById("riviere").innerHTML =
+    '<div class="tuiles">' +
+    tuile("Débit à Eyrein", nf0(q), "l/s", '<span class="pastille ' + etat + '"></span>' + mot, etat) +
+    tuile("Soit", nf(q / 1000, 3), "m³/s", "relevé le " + quand) +
+    "</div>" +
+    "<p>Station <em>La Montane à Eyrein, pont du Geai</em>, à trois kilomètres en aval, relevée toutes les cinq minutes. " +
+    "À titre de repère&nbsp;: sous 20 litres par seconde, la rivière est à l'étiage sévère et tout prélèvement se discute.</p>";
+}
+
+async function secheresse() {
+  const zones = await json("https://api.vigieau.beta.gouv.fr/api/zones?lon=" + LON + "&lat=" + LAT + "&profil=particulier");
+  if (!Array.isArray(zones) || !zones.length) {
+    document.getElementById("secheresse").innerHTML = "<p>Aucune restriction en vigueur sur la commune.</p>";
+    return;
+  }
+  const rang = { vigilance: 1, alerte: 2, alerte_renforcee: 3, crise: 4 };
+  const mots = { vigilance: "vigilance", alerte: "alerte", alerte_renforcee: "alerte renforcée", crise: "crise" };
+  const libZone = { SUP: "eaux de surface", SOU: "eaux souterraines", AEP: "eau potable" };
+  const pire = zones.reduce((a, b) => (rang[b.niveauGravite] || 0) > (rang[a.niveauGravite] || 0) ? b : a);
+  const etat = (rang[pire.niveauGravite] || 0) >= 2 ? "alerte" : "vigilance";
+  const lignes = zones.map((z) =>
+    "<tr><td>" + (libZone[z.type] || z.type) + "</td><td>" + (mots[z.niveauGravite] || z.niveauGravite) + "</td><td>" + z.nom + "</td></tr>").join("");
+  const arrete = pire.arrete && pire.arrete.cheminFichier
+    ? '<p><a href="' + pire.arrete.cheminFichier + '">Lire l\'arrêté préfectoral</a>' +
+      (pire.arrete.dateFinValidite ? " — en vigueur jusqu'au " + new Date(pire.arrete.dateFinValidite).toLocaleDateString("fr-FR", { dateStyle: "long" }) : "") + ".</p>"
+    : "";
+  document.getElementById("secheresse").innerHTML =
+    '<div class="tuiles">' +
+    tuile("Niveau le plus élevé", mots[pire.niveauGravite] || pire.niveauGravite, "",
+      '<span class="pastille ' + etat + '"></span>' + (libZone[pire.type] || pire.type), etat) +
+    "</div>" +
+    '<div class="defilant"><table class="donnees"><thead><tr><th>Ressource</th><th>Niveau</th><th>Zone</th></tr></thead><tbody>' +
+    lignes + "</tbody></table></div>" + arrete +
+    '<p>Les restrictions s\'imposent à tous. Le détail des usages autorisés et interdits est sur <a href="https://vigieau.gouv.fr">VigiEau</a>.</p>';
+}
+
+(async () => {
+  const taches = [
+    [meteo, "tuiles", "Météo indisponible pour l'instant. Les sources publiques ont des interruptions ; réessayez plus tard."],
+    [riviere, "riviere", "Débit de la Montane indisponible pour l'instant."],
+    [secheresse, "secheresse", "État des restrictions indisponible pour l'instant."]
+  ];
+  await Promise.all(taches.map(([f, id, msg]) => f().catch((e) => { console.warn(id, e); echec(id, msg); })));
+  document.getElementById("horodatage").textContent =
+    "Relevé le " + new Date().toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" }) +
+    ". Sources : Open-Meteo, Hub'Eau, VigiEau.";
+})();
+</script>
+
+</body>
+</html>
