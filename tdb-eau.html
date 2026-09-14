@@ -59,7 +59,7 @@
 <p>Un observateur passe plusieurs fois par an sur un ruisseau de tête de bassin, à <strong>6,7 km</strong> d'ici, et note à l'œil si l'eau coule. C'est le seul relevé de ce type dans un rayon de quatorze kilomètres, et il dit ce qu'aucune station ne mesure&nbsp;: ce qui arrive au petit chevelu, celui qui alimente les mares et les sources.</p>
 <div id="onde"><p class="chargement">Chargement…</p></div>
 
-<h2 id="prelevements">Qui prélève l'eau ici</h2>
+<h2 id="ou-va-l-eau">Qui prélève l'eau ici</h2>
 <div id="prelevements"><p class="chargement">Chargement…</p></div>
 
 <h2>Méthode</h2>
@@ -86,6 +86,17 @@
 <script src="tdb.js?v=7"></script>
 <script>
 const JOUR = (t) => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
+/* Les noms d'ouvrages arrivent en capitales : on les repasse en bas de casse
+   sans écraser les noms de lieux. */
+const LIEUX = ["Montane", "Vitrac", "Mons", "Bouysse", "Eyrein", "Reix", "Graule", "Monteil", "Pont de Reix"];
+function nomPropre(n) {
+  let t = n.toLowerCase().replace(/\s+/g, " ").trim();
+  t = t.charAt(0).toUpperCase() + t.slice(1);
+  for (const l of LIEUX) t = t.replace(new RegExp("\\b" + l.toLowerCase() + "\\b", "g"), l);
+  /* la source ne porte pas les accents */
+  return t.replace(/riviere/g, "rivière").replace(/chateau/g, "château")
+          .replace(/ a /g, " à ").replace(/eval /g, "évaluation ");
+}
 (async () => {
   let d;
   try { d = await json("data/eau.json"); }
@@ -98,13 +109,15 @@ const JOUR = (t) => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", mo
   const completes = Object.keys(A).filter((y) => A[y].complete).length;
   const rang = d.rang_etiage[an];
   const total = Object.keys(d.rang_etiage).length;
+  const classement = Object.keys(d.rang_etiage).sort((a, b) => d.rang_etiage[a] - d.rang_etiage[b]);
+  const pireAnnee = classement[0];
 
   document.getElementById("synthese").innerHTML =
-    tuile("Étiage " + an, rang + "ᵉ", "sur " + total, "le plus sévère depuis " + d.periode[0], rang <= 5 ? "alerte" : null) +
+    tuile("Étiage " + an, rang + (rang === 1 ? "ᵉʳ" : "ᵉ"), "sur " + total + " étés", "le plus sévère de la série : " + pireAnnee, rang <= 5 ? "alerte" : null) +
     tuile("Plus bas débit", nf(cur.min, 1), "l/s", "le " + JOUR(cur.jour_min)) +
     tuile("Sous 20 l/s", cur.sous_seuil["20"].jours, "jours", cur.sous_seuil["20"].premier ? "depuis le " + JOUR(cur.sous_seuil["20"].premier) : "cette année") +
     tuile("Module", nf0(d.module_l_s), "l/s", "moyenne sur " + nf0(d.jours) + " jours") +
-    (d.prelevements ? tuile("Prélevé sur la commune", nf0(d.prelevements.par_annee[d.prelevements.derniere_annee] / 1000), "milliers de m³", "en " + d.prelevements.derniere_annee + ", " + (d.prelevements.usages.join(", ").toLowerCase() || "—")) : "");
+    (d.prelevements ? tuile("Prélevé sur la commune", nf0(d.prelevements.par_annee[d.prelevements.derniere_annee]), "m³", "en " + d.prelevements.derniere_annee + ", " + (d.prelevements.usages.join(", ").toLowerCase() || "—")) : "");
 
   /* --- étiages annuels --- */
   const zone = document.getElementById("g-etiage");
@@ -133,7 +146,7 @@ const JOUR = (t) => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", mo
   zone.appendChild(det);
 
   /* les dix étiages les plus sévères */
-  const pires = Object.keys(d.rang_etiage).sort((a, b) => d.rang_etiage[a] - d.rang_etiage[b]).slice(0, 10);
+  const pires = classement.slice(0, 10);
   const recents = pires.filter((y) => +y >= 2000).length;
   const zeroAn = Object.keys(A).filter((y) => A[y].min === 0);
   document.getElementById("l-etiage").innerHTML =
@@ -184,7 +197,7 @@ const JOUR = (t) => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", mo
       "<strong>en totalité pour l'eau potable</strong> — ni irrigation ni industrie déclarées. Depuis " + a0 + ", le total a " +
       (evol < 0 ? "baissé de " + Math.abs(evol) : "augmenté de " + evol) + "&nbsp;%.</p>" +
       "<div class='defilant'><table class='donnees'><thead><tr><th>Ouvrage</th><th>m³ en " + a1 + "</th></tr></thead><tbody>" +
-      P.ouvrages.map((o) => "<tr><td>" + o.nom.toLowerCase().replace(/(^|\s|')\S/g, (m) => m.toUpperCase()) + "</td><td>" + nf0(o.volume) + "</td></tr>").join("") +
+      P.ouvrages.map((o) => "<tr><td>" + nomPropre(o.nom) + "</td><td>" + nf0(o.volume) + "</td></tr>").join("") +
       "</tbody></table></div>" +
       "<p><strong>Deux de ces ouvrages portent le nom du lieu</strong>, et une prise en rivière capte la Montane à 1,2 km d'ici. " +
       "Autrement dit, l'eau d'ici part déjà dans le réseau public. Tout projet de prélèvement du collectif se discutera donc " +
