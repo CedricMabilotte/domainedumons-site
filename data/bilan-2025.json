@@ -1,0 +1,166 @@
+{
+ "annee": 2025,
+ "bilan": {
+  "tmoy": 11.39,
+  "tmax_moy": 16.12,
+  "tmin_moy": 7.42,
+  "gel": 41,
+  "gel_fort": 2,
+  "chaud30": 24,
+  "chaud32": 11,
+  "tmax_abs": 35.1,
+  "tmin_abs": -6.2,
+  "pluie": 1389,
+  "jp": 150,
+  "jp10": 42,
+  "pmax24": 55.7,
+  "deficit": 88,
+  "etp": 921,
+  "tmax_abs_date": "2025-08-12",
+  "tmin_abs_date": "2025-01-14",
+  "pmax24_date": "2025-10-22",
+  "secheresse_serie": 15,
+  "secheresse_fin": "2025-10-19",
+  "derniere_gelee": "2025-03-17",
+  "premiere_gelee": "2025-11-18",
+  "saison_sans_gel": 246,
+  "sommeT": 4041,
+  "mois": {
+   "1": {
+    "pluie": 202,
+    "tmoy": 3.9
+   },
+   "2": {
+    "pluie": 48,
+    "tmoy": 5.4
+   },
+   "3": {
+    "pluie": 77,
+    "tmoy": 6.8
+   },
+   "4": {
+    "pluie": 181,
+    "tmoy": 10.7
+   },
+   "5": {
+    "pluie": 67,
+    "tmoy": 13.3
+   },
+   "6": {
+    "pluie": 63,
+    "tmoy": 20.2
+   },
+   "7": {
+    "pluie": 61,
+    "tmoy": 18.9
+   },
+   "8": {
+    "pluie": 118,
+    "tmoy": 20.0
+   },
+   "9": {
+    "pluie": 116,
+    "tmoy": 13.6
+   },
+   "10": {
+    "pluie": 224,
+    "tmoy": 11.2
+   },
+   "11": {
+    "pluie": 167,
+    "tmoy": 6.6
+   },
+   "12": {
+    "pluie": 65,
+    "tmoy": 5.6
+   }
+  }
+ },
+ "normale_1991_2020": {
+  "tmoy": 10.4,
+  "gel": 49.5,
+  "chaud30": 4.5,
+  "pluie": 1320.8,
+  "jp": 154.6,
+  "deficit": -2.4,
+  "etp": 822.8,
+  "sommeT": 3718
+ },
+ "reference_1961_1990": {
+  "tmoy": 9.5,
+  "gel": 62.6,
+  "chaud30": 1.6,
+  "pluie": 1444.1,
+  "jp": 167.1
+ },
+ "decennie_2016_2025": {
+  "tmoy": 11.1,
+  "gel": 36.4,
+  "chaud30": 10.3,
+  "pluie": 1434.3,
+  "jp": 156,
+  "deficit": 69.8
+ },
+ "rangs": {
+  "tmoy": {
+   "rang": 5,
+   "sur": 76,
+   "sens": "plus élevé"
+  },
+  "pluie": {
+   "rang": 44,
+   "sur": 76,
+   "sens": "plus faible"
+  },
+  "gel": {
+   "rang": 18,
+   "sur": 76,
+   "sens": "plus faible"
+  },
+  "chaud30": {
+   "rang": 1,
+   "sur": 76,
+   "sens": "plus élevé"
+  },
+  "deficit": {
+   "rang": 14,
+   "sur": 76,
+   "sens": "plus élevé"
+  },
+  "jp": {
+   "rang": 22,
+   "sur": 76,
+   "sens": "plus faible"
+  }
+ },
+ "comparaison": {
+  "2022": {
+   "tmoy": 12.15,
+   "pluie": 1139,
+   "gel": 41,
+   "chaud30": 22,
+   "deficit": 237
+  },
+  "2023": {
+   "tmoy": 11.41,
+   "pluie": 1706,
+   "gel": 40,
+   "chaud30": 8,
+   "deficit": 55
+  },
+  "2024": {
+   "tmoy": 11.0,
+   "pluie": 1715,
+   "gel": 29,
+   "chaud30": 5,
+   "deficit": -293
+  },
+  "2025": {
+   "tmoy": 11.39,
+   "pluie": 1389,
+   "gel": 41,
+   "chaud30": 24,
+   "deficit": 88
+  }
+ }
+}

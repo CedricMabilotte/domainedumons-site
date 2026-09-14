@@ -280,6 +280,16 @@ footer ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0
 .trace-bande { fill: var(--trace); opacity: 0.16; }
 .trace-barre { fill: var(--trace); }
 .trace-tendance { fill: none; stroke: var(--alerte); stroke-width: 2; stroke-dasharray: 5 4; }
+.trace-reference { fill: var(--encre-douce); opacity: 0.13; }
+.trace-mediane { fill: none; stroke: var(--encre-douce); stroke-width: 1.5; stroke-dasharray: 4 3; opacity: 0.7; }
+
+/* Légende : l'identité n'est jamais portée par la seule couleur */
+.legende { list-style: none; padding: 0; margin: 0 0 0.9rem; display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; font-size: 0.85rem; color: var(--encre-douce); }
+.legende li { margin: 0; display: flex; align-items: center; gap: 0.4rem; }
+.legende .ech { width: 1.5rem; height: 0.7rem; display: inline-block; }
+.legende .ech.ligne { height: 0; border-top: 2px solid var(--trace); }
+.legende .ech.bande { background: var(--encre-douce); opacity: 0.18; }
+.legende .ech.mediane { height: 0; border-top: 1.5px dashed var(--encre-douce); }
 .trace-zero { stroke: var(--encre-douce); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.6; }
 
 .curseur { stroke: var(--encre-douce); stroke-width: 1; }

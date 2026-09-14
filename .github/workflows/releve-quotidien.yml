@@ -20,6 +20,9 @@ jobs:
       - name: Relever les sources publiques
         run: python3 scripts/releve.py
 
+      - name: Recalculer l'année en cours et l'année glissante
+        run: python3 scripts/annee.py
+
       - name: Publier si quelque chose a changé
         run: |
           if git diff --quiet -- data/; then

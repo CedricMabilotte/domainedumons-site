@@ -11,7 +11,7 @@ import csv, json, os, sys, urllib.request, urllib.error
 from datetime import date, timedelta
 from statistics import mean
 
-LAT, LON = 45.3706, 1.938
+LAT, LON = 45.351433, 1.931875   # chemin du Mons, 588 m
 STATION = "P361401001"
 CSV = os.path.join(os.path.dirname(__file__), "..", "data", "releve-quotidien.csv")
 COLS = ["date", "t_min_c", "t_max_c", "t_moy_c", "pluie_mm", "etp_mm",

@@ -62,7 +62,7 @@ function graphe(opts) {
   const W = 640, H = hauteur, mg = { t: 12, r: 10, b: 26, l: 40 };
   const iw = W - mg.l - mg.r, ih = H - mg.t - mg.b;
 
-  const toutesY = points.flatMap((p) => [p.y, p.y2]).filter((v) => typeof v === "number");
+  const toutesY = points.flatMap((p) => [p.y, p.y2, p.r0, p.r1]).filter((v) => typeof v === "number");
   let [mn, mx] = extremes(toutesY);
   if (type === "barres" || zero) mn = Math.min(0, mn);
   const e = echelle(mn, mx);
@@ -90,6 +90,19 @@ function graphe(opts) {
   for (const i of idx) {
     const px = type === "barres" ? Xb(i) : X(i);
     el("text", { class: "axe-texte", x: px, y: H - 8, "text-anchor": i === 0 ? "start" : i === n - 1 ? "end" : "middle" }, svg).textContent = points[i].libelle;
+  }
+
+  /* bande de référence (quantiles d'une période de comparaison), dessinée derrière */
+  if (points.some((p) => typeof p.r0 === "number")) {
+    const ref = points.filter((p) => typeof p.r0 === "number");
+    if (ref.length > 1) {
+      const iRef = points.map((p, i) => [p, i]).filter(([p]) => typeof p.r0 === "number");
+      const haut = iRef.map(([p, i]) => `${X(i)},${Y(p.r1)}`);
+      const bas = iRef.map(([p, i]) => `${X(i)},${Y(p.r0)}`).reverse();
+      el("polygon", { class: "trace-reference", points: haut.concat(bas).join(" ") }, svg);
+      if (typeof ref[0].rm === "number")
+        el("polyline", { class: "trace-mediane", points: iRef.map(([p, i]) => `${X(i)},${Y(p.rm)}`).join(" ") }, svg);
+    }
   }
 
   /* marques */
@@ -128,9 +141,10 @@ function graphe(opts) {
     const p = points[i], px = type === "barres" ? Xb(i) : X(i);
     curseur.setAttribute("x1", px); curseur.setAttribute("x2", px); curseur.style.opacity = 0.45;
     if (type !== "barres") { pt.setAttribute("cx", px); pt.setAttribute("cy", Y(p.y2 ?? p.y)); pt.style.opacity = 1; }
-    const txt = p.y2 !== undefined && p.y2 !== null
+    let txt = p.y2 !== undefined && p.y2 !== null
       ? `${nf(p.y)} à ${nf(p.y2)} ${unite}`
       : `${nf(p.y, Number.isInteger(p.y) ? 0 : 1)} ${unite}`;
+    if (typeof p.rm === "number") txt += `<br>normale : ${nf(p.rm, 0)} ${unite}`;
     montrerBulle(env, (px / W) * env.clientWidth, (Y(p.y2 ?? p.y) / H) * env.clientHeight, `<strong>${p.cle}</strong>${txt}`);
   }
   zone.addEventListener("mousemove", (ev) => viser(ev.clientX));

@@ -63,8 +63,9 @@
 <h2>Comment lire ces chiffres</h2>
 
 <div class="note">
-  <span class="etiquette">Un avertissement qui compte</span>
-  <p>Le modèle météo raisonne sur une maille de plusieurs kilomètres et place ce point à <strong>576&nbsp;m d'altitude</strong>, alors que le lieu est plus bas dans la vallée. Par nuit claire et sans vent, l'air froid draine vers le fond de vallée&nbsp;: la température réelle peut y descendre <strong>3 à 6&nbsp;°C sous la valeur affichée ici</strong>. Pour suivre une tendance, c'est excellent. Pour décider de bâcher ce soir, il faut un thermomètre sur place.</p>
+  <span class="etiquette">Ce que vaut la donnée modélisée ici</span>
+  <p>Le lieu est à <strong>588 mètres, sur un replat exposé au sud</strong> — pas en fond de vallée : dans un rayon de 800 mètres, 89&nbsp;% du terrain est plus bas. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de deux mètres de l'altitude réelle</strong>. C'est une situation inhabituellement favorable : la donnée est ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
+  <p>Deux réserves subsistent. La maille fait environ neuf kilomètres&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — ce qui compte pour les parcelles situées en contrebas.</p>
 </div>
 
 <p>Le <strong>bilan hydrique</strong> est la différence entre ce qui est tombé et ce que l'atmosphère a évaporé sur sept jours. Négatif, le sol se vide&nbsp;; positif, il se recharge. C'est une approximation&nbsp;: la réserve réelle dépend de la profondeur du sol et de sa charge en cailloux, qui se mesurent à la bêche et pas au modèle.</p>
@@ -85,7 +86,7 @@
 
 <script src="tdb.js"></script>
 <script>
-const LAT = 45.3706, LON = 1.938, STATION = "P361401001";
+const LAT = 45.351433, LON = 1.931875, STATION = "P361401001";  /* chemin du Mons, 588 m */
 const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
 const jourLong = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
 
@@ -152,7 +153,7 @@ async function riviere() {
     tuile("Débit à Eyrein", nf0(q), "l/s", '<span class="pastille ' + etat + '"></span>' + mot, etat) +
     tuile("Soit", nf(q / 1000, 3), "m³/s", "relevé le " + quand) +
     "</div>" +
-    "<p>Station <em>La Montane à Eyrein, pont du Geai</em>, à trois kilomètres en aval, relevée toutes les cinq minutes. " +
+    "<p>Station <em>La Montane à Eyrein, pont du Geai</em>, à un kilomètre deux cents, relevée toutes les cinq minutes. " +
     "À titre de repère&nbsp;: sous 20 litres par seconde, la rivière est à l'étiage sévère et tout prélèvement se discute.</p>";
 }
 

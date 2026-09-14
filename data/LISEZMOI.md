@@ -5,7 +5,7 @@ avec mention de la source : « Collectif expérimental du Domaine du Mons ».
 
 ## `climat-annuel.csv` et `climat.json`
 
-Indicateurs climatiques annuels au point 45,3706 N / 1,938 E (Vitrac-sur-Montane, Corrèze),
+Indicateurs climatiques annuels au point 45,351433 N / 1,931875 E (Domaine du Mons, chemin du Mons, Vitrac-sur-Montane, Corrèze — 588 m),
 de 1950 à 2025.
 
 | Colonne | Définition |
@@ -21,13 +21,17 @@ de 1950 à 2025.
 | `premiere_gelee_automne_jour_annee` | Quantième du premier jour à minimale ≤ 0 °C après le 1er juillet |
 
 **Source primaire** : réanalyse [Open-Meteo](https://open-meteo.com/) (ERA5), maille d'environ
-9 km, altitude du point de modèle 576 m. Les tendances du fichier JSON sont calculées par
-test de Mann-Kendall et pente de Sen, avec intervalle de confiance à 95 %.
+9 km, point de grille à 589 m. Les tendances du fichier JSON sont calculées par test de
+Mann-Kendall et pente de Sen, avec intervalle de confiance à 95 %.
 
-**Limite à connaître.** Une réanalyse de cette maille ne résout pas un fond de vallée.
-Par nuit claire et calme, la température réelle au sol peut descendre 3 à 6 °C sous la valeur
-modélisée. Ces séries sont valables pour une **tendance de long terme**, pas pour une alerte
-au gel ni pour une valeur ponctuelle.
+**Représentativité.** Le lieu est à 587,5 m sur un replat exposé au sud (pente ~1°), et non en
+fond de vallée : dans un rayon de 800 m, 89 % du terrain est plus bas. L'écart entre l'altitude
+réelle et celle du point de modèle est inférieur à 2 m, ce qui rend la réanalyse inhabituellement
+représentative pour ce site.
+
+**Limites subsistantes.** La maille lisse les extrêmes et représente mal les orages convectifs
+d'été. Les parcelles situées en contrebas reçoivent l'air froid drainé des hauteurs et gèlent
+plus sévèrement que ne l'indiquent ces séries.
 
 ## `releve-quotidien.csv`
 
