@@ -127,8 +127,8 @@ function jourDeLAnnee(doy) {
 
   document.getElementById("synthese").innerHTML =
     tuile("Chauffage", nf0(n.dju), "DJU", "normale 1991-2020, base 18 °C") +
-    tuile("Besoin de chauffage", nf0(tr.dju.pente_par_decennie), "DJU", "par décennie, soit " + nf(100 * tr.dju.pente_par_decennie / n.dju, 1) + " %") +
-    tuile("Débourrement", jourDeLAnnee(n.debourrement), "", "en moyenne, " + nf(tr.debourrement.pente_par_decennie, 1) + " jour par décennie") +
+    tuile("Besoin de chauffage", "−" + nf0(Math.abs(tr.dju.pente_par_decennie)), "DJU", "par décennie, soit " + nf(Math.abs(100 * tr.dju.pente_par_decennie / n.dju), 1) + " % de moins") +
+    tuile("Débourrement", jourDeLAnnee(n.debourrement), "", "en moyenne, " + nf(Math.abs(tr.debourrement.pente_par_decennie), 1) + " jour plus tôt par décennie") +
     tuile("Gel en floraison", recent.part_gelee_en_floraison, "%", "des années 1996-2025, contre " + ancien.part_gelee_en_floraison + " % en 1961-1990",
           recent.part_gelee_en_floraison > ancien.part_gelee_en_floraison ? "alerte" : null) +
     tuile("Fenaison", nf(n.fenetres, 1), "fenêtres", "par été, de 3 jours secs ou plus");
@@ -139,7 +139,7 @@ function jourDeLAnnee(doy) {
     (tr.dju.significative ? "baisse de <strong>" + nf0(Math.abs(tr.dju.pente_par_decennie)) + " DJU par décennie</strong> (intervalle à 95 % : " +
       nf0(tr.dju.ic95[0]) + " à " + nf0(tr.dju.ic95[1]) + ")." : "aucune détectable."), s.dju, { unite: "DJU", tendance: droite(s.dju, tr.dju) });
   bloc(zb, "Jours à chauffer", "Nombre de jours dont la moyenne reste sous 18 °C. <strong>Tendance</strong> : " +
-    nf(tr.jours_chauffes.pente_par_decennie, 1) + " jour par décennie.", s.jours_chauffes, { unite: "jours", tendance: droite(s.jours_chauffes, tr.jours_chauffes) });
+    nf(Math.abs(tr.jours_chauffes.pente_par_decennie), 1) + " jours de moins par décennie.", s.jours_chauffes, { unite: "jours", tendance: droite(s.jours_chauffes, tr.jours_chauffes) });
   const djuv = s.dju.map(([, v]) => v), maxi = Math.max(...djuv), mini = Math.min(...djuv);
   const anMax = s.dju.find(([, v]) => v === maxi)[0], anMin = s.dju.find(([, v]) => v === mini)[0];
   const rec10 = s.dju.slice(-10).map(([, v]) => v).sort((a, b) => a - b);
@@ -175,7 +175,7 @@ function jourDeLAnnee(doy) {
   document.getElementById("l-verger").innerHTML =
     "<p><strong>La floraison avance plus vite que le gel ne recule.</strong> Le débourrement gagne " +
     nf(Math.abs(tr.debourrement.pente_par_decennie), 1) + " jour par décennie et la floraison " +
-    nf(Math.abs(tr.floraison.pente_par_decennie), 1) + " — mais le nombre de gelées survenant après le débourrement " +
+    nf(Math.abs(tr.floraison.pente_par_decennie), 1) + " jour — mais le nombre de gelées survenant après le débourrement " +
     "<strong>n'a aucune tendance détectable</strong> : " + recent.part_avec_gelee + " % des trente dernières années en comptent au moins une, contre " +
     ancien.part_avec_gelee + " % en 1961-1990. Il gèle moins souvent dans l'année, mais pas moins souvent au moment où l'arbre est sorti.</p>" +
     "<p><strong>Et sur la fleur ouverte, le risque a changé de niveau.</strong> Une gelée à −1 °C ou moins après floraison touchait " +
@@ -194,7 +194,7 @@ function jourDeLAnnee(doy) {
     { unite: "jours", tendance: droite(s.plus_longue_suite, tr.plus_longue_suite) });
   const fen = s.fenetres.map(([, v]) => v), mauvaises = s.fenetres.filter(([, v]) => v <= 4).map(([y]) => y);
   document.getElementById("l-fenaison").innerHTML =
-    "<p>En moyenne <strong>" + nf(n.fenetres, 1) + " fenêtres par été</strong>, dont " + nf(n.fenetres_larges, 1) +
+    "<p>En moyenne <strong>" + nf(n.fenetres, 1) + " fenêtres par été</strong>, dont " + nf(n.fenetres_larges, 0) +
     " assez larges pour laisser une marge, et une plus longue suite sèche de " + nf(n.plus_longue_suite, 0) + " jours. " +
     "Aucune tendance n'est détectable, ni à la hausse ni à la baisse : <strong>la fenaison n'est pas ce que le réchauffement a changé ici.</strong> " +
     "Le foin n'est pas plus difficile à faire qu'en 1950 — la difficulté s'est déplacée sur la pousse de l'herbe, que le déficit d'été commande.</p>" +
