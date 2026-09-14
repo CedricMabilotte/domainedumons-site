@@ -54,7 +54,7 @@ function cacherBulle() { if (bulle) bulle.style.display = "none"; }
    type   : "ligne" | "bande" | "barres"
    ------------------------------------------------------------------ */
 function graphe(opts) {
-  const { conteneur, points, type = "ligne", unite = "", tendance = null, hauteur = 190, zero = false } = opts;
+  const { conteneur, points, type = "ligne", unite = "", tendance = null, hauteur = 190, zero = false, log = false } = opts;
   if (!conteneur) return;
   conteneur.innerHTML = "";
   if (!points || !points.length) { conteneur.innerHTML = '<p class="echec">Donnée indisponible.</p>'; return; }
@@ -63,10 +63,27 @@ function graphe(opts) {
   const iw = W - mg.l - mg.r, ih = H - mg.t - mg.b;
 
   const toutesY = points.flatMap((p) => [p.y, p.y2, p.r0, p.r1]).filter((v) => typeof v === "number");
-  let [mn, mx] = extremes(toutesY);
-  if (type === "barres" || zero) mn = Math.min(0, mn);
-  const e = echelle(mn, mx);
-  const Y = (v) => mg.t + ih - ((v - e.bas) / (e.haut - e.bas)) * ih;
+  let e, tv;
+  if (log) {
+    /* échelle logarithmique : nécessaire quand un étiage et une crue tiennent dans le même graphique */
+    const pos = toutesY.filter((v) => v > 0);
+    const plancher = pos.length ? Math.max(Math.min(...pos) / 2, 1e-6) : 1;
+    tv = (v) => Math.log10(Math.max(v, plancher));
+    const [, mxp] = extremes(pos.length ? pos : [1]);
+    const ticks = [];
+    for (let k = Math.floor(Math.log10(plancher)); k <= Math.ceil(Math.log10(mxp)); k++)
+      for (const m of [1, 2, 5]) {
+        const v = m * Math.pow(10, k);
+        if (v >= plancher && v <= mxp * 1.6) ticks.push(v);
+      }
+    e = { bas: tv(plancher), haut: tv(Math.max(mxp, plancher * 10)), ticks };
+  } else {
+    let [mn, mx] = extremes(toutesY);
+    if (type === "barres" || zero) mn = Math.min(0, mn);
+    e = echelle(mn, mx);
+    tv = (v) => v;
+  }
+  const Y = (v) => mg.t + ih - ((tv(v) - e.bas) / (e.haut - e.bas)) * ih;
   const n = points.length;
   const X = (i) => mg.l + (n === 1 ? iw / 2 : (i / (n - 1)) * iw);
   const larg = type === "barres" ? Math.max(1, (iw / n) * 0.62) : 0;
@@ -81,7 +98,7 @@ function graphe(opts) {
   /* grille + axe Y */
   for (const t of e.ticks) {
     el("line", { class: "grille-ligne", x1: mg.l, x2: W - mg.r, y1: Y(t), y2: Y(t) }, svg);
-    el("text", { class: "axe-texte", x: mg.l - 6, y: Y(t) + 4, "text-anchor": "end" }, svg).textContent = nf(t, Number.isInteger(t) ? 0 : 1);
+    el("text", { class: "axe-texte", x: mg.l - 6, y: Y(t) + 4, "text-anchor": "end" }, svg).textContent = nf(t, t < 1 ? 1 : 0);
   }
   if (e.bas < 0 && e.haut > 0) el("line", { class: "trace-zero", x1: mg.l, x2: W - mg.r, y1: Y(0), y2: Y(0) }, svg);
 

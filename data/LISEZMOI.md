@@ -52,6 +52,22 @@ même station. Une ligne par jour, ajoutée la veille pour le jour écoulé.
 Une cellule vide signifie que la source était muette ce jour-là. Le relevé n'est jamais
 interrompu par l'indisponibilité d'une source.
 
+## `eau.json`
+
+Série longue de l'eau, produite par `scripts/eau.py` à partir de trois API Hub'Eau.
+
+| Clé | Contenu |
+|---|---|
+| `annees` | Pour chaque année : nombre de jours mesurés, module, médiane, débit minimal et sa date, `vcn3` et `vcn10` (plus faible moyenne sur 3 et 10 jours consécutifs), et pour chaque seuil (50, 20, 10 l/s) le nombre de jours passés en dessous et la date du premier |
+| `rang_etiage` | Rang de chaque année sur le VCN10, 1 étant l'étiage le plus sévère |
+| `courbe` | Débit journalier de l'année en cours, avec les quantiles 10 / 50 / 90 % du même jour calculés sur toutes les années antérieures |
+| `onde` | Observations d'écoulement de la station ONDE la plus proche (6,7 km), et leur résumé annuel |
+| `prelevements` | Volumes prélevés sur la commune par année et par ouvrage (BNPE), et les usages déclarés |
+
+**Station** : `P361401001`, la Montane à Eyrein (pont du Geai), 1,2 km, bassin versant 43 km², en service depuis le 1er janvier 1957. Ce sont les données *élaborées* (validées, expertisées), et non le flux temps réel, qui ne conserve qu'un mois.
+
+**Limite** : la station draine 43 km². Elle ne dit rien du chevelu de tête de bassin, qui s'arrête bien avant et repart bien après. Les observations ONDE en donnent une approximation ; seule une mesure locale la remplacerait.
+
 ## `analyses.json`
 
 Trois familles d'indicateurs dérivés de la même réanalyse, 1950-2025, calculées par
