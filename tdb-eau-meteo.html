@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eau et météo — Domaine du Mons</title>
 <meta name="description" content="Risque de gelée, pluie, bilan hydrique, débit de la Montane et restrictions sécheresse à Vitrac-sur-Montane. Données publiques ouvertes.">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -24,6 +24,7 @@
             <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
             <li><a href="tdb-annee.html">L'année</a></li>
             <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
             <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
             <li><hr></li>
             <li><a href="rapport-2025.html">Rapport 2025</a></li>
@@ -73,6 +74,10 @@
 <h2>Sécheresse</h2>
 <div id="secheresse"><p class="chargement">Chargement…</p></div>
 
+<h3>L'archive des restrictions</h3>
+<p>VigiEau publie l'état du jour et ne conserve pas d'historique ouvert à cette maille&nbsp;: sa requête par date renvoie l'arrêté courant, et aucun jeu national ne rejoue la série pour la Corrèze (vérifié le 14 septembre 2026). Chaque journée non relevée est perdue pour toujours, d'où le relevé automatique quotidien.</p>
+<div id="archive-secheresse"><p class="chargement">Chargement…</p></div>
+
 <h2>Lecture</h2>
 
 <div class="note">
@@ -101,7 +106,7 @@
   </div>
 </footer>
 
-<script src="tdb.js?v=5"></script>
+<script src="tdb.js?v=6"></script>
 <script>
 const LAT = 45.351433, LON = 1.931875, STATION = "P361401001";  /* chemin du Mons, 588 m */
 const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
@@ -201,11 +206,58 @@ async function secheresse() {
     '<p>Les restrictions s\'imposent à tous. Le détail des usages autorisés et interdits est sur <a href="https://vigieau.gouv.fr">VigiEau</a>.</p>';
 }
 
+const LIB_NIVEAU = { aucune: "aucune restriction", vigilance: "vigilance", alerte: "alerte",
+                     alerte_renforcee: "alerte renforcée", crise: "crise" };
+async function archive() {
+  const a = await json("data/secheresse-historique.json");
+  const cible = document.getElementById("archive-secheresse");
+  if (!a.jours_releves) {
+    cible.innerHTML = "<p>L'archive commence dès le premier relevé.</p>";
+    return;
+  }
+  const act = a.actuel, an = new Date().getFullYear();
+  const cetteAnnee = a.par_annee[String(an)] || null;
+  const etat = ["alerte", "alerte_renforcee", "crise"].includes(act.niveau) ? "alerte" : "vigilance";
+  const jours = (v) => v + (v > 1 ? " jours" : " jour");
+  let html = '<div class="tuiles">' +
+    tuile("Niveau actuel", LIB_NIVEAU[act.niveau] || act.niveau, "",
+          '<span class="pastille ' + etat + '"></span>depuis le ' +
+          new Date(act.depuis).toLocaleDateString("fr-FR", { dateStyle: "long" }), etat) +
+    tuile("Sans interruption", act.jours, act.jours > 1 ? "jours" : "jour", "à ce niveau") +
+    tuile("Archive", a.jours_releves, a.jours_releves > 1 ? "jours" : "jour",
+          "relevés depuis le " + new Date(a.debut).toLocaleDateString("fr-FR", { dateStyle: "long" })) +
+    (cetteAnnee ? tuile("Sous restriction en " + an, cetteAnnee.jours_restreints, "sur " + cetteAnnee.jours_releves,
+          "jours en alerte ou au-delà") : "") +
+    "</div>";
+  const annees = Object.keys(a.par_annee).sort();
+  if (annees.length) {
+    html += '<div class="defilant"><table class="donnees"><thead><tr><th>Année</th>' +
+      a.niveaux.map((n) => "<th>" + (LIB_NIVEAU[n] || n) + "</th>").join("") +
+      "<th>relevés</th></tr></thead><tbody>" +
+      annees.map((y) => {
+        const v = a.par_annee[y];
+        return "<tr><td>" + y + (v.complete ? "" : " <span class=\"nb\">(partielle)</span>") + "</td>" +
+          a.niveaux.map((n) => "<td>" + (v[n] || 0) + "</td>").join("") + "<td>" + v.jours_releves + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  if (a.bascules && a.bascules.length > 1) {
+    html += "<h4>Les bascules</h4><div class=\"defilant\"><table class=\"donnees\"><thead><tr><th>Date</th><th>De</th><th>Vers</th></tr></thead><tbody>" +
+      a.bascules.slice().reverse().map((b) =>
+        "<tr><td>" + new Date(b.date).toLocaleDateString("fr-FR") + "</td><td>" +
+        (b.de ? (LIB_NIVEAU[b.de] || b.de) : "début de l'archive") + "</td><td>" +
+        (LIB_NIVEAU[b.vers] || b.vers) + "</td></tr>").join("") + "</tbody></table></div>";
+  }
+  html += "<p>Série publiée en données ouvertes — <a href=\"data/secheresse-historique.json\">JSON</a>, " +
+    "<a href=\"data/releve-quotidien.csv\">relevé quotidien brut</a>. " +
+    (a.jours_releves < 400 ? "Une année complète sera comparable à l'été 2027." : "") + "</p>";
+  cible.innerHTML = html;
+}
 (async () => {
   const taches = [
     [meteo, "tuiles", "Météo indisponible pour l'instant. Les sources publiques ont des interruptions ; réessayez plus tard."],
     [riviere, "riviere", "Débit de la Montane indisponible pour l'instant."],
-    [secheresse, "secheresse", "État des restrictions indisponible pour l'instant."]
+    [secheresse, "secheresse", "État des restrictions indisponible pour l'instant."],
+    [archive, "archive-secheresse", "Archive des restrictions indisponible."]
   ];
   await Promise.all(taches.map(([f, id, msg]) => f().catch((e) => { console.warn(id, e); echec(id, msg); })));
   document.getElementById("horodatage").textContent =
@@ -214,7 +266,7 @@ async function secheresse() {
 })();
 </script>
 
-<script src="site.js?v=5"></script>
+<script src="site.js?v=6"></script>
 
 </body>
 </html>

@@ -22,6 +22,8 @@ jobs:
 
       - name: Recalculer l'année en cours et l'année glissante
         run: python3 scripts/annee.py
+      - name: Mettre à jour l'archive des restrictions sécheresse
+        run: python3 scripts/secheresse.py
 
       - name: Publier si quelque chose a changé
         run: |

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chauffage, verger, fenaison — Domaine du Mons</title>
+<meta name="description" content="Trois décisions chiffrées sur 76 ans à Vitrac-sur-Montane : degrés-jours de chauffage, gel après débourrement, fenêtres de fenaison.">
+<link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="m-tdb" aria-current="page">Tableaux de bord</button>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<main class="tdb">
+<p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
+<h1>Chauffage, verger, fenaison</h1>
+<p>La page précédente décrit le climat. Celle-ci en tire trois décisions : combien de bois mettre sous abri, si un fruitier a ses chances ici, et combien de fois par été le foin peut sécher. Chacune est recalculée sur les mêmes 76 années.</p>
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement des séries</p></div></div>
+
+<h2 id="bois">Le bois</h2>
+<p>Le degré-jour unifié mesure la somme des écarts quotidiens sous 18 °C : c'est la grandeur à laquelle la consommation de chauffage est à peu près proportionnelle, et la seule qui permette de comparer deux hivers.</p>
+<div id="g-bois"></div>
+<div id="l-bois"><p class="chargement">Chargement…</p></div>
+
+<h2 id="verger">Le verger</h2>
+<p>Le point qui décide d'un verger n'est pas la date de la dernière gelée, ni celle du débourrement : c'est l'écart entre les deux. Le verdict est habituellement importé de la littérature nationale. Il est ici calculé sur place.</p>
+<div id="g-verger"></div>
+<div id="l-verger"><p class="chargement">Chargement…</p></div>
+<div class="note">
+  <span class="etiquette">Ce que ce calcul ne sait pas</span>
+  <p>Le débourrement n'est pas observé, il est <strong>estimé</strong> par un cumul de températures, avec des seuils calés pour que les dates médianes tombent au bon moment pour un pommier à cette altitude. Le modèle décrit donc une année moyenne mieux qu'une année particulière.</p>
+  <p>Et la maille de la réanalyse fait neuf kilomètres&nbsp;: elle <strong>lisse les minimales</strong>. Les gelées réelles sont plus sévères que celles comptées ici, surtout dans les parcelles basses. Les chiffres se lisent en écart entre périodes, pas en valeur absolue.</p>
+  <p>La première saison d'observation réelle — date de débourrement notée sur l'arbre, minimale relevée sous abri — permettra de recaler les seuils. C'est le genre de mesure que deux capteurs et un carnet suffisent à produire.</p>
+</div>
+
+<h2 id="fenaison">La fenaison</h2>
+<p>Faucher engage trois jours. La question n'est pas de savoir s'il pleuvra moins, mais si les suites de jours secs se raréfient — ce qui n'est pas la même chose et peut aller en sens contraire.</p>
+<div id="g-fenaison"></div>
+<div id="l-fenaison"><p class="chargement">Chargement…</p></div>
+
+<h2>Méthode</h2>
+<table class="donnees">
+  <thead><tr><th>Indicateur</th><th>Définition retenue</th></tr></thead>
+  <tbody>
+    <tr><td>Degrés-jours de chauffage</td><td>Somme des <span class="nb">18 °C −</span> température moyenne du jour, quand cet écart est positif. Saison du 1<sup>er</sup> juillet au 30 juin, nommée par son année de fin.</td></tr>
+    <tr><td>Débourrement</td><td>Premier jour où le cumul des températures moyennes au-dessus de 5 °C, depuis le 1<sup>er</sup> février, atteint 80 °C·j. Floraison au seuil de 150 °C·j.</td></tr>
+    <tr><td>Gelée dommageable</td><td>Minimale ≤ 0 °C après le débourrement ; ≤ −2 °C détruit la pousse ; ≤ −1 °C sur fleur ouverte supprime la récolte. Fenêtre close au 31 mai.</td></tr>
+    <tr><td>Fenêtre de fenaison</td><td>Suite d'au moins 3 jours consécutifs à moins de 1 mm de pluie, entre le 1<sup>er</sup> mai et le 31 juillet.</td></tr>
+  </tbody>
+</table>
+<p>Tendances par test de Mann-Kendall et pente de Sen, comme sur la page climat : quand l'intervalle de confiance contient zéro, il est écrit qu'aucune tendance n'est détectable.</p>
+<p>Données téléchargeables — <a href="data/analyses.json">JSON</a> — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>. Le calcul tient dans <a href="https://github.com/CedricMabilotte/domainedumons-site/blob/main/scripts/analyses.py">un script lisible</a>.</p>
+<p class="horodatage" id="horodatage"></p>
+</main>
+<footer>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="tdb.js?v=6"></script>
+<script>
+function bloc(zone, titre, legende, serie, opts) {
+  const d = document.createElement("div");
+  d.className = "graphe";
+  d.innerHTML = "<h3>" + titre + "</h3><p class='legende-axe'>" + legende + "</p><div></div>";
+  zone.appendChild(d);
+  graphe({ conteneur: d.lastElementChild, points: serie.map(([y, v]) => ({ cle: String(y), libelle: String(y), y: v })),
+           type: opts.type || "ligne", unite: opts.unite, tendance: opts.tendance || null, hauteur: 170, zero: opts.zero !== false });
+  const det = document.createElement("details");
+  det.className = "tableau-brut";
+  det.innerHTML = "<summary>Voir les chiffres — " + titre.toLowerCase() + "</summary>" +
+    "<div class='defilant'><table class='donnees'><thead><tr><th>Année</th><th>" + opts.unite + "</th></tr></thead><tbody>" +
+    serie.map(([y, v]) => "<tr><td>" + y + "</td><td>" + nf(v, opts.dec === undefined ? 0 : opts.dec) + "</td></tr>").join("") +
+    "</tbody></table></div>";
+  zone.appendChild(det);
+}
+function droite(serie, t) {
+  if (!t || !t.significative) return null;
+  const xs = serie.map(([y]) => y);
+  const milieu = (t.y0 + t.y1) / 2, demi = (xs[xs.length - 1] - xs[0]) / 2, pente = t.pente_par_decennie / 10;
+  return { y0: milieu - pente * demi, y1: milieu + pente * demi };
+}
+const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+function jourDeLAnnee(doy) {
+  const d = new Date(2001, 0, 1); d.setDate(Math.round(doy));
+  return d.getDate() + " " + MOIS[d.getMonth()];
+}
+(async () => {
+  let d;
+  try { d = await json("data/analyses.json"); }
+  catch (e) {
+    echec("synthese", "Séries indisponibles.");
+    ["l-bois", "l-verger", "l-fenaison"].forEach((i) => echec(i, ""));
+    return;
+  }
+  const n = d.normale_1991_2020, tr = d.tendances, s = d.series, r = d.risque_gel;
+  const recent = r["1996-2025"], ancien = r["1961-1990"];
+
+  document.getElementById("synthese").innerHTML =
+    tuile("Chauffage", nf0(n.dju), "DJU", "normale 1991-2020, base 18 °C") +
+    tuile("Besoin de chauffage", nf0(tr.dju.pente_par_decennie), "DJU", "par décennie, soit " + nf(100 * tr.dju.pente_par_decennie / n.dju, 1) + " %") +
+    tuile("Débourrement", jourDeLAnnee(n.debourrement), "", "en moyenne, " + nf(tr.debourrement.pente_par_decennie, 1) + " jour par décennie") +
+    tuile("Gel en floraison", recent.part_gelee_en_floraison, "%", "des années 1996-2025, contre " + ancien.part_gelee_en_floraison + " % en 1961-1990",
+          recent.part_gelee_en_floraison > ancien.part_gelee_en_floraison ? "alerte" : null) +
+    tuile("Fenaison", nf(n.fenetres, 1), "fenêtres", "par été, de 3 jours secs ou plus");
+
+  /* --- bois --- */
+  const zb = document.getElementById("g-bois");
+  bloc(zb, "Degrés-jours de chauffage", "Somme annuelle des écarts sous 18 °C, saison de juillet à juin. <strong>Tendance</strong> : " +
+    (tr.dju.significative ? "baisse de <strong>" + nf0(Math.abs(tr.dju.pente_par_decennie)) + " DJU par décennie</strong> (intervalle à 95 % : " +
+      nf0(tr.dju.ic95[0]) + " à " + nf0(tr.dju.ic95[1]) + ")." : "aucune détectable."), s.dju, { unite: "DJU", tendance: droite(s.dju, tr.dju) });
+  bloc(zb, "Jours à chauffer", "Nombre de jours dont la moyenne reste sous 18 °C. <strong>Tendance</strong> : " +
+    nf(tr.jours_chauffes.pente_par_decennie, 1) + " jour par décennie.", s.jours_chauffes, { unite: "jours", tendance: droite(s.jours_chauffes, tr.jours_chauffes) });
+  const djuv = s.dju.map(([, v]) => v), maxi = Math.max(...djuv), mini = Math.min(...djuv);
+  const anMax = s.dju.find(([, v]) => v === maxi)[0], anMin = s.dju.find(([, v]) => v === mini)[0];
+  const rec10 = s.dju.slice(-10).map(([, v]) => v).sort((a, b) => a - b);
+  const pire10 = rec10[rec10.length - 1], med10 = rec10[Math.floor(rec10.length / 2)];
+  document.getElementById("l-bois").innerHTML =
+    "<p>Le besoin de chauffage recule de <strong>" + nf0(Math.abs(tr.dju.pente_par_decennie)) + " DJU par décennie</strong>, soit " +
+    nf(Math.abs(100 * tr.dju.pente_par_decennie / n.dju), 1) + " % du besoin actuel tous les dix ans. Sur la période, la médiane passe de " +
+    nf0(tr.dju.y0) + " à " + nf0(tr.dju.y1) + " DJU : <strong>" + nf(100 * (1 - tr.dju.y1 / tr.dju.y0), 0) + " % de moins</strong> qu'au début des années 1950. " +
+    "Un logement chauffé au bois consomme à peu près proportionnellement : dix stères hier en demandent aujourd'hui autour de " +
+    nf(10 * tr.dju.y1 / tr.dju.y0, 1) + ".</p>" +
+    "<p>C'est la moyenne, et ce n'est pas sur elle qu'on dimensionne un tas de bois. L'hiver le plus froid de la série, " + anMax + ", a demandé " +
+    nf0(maxi) + " DJU ; le plus doux, " + anMin + ", " + nf0(mini) + " — un écart de " + nf(100 * (maxi / mini - 1), 0) + " %. " +
+    "Même sur les dix dernières saisons, la plus rude (" + nf0(pire10) + " DJU) a demandé <strong>" +
+    nf(100 * (pire10 / med10 - 1), 0) + " % de plus que la médiane</strong> de la période. " +
+    "<strong>Le stock se cale sur ce chiffre-là</strong>, pas sur la moyenne&nbsp;: le bois qui reste ne se perd pas, il sèche, " +
+    "tandis qu'une réserve calculée au plus juste tombe en défaut une année sur dix.</p>";
+
+  /* --- verger --- */
+  const zv = document.getElementById("g-verger");
+  bloc(zv, "Date de débourrement", "Jour de l'année où le cumul de températures atteint le seuil. <strong>Tendance</strong> : " +
+    (tr.debourrement.significative ? "<strong>" + nf(Math.abs(tr.debourrement.pente_par_decennie), 1) + " jour plus tôt par décennie</strong> (intervalle à 95 % : " +
+      nf(Math.abs(tr.debourrement.ic95[1]), 1) + " à " + nf(Math.abs(tr.debourrement.ic95[0]), 1) + ")." : "aucune détectable."),
+    s.debourrement, { unite: "jour", tendance: droite(s.debourrement, tr.debourrement), zero: false });
+  bloc(zv, "Date de floraison", "Même méthode, seuil plus haut. <strong>Tendance</strong> : " +
+    (tr.floraison.significative ? "<strong>" + nf(Math.abs(tr.floraison.pente_par_decennie), 1) + " jour plus tôt par décennie</strong>." : "aucune détectable."),
+    s.floraison, { unite: "jour", tendance: droite(s.floraison, tr.floraison), zero: false });
+  bloc(zv, "Gelées après débourrement", "Nombre de jours à 0 °C ou moins entre le débourrement et le 31 mai. <strong>Tendance</strong> : " +
+    (tr.gelees_apres.significative ? "significative." : "aucune détectable — l'intervalle de confiance contient zéro."),
+    s.gelees_apres, { unite: "jours", type: "barres" });
+  bloc(zv, "Gelées sur fleur ouverte", "Jours à −1 °C ou moins après le stade floraison : le gel qui supprime la récolte.",
+    s.gel_floraison, { unite: "jours", type: "barres" });
+  const pires = d.series.gel_floraison.filter(([, v]) => v > 0).map(([y]) => y).filter((y) => y >= 1996);
+  document.getElementById("l-verger").innerHTML =
+    "<p><strong>La floraison avance plus vite que le gel ne recule.</strong> Le débourrement gagne " +
+    nf(Math.abs(tr.debourrement.pente_par_decennie), 1) + " jour par décennie et la floraison " +
+    nf(Math.abs(tr.floraison.pente_par_decennie), 1) + " — mais le nombre de gelées survenant après le débourrement " +
+    "<strong>n'a aucune tendance détectable</strong> : " + recent.part_avec_gelee + " % des trente dernières années en comptent au moins une, contre " +
+    ancien.part_avec_gelee + " % en 1961-1990. Il gèle moins souvent dans l'année, mais pas moins souvent au moment où l'arbre est sorti.</p>" +
+    "<p><strong>Et sur la fleur ouverte, le risque a changé de niveau.</strong> Une gelée à −1 °C ou moins après floraison touchait " +
+    ancien.part_gelee_en_floraison + " % des années en 1961-1990. Sur 1996-2025, " + recent.part_gelee_en_floraison + " %" +
+    (pires.length ? " — " + pires.join(", ") : "") + ". Sur des effectifs aussi petits, le test statistique reste " +
+    "au bord du seuil (p = " + nf(tr.gel_floraison.p, 3) + ") : <strong>la hausse est nette mais pas encore démontrée</strong>, et c'est ce qu'il faut en dire.</p>" +
+    "<p>Ce que ça commande : <strong>des variétés à floraison tardive</strong>, et surtout le choix de l'emplacement. " +
+    "Le replat du lieu vide son air froid vers le bas ; les quinze mètres les plus bas de la pente le reçoivent. Entre deux parcelles distantes de " +
+    "cent mètres, l'écart de risque dépasse l'effet de soixante-dix ans de réchauffement.</p>";
+
+  /* --- fenaison --- */
+  const zf = document.getElementById("g-fenaison");
+  bloc(zf, "Fenêtres de fenaison", "Suites d'au moins 3 jours à moins de 1 mm, de mai à juillet. <strong>Tendance</strong> : " +
+    (tr.fenetres.significative ? "significative." : "aucune détectable."), s.fenetres, { unite: "fenêtres", type: "barres" });
+  bloc(zf, "Plus longue suite sèche", "Le plus long épisode sans pluie de l'été, en jours.", s.plus_longue_suite,
+    { unite: "jours", tendance: droite(s.plus_longue_suite, tr.plus_longue_suite) });
+  const fen = s.fenetres.map(([, v]) => v), mauvaises = s.fenetres.filter(([, v]) => v <= 4).map(([y]) => y);
+  document.getElementById("l-fenaison").innerHTML =
+    "<p>En moyenne <strong>" + nf(n.fenetres, 1) + " fenêtres par été</strong>, dont " + nf(n.fenetres_larges, 1) +
+    " assez larges pour laisser une marge, et une plus longue suite sèche de " + nf(n.plus_longue_suite, 0) + " jours. " +
+    "Aucune tendance n'est détectable, ni à la hausse ni à la baisse : <strong>la fenaison n'est pas ce que le réchauffement a changé ici.</strong> " +
+    "Le foin n'est pas plus difficile à faire qu'en 1950 — la difficulté s'est déplacée sur la pousse de l'herbe, que le déficit d'été commande.</p>" +
+    "<p>La marge reste mince quand même : " + mauvaises.length + " années sur " + fen.length +
+    " n'ont offert que quatre fenêtres ou moins entre mai et juillet, soit une année sur " + nf(fen.length / Math.max(1, mauvaises.length), 0) +
+    ". Une organisation qui suppose de pouvoir faucher au jour choisi tombe en défaut ces années-là ; une organisation qui sait faucher " +
+    "dans les 48 heures qui suivent une prévision passe partout.</p>";
+
+  document.getElementById("horodatage").textContent =
+    "Séries calculées le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " sur " + d.periode[0] + "-" + d.periode[1] + " · " + d.source + " · Licence Ouverte 2.0.";
+})();
+</script>
+<script src="site.js?v=6"></script>
+</body>
+</html>

@@ -52,6 +52,56 @@ même station. Une ligne par jour, ajoutée la veille pour le jour écoulé.
 Une cellule vide signifie que la source était muette ce jour-là. Le relevé n'est jamais
 interrompu par l'indisponibilité d'une source.
 
+## `analyses.json`
+
+Trois familles d'indicateurs dérivés de la même réanalyse, 1950-2025, calculées par
+`scripts/analyses.py`. Chaque série est un tableau `[année, valeur]` ; `tendances` porte la
+pente de Sen par décennie, son intervalle de confiance à 95 %, la p-value de Mann-Kendall et
+le verdict de significativité ; `normale_1991_2020` la moyenne de référence.
+
+| Clé | Définition |
+|---|---|
+| `dju` | Degrés-jours unifiés de chauffage, base 18 °C : somme des (18 − température moyenne du jour) positifs, saison du 1er juillet au 30 juin, nommée par son année de fin |
+| `jours_chauffes` | Nombre de jours de la saison dont la température moyenne reste sous 18 °C |
+| `debourrement` | Quantième du premier jour où le cumul des (température moyenne − 5 °C) positifs depuis le 1er février atteint 80 °C·j |
+| `floraison` | Idem, au seuil de 150 °C·j |
+| `gelees_apres` | Nombre de jours à minimale ≤ 0 °C entre le débourrement et le 31 mai |
+| `gel_destructeur` | Idem, à ≤ −2 °C |
+| `gel_floraison` | Nombre de jours à minimale ≤ −1 °C après le stade floraison et avant le 31 mai |
+| `tmin_apres` | Température minimale la plus basse atteinte après le débourrement |
+| `fenetres` | Nombre de suites d'au moins 3 jours consécutifs à moins de 1 mm de pluie, du 1er mai au 31 juillet |
+| `fenetres_larges` | Idem, pour 5 jours et plus |
+| `jours_secs_utiles` | Nombre total de jours contenus dans ces suites de 3 jours et plus |
+| `plus_longue_suite` | Plus longue suite de jours secs de la période mai-juillet |
+
+`risque_gel` compare trois périodes de trente ans : part des années comptant au moins une
+gelée après débourrement, part avec une gelée destructrice, part avec une gelée sur fleur
+ouverte.
+
+**Les seuils de stades sont des proxys**, calés pour que les dates médianes correspondent au
+débourrement (4 avril) et à la floraison (24 avril) d'un pommier à cette altitude. Ils ne
+remplacent pas une observation phénologique. La maille de 9 km lissant les minimales, les
+comptages de gelées sont des minorants : ils se lisent en écart entre périodes, pas en valeur
+absolue.
+
+## `secheresse-historique.json`
+
+Archive des niveaux de restriction sécheresse applicables au lieu, constituée jour après jour
+à partir de la colonne `secheresse_niveau` du relevé quotidien, par `scripts/secheresse.py`.
+
+| Clé | Contenu |
+|---|---|
+| `par_annee` | Nombre de jours passés à chaque niveau, jours relevés, jours en alerte ou au-delà, et si l'année est complète |
+| `bascules` | Chaque changement de niveau, avec sa date |
+| `episodes_clos` | Épisodes terminés, avec début et fin |
+| `actuel` | Niveau en cours, date de début et ancienneté en jours |
+
+**Pourquoi cette archive existe.** VigiEau publie l'état du jour et ne conserve pas
+d'historique ouvert à cette maille : le paramètre de recherche par date renvoie l'arrêté
+courant, et aucun jeu de données national ne rejoue la série pour la Corrèze (vérifié le
+14 septembre 2026). Une journée non relevée est définitivement perdue. La série commence donc
+au premier relevé et ne peut pas être reconstituée en arrière.
+
 ## `registre-interet-general.json`
 
 Comptages mensuels de l'activité tournée vers l'extérieur : accueil, chantiers ouverts,

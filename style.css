@@ -107,6 +107,8 @@ h2 {
 }
 h2 + p, h2 + div, h2 + ul { margin-top: 0; }
 h3 { font-size: 1rem; font-weight: 600; margin: 1.4rem 0 .3rem; }
+h4 { font-size: .92rem; font-weight: 600; margin: 1.2rem 0 .3rem; }
+.nb { color: var(--douce); font-size: .88em; }
 
 p, ul, ol { margin: 0 0 .85rem; }
 ul, ol { padding-left: 1.1rem; }
