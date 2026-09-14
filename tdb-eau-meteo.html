@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eau et météo — Domaine du Mons</title>
 <meta name="description" content="Risque de gelée, pluie, bilan hydrique, débit de la Montane et restrictions sécheresse à Vitrac-sur-Montane. Données publiques ouvertes.">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -101,7 +101,7 @@
   </div>
 </footer>
 
-<script src="tdb.js?v=4"></script>
+<script src="tdb.js?v=5"></script>
 <script>
 const LAT = 45.351433, LON = 1.931875, STATION = "P361401001";  /* chemin du Mons, 588 m */
 const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
@@ -214,7 +214,7 @@ async function secheresse() {
 })();
 </script>
 
-<script src="site.js?v=4"></script>
+<script src="site.js?v=5"></script>
 
 </body>
 </html>

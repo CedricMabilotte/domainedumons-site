@@ -11,11 +11,16 @@ p += c.cadre(352, 24, 268, 92)         # association
 p += c.cadre(120, 222, 400, 100)       # le foncier
 p += c.fleche(138, 110, 250, 218)
 p += c.fleche(480, 118, 392, 218)
-# la terre : des touffes sous la boite, plutot que des hachures sur le texte
-for i in range(24):
-    x = 128 + i * 16.6
-    p += c.trait(x, 322, x - 3, 336, passes=1)
-    p += c.trait(x + 4, 322, x + 7, 335, passes=1)
+# la terre : des touffes sous la boite, d'espacement et de hauteur irreguliers
+x = 130.0
+while x < 512:
+    h = c.r.uniform(8, 17)
+    p += c.trait(x, 322, x - c.r.uniform(1, 5), 322 + h, passes=1)
+    if c.r.random() < 0.75:
+        p += c.trait(x + c.r.uniform(2, 5), 322, x + c.r.uniform(4, 9), 322 + h * c.r.uniform(.6, 1.05), passes=1)
+    if c.r.random() < 0.4:
+        p += c.trait(x + c.r.uniform(1, 4), 322, x + c.r.uniform(-1, 2), 322 + h * c.r.uniform(.5, .8), passes=1)
+    x += c.r.uniform(9, 26)
 
 montage = f'''<svg viewBox="0 0 640 348" role="img" aria-labelledby="t-mont d-mont" class="croquis">
   <title id="t-mont">Le montage, dessiné</title>
