@@ -38,9 +38,12 @@ q = c2.courbe(sol, passes=2)
 q += c2.trait(8, 250, 8, 262, passes=1)
 # le lit de la Montane, en bas à gauche
 q += c2.courbe([(14, 258), (40, 254), (66, 257), (92, 253)], passes=1)
-# le repère du lieu
-q += c2.trait(392, 86, 392, 134, passes=2)
-q += c2.courbe([(384, 96), (392, 84), (400, 96)], passes=1)
+# le repère du lieu : un trait qui descend sur un point marqué au sol
+q += c2.trait(392, 96, 392, 132, passes=2)
+q += c2.courbe([(386, 124), (392, 134), (398, 124)], passes=1)
+q += c2.courbe([(384, 139), (400, 139)], passes=2)
+q += c2.courbe([(386, 136), (398, 143)], passes=1)
+q += c2.courbe([(398, 136), (386, 143)], passes=1)
 # flèche de l'air froid qui descend
 q += c2.fleche(300, 176, 168, 232)
 # le soleil, au sud
@@ -53,8 +56,8 @@ coupe = f'''<svg viewBox="0 0 640 280" role="img" aria-labelledby="t-coupe d-cou
   <desc id="d-coupe">Le Domaine du Mons occupe un replat à 588 mètres, exposé au sud. Le terrain descend vers la vallée de la Montane. L'air froid des nuits claires s'écoule du replat vers les bas-fonds, qui gèlent donc plus fort que le lieu lui-même.</desc>
   {chemin(q, "trait-croquis")}
   <g class="texte-croquis">
-    <text x="372" y="74" class="fort">le replat, 588 m</text>
-    <text x="372" y="122" class="petit">exposé au sud</text>
+    <text x="392" y="86" class="fort" text-anchor="middle">le replat, 588 m</text>
+    <text x="584" y="104" class="petit" text-anchor="middle">plein sud</text>
     <text x="14" y="278" class="petit">la vallée de la Montane</text>
     <text x="176" y="216" class="petit">l'air froid descend</text>
   </g>
