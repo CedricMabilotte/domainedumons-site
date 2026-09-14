@@ -74,21 +74,21 @@ const SERIES = [
 ];
 
 const MOTS = {
-  tmoy: ["s'est réchauffée", "s'est refroidie"],
-  gel: ["a augmenté", "a diminué"],
-  chaud: ["a augmenté", "a diminué"],
-  pluie: ["a augmenté", "a diminué"],
-  jp: ["a augmenté", "a diminué"],
-  defic: ["s'est creusé", "s'est réduit"]
+  tmoy: ["réchauffement", "refroidissement"],
+  gel: ["hausse", "baisse"],
+  chaud: ["hausse", "baisse"],
+  pluie: ["hausse", "baisse"],
+  jp: ["hausse", "baisse"],
+  defic: ["creusement", "réduction"]
 };
 
 function phraseTendance(cle, t, unite) {
-  if (!t) return "série trop courte pour conclure.";
-  if (!t.significative) return "<strong>pas de tendance détectable</strong> sur la période.";
+  if (!t) return "<strong>Tendance</strong> : série trop courte pour conclure.";
+  if (!t.significative) return "<strong>Tendance</strong> : aucune n'est détectable sur la période — l'intervalle de confiance contient zéro.";
   const sens = t.pente_par_decennie > 0 ? MOTS[cle][0] : MOTS[cle][1];
   const v = Math.abs(t.pente_par_decennie);
-  return sens + " de <strong>" + nf(v, v < 1 ? 2 : 1) + " " + unite + " par décennie</strong> " +
-    "(intervalle de confiance à 95 % : " + nf(t.ic95[0], 2) + " à " + nf(t.ic95[1], 2) + ").";
+  return "<strong>Tendance</strong> : " + sens + " de <strong>" + nf(v, v < 1 ? 2 : 1) + " " + unite +
+    " par décennie</strong> (intervalle de confiance à 95 % : " + nf(t.ic95[0], 2) + " à " + nf(t.ic95[1], 2) + ")."; 
 }
 
 (async () => {
@@ -100,7 +100,7 @@ function phraseTendance(cle, t, unite) {
   document.getElementById("synthese").innerHTML =
     tuile("Période", d.periode[0] + "–" + d.periode[1], "", (d.series.tmoy.length) + " années complètes") +
     tuile("Température moyenne", nf(n.tmoy), "°C", "normale 1991-2020") +
-    tuile("Réchauffement", "+" + nf(tr.tmoy.pente_par_decennie, 2), "°C / décennie", '<span class="pastille alerte"></span>tendance significative', "alerte") +
+    tuile("Réchauffement", "+" + nf(tr.tmoy.pente_par_decennie, 2), "°C", 'par décennie · <span class="pastille alerte"></span>significatif', "alerte") +
     tuile("Jours de gel", nf0(n.gel), "par an", nf(tr.gel.pente_par_decennie, 1) + " par décennie") +
     tuile("Jours à 30 °C", nf(n.chaud), "par an", "+" + nf(tr.chaud.pente_par_decennie, 2) + " par décennie");
 
