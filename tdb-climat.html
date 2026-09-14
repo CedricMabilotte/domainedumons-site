@@ -9,42 +9,55 @@
 </head>
 <body>
 
-<header>
-  <h1 class="titre"><a href="index.html">Domaine du Mons</a></h1>
-  <p class="sous-titre">Collectif expérimental — Vitrac-sur-Montane, Corrèze</p>
-  <nav aria-label="Navigation principale">
-    <ul>
-      <li><a href="index.html">Le lieu</a></li>
-      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
-      <li><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a></li>
-      <li><a href="nous-joindre.html">Nous joindre</a></li>
-    </ul>
-  </nav>
-</header>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="m-tdb" aria-current="page">Tableaux de bord</button>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
 
 <main class="tdb">
 
-<p class="chapeau"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
+<p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 
-<h2>Le climat d'ici, 1950-2025</h2>
+<h1>Le climat d'ici, 1950-2025</h1>
 
-<p>Soixante-seize années de relevés quotidiens au point du lieu, résumées année par année. Chaque tendance est testée&nbsp;: quand l'intervalle de confiance contient zéro, nous écrivons qu'il n'y a <em>pas de tendance détectable</em> — pas que c'est stable. Ce n'est pas la même chose.</p>
+<p>76 années de relevés quotidiens au point du lieu, résumées année par année. Chaque tendance est testée : quand l'intervalle de confiance contient zéro, nous écrivons qu'il n'y a <em>pas de tendance détectable</em>, et non que c'est stable.</p>
 
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
 
 <div id="graphiques"></div>
 
-<h2 id="ce-qu-on-y-lit">Ce qu'on y lit</h2>
+<h2 id="ce-qu-on-y-lit">Lecture</h2>
 <div id="lecture"><p class="chargement">Chargement…</p></div>
 
-<h2>Comment ces chiffres sont obtenus</h2>
+<h2>Méthode</h2>
 
 <p>La source est une réanalyse atmosphérique — un modèle qui reconstitue le temps passé heure par heure en assimilant toutes les observations disponibles. Elle donne une série continue là où aucune station n'a jamais été installée, ce qui est le cas ici.</p>
 
 <p>Les tendances sont calculées par le <strong>test de Mann-Kendall</strong> et la <strong>pente de Sen</strong>, deux méthodes qui ne supposent ni distribution normale ni relation linéaire, et qui résistent aux valeurs extrêmes — contrairement à une droite de régression ordinaire, qu'une seule année exceptionnelle suffit à faire pivoter.</p>
 
 <div class="note">
-  <span class="etiquette">Ce que vaut cette série ici</span>
+  <span class="etiquette">La série, ici</span>
   <p>Le lieu est à <strong>588 mètres, sur un replat exposé au sud</strong> — pas en fond de vallée : dans un rayon de 800 mètres, 89&nbsp;% du terrain est plus bas. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de deux mètres de l'altitude réelle</strong>. C'est une situation inhabituellement favorable : la donnée est ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
   <p>Deux réserves subsistent. La maille fait environ neuf kilomètres&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — ce qui compte pour les parcelles situées en contrebas.</p>
 </div>
@@ -58,11 +71,15 @@
 </main>
 
 <footer>
-  <p>Collectif expérimental du Domaine du Mons — Vitrac-sur-Montane (19).</p>
-  <ul>
-    <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
-    <li><a href="index.html">Le lieu</a></li>
-  </ul>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
 </footer>
 
 <script src="tdb.js"></script>
@@ -169,6 +186,8 @@ function phraseTendance(cle, t, unite) {
     " · " + d.source + " · Licence Ouverte 2.0.";
 })();
 </script>
+
+<script src="site.js"></script>
 
 </body>
 </html>

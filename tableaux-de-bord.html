@@ -9,24 +9,37 @@
 </head>
 <body>
 
-<header>
-  <h1 class="titre"><a href="index.html">Domaine du Mons</a></h1>
-  <p class="sous-titre">Collectif expérimental — Vitrac-sur-Montane, Corrèze</p>
-  <nav aria-label="Navigation principale">
-    <ul>
-      <li><a href="index.html">Le lieu</a></li>
-      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
-      <li><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a></li>
-      <li><a href="nous-joindre.html">Nous joindre</a></li>
-    </ul>
-  </nav>
-</header>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="m-tdb" aria-current="page">Tableaux de bord</button>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
 
 <main class="tdb">
 
-<p class="chapeau">Conduire un lieu vivrier demande de savoir ce qu'il fait beau demain, ce que la rivière a dans le ventre, et ce que le climat d'ici sera devenu dans vingt ans. Ces trois questions n'ont pas la même échelle de temps, alors elles n'ont pas la même page.</p>
+<p class="chapeau">Le temps qu'il fera demain, l'état de la rivière, et le climat d'ici dans 20 ans : trois échelles de temps, trois pages.</p>
 
-<h2>Les tableaux</h2>
+<h1>Les tableaux</h1>
 
 <ul class="cartes">
   <li>
@@ -51,20 +64,18 @@
   </li>
 </ul>
 
-<h2>Pourquoi ces trois-là, et pas douze</h2>
+<h2>Pourquoi trois, et pas douze</h2>
 
-<p>Un tableau de bord grossit tout seul. On ajoute un indicateur parce qu'il est joli, un autre parce que la donnée existe, et au bout d'un an la page ne sert plus à rien parce qu'on ne sait plus où regarder.</p>
-
-<p>Nous nous sommes donné une règle&nbsp;:</p>
+<p>Un tableau de bord grossit tout seul : on ajoute un indicateur parce qu'il est joli, un autre parce que la donnée existe, et au bout d'un an on ne sait plus où regarder. D'où une règle.</p>
 
 <div class="note">
   <span class="etiquette">Règle d'admission</span>
   <p>Un indicateur n'entre dans une de ces pages que si l'on sait écrire la phrase&nbsp;: <strong>«&nbsp;si X franchit S, alors on fait Y avant Z&nbsp;»</strong>. Si la phrase ne s'écrit pas, l'indicateur est décoratif et il reste dehors.</p>
 </div>
 
-<p>C'est ce qui explique les absences. Pas de pression atmosphérique, pas de «&nbsp;ressenti&nbsp;», pas d'indice UV, pas de cumul de pluie depuis le 1<sup>er</sup> janvier — aucun de ces chiffres ne déclenche jamais rien.</p>
+<p>D'où les absences : pas de pression atmosphérique, pas de « ressenti », pas d'indice UV, pas de cumul depuis le 1<sup>er</sup> janvier. Aucun de ces chiffres ne déclenche jamais rien.</p>
 
-<h2>D'où viennent les données</h2>
+<h2>Les sources</h2>
 
 <p>Uniquement de sources publiques ouvertes, interrogées directement par votre navigateur. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
 
@@ -77,9 +88,9 @@
   </tbody>
 </table>
 
-<p>Ces trois sources sont libres et gratuites. Les chiffres que nous en tirons, ainsi que nos propres relevés, seront republiés en données ouvertes&nbsp;: sur un territoire de deux cent cinquante habitants, personne d'autre ne produira la donnée fine, et c'est une raison suffisante pour la produire.</p>
+<p>Ces trois sources sont libres et gratuites. Ce que nous en tirons, et nos propres relevés, sont republiés en données ouvertes : sur une commune de 250 habitants, personne d'autre ne produira la donnée fine.</p>
 
-<h2>Ce qui viendra, et à quelle condition</h2>
+<h2>Plus tard, et sous condition</h2>
 
 <ul class="cartes">
   <li class="bientot">
@@ -99,18 +110,23 @@
   </li>
 </ul>
 
-<p>Chacune attend un signal, pas une date. C'est la même règle que pour le reste du site&nbsp;: on ne construit un outil que quand l'usage déborde.</p>
+<p>Chacune attend un signal, pas une date : on ne construit un outil que quand l'usage déborde.</p>
 
 </main>
 
 <footer>
-  <p>Collectif expérimental du Domaine du Mons — Vitrac-sur-Montane (19).</p>
-  <ul>
-    <li><a href="index.html">Le lieu</a></li>
-    <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
-    <li><a href="nous-joindre.html">Nous joindre</a></li>
-  </ul>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
 </footer>
+
+<script src="site.js"></script>
 
 </body>
 </html>

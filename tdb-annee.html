@@ -9,26 +9,39 @@
 </head>
 <body>
 
-<header>
-  <h1 class="titre"><a href="index.html">Domaine du Mons</a></h1>
-  <p class="sous-titre">Collectif expérimental — Vitrac-sur-Montane, Corrèze</p>
-  <nav aria-label="Navigation principale">
-    <ul>
-      <li><a href="index.html">Le lieu</a></li>
-      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
-      <li><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a></li>
-      <li><a href="nous-joindre.html">Nous joindre</a></li>
-    </ul>
-  </nav>
-</header>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="m-tdb" aria-current="page">Tableaux de bord</button>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
 
 <main class="tdb">
 
-<p class="chapeau"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
+<p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 
-<h2 id="titre-annee">L'année</h2>
+<h1 id="titre-annee">L'année</h1>
 
-<p>La question utile n'est pas «&nbsp;combien est-il tombé&nbsp;?&nbsp;» mais «&nbsp;est-ce beaucoup, pour un 13 septembre&nbsp;?&nbsp;». Cette page compare l'année en cours, jour pour jour, aux trente années de la normale 1991-2020 — et donne le même exercice sur les douze derniers mois glissants, qui ne s'arrêtent pas au 31 décembre comme les récoltes.</p>
+<p class="chapeau">Un cumul de pluie ne dit rien seul : il faut le rapporter à ce qu'une année reçoit d'habitude à la même date. Cette page compare l'année en cours, jour pour jour, aux 30 années de la normale 1991-2020, puis fait de même sur les 12 derniers mois glissants.</p>
 
 <div class="tuiles" id="tuiles"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement</p></div></div>
 
@@ -55,18 +68,18 @@
 
 <p>Dire qu'une valeur est «&nbsp;au-dessus du dixième le plus haut&nbsp;» signifie que, sur les trente années de référence, moins de trois ont fait autant à la même date. C'est une façon de parler d'un écart sans prétendre à une précision que la donnée n'a pas.</p>
 
-<p>L'intérêt de la comparaison <em>à date</em> est qu'elle évite le piège classique du bilan de fin d'année&nbsp;: en septembre, un cumul de pluie annuel n'a aucun sens dans l'absolu — il n'a de sens que rapporté à ce qu'un mois de septembre reçoit d'habitude.</p>
+<p>La comparaison <em>à date</em> évite le piège du bilan de fin d'année : en septembre, un cumul annuel ne se lit que rapporté à un mois de septembre ordinaire.</p>
 
-<p>L'<strong>année glissante</strong> répond à un autre besoin. Une sécheresse ne s'arrête pas au 31 décembre, un cycle fourrager non plus. Les douze derniers mois disent l'état réel du milieu, là où l'année civile est une convention comptable.</p>
+<p>L'année glissante répond à autre chose. Une sécheresse ne s'arrête pas au 31 décembre, un cycle fourrager non plus. Les 12 derniers mois disent l'état réel du milieu ; l'année civile est une convention comptable.</p>
 
 <h2>Rapports annuels</h2>
 
-<p>Chaque année close donne lieu à un rapport de consolidation, archivé et non modifié ensuite. C'est la mémoire longue du lieu&nbsp;: dans quinze ans, ce sont ces documents qui diront ce qu'on a vécu, et pas un graphique recalculé.</p>
+<p>Chaque année close donne lieu à un rapport archivé, non modifié ensuite. Dans 15 ans, ce sont ces documents qui diront ce qu'on a vécu, pas un graphique recalculé entre-temps.</p>
 
 <ul class="cartes">
   <li>
     <h3><a href="rapport-2025.html">Rapport 2025</a></h3>
-    <p>Première année archivée. Une année qui a battu le record de jours à 30 °C — vingt-quatre, contre quatre et demi en normale — avec une pluviométrie pourtant supérieure à la moyenne.</p>
+    <p>Première année archivée. Record de jours à 30 °C : 24, contre 4,5 en normale, avec une pluviométrie pourtant supérieure à la moyenne.</p>
     <p class="source">Arrêté au 31 décembre 2025. Document figé.</p>
   </li>
 </ul>
@@ -76,11 +89,15 @@
 </main>
 
 <footer>
-  <p>Collectif expérimental du Domaine du Mons — Vitrac-sur-Montane (19).</p>
-  <ul>
-    <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
-    <li><a href="index.html">Le lieu</a></li>
-  </ul>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
 </footer>
 
 <script src="tdb.js"></script>
@@ -156,6 +173,8 @@ function etatDe(pos) {
     " · normale " + d.normale + " · Licence Ouverte 2.0.";
 })();
 </script>
+
+<script src="site.js"></script>
 
 </body>
 </html>
