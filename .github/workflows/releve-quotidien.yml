@@ -24,6 +24,8 @@ jobs:
         run: python3 scripts/annee.py
       - name: Mettre à jour l'archive des restrictions sécheresse
         run: python3 scripts/secheresse.py
+      - name: Compléter l'humidité des sols (SIM2, soixante derniers jours)
+        run: python3 scripts/sim2.py || echo "SIM2 muet aujourd'hui, on continue"
 
       - name: Publier si quelque chose a changé
         run: |

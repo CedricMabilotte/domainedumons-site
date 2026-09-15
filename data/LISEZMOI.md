@@ -151,6 +151,69 @@ Emprise et millésimes des photographies aériennes enregistrées dans `dessins/
 par `scripts/ortho.py` : vol du 30 juillet 1959, vol de 1972, orthophotographie actuelle,
 sur 900 m de côté autour du chemin du Mons. Source : Géoplateforme IGN.
 
+## `humidite-sol.csv` et `humidite-sol.json`
+Humidité du sol au droit du lieu, **du 1er août 1958 à aujourd'hui**, tirée de la réanalyse
+SIM2 (SAFRAN-ISBA) de Météo-France. La grille est de 8 km ; la maille retenue est
+LAMBX 5720 / LAMBY 20410, centre à 4,2 km du chemin du Mons.
+| Colonne du CSV | Définition |
+|---|---|
+| `date` | Jour |
+| `pluie_mm` | Précipitations liquides et solides (PRELIQ + PRENEI) |
+| `etp_mm` | Évapotranspiration potentielle du modèle |
+| `t_c` | Température moyenne de l'air |
+| `swi` | *Soil Wetness Index* — humidité du sol ramenée à la réserve utile. 1 = capacité au champ, 0 = point de flétrissement |
+| `sswi_10j` | *Standardised SWI* sur dix jours — le même indice ramené à la normale du même jour de l'année, en écarts-types |
+| `drainage_mm`, `ruissellement_mm` | Drainage profond et ruissellement de surface simulés |
+Le JSON, produit par `scripts/sim2.py`, en tire :
+| Clé | Contenu |
+|---|---|
+| `actuel` | Dernier jour disponible : date, `swi`, `sswi` |
+| `courbe` | Pour chaque jour de l'année en cours, le SWI et les quantiles 10 / 50 / 90 % du même jour calculés sur 1958-2020 |
+| `annees` | Par année : jours disponibles, jours passés sous −1, −1,5 et −2 écarts-types, SWI moyen de juin à août, plus longue suite consécutive sous −1,5, et si l'année est complète |
+| `rang_ete` | Rang de chaque année sur le SWI moyen de l'été, 1 étant l'été le plus sec |
+| `episodes` | Suites d'au moins vingt jours consécutifs sous −1,5 écart-type, avec leur durée et le plus bas atteint |
+**Pourquoi cette série en plus de la pluie.** Un cumul de précipitations ne dit pas ce qui reste
+dans le sol : une même pluie d'automne recharge la réserve ou part au ruissellement selon l'état
+antérieur. Le SWI intègre cet état, et le SSWI dit si le sol est sec *pour la saison* plutôt que
+sec dans l'absolu — c'est l'indicateur sur lequel les services de l'État constatent une
+sécheresse des sols, au seuil de −1,5.
+**Limites.** La maille de 8 km porte un sol moyen : ni le replat du Mons, ni l'acidité et la
+saturation en aluminium du complexe d'échange, ni la réserve utile réelle d'une parcelle donnée
+n'y figurent. La série se lit en écart d'une année à l'autre, pas en valeur absolue à la
+parcelle. Le fichier de mise à jour publié par Météo-France ne conserve que soixante jours ;
+l'historique complet a été reconstitué fichier par fichier et n'est pas rejouable rapidement —
+d'où sa publication ici.
+**Source** : Météo-France, [données SIM quotidiennes](https://www.data.gouv.fr/fr/datasets/donnees-changement-climatique-sim-quotidienne/), Licence Ouverte 2.0.
+
+## `zone-une-heure.json`, `reseau-lieux.json`, `associations.json` et `carte-zone.json`
+Les quatre fichiers de la page **Le réseau**, produits par `scripts/reseau.py` et
+`scripts/carte.py`. La « zone d'une heure » est approchée par un rayon de **45 km à vol
+d'oiseau** autour du lieu : sur ces routes de moyenne montagne, une heure porte plus loin vers
+Tulle que vers le plateau, et aucune approximation simple ne corrige cela.
+| Fichier | Contenu |
+|---|---|
+| `zone-une-heure.json` | Les 284 communes dont le chef-lieu est dans le rayon, avec code INSEE, nom, coordonnées et population ; total et population cumulée |
+| `reseau-lieux.json` | Les 191 lieux portés par des collectifs déjà référencés dans la zone : nom, commune, coordonnées, distance, catégories d'origine, carte source et date de la fiche |
+| `associations.json` | Comptage des associations actives de la zone : total, par commune, par thème, par décennie de création, et la liste des noms dont l'objet apparent dépasse le cercle des membres |
+| `carte-zone.json` | Paramètres de la projection équirectangulaire locale utilisée par `dessins/zone.svg`, pour replacer n'importe quel point sur la carte |
+**Les lieux** viennent de [Transiscope](https://transiscope.org/), qui agrège une vingtaine de
+cartes d'alternatives (Près de chez nous, Colibris, Alternatiba, réseau des ressourceries,
+Longue vie aux objets). **Aucune fiche n'a été vérifiée sur place** : certaines datent de 2017,
+un lieu peut avoir fermé, changé d'objet, ou ne plus vouloir y figurer. Les catégories affichées
+sont celles des cartes d'origine. Toute personne concernée peut demander correction ou retrait à
+contact@actitude.org ; le retrait est fait sans discussion.
+**Les associations** viennent de l'[annuaire public des entreprises et
+associations](https://recherche-entreprises.api.gouv.fr/), activité 94.99Z, établissements
+actifs. Le classement par thème repose sur les **mots du nom déposé** : c'est un repérage
+grossier, pas une qualification d'intérêt général — laquelle ne se décide ni sur un nom ni sur
+un code d'activité, mais sur les faits.
+**Ce qui est publié, et rien de plus** : le nom de l'association, sa commune et son année de
+création, tels qu'ils figurent déjà au Journal officiel. Aucune adresse, aucun nom de dirigeant,
+aucun recoupement entre sources.
+**Le fond de carte** est un fichier du dépôt : aucune tuile distante, aucun traceur.
+Contours communaux de [geo.api.gouv.fr](https://geo.api.gouv.fr/), simplifiés par
+Douglas-Peucker à 0,0045°.
+
 ## `registre-interet-general.json`
 
 Comptages mensuels de l'activité tournée vers l'extérieur : accueil, chantiers ouverts,
