@@ -289,7 +289,7 @@ function nomPropre(n) {
           sswi <= -2 ? "sécheresse extrême pour la saison" : sswi <= -1.5 ? "sécheresse marquée pour la saison" :
           sswi <= -1 ? "sol sec pour la saison" : "dans la normale saisonnière",
           sswi <= -1.5 ? "alerte" : sswi <= -1 ? "attention" : null) +
-    tuile("L'été " + an, rang ? rang + "<sup>e</sup> / " + etes : "—", "",
+    tuile("L'été " + an, rang ? rang + (rang === 1 ? "<sup>er</sup>" : "<sup>e</sup>") + " / " + etes : "—", "",
           rang === 1 ? "le sol le plus sec de toute la série" : "sur " + etes + " étés depuis " + d.periode[0],
           rang && rang <= 5 ? "alerte" : null) +
     tuile("Jours de sécheresse marquée", nf0(cur.sous_1_5 || 0), "j",
@@ -313,7 +313,8 @@ function nomPropre(n) {
   be.className = "graphe";
   be.innerHTML = "<h3>Jours de sécheresse marquée, chaque année</h3>" +
     "<p class='legende-axe'>Nombre de jours de l'année où l'humidité du sol est à plus de 1,5 écart-type sous la normale du jour. " +
-    "C'est le seuil retenu par les services de l'État pour parler de sécheresse des sols.</p><div></div>";
+    "C'est le seuil retenu par les services de l'État pour parler de sécheresse des sols. "
+    + "L'année en cours n'y figure pas tant qu'elle n'est pas terminée.</p><div></div>";
   document.getElementById("g-sol-etes").appendChild(be);
   graphe({
     conteneur: be.lastElementChild, type: "barres", hauteur: 190, unite: "j", zero: true,
@@ -326,7 +327,8 @@ function nomPropre(n) {
   document.getElementById("l-sol").innerHTML =
     "<p><strong>L'été " + an + " est le plus sec de la série pour le sol</strong>, devant " + pires[1] + " et " + pires[2] + ". " +
     "Sur les huit étés les plus secs depuis " + d.periode[0] + ", <strong>" + recents + " sont postérieurs à 2000</strong> — " +
-    pires.join(", ") + ".</p>" +
+    pires.filter((y) => +y >= 2000).join(", ") + " — et les anciens se réduisent à " +
+    pires.filter((y) => +y < 2000).join(" et ") + ".</p>" +
     "<p>Ce classement ne recoupe pas celui des étiages de la Montane, et c'est ce qui le rend utile&nbsp;: " +
     "un sol peut rester sec des mois après que la rivière est remontée, parce que la pluie d'automne repart au ruissellement " +
     "avant d'avoir rechargé la réserve. <strong>Pour un jardin, un verger ou une prairie, c'est cette ligne-là qui compte</strong>, pas le débit.</p>" +
