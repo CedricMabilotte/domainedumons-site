@@ -282,10 +282,11 @@ function nomPropre(n) {
   const etes = Object.keys(d.rang_ete).length;
   const rang = d.rang_ete[an];
   /* --- tuiles --- */
-  const sswi = d.actuel.sswi;
+  const sswi = d.actuel.sswi, rj = d.actuel.rang_jour;
   document.getElementById("synthese-sol").innerHTML =
     tuile("Humidité du sol", nf(d.actuel.swi, 2), "", "au " + JOUR2(d.actuel.date) + " · 1 = capacité au champ, 0 = flétrissement") +
     tuile("Écart à la normale du jour", (sswi > 0 ? "+" : "") + nf(sswi, 1), "σ",
+          rj && rj[0] === 0 ? "plus sec qu'aucune des " + nf0(rj[1]) + " valeurs de référence à cette date" :
           sswi <= -2 ? "sécheresse extrême pour la saison" : sswi <= -1.5 ? "sécheresse marquée pour la saison" :
           sswi <= -1 ? "sol sec pour la saison" : "dans la normale saisonnière",
           sswi <= -1.5 ? "alerte" : sswi <= -1 ? "attention" : null) +
@@ -342,7 +343,16 @@ function nomPropre(n) {
     "<div class='note'><span class='etiquette'>Ce que la maille ne dit pas</span>" +
     "<p>Le modèle tourne sur une grille de 8 km, avec un sol moyen. Il ne connaît ni le replat du Mons, " +
     "ni l'acidité et l'aluminium du complexe d'échange, ni la réserve utile réelle de chaque parcelle. " +
-    "Il se lit en <strong>écart d'une année à l'autre</strong>, pas en valeur absolue à la parcelle.</p></div>";
+    "Il se lit en <strong>écart d'une année à l'autre</strong>, pas en valeur absolue à la parcelle.</p></div>" +
+    "<div class='note'><span class='etiquette'>Pourquoi nous recalculons l'écart nous-mêmes</span>" +
+    "<p>Le fichier source porte déjà une colonne d'écart à la normale. Elle sature&nbsp;: le 16 décembre 1978, " +
+    "où l'humidité du sol vaut 0,73, et le 16 décembre 1985, où elle vaut 0,57, y portent <strong>la même valeur, " +
+    "−8,17</strong> — deux états de sol différents, un seul chiffre. En hiver, où le sol est presque toujours à sa " +
+    "capacité, la standardisation part en butée. Nous recalculons donc l'écart par le <strong>rang du jour dans " +
+    "l'échantillon de référence</strong> — toutes les valeurs de 1958 à 2020 à moins de dix jours de cette date " +
+    "dans l'année, soit environ 1 300 — ce qui borne l'indicateur par l'échantillon lui-même. " +
+    "Un écart de −3,4 σ signifie alors quelque chose de vérifiable&nbsp;: aucune de ces 1 300 journées n'a été " +
+    "plus sèche.</p></div>";
   /* --- une ligne de plus au condensé, quand le premier bloc est posé --- */
   for (let i = 0; i < 40; i++) {
     const ul = document.querySelector("#condense ul");

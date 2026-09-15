@@ -162,16 +162,27 @@ LAMBX 5720 / LAMBY 20410, centre à 4,2 km du chemin du Mons.
 | `etp_mm` | Évapotranspiration potentielle du modèle |
 | `t_c` | Température moyenne de l'air |
 | `swi` | *Soil Wetness Index* — humidité du sol ramenée à la réserve utile. 1 = capacité au champ, 0 = point de flétrissement |
-| `sswi_10j` | *Standardised SWI* sur dix jours — le même indice ramené à la normale du même jour de l'année, en écarts-types |
+| `sswi_10j` | *Standardised SWI* sur dix jours, **tel que publié à la source**. Il n'est pas utilisé dans les analyses : voir l'avertissement ci-dessous |
 | `drainage_mm`, `ruissellement_mm` | Drainage profond et ruissellement de surface simulés |
 Le JSON, produit par `scripts/sim2.py`, en tire :
 | Clé | Contenu |
 |---|---|
-| `actuel` | Dernier jour disponible : date, `swi`, `sswi` |
+| `actuel` | Dernier jour disponible : date, `swi`, `sswi` recalculé, et `rang_jour` = [nombre de valeurs de référence plus sèches, taille de l'échantillon] |
 | `courbe` | Pour chaque jour de l'année en cours, le SWI et les quantiles 10 / 50 / 90 % du même jour calculés sur 1958-2020 |
 | `annees` | Par année : jours disponibles, jours passés sous −1, −1,5 et −2 écarts-types, SWI moyen de juin à août, plus longue suite consécutive sous −1,5, et si l'année est complète |
 | `rang_ete` | Rang de chaque année sur le SWI moyen de l'été, 1 étant l'été le plus sec |
 | `episodes` | Suites d'au moins vingt jours consécutifs sous −1,5 écart-type, avec leur durée et le plus bas atteint |
+**L'écart à la normale est recalculé, pas repris.** La colonne `sswi_10j` du fichier source
+sature : le 16 décembre 1978, où le SWI vaut 0,73, et le 16 décembre 1985, où il vaut 0,57,
+y portent la même valeur, −8,169 — deux états de sol différents, un seul chiffre. En hiver, où
+le sol est presque toujours à sa capacité, la standardisation part en butée et fabrique des
+écarts-types sans signification. Les analyses publiées ici utilisent donc un écart recalculé
+par **rang normalisé** : la valeur du jour est située dans l'échantillon de toutes les journées
+de 1958 à 2020 situées à moins de dix jours de la même date dans l'année (environ 1 300
+valeurs), et ce rang est converti en écart-type. L'indicateur est alors borné par l'échantillon,
+et un écart de −3,4 σ veut dire quelque chose de vérifiable : aucune de ces journées de
+référence n'a été plus sèche. Le calcul est dans `scripts/sim2.py`, fonction `sswi_maison`.
+
 **Pourquoi cette série en plus de la pluie.** Un cumul de précipitations ne dit pas ce qui reste
 dans le sol : une même pluie d'automne recharge la réserve ou part au ruissellement selon l'état
 antérieur. Le SWI intègre cet état, et le SSWI dit si le sol est sec *pour la saison* plutôt que

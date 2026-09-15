@@ -109,6 +109,75 @@ def completer():
     return lignes
 
 
+def normale_inverse(p):
+    """Quantile de la loi normale centrée réduite, approximation d'Acklam.
+    Évite une dépendance à scipy pour une fonction de quinze lignes."""
+    a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
+         1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00]
+    b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02,
+         6.680131188771972e+01, -1.328068155288572e+01]
+    c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00,
+         -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00]
+    d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00,
+         3.754408661907416e+00]
+    pl, ph = 0.02425, 1 - 0.02425
+    if p < pl:
+        q = (-2 * __import__("math").log(p)) ** 0.5
+        return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)
+    if p > ph:
+        q = (-2 * __import__("math").log(1 - p)) ** 0.5
+        return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1)
+    q = p - 0.5
+    r = q * q
+    return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1)
+
+# --- Calendrier canonique de 366 jours, pour la fenêtre glissante des normales.
+MD = []
+for _m, _n in ((1,31),(2,29),(3,31),(4,30),(5,31),(6,30),(7,31),(8,31),(9,30),(10,31),(11,30),(12,31)):
+    MD += ["%02d-%02d" % (_m, _j) for _j in range(1, _n + 1)]
+RANG_MD = {md: i for i, md in enumerate(MD)}
+
+def sswi_maison(lignes, jours):
+    """Notre propre SSWI, en rang normalisé sur une fenêtre de ±10 jours.
+
+    Pourquoi ne pas reprendre la colonne SSWI_10J du fichier source : elle
+    sature. Le 16 décembre 1978 (SWI 0,73) et le 16 décembre 1985 (SWI 0,569)
+    y portent la même valeur, −8,169 — deux états de sol différents, un seul
+    chiffre. En décembre, où le sol est presque toujours à sa capacité, la
+    standardisation part en butée et fabrique des écarts-types qui n'ont pas
+    de sens. Un rang normalisé sur l'échantillon de référence est borné par
+    l'échantillon lui-même, et ne peut pas produire ce genre de valeur.
+    """
+    ref = {}
+    for d in jours:
+        y = int(d[:4])
+        if not (REF[0] <= y <= REF[1]):
+            continue
+        s = lignes[d]["swi"]
+        if s not in ("", None):
+            ref.setdefault(d[5:], []).append(float(s))
+    fenetre = {}
+    for md, i in RANG_MD.items():
+        v = []
+        for k in range(i - 10, i + 11):
+            v += ref.get(MD[k % 366], [])
+        fenetre[md] = sorted(v)
+    out = {}
+    for d in jours:
+        s = lignes[d]["swi"]
+        v = fenetre.get(d[5:])
+        if s in ("", None) or not v or len(v) < 200:
+            continue
+        x = float(s)
+        # rang : nombre de valeurs de référence strictement inférieures, plus
+        # la moitié des ex aequo — la correction habituelle pour un rang discret
+        inf = sum(1 for r in v if r < x)
+        eg = sum(1 for r in v if r == x)
+        p = (inf + 0.5 * eg + 0.5) / (len(v) + 1)
+        out[d] = round(normale_inverse(min(max(p, 1e-6), 1 - 1e-6)), 3)
+    return out, {d: (sum(1 for r in fenetre[d[5:]] if r < float(lignes[d]["swi"])), len(fenetre[d[5:]]))
+                 for d in out}
+
 def quantiles(vals, ps):
     v = sorted(vals)
     return [round(v[min(len(v) - 1, max(0, int(round(p * (len(v) - 1))))) ], 3) for p in ps]
@@ -119,6 +188,7 @@ def calculer(lignes):
     if not jours:
         raise SystemExit("aucune donnée")
     courante = int(jours[-1][:4])
+    SSWI, RANGS = sswi_maison(lignes, jours)
 
     # --- quantiles climatologiques du SWI, par jour de l'année
     par_md = {}
@@ -146,13 +216,13 @@ def calculer(lignes):
     annees = {}
     for d in jours:
         y = str(int(d[:4]))
-        ss = lignes[d]["sswi_10j"]
+        ss = SSWI.get(d)
         sw = lignes[d]["swi"]
         a = annees.setdefault(y, {"jours": 0, "sous_1": 0, "sous_1_5": 0, "sous_2": 0,
                                   "swi_ete": [], "serie_max": 0, "_serie": 0})
         a["jours"] += 1
-        if ss not in ("", None):
-            x = float(ss)
+        if ss is not None:
+            x = ss
             if x < -1:
                 a["sous_1"] += 1
             if x < -1.5:
@@ -179,12 +249,12 @@ def calculer(lignes):
     # --- les épisodes : au moins vingt jours consécutifs sous -1,5
     episodes, debut, fond = [], None, 0
     for d in jours:
-        ss = lignes[d]["sswi_10j"]
-        sec = ss not in ("", None) and float(ss) < -1.5
+        ss = SSWI.get(d)
+        sec = ss is not None and ss < -1.5
         if sec:
             if debut is None:
-                debut, fond = d, float(ss)
-            fond = min(fond, float(ss))
+                debut, fond = d, ss
+            fond = min(fond, ss)
         elif debut is not None:
             n = (datetime.fromisoformat(d) - datetime.fromisoformat(debut)).days
             if n >= 20:
@@ -202,10 +272,15 @@ def calculer(lignes):
         "maille": [LAMBX, LAMBY], "distance_centre_km": 4.2,
         "periode": [jours[0][:4], jours[-1][:4]], "jours": len(jours),
         "reference": list(REF),
+        "sswi_calcul": "rang normalisé du SWI sur une fenêtre de ±10 jours autour du jour de "
+                       "l'année, sur %d-%d. La colonne SSWI_10J du fichier source n'est pas "
+                       "reprise : elle sature en hiver et attribue la même valeur à des états "
+                       "de sol différents." % REF,
         "annee_courante": courante,
         "actuel": {"date": jours[-1],
                    "swi": None if dernier["swi"] == "" else float(dernier["swi"]),
-                   "sswi": None if dernier["sswi_10j"] == "" else float(dernier["sswi_10j"])},
+                   "sswi": SSWI.get(jours[-1]),
+                   "rang_jour": RANGS.get(jours[-1])},
         "courbe": courbe,
         "annees": annees,
         "rang_ete": rang_ete,
