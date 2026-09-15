@@ -175,11 +175,15 @@ function graphe(opts) {
 }
 
 /* Récupération tolérante : ne casse jamais la page */
+/* Les jeux de données sont réécrits chaque matin sous le même nom. Sans
+   revalidation, un visiteur revenu dans la journée lit la version de la veille
+   servie par son cache. On demande donc une revalidation à chaque chargement :
+   le serveur répond 304 quand rien n'a bougé, et le coût est nul. */
 async function json(url, ms = 12000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
   try {
-    const r = await fetch(url, { signal: ctrl.signal });
+    const r = await fetch(url, { signal: ctrl.signal, cache: "no-cache" });
     if (!r.ok) throw new Error("HTTP " + r.status);
     return await r.json();
   } finally { clearTimeout(t); }
