@@ -135,3 +135,117 @@ boucle = f'''<svg viewBox="0 0 640 306" role="img" aria-labelledby="t-bou d-bou"
 open("dessins/cercles.svg", "w", encoding="utf-8").write(cercles)
 open("dessins/boucle.svg", "w", encoding="utf-8").write(boucle)
 print("dessins écrits :", ", ".join(sorted(os.listdir("dessins"))))
+
+# ------------------------------------------- le verger : la course du gel
+c5 = Crayon(graine=73, rugosite=1.2)
+v = []
+v += c5.trait(70, 232, 600, 232)                 # l'axe du temps
+for x, _lab in ((110, "1er mars"), (280, "1er avril"), (450, "1er mai"), (600, "1er juin")):
+    v += c5.trait(x, 228, x, 238, passes=1)
+v += c5.trait(96, 96, 470, 96, passes=1)         # la ligne de la période ancienne
+v += c5.trait(96, 168, 470, 168, passes=1)       # la ligne de la période récente
+v += c5.cercle(300, 96, 9, 9, passes=2, n=16)    # gelée, années 1960
+v += c5.cercle(420, 96, 9, 9, passes=2, n=16)    # floraison, années 1960
+v += c5.cercle(261, 168, 9, 9, passes=2, n=16)   # gelée, aujourd'hui
+v += c5.cercle(382, 168, 9, 9, passes=2, n=16)   # floraison, aujourd'hui
+v += c5.fleche(300, 78, 261, 78)                 # le recul de la gelée
+v += c5.fleche(420, 186, 382, 186)               # l'avance de la floraison
+v += c5.trait(311, 96, 409, 96, passes=1)        # l'écart, en haut
+v += c5.trait(272, 168, 371, 168, passes=1)      # l'écart, en bas
+course = f'''<svg viewBox="0 0 640 262" role="img" aria-labelledby="t-cou d-cou" class="croquis">
+  <title id="t-cou">La course entre la gelée et la floraison</title>
+  <desc id="d-cou">La dernière gelée de printemps recule de 2,3 jours par décennie et la floraison avance de 2,5 jours par décennie. Les deux se déplacent vers le début de l&#39;année à peu près à la même vitesse, donc l&#39;écart entre elles ne se creuse pas.</desc>
+  {chemin(v, "trait-croquis")}
+  <g class="texte-croquis">
+    <text x="18" y="100" class="fort">1961-1990</text>
+    <text x="18" y="172" class="fort">1996-2025</text>
+    <text x="252" y="64">dernière gelée</text>
+    <text x="392" y="64">floraison</text>
+    <text x="330" y="118">l&#39;écart</text>
+    <text x="292" y="190">le même écart</text>
+    <text x="96" y="254">mars</text>
+    <text x="266" y="254">avril</text>
+    <text x="436" y="254">mai</text>
+  </g>
+</svg>'''
+
+# --------------------------------- l'eau : ce que la station mesure, ou non
+c6 = Crayon(graine=91, rugosite=1.25)
+e = []
+pente = [(30, 96), (110, 118), (190, 150), (280, 186), (390, 214), (500, 232), (614, 244)]
+e += c6.courbe(pente, passes=2)                  # le versant
+e += c6.courbe([(96, 112), (150, 136), (208, 158)], passes=1)   # le chevelu, en pointillé de trait
+e += c6.courbe([(300, 196), (400, 222), (520, 240), (614, 250)], passes=2)  # la Montane
+e += c6.cadre(486, 168, 108, 46)                 # la station
+e += c6.fleche(540, 216, 540, 236)
+e += c6.trait(150, 130, 168, 118, passes=1)      # le trait de rappel vers la source
+e += c6.cercle(120, 120, 7, 7, passes=2, n=14)   # la source
+mesure = f'''<svg viewBox="0 0 640 286" role="img" aria-labelledby="t-mes d-mes" class="croquis">
+  <title id="t-mes">Ce que la station mesure</title>
+  <desc id="d-mes">La station hydrométrique mesure la Montane à l&#39;aval, sur un bassin de 43 km². Les sources et le petit chevelu de tête de bassin s&#39;arrêtent bien avant, et personne ne les mesure.</desc>
+  {chemin(e, "trait-croquis")}
+  <g class="texte-croquis">
+    <text x="136" y="104" class="fort">la source, le ruisseau de tête</text>
+    <text x="136" y="126">ils s&#39;arrêtent les premiers — et personne ne les mesure</text>
+    <text x="300" y="178" class="fort">la Montane</text>
+    <text x="496" y="194" class="fort">la station</text>
+    <text x="496" y="212">43 km² à l&#39;aval</text>
+    <text x="30" y="272">Deux échelles d&#39;eau, un seul appareil de mesure.</text>
+  </g>
+</svg>'''
+
+# -------------------------------------- le terrain : la coupe de l'air froid
+c7 = Crayon(graine=113, rugosite=1.25)
+a = []
+sol2 = [(20, 132), (120, 128), (210, 136), (300, 168), (380, 214), (450, 244), (530, 252), (614, 248)]
+a += c7.courbe(sol2, passes=2)
+a += c7.fleche(160, 104, 300, 150)               # l'air froid qui s'écoule
+a += c7.fleche(330, 150, 430, 216)
+a += c7.fleche(470, 222, 520, 238)
+for x in (486, 498, 510, 522):                   # la haie en travers
+    a += c7.trait(x, 250, x - c7.r.uniform(1, 4), 250 - c7.r.uniform(16, 26), passes=1)
+a += c7.cadre(78, 96, 84, 32)                    # le bâti sur le replat
+airfroid = f'''<svg viewBox="0 0 640 300" role="img" aria-labelledby="t-air d-air" class="croquis">
+  <title id="t-air">Comment l&#39;air froid s&#39;écoule</title>
+  <desc id="d-air">La nuit, l&#39;air refroidi devient plus dense et descend la pente. Il quitte le replat où se trouve le bâti, s&#39;accumule dans la cuvette en contrebas, et une haie plantée en travers de la pente le retient en amont.</desc>
+  {chemin(a, "trait-croquis")}
+  <g class="texte-croquis">
+    <text x="82" y="88" class="fort">le replat</text>
+    <text x="82" y="118">il se vide</text>
+    <text x="196" y="106">l&#39;air froid coule</text>
+    <text x="330" y="204">la cuvette se remplit</text>
+    <text x="446" y="292">une haie en travers le retient</text>
+  </g>
+</svg>'''
+
+# ------------------------------------ construire : la coupe de principe
+c8 = Crayon(graine=131, rugosite=1.2)
+b2 = []
+b2 += c8.trait(40, 176, 600, 176)                # le terrain naturel
+b2 += c8.cadre(180, 96, 240, 80)                 # le volume habité
+b2 += c8.cadre(180, 176, 240, 40)                # le vide sanitaire
+b2 += c8.trait(180, 216, 180, 252, passes=2)     # les semelles
+b2 += c8.trait(420, 216, 420, 252, passes=2)
+b2 += c8.trait(176, 252, 424, 252, passes=1)
+b2 += c8.fleche(150, 196, 196, 196)              # la ventilation qui traverse
+b2 += c8.fleche(404, 196, 452, 196)
+b2 += c8.trait(120, 176, 180, 176, passes=1)     # le trottoir périphérique
+b2 += c8.trait(420, 176, 480, 176, passes=1)
+b2 += c8.fleche(300, 268, 300, 176)              # le radon qui monte
+coupe_bati = f'''<svg viewBox="0 0 640 300" role="img" aria-labelledby="t-bat d-bat" class="croquis">
+  <title id="t-bat">Coupe de principe d&#39;une construction ici</title>
+  <desc id="d-bat">Le radon remonte du granite. Un vide sanitaire ventilé de part en part et une dalle étanche l&#39;évacuent avant qu&#39;il n&#39;entre. Les semelles descendent à quatre-vingts centimètres au moins à cause du retrait-gonflement des argiles, et un trottoir périphérique éloigne l&#39;eau du pied des murs.</desc>
+  {chemin(b2, "trait-croquis")}
+  <g class="texte-croquis">
+    <text x="196" y="130" class="fort">l&#39;habitation</text>
+    <text x="196" y="152">pas de pièce de vie en dessous</text>
+    <text x="196" y="202" class="fort">vide sanitaire ventilé</text>
+    <text x="34" y="192">l&#39;air entre</text>
+    <text x="462" y="192">et ressort</text>
+    <text x="196" y="242">semelles à 0,80 m au moins</text>
+    <text x="316" y="286">le radon remonte du granite</text>
+  </g>
+</svg>'''
+for nom, svg in (("course", course), ("mesure", mesure), ("airfroid", airfroid), ("coupe-bati", coupe_bati)):
+    open("dessins/%s.svg" % nom, "w", encoding="utf-8").write(svg)
+    print("  dessins/%s.svg : %d octets" % (nom, len(svg)))
