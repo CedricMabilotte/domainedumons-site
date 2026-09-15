@@ -360,3 +360,13 @@ h1 + .chapeau { margin-top: -.25rem; }
                               color: var(--douce); font-family: Georgia, serif; }
 .liste-lieux .lecture { color: var(--douce); font-size: .88rem; font-style: italic; }
 details > summary { cursor: pointer; color: var(--accent); margin: .6rem 0; }
+.recherche { margin: .8rem 0 1rem; }
+.recherche label { display: block; color: var(--douce); font-size: .86rem; margin-bottom: .25rem; }
+.recherche input { width: 100%; max-width: 26rem; padding: .45rem .6rem; font-family: Georgia, serif;
+                   font-size: 1rem; color: var(--encre); background: var(--papier);
+                   border: 1px solid var(--trait); border-radius: 0; }
+.recherche input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+button.suite { font-family: Georgia, serif; font-size: .95rem; color: var(--encre);
+               background: var(--surface); border: 1px solid var(--trait); border-radius: 0;
+               padding: .5rem .9rem; cursor: pointer; margin: .6rem 0 1.2rem; }
+button.suite:hover { background: var(--grille); }
