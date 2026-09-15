@@ -298,13 +298,14 @@ h1 + .chapeau { margin-top: -.25rem; }
 
 /* ------------------------------------------------------- la carte du réseau */
 .carte-reseau { margin: 1.2rem 0 .6rem; }
+@media (min-width: 860px) { .carte-reseau { margin-left: -70px; margin-right: -70px; } }
 .carte-reseau svg { display: block; width: 100%; height: auto; }
-.carte-zone .commune { fill: none; stroke: var(--trait); stroke-width: .5; }
-.carte-zone .limite { fill: none; stroke: var(--douce); stroke-width: 1; stroke-dasharray: 5 4; opacity: .7; }
+.carte-zone .commune { fill: none; stroke: var(--trait); stroke-width: .9; }
+.carte-zone .limite { fill: none; stroke: var(--douce); stroke-width: 1.8; stroke-dasharray: 8 6; opacity: .7; }
 .carte-zone .ville { fill: var(--douce); }
-.carte-zone .nom-ville { fill: var(--douce); font-family: Georgia, serif; font-size: 11px; }
+.carte-zone .nom-ville { fill: var(--douce); font-family: Georgia, serif; font-size: 15px; }
 .carte-zone .centre circle { fill: var(--alerte); }
-.carte-zone .centre text { fill: var(--encre); font-family: Georgia, serif; font-size: 12px; font-weight: 600; }
+.carte-zone .centre text { fill: var(--encre); font-family: Georgia, serif; font-size: 17px; font-weight: 600; }
 .carte-zone .lieu { fill: var(--accent); opacity: .75; cursor: pointer; }
 .carte-zone .lieu:hover, .carte-zone .lieu[data-actif="1"] { fill: var(--alerte); opacity: 1; }
 .carte-zone .lieu[data-masque="1"] { opacity: .12; }

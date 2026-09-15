@@ -101,20 +101,20 @@ def main():
     for v in villes:
         X, Y = px(v["lat"], v["lon"])
         ancre = "end" if X > cx else "start"
-        dx = -6 if X > cx else 6
-        marques.append('<circle class="ville" cx="%.1f" cy="%.1f" r="2.6"/>'
+        dx = -8 if X > cx else 8
+        marques.append('<circle class="ville" cx="%.1f" cy="%.1f" r="3.4"/>'
                        '<text class="nom-ville" x="%.1f" y="%.1f" text-anchor="%s">%s</text>'
-                       % (X, Y, X + dx, Y + 3.5, ancre, v["nom"]))
+                       % (X, Y, X + dx, Y + 5, ancre, v["nom"]))
 
     svg = ('<svg viewBox="0 0 %.0f %.0f" xmlns="http://www.w3.org/2000/svg" class="carte-zone" '
            'role="img" aria-label="Carte des communes situées à une heure de route du Domaine du Mons">\n'
            '  <g class="communes">\n    %s\n  </g>\n'
            '  <circle class="limite" cx="%.1f" cy="%.1f" r="%.1f"/>\n'
            '  <g class="villes">\n    %s\n  </g>\n'
-           '  <g class="centre"><circle cx="%.1f" cy="%.1f" r="4.5"/>'
+           '  <g class="centre"><circle cx="%.1f" cy="%.1f" r="5.5"/>'
            '<text x="%.1f" y="%.1f">le Mons</text></g>\n'
            '</svg>\n' % (LARGEUR, H, "\n    ".join(chemins), cx, cy, r,
-                         "\n    ".join(marques), cx, cy, cx + 9, cy + 4))
+                         "\n    ".join(marques), cx, cy, cx + 11, cy + 6))
     os.makedirs(os.path.join(RACINE, "dessins"), exist_ok=True)
     f = os.path.join(RACINE, "dessins", "zone.svg")
     open(f, "w", encoding="utf-8").write(svg)

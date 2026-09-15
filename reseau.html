@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le réseau — Domaine du Mons</title>
 <meta name="description" content="Les lieux portés par des collectifs et les associations d'intérêt général à une heure de Vitrac-sur-Montane, avec une carte, un annuaire ouvert et un fil commun.">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 <div class="bandeau">
@@ -111,7 +111,7 @@
     </ul>
   </div>
 </footer>
-<script src="tdb.js?v=9"></script>
+<script src="tdb.js?v=10"></script>
 <script>
 /* Familles d'affichage : les cartes d'origine ont des dizaines de catégories,
    on les ramène à six pour que le filtre reste utilisable. */
@@ -169,7 +169,7 @@ function familles(cats) {
     c.setAttribute("class", "lieu");
     c.setAttribute("cx", x.toFixed(1));
     c.setAttribute("cy", y.toFixed(1));
-    c.setAttribute("r", l.km < 0.5 ? 0 : 3.4);
+    c.setAttribute("r", l.km < 0.5 ? 0 : 4.2);
     c.setAttribute("tabindex", "0");
     c.setAttribute("role", "button");
     const t = document.createElementNS("http://www.w3.org/2000/svg", "title");
@@ -277,6 +277,6 @@ function familles(cats) {
     " · Transiscope, annuaire des entreprises et associations, geo.api.gouv.fr · Licence Ouverte 2.0.";
 })();
 </script>
-<script src="site.js?v=9"></script>
+<script src="site.js?v=10"></script>
 </body>
 </html>
