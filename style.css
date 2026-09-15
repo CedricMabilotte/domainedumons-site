@@ -295,3 +295,33 @@ h1 + .chapeau { margin-top: -.25rem; }
 .condense li:last-child { margin-bottom: 0; }
 .condense p { margin: 0; }
 @media (max-width: 34rem) { .condense { font-size: .96rem; padding: .7rem .8rem; } }
+
+/* ------------------------------------------------------- la carte du réseau */
+.carte-reseau { margin: 1.2rem 0 .6rem; }
+.carte-reseau svg { display: block; width: 100%; height: auto; }
+.carte-zone .commune { fill: none; stroke: var(--trait); stroke-width: .5; }
+.carte-zone .limite { fill: none; stroke: var(--douce); stroke-width: 1; stroke-dasharray: 5 4; opacity: .7; }
+.carte-zone .ville { fill: var(--douce); }
+.carte-zone .nom-ville { fill: var(--douce); font-family: Georgia, serif; font-size: 11px; }
+.carte-zone .centre circle { fill: var(--alerte); }
+.carte-zone .centre text { fill: var(--encre); font-family: Georgia, serif; font-size: 12px; font-weight: 600; }
+.carte-zone .lieu { fill: var(--accent); opacity: .75; cursor: pointer; }
+.carte-zone .lieu:hover, .carte-zone .lieu[data-actif="1"] { fill: var(--alerte); opacity: 1; }
+.carte-zone .lieu[data-masque="1"] { opacity: .12; }
+.filtres { display: flex; flex-wrap: wrap; gap: .35rem; margin: .2rem 0 .8rem; }
+.filtres button {
+  font: inherit; font-size: .84rem; padding: .2rem .6rem; cursor: pointer;
+  background: var(--papier); color: var(--encre);
+  border: 1px solid var(--trait); border-radius: 2px;
+}
+.filtres button[aria-pressed="true"] { background: var(--encre); color: var(--papier); border-color: var(--encre); }
+.fiche-lieu {
+  margin: .6rem 0 0; padding: .7rem .85rem; background: var(--surface);
+  box-shadow: inset 2px 0 0 var(--accent); font-size: .94rem;
+}
+.fiche-lieu p { margin: 0 0 .25rem; }
+.fiche-lieu p:last-child { margin-bottom: 0; }
+.liste-lieux { list-style: none; padding: 0; margin: 0; }
+.liste-lieux li { margin: 0; padding: .4rem 0; border-bottom: 1px solid var(--trait); }
+.liste-lieux .lieu-nom { font-weight: 600; }
+.liste-lieux .lieu-detail { color: var(--douce); font-size: .86rem; }
