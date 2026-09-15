@@ -87,23 +87,22 @@ for f, s in (("montage", montage), ("coupe", coupe), ("filet", filet)):
 # ------------------------------------------------- marcher libre : les cercles
 c3 = Crayon(graine=41, rugosite=1.15)
 r = []
-r += c3.cercle(320, 176, 300, 140)          # le dehors
-r += c3.cercle(300, 176, 196, 108)          # le collectif
-r += c3.cercle(232, 180, 92, 66)            # chacun
-cercles = f'''<svg viewBox="0 0 640 356" role="img" aria-labelledby="t-cer d-cer" class="croquis">
+r += c3.cercle(320, 210, 305, 195)          # le dehors
+r += c3.cercle(300, 215, 215, 130)          # le collectif
+r += c3.cercle(240, 220, 100, 72)           # chacun
+cercles = f'''<svg viewBox="0 0 640 420" role="img" aria-labelledby="t-cer d-cer" class="croquis">
   <title id="t-cer">Trois cercles emboîtés</title>
   <desc id="d-cer">Un cercle intérieur pour ce qui reste à chacun, un cercle intermédiaire pour ce que le collectif met en commun, un cercle extérieur pour ce qui est ouvert au dehors. Les trois se contiennent sans se confondre.</desc>
   {chemin(r, "trait-croquis")}
   <g class="texte-croquis">
-    <text x="176" y="166" class="fort">chacun</text>
-    <text x="164" y="190">la chambre, le revenu,</text>
-    <text x="164" y="211">les liens, le silence</text>
-    <text x="392" y="132" class="fort">le collectif</text>
-    <text x="392" y="156">la terre, les outils, les décisions,</text>
-    <text x="392" y="177">le travail partagé, la table</text>
-    <text x="392" y="272" class="fort">le dehors</text>
-    <text x="392" y="296">l'accueil, les chantiers,</text>
-    <text x="392" y="317">ce qui est transmis</text>
+    <text x="214" y="46" class="fort">le dehors</text>
+    <text x="214" y="68">l&#39;accueil, les chantiers, ce qui se transmet</text>
+    <text x="352" y="198" class="fort">le collectif</text>
+    <text x="352" y="220">la terre, les outils,</text>
+    <text x="352" y="241">les décisions, la table</text>
+    <text x="182" y="208" class="fort">chacun</text>
+    <text x="160" y="230">la chambre, le revenu,</text>
+    <text x="160" y="251">les liens, le silence</text>
   </g>
 </svg>'''
 
