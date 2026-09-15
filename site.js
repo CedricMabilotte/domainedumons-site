@@ -11,17 +11,52 @@
     }, { passive: true });
   }
 
-  document.querySelectorAll("nav button[aria-controls]").forEach(function (b) {
+  var survol = matchMedia("(hover:hover)").matches;
+
+  document.querySelectorAll("nav [aria-controls]").forEach(function (b) {
     var menu = document.getElementById(b.getAttribute("aria-controls"));
     if (!menu) return;
-    function ouvrir(o) { b.setAttribute("aria-expanded", o); menu.hidden = !o; }
+    var bloc = b.closest("li");
+    var minuterie = null;
+
+    function ouvrir(o) {
+      b.setAttribute("aria-expanded", o ? "true" : "false");
+      menu.hidden = !o;
+    }
+    function fermerPlusTard() {
+      clearTimeout(minuterie);
+      /* on laisse un délai : traverser le vide entre le titre et le menu
+         ne doit pas le refermer */
+      minuterie = setTimeout(function () { ouvrir(false); }, 400);
+    }
+    function annuler() { clearTimeout(minuterie); }
+
     b.addEventListener("click", function (e) {
+      e.preventDefault();
       e.stopPropagation();
+      annuler();
       ouvrir(b.getAttribute("aria-expanded") !== "true");
     });
-    b.parentNode.addEventListener("mouseenter", function () { if (matchMedia("(hover:hover)").matches) ouvrir(true); });
-    b.parentNode.addEventListener("mouseleave", function () { if (matchMedia("(hover:hover)").matches) ouvrir(false); });
-    addEventListener("keydown", function (e) { if (e.key === "Escape") { ouvrir(false); b.focus(); } });
-    addEventListener("click", function (e) { if (!b.parentNode.contains(e.target)) ouvrir(false); });
+
+    if (survol && bloc) {
+      bloc.addEventListener("mouseenter", function () { annuler(); ouvrir(true); });
+      bloc.addEventListener("mouseleave", fermerPlusTard);
+      menu.addEventListener("mouseenter", annuler);
+      menu.addEventListener("mouseleave", fermerPlusTard);
+    }
+    if (bloc) {
+      bloc.addEventListener("focusin", function () { annuler(); ouvrir(true); });
+      bloc.addEventListener("focusout", function () {
+        setTimeout(function () {
+          if (bloc && !bloc.contains(document.activeElement)) ouvrir(false);
+        }, 0);
+      });
+    }
+    addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !menu.hidden) { ouvrir(false); b.focus(); }
+    });
+    addEventListener("click", function (e) {
+      if (bloc && !bloc.contains(e.target)) { annuler(); ouvrir(false); }
+    });
   });
 })();

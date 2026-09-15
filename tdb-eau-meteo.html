@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eau et météo — Domaine du Mons</title>
 <meta name="description" content="Risque de gelée, pluie, bilan hydrique, débit de la Montane et restrictions sécheresse à Vitrac-sur-Montane. Données publiques ouvertes.">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
         <li><a href="index.html">Le lieu</a></li>
         <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
         <li>
-          <button type="button" aria-expanded="false" aria-controls="m-tdb" aria-current="page">Tableaux de bord</button>
+          <span class="menu-deroulant"><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-tdb" aria-label="Ouvrir le menu des tableaux de bord">⌄</button></span>
           <ul class="sous-menu" id="m-tdb" hidden>
             <li class="groupe">La semaine</li>
             <li><a href="tdb-eau-meteo.html">Eau et météo</a></li>
@@ -113,7 +113,7 @@
   </div>
 </footer>
 
-<script src="tdb.js?v=7"></script>
+<script src="tdb.js?v=8"></script>
 <script>
 const LAT = 45.351433, LON = 1.931875, STATION = "P361401001";  /* chemin du Mons, 588 m */
 const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
@@ -273,7 +273,7 @@ async function archive() {
 })();
 </script>
 
-<script src="site.js?v=7"></script>
+<script src="site.js?v=8"></script>
 
 </body>
 </html>

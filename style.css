@@ -1,17 +1,17 @@
 /* Domaine du Mons — feuille unique. Aucune dépendance, aucune police distante. */
 
 :root {
-  --papier: #f7f4ec;
-  --encre: #17160f;
-  --douce: #57523f;
-  --trait: #d9d2bf;
+  --papier: #ffffff;
+  --encre: #1a1915;
+  --douce: #5b5749;
+  --trait: #e2dfd4;
   --accent: #5c6b4a;
-  --surface: #efeadd;
+  --surface: #f6f5f0;
   --calme: #0b7f4e;
   --vigilance: #bb9008;
   --alerte: #d94d08;
   --trace: #5c6b4a;
-  --grille: #e3ddcc;
+  --grille: #ebe8df;
   --mesure: 34rem;
 }
 
@@ -75,14 +75,18 @@ nav a, nav button {
 }
 nav a:hover, nav button:hover { border-bottom-color: var(--encre); }
 nav [aria-current="page"] { border-bottom: 1.5px solid var(--accent); }
-nav button::after { content: " ⌄"; font-size: .8em; opacity: .55; }
+nav .chevron { padding: .15rem .15rem .15rem .1rem; line-height: 1; opacity: .55; }
+nav .chevron:hover, nav .chevron[aria-expanded="true"] { opacity: 1; border-bottom-color: transparent; }
+.menu-deroulant { display: inline-flex; align-items: baseline; gap: .05rem; }
 
 .sous-menu {
-  position: absolute; top: calc(100% + .45rem); right: 0;
+  position: absolute; top: calc(100% + .45rem); right: 0; z-index: 10;
   min-width: 13rem; margin: 0; padding: .35rem 0; list-style: none;
   background: var(--papier); border: 1px solid var(--trait);
   box-shadow: 0 4px 14px rgba(0,0,0,.09);
 }
+/* pont invisible : la souris peut descendre du titre au menu sans le fermer */
+.sous-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -.65rem; height: .65rem; }
 .sous-menu[hidden] { display: none; }
 .sous-menu li { margin: 0; }
 .sous-menu a { display: block; padding: .32rem .8rem; border: 0; white-space: nowrap; }
