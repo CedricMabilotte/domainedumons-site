@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La cartographie des lieux — Domaine du Mons</title>
+<meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="style.css?v=12">
+</head>
+<body>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+                <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li><a href="marcher-libre.html">Marcher libre</a></li>
+        <li>
+          <span class="menu-deroulant"><a href="reseau.html">Le réseau</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-res" aria-label="Ouvrir le menu du réseau">⌄</button></span>
+          <ul class="sous-menu" id="m-res" hidden>
+            <li><a href="reseau-carte.html" aria-current="page">La cartographie des lieux</a></li>
+            <li><a href="reseau-fil.html">Le fil commun</a></li>
+            <li><a href="reseau-associations.html">Les associations d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="reseau.html">Vue d'ensemble</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="menu-deroulant"><a href="tableaux-de-bord.html">Tableaux de bord</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-tdb" aria-label="Ouvrir le menu des tableaux de bord">⌄</button></span>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li class="groupe">La semaine</li>
+            <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li class="groupe">La longue durée</li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
+            <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
+            <li class="groupe">Le lieu</li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-construire.html">Construire ici</a></li>
+            <li class="groupe">Le collectif</li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<main>
+<p class="retour"><a href="reseau.html">← Le réseau</a></p>
+<h1>La cartographie des lieux</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+
+<p>Les communes dont le centre est à moins de 45&nbsp;km d'ici, ce qui correspond à peu près à une heure de route sur ces routes-là. Chaque point est un lieu porté par un collectif, déjà référencé sur un annuaire public. <strong>Cliquez sur un point</strong> pour lire sa fiche&nbsp;; la molette ne zoome qu'après un clic sur la carte, pour ne pas bloquer le défilement de la page.</p>
+
+<div class="filtres" id="filtres"></div>
+<div class="carte-leaflet" id="carte"><p class="chargement">Chargement de la carte…</p></div>
+<p class="legende-carte">Contours communaux&nbsp;: Admin Express (IGN), via geo.api.gouv.fr. <strong>Aucune tuile distante</strong>&nbsp;: le fond est un fichier du dépôt, et la bibliothèque de carte en est une copie locale. Ouvrir cette page n'envoie rien à personne.</p>
+<div id="fiche"></div>
+
+<h2 id="l-annuaire">L'annuaire</h2>
+<p id="intro-annuaire"><span class="chargement">Chargement…</span></p>
+
+<div class="note">
+  <span class="etiquette">Ce que vaut cette liste, et ce qu'elle ne vaut pas</span>
+  <p>Elle est reprise telle quelle d'un agrégateur de cartes d'alternatives. <strong>Aucune fiche n'a été vérifiée sur place</strong>, certaines datent de plusieurs années, et un lieu peut avoir fermé, changé d'objet ou ne plus vouloir y figurer.</p>
+  <p>Notre propre fiche en est l'exemple&nbsp;: elle date du 3 janvier 2019 et décrit encore le lieu comme un élevage en vente directe. Nous la corrigeons — et c'est exactement ce que nous proposons à chacun de faire pour la sienne.</p>
+  <p>Cette carte montre <strong>le milieu des collectifs</strong>, pas le noyau d'intérêt général. Les lieux n'ont pas été passés à la grille appliquée aux associations&nbsp;: ce sont deux usages différents, et cette page ne fait que le premier.</p>
+  <p><strong>Droit de réponse.</strong> Toute personne concernée par une fiche peut demander sa correction ou son retrait à <a href="mailto:contact@actitude.org">contact@actitude.org</a>. Le retrait est fait sans discussion et sans délai&nbsp;; la correction est datée dans le journal des versions, en bas de page.</p>
+</div>
+
+<div class="liste-lieux" id="liste"><p class="chargement">Chargement…</p></div>
+
+<h2 id="la-methode">Méthode</h2>
+<p><strong>La zone.</strong> Une heure de route est approchée par 45&nbsp;km à vol d'oiseau. C'est une simplification&nbsp;: sur ces routes de moyenne montagne, une heure porte plus loin vers Tulle que vers le plateau. La liste des communes vient du découpage administratif officiel.</p>
+<p><strong>Les lieux.</strong> Repris de <a href="https://transiscope.org/">Transiscope</a>, qui agrège une vingtaine de cartes — Près de chez nous, Colibris, Alternatiba, le réseau des ressourceries, Longue vie aux objets. Les catégories affichées sont celles des cartes d'origine, pas les nôtres.</p>
+<p><strong>La carte.</strong> Elle est dessinée par <a href="https://leafletjs.com/">Leaflet</a>, dont une copie est déposée dans le dépôt du site. Il n'y a ni fond photographique ni tuiles&nbsp;: seulement les contours des 284 communes de la zone, servis eux aussi par le dépôt. C'est plus sobre qu'un fond routier, et cela tient la promesse faite en bas de chaque page — <strong>rien ne part vers un tiers quand vous ouvrez cette page</strong>. Le prix est assumé&nbsp;: pas de routes, pas de relief, pas de noms de hameaux.</p>
+<p>Données téléchargeables — <a href="data/reseau-lieux.json">les lieux</a>, <a href="data/zone-communes.geojson">les contours</a>, <a href="data/zone-une-heure.json">la zone</a> — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>.</p>
+
+<h2 id="les-versions">Journal des versions</h2>
+<ul>
+  <li><strong>15 septembre 2026</strong> — première version. Reprise de 191 lieux depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</li>
+  <li><strong>16 septembre 2026</strong> — la carte devient navigable&nbsp;: zoom, déplacement, fiche au clic, contours communaux au trait fin. Toujours sans aucune tuile distante.</li>
+</ul>
+<p class="horodatage" id="horodatage"></p>
+</main>
+
+
+<footer>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="marcher-libre.html">Marcher libre</a></li>
+      <li><a href="reseau.html">Le réseau</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="vendor/leaflet.js"></script>
+<script src="tdb.js?v=12"></script>
+<script>
+/* Familles d'affichage : les cartes d'origine ont des dizaines de catégories,
+   on les ramène à six pour que le filtre reste utilisable. */
+const FAMILLES = [
+  ["Terre et alimentation", ["agricult", "aliment", "producteur", "forêt nourric", "amap", "écologie"]],
+  ["Réparer, réemployer", ["répar", "zéro déchet", "objets", "recycler", "ressourcer"]],
+  ["Habiter ensemble", ["habitat", "urbanisme", "oasis"]],
+  ["Lien social et culture", ["rencontre", "lien social", "culture", "média"]],
+  ["Solidarité et droits", ["solidarit", "citoyenneté", "droits"]],
+  ["Économie sociale", ["économie sociale", "magasin", "commerce"]]
+];
+const sansAcc = (t) => (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+function familles(cats) {
+  const c = (cats || []).map(sansAcc).join(" | ");
+  return FAMILLES.filter(([, mots]) => mots.some((m) => c.includes(sansAcc(m)))).map(([n]) => n);
+}
+const ICI = [45.351433, 1.931875];
+(async () => {
+  let L2, C, contours;
+  try {
+    [L2, C, contours] = await Promise.all([
+      json("data/reseau-lieux.json"), json("data/zone-une-heure.json"),
+      json("data/zone-communes.geojson")]);
+  } catch (e) {
+    echec("condense", "Données du réseau indisponibles.");
+    echec("carte", "");
+    return;
+  }
+  const lieux = L2.lieux.map((l) => Object.assign({}, l, { fam: familles(l.categories) }));
+  const communes = new Set(lieux.map((l) => l.commune)).size;
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li><strong>" + lieux.length + " lieux</strong> portés par des collectifs sont déjà référencés dans l'heure, sur " + communes + " communes.</li>" +
+    "<li>Le plus proche est à " + nf(lieux.filter((l) => l.km > 0.4)[0].km, 1) + " km, le plus lointain à " + nf(lieux[lieux.length - 1].km, 1) + " km.</li>" +
+    "<li>La zone couvre " + nf0(C.total) + " communes et " + nf0(C.population) + " habitants, à 45 km à la ronde.</li>" +
+    "<li><strong>Aucune fiche n'a été vérifiée sur place</strong> — la nôtre non plus, et elle date de 2019.</li>" +
+    "</ul>";
+  /* --- la carte : Leaflet sans aucune tuile --- */
+  const zone = document.getElementById("carte");
+  zone.innerHTML = "";
+  const carte = L.map(zone, {
+    center: ICI, zoom: 9, minZoom: 8, maxZoom: 14,
+    scrollWheelZoom: false, attributionControl: false
+  });
+  L.control.scale({ imperial: false, maxWidth: 140 }).addTo(carte);
+  /* la molette ne prend la main qu'après un clic : sinon on ne peut plus
+     faire défiler la page quand le curseur passe sur la carte */
+  carte.once("click", () => carte.scrollWheelZoom.enable());
+  L.geoJSON(contours, {
+    style: { className: "commune", fill: true, fillOpacity: 0, weight: 1 },
+    onEachFeature: (f, c) => {
+      c.bindTooltip(f.properties.nom + (f.properties.pop ? " — " + nf0(f.properties.pop) + " hab." : ""),
+                    { sticky: true, className: "bulle-commune" });
+    }
+  }).addTo(carte);
+  L.circle(ICI, { radius: 45000, className: "limite", fill: false, weight: 1.4 }).addTo(carte);
+  L.circleMarker(ICI, { className: "ici", radius: 6, weight: 0 }).addTo(carte)
+    .bindTooltip("le Mons", { permanent: true, direction: "right", className: "bulle-ici" });
+  const points = lieux.map((l, i) => {
+    if (l.km < 0.4) return null;      /* notre propre point est déjà là */
+    const m = L.circleMarker([l.lat, l.lon], { className: "lieu", radius: 5, weight: 1 });
+    m.bindTooltip(l.nom, { direction: "top" });
+    m.on("click", () => fiche(i, m));
+    m.addTo(carte);
+    return m;
+  });
+  let choisi = null;
+  function fiche(i, m) {
+    const l = lieux[i];
+    if (choisi && choisi.getElement()) choisi.getElement().classList.remove("actif");
+    choisi = m;
+    if (m.getElement()) m.getElement().classList.add("actif");
+    document.getElementById("fiche").innerHTML =
+      "<div class='fiche-lieu'><p><strong>" + l.nom + "</strong> — " + (l.commune || "commune inconnue") +
+      ", à " + nf(l.km, 1) + " km.</p>" +
+      (l.categories.length ? "<p>" + l.categories.join(" · ") + "</p>" : "") +
+      "<p class='nb'>Fiche reprise de " + (l.source || "un annuaire public") +
+      (l.maj ? ", mise à jour le " + new Date(l.maj).toLocaleDateString("fr-FR", { dateStyle: "long" }) : "") +
+      (l.commune_deduite ? " · commune déduite des coordonnées" : "") + ".</p></div>";
+  }
+  /* --- filtres --- */
+  const actives = new Set();
+  const zoneF = document.getElementById("filtres");
+  zoneF.innerHTML = FAMILLES.map(([n]) =>
+    "<button type='button' aria-pressed='false' data-f=\"" + n + "\">" + n +
+    " <span class='nb'>" + lieux.filter((l) => l.fam.includes(n)).length + "</span></button>").join("") +
+    "<button type='button' data-f='' aria-pressed='true'>Tout</button>";
+  function appliquer() {
+    points.forEach((m, i) => {
+      if (!m) return;
+      const ok = !actives.size || lieux[i].fam.some((f) => actives.has(f));
+      const el = m.getElement();
+      if (el) el.classList.toggle("masque", !ok);
+    });
+    liste();
+    zoneF.querySelectorAll("button").forEach((b) => {
+      const f = b.dataset.f;
+      b.setAttribute("aria-pressed", f ? String(actives.has(f)) : String(actives.size === 0));
+    });
+  }
+  zoneF.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    const f = b.dataset.f;
+    if (!f) actives.clear();
+    else if (actives.has(f)) actives.delete(f);
+    else actives.add(f);
+    appliquer();
+  });
+  /* --- l'annuaire --- */
+  function liste() {
+    const vus = lieux.filter((l) => !actives.size || l.fam.some((f) => actives.has(f)));
+    document.getElementById("intro-annuaire").innerHTML =
+      "<strong>" + vus.length + " lieux</strong>, du plus proche au plus éloigné" +
+      (actives.size ? " — filtre : " + [...actives].join(", ") : "") + ".";
+    document.getElementById("liste").innerHTML = vus.map((l) =>
+      "<p><span class='lieu-nom'>" + l.nom + "</span> <span class='lieu-detail'>" +
+      (l.commune || "—") + " · " + nf(l.km, 1) + " km" +
+      (l.maj ? " · fiche de " + l.maj.slice(0, 4) : "") + "</span></p>").join("");
+  }
+  appliquer();
+  document.getElementById("horodatage").textContent =
+    "Relevé le " + new Date(L2.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · Transiscope, geo.api.gouv.fr · fond de carte servi par le dépôt · Licence Ouverte 2.0.";
+})();
+</script>
+<script src="site.js?v=12"></script>
+</body>
+</html>

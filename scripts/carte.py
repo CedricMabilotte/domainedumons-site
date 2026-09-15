@@ -20,7 +20,8 @@ RAYON = 45.0
 DEPS = ["19", "23", "87", "15", "46"]
 LARGEUR = 900.0
 UA = {"User-Agent": "domainedumons.actitude.org/1.0"}
-TOL = 0.0045          # tolérance de simplification, en degrés (~350 m)
+TOL = 0.0045          # tolérance pour le SVG statique, en degrés (~350 m)
+TOL_FIN = 0.0012      # tolérance pour le GeoJSON, plus fine : la carte Leaflet zoome
 
 
 def projeter(la, lo):
@@ -45,6 +46,52 @@ def simplifier(pts, tol):
     if dmax > tol:
         return simplifier(pts[:idx + 1], tol)[:-1] + simplifier(pts[idx:], tol)
     return [pts[0], pts[-1]]
+
+
+def ecrire_geojson(zone, deps):
+    """Le même fond, en GeoJSON, pour la carte Leaflet qui zoome.
+
+    Tolérance plus fine que le SVG (~95 m contre ~350 m) : à fort grossissement
+    un contour trop simplifié se voit. Coordonnées arrondies à la quatrième
+    décimale, soit environ onze mètres — inutile de publier plus précis que ce
+    que la simplification vient de jeter.
+    """
+    traits = []
+    for d in deps:
+        u = "https://geo.api.gouv.fr/departements/%s/communes?fields=nom,code,contour&format=json" % d
+        with urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=180) as r:
+            c = json.load(r)
+        for x in c:
+            if x["code"] not in zone or not x.get("contour"):
+                continue
+            g = x["contour"]
+            exts = [g["coordinates"][0]] if g["type"] == "Polygon" else [p[0] for p in g["coordinates"]]
+            parties = []
+            for anneau in exts:
+                pts = [(float(lo), float(la)) for lo, la in anneau]
+                if len(pts) > 2 and pts[0] == pts[-1]:
+                    pts = pts[:-1]
+                if len(pts) < 8:
+                    continue
+                m = len(pts) // 2
+                red = simplifier(pts[:m + 1], TOL_FIN)[:-1] + simplifier(pts[m:] + [pts[0]], TOL_FIN)
+                if len(red) > 3:
+                    parties.append([[round(lo, 4), round(la, 4)] for lo, la in red] +
+                                   [[round(red[0][0], 4), round(red[0][1], 4)]])
+            if parties:
+                traits.append({"type": "Feature",
+                               "properties": {"code": x["code"], "nom": x["nom"],
+                                              "pop": zone[x["code"]].get("pop")},
+                               "geometry": {"type": "Polygon", "coordinates": [parties[0]]}
+                               if len(parties) == 1 else
+                               {"type": "MultiPolygon", "coordinates": [[p] for p in parties]}})
+    f = os.path.join(RACINE, "data", "zone-communes.geojson")
+    json.dump({"type": "FeatureCollection",
+               "licence": "Licence Ouverte 2.0 — contours geo.api.gouv.fr (Admin Express, IGN)",
+               "simplification_deg": TOL_FIN, "calcule_le": date.today().isoformat(),
+               "features": traits},
+              open(f, "w"), ensure_ascii=False, separators=(",", ":"))
+    print("  %s : %d communes, %d octets" % (f, len(traits), os.path.getsize(f)))
 
 
 def main():
@@ -77,6 +124,7 @@ def main():
                 if len(red) > 3:
                     formes.append((x["code"], red))
     print("  %d contours retenus" % len(formes))
+    ecrire_geojson(zone, DEPS)
 
     # cadre : le disque de la zone
     demi = RAYON * 1.02

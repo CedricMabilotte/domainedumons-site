@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les associations d'intérêt général — Domaine du Mons</title>
+<meta name="description" content="Les associations actives à une heure de Vitrac-sur-Montane, et le tri de celles dont l'objet déclaré les engage envers des non-membres.">
+<link rel="stylesheet" href="style.css?v=12">
+</head>
+<body>
+<div class="bandeau">
+  <div class="bandeau-contenu">
+    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
+    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <nav aria-label="Navigation principale">
+      <ul>
+                <li><a href="index.html">Le lieu</a></li>
+        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+        <li><a href="marcher-libre.html">Marcher libre</a></li>
+        <li>
+          <span class="menu-deroulant"><a href="reseau.html">Le réseau</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-res" aria-label="Ouvrir le menu du réseau">⌄</button></span>
+          <ul class="sous-menu" id="m-res" hidden>
+            <li><a href="reseau-carte.html">La cartographie des lieux</a></li>
+            <li><a href="reseau-fil.html">Le fil commun</a></li>
+            <li><a href="reseau-associations.html" aria-current="page">Les associations d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="reseau.html">Vue d'ensemble</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="menu-deroulant"><a href="tableaux-de-bord.html">Tableaux de bord</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-tdb" aria-label="Ouvrir le menu des tableaux de bord">⌄</button></span>
+          <ul class="sous-menu" id="m-tdb" hidden>
+            <li class="groupe">La semaine</li>
+            <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
+            <li><a href="tdb-annee.html">L'année</a></li>
+            <li class="groupe">La longue durée</li>
+            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
+            <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
+            <li class="groupe">Le lieu</li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-construire.html">Construire ici</a></li>
+            <li class="groupe">Le collectif</li>
+            <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
+            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+          </ul>
+        </li>
+        <li><a href="nous-joindre.html">Nous joindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<main>
+<p class="retour"><a href="reseau.html">← Le réseau</a></p>
+<h1>Les associations d'intérêt général</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+
+<p>Recenser les associations d'intérêt général de la zone posait une question qu'on ne pouvait pas contourner&nbsp;: <strong>à quoi les reconnaît-on&nbsp;?</strong> Ni le statut, ni le code d'activité, ni le nom ne le disent. La première version de cette page triait sur les mots du nom déposé, et le disait — c'était un repérage grossier, assumé comme tel. Nous l'avons refait autrement.</p>
+
+<h2 id="combien">Combien elles sont, vraiment</h2>
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement du recensement</p></div></div>
+<div id="lecture-total"></div>
+
+<h2 id="la-grille">La grille</h2>
+<p><strong>Une association entre dans la liste si son objet déclaré l'engage à faire quelque chose pour des gens qui n'en sont pas membres.</strong> C'est le seul critère. Il se décline en cinq faits&nbsp;; un seul suffit, s'il est net.</p>
+<div class="tuiles" id="faits"></div>
+
+<h3>Les trois motifs qui font sortir</h3>
+<p>Ils l'emportent, même si un fait apparaît, sauf si l'objet montre une action tournée vers l'extérieur <em>en plus</em> de l'activité interne.</p>
+<ul>
+  <li><strong>Le cercle</strong> — l'objet est tourné vers les membres&nbsp;: amicale, club de loisirs entre adhérents, comité des fêtes, anciens combattants, association de chasse ou de pêche, association syndicale de propriétaires, association cultuelle.</li>
+  <li><strong>L'intérêt économique</strong> — défense des intérêts d'une profession ou d'un secteur, syndicat professionnel, groupement d'employeurs.</li>
+  <li><strong>Le partisan</strong> — activité politique de parti, financement de campagne.</li>
+</ul>
+
+<h3>Les cas limites, et comment on a tranché</h3>
+<p>Ce sont eux qui font la valeur d'une grille&nbsp;: sans eux, elle n'est qu'une déclaration d'intention. Les nôtres&nbsp;:</p>
+<ul>
+  <li><strong>Les comités des fêtes sortent</strong>, même quand la fête est ouverte à tous. C'est la sociabilité d'un bourg, ce qui est précieux, mais ce n'est pas un service rendu au-delà du cercle. Sauf quand l'objet déclare en plus tenir un lieu ou prêter du matériel aux autres associations — alors le verdict est le doute, pas le rejet.</li>
+  <li><strong>Les clubs du troisième âge</strong> ne sont jamais retenus. Beaucoup déclarent « lutter contre l'isolement », ce qui est vrai et utile&nbsp;; mais le bénéficiaire reste l'adhérent. Ils passent en doute quand l'objet vise « les personnes âgées de la commune » et non « ses membres ».</li>
+  <li><strong>Les associations de pêche agréées</strong> déclarent presque toutes la protection des milieux aquatiques et la lutte contre la pollution — un commun, au sens plein. Mais c'est indissociable de la gestion d'un droit de pêche au bénéfice des adhérents. Verdict&nbsp;: doute, uniformément.</li>
+  <li><strong>Les maisons de santé et les CPTS</strong> maintiennent l'accès aux soins en zone rurale, ce qui est un fait considérable ici. Mais leur objet déclaré est le regroupement de professionnels, et parfois la défense de leurs intérêts. Verdict&nbsp;: doute, sans exception.</li>
+  <li><strong>Les associations qui animent un Ehpad ou un hôpital</strong> sont retenues, même quand elles ont déclaré la famille « clubs du troisième âge »&nbsp;: les bénéficiaires sont les résidents, pas les membres. La famille déclarée ne décide pas — l'objet, si.</li>
+  <li><strong>Les radios de proximité et les journaux locaux gratuits</strong> sont retenus au titre de l'ouverture. C'est discutable, et nous le signalons.</li>
+  <li><strong>Un objet vague</strong> — « promouvoir toutes activités utiles » — ne suffit jamais. En cas de doute réel, le verdict est le doute, pas l'inclusion.</li>
+</ul>
+
+<h2 id="les-retenues">Les associations retenues</h2>
+<p id="intro-retenues"><span class="chargement">Chargement…</span></p>
+<div class="filtres" id="filtres-faits"></div>
+<div class="liste-lieux" id="liste"><p class="chargement">Chargement…</p></div>
+
+<h2 id="les-douteuses">Celles dont nous ne savons pas</h2>
+<p id="intro-douteuses"><span class="chargement">Chargement…</span></p>
+<p>Elles sont publiées, et pas silencieusement écartées. Un objet trop court, un fait réel mais dont le bénéficiaire reste le cercle, un service rendu sous une formulation de club&nbsp;: dans chacun de ces cas, trancher aurait été décider à la place de qui vérifiera. <strong>Un doute affiché vaut mieux qu'un tri silencieux.</strong></p>
+<details>
+  <summary>Voir la liste des associations en attente de vérification</summary>
+  <div class="liste-lieux" id="liste-douteuses"><p class="chargement">Chargement…</p></div>
+</details>
+
+<h2 id="par-famille">Ce que le territoire déclare faire</h2>
+<p>Chaque association choisit elle-même, à sa déclaration, une famille dans une nomenclature officielle de 297 codes. C'est une donnée déclarative, pas un jugement&nbsp;: elle dit ce que les gens d'ici <em>pensent</em> monter quand ils montent une association.</p>
+<div class="defilant" id="familles"><p class="chargement">Chargement…</p></div>
+
+<h2 id="la-methode">Méthode</h2>
+<p><strong>La source.</strong> Le Répertoire national des associations, tenu par le ministère de l'Intérieur, dans son millésime du 1<sup>er</sup> septembre 2026. Nous en avons extrait les sept départements que la zone recoupe, retenu les associations dont l'adresse déclarée est dans une des 284 communes et dont la position est « active », et joint la nomenclature officielle d'objet social publiée par la DILA.</p>
+<p><strong>La lecture.</strong> Le vivier réunit les familles susceptibles de porter un fait d'intérêt général, plus les associations des autres familles dont l'objet en portait plusieurs. <strong>Chaque objet déclaré de ce vivier a été lu et classé un par un</strong> contre la grille ci-dessus, écrite avant la lecture et non ajustée après. Chaque association retenue porte le ou les faits qui l'ont fait entrer, et une demi-phrase qui dit ce qu'elle déclare faire — pour qu'on puisse contester le classement pièce par pièce plutôt qu'en bloc.</p>
+<p><strong>Ce qui est publié, et rien de plus</strong>&nbsp;: le nom de l'association, son numéro RNA, sa commune, son année de création et la famille qu'elle a déclarée — tous publiés au Journal officiel des associations. Aucune adresse, aucun nom de dirigeant, aucun contact, aucun recoupement entre sources.</p>
+
+<div class="note">
+  <span class="etiquette">Ce que cette liste ne prouve pas</span>
+  <p><strong>La grille lit une déclaration, pas une pratique.</strong> Une association peut déclarer un objet généreux et ne plus rien faire depuis quinze ans&nbsp;; une autre peut rendre un service réel sous un objet sec. Aucune n'a été vérifiée sur place.</p>
+  <p>Et « active » au sens du répertoire veut seulement dire <em>qui n'a pas déclaré sa dissolution</em>. Beaucoup d'associations existent sur le papier et nulle part ailleurs. Le chiffre total est donc un majorant, et il faut le lire comme tel.</p>
+  <p>Enfin, ce tri n'est pas une qualification juridique d'intérêt général. Celle-ci ne se décide ni sur un nom, ni sur un code, ni sur un objet déclaré, mais sur les faits — et c'est tout le sujet du <a href="tdb-registre.html">registre</a>.</p>
+</div>
+
+<p><strong>Droit de réponse.</strong> Toute association qui conteste son classement, ou sa présence ici, peut écrire à <a href="mailto:contact@actitude.org">contact@actitude.org</a>. Le retrait est fait sans discussion et sans délai&nbsp;; la correction est datée dans le journal des versions.</p>
+
+<p>Données téléchargeables — <a href="data/associations.json">le recensement et les retenues</a>, <a href="data/associations-douteuses.json">les douteuses</a>, <a href="data/lecture-associations.json">la lecture complète, verdict par verdict</a> — sous Licence Ouverte 2.0. La grille appliquée est dans le dépôt, en <code>scripts/GRILLE-ASSOCIATIONS.md</code>, et le script de fabrication en <code>scripts/assos.py</code>.</p>
+
+<h2 id="les-versions">Journal des versions</h2>
+<ul>
+  <li><strong>15 septembre 2026</strong> — première version. Décompte à partir de l'annuaire des entreprises, tri sur les mots du nom déposé.</li>
+  <li><strong>16 septembre 2026</strong> — refonte complète. Le recensement repart du Répertoire national des associations et non plus de l'annuaire des entreprises&nbsp;: <strong>le total passe de 1 952 à plus de huit mille</strong>, parce que l'annuaire des entreprises ne voit que les associations immatriculées. Le tri par mots du nom est remplacé par la lecture de chaque objet déclaré contre une grille écrite d'avance.</li>
+</ul>
+<p class="horodatage" id="horodatage"></p>
+</main>
+
+
+<footer>
+  <div>
+    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <ul>
+      <li><a href="index.html">Le lieu</a></li>
+      <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+      <li><a href="marcher-libre.html">Marcher libre</a></li>
+      <li><a href="reseau.html">Le réseau</a></li>
+      <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="tdb.js?v=12"></script>
+<script>
+const FAITS = {
+  ouverture:   ["Ouvrir un lieu ou une ressource", "accueillir, héberger, prêter des outils, mettre une ressource à disposition de non-membres"],
+  transmission:["Transmettre un savoir", "former, sensibiliser, accompagner des personnes extérieures à l'association"],
+  commun:      ["Entretenir un commun", "prendre soin d'un bien qui n'est à personne : rivière, forêt, chemins, semences, petit patrimoine"],
+  solidarite:  ["Porter une solidarité", "aider des personnes en difficulté qui ne sont pas les membres"],
+  territoire:  ["Faire vivre le territoire autrement", "circuits courts, réemploi, énergie citoyenne, habitat partagé, installation agricole"]
+};
+(async () => {
+  let d, dt;
+  try {
+    [d, dt] = await Promise.all([json("data/associations.json"),
+                                 json("data/associations-douteuses.json").catch(() => null)]);
+  } catch (e) {
+    ["condense", "synthese", "liste"].forEach((i) => echec(i, "Recensement associatif indisponible."));
+    return;
+  }
+  const parHab = d.population_zone / d.actives;
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li><strong>" + nf0(d.actives) + " associations actives</strong> sont domiciliées dans la zone — une pour " +
+      nf0(parHab) + " habitants.</li>" +
+    "<li><strong>" + nf0(d.lues) + " objets déclarés</strong> ont été lus un par un contre une grille écrite d'avance.</li>" +
+    "<li><strong>" + nf0(d.verdicts.retenu) + " retenues</strong>, " + nf0(d.verdicts.douteux) +
+      " laissées en doute, " + nf0(d.verdicts.hors) + " écartées.</li>" +
+    "<li>Le critère est <strong>ce que l'association dit faire pour des non-membres</strong>, jamais son statut ni son nom.</li>" +
+    "</ul>";
+  const avant1990 = Object.entries(d.par_decennie).filter(([k]) => +k < 1990)
+                          .reduce((a, [, v]) => a + v, 0);
+  document.getElementById("synthese").innerHTML =
+    tuile("Associations actives", nf0(d.actives), "", "domiciliées dans une des " + nf0(d.communes_zone) + " communes de la zone") +
+    tuile("Une pour", nf0(parHab), "hab.", "sur " + nf0(d.population_zone) + " habitants") +
+    tuile("Déclarées avant 1990", nf0(avant1990), "", Math.round(100 * avant1990 / d.actives) + " % du total — le tissu est ancien") +
+    tuile("Retenues après lecture", nf0(d.verdicts.retenu), "", "sur " + nf0(d.lues) + " objets lus, soit " +
+          Math.round(100 * d.verdicts.retenu / d.lues) + " %");
+  document.getElementById("lecture-total").innerHTML =
+    "<p>Ce total est <strong>plus de quatre fois</strong> celui que nous publiions la veille. La première version comptait les associations " +
+    "de l'annuaire des entreprises, qui ne voit que celles qui ont un numéro SIREN — c'est-à-dire celles qui emploient, " +
+    "perçoivent des subventions publiques ou sont assujetties à la TVA. <strong>Environ une association sur quatre.</strong> " +
+    "Les autres, la grande majorité, n'existent que dans le répertoire du ministère de l'Intérieur.</p>" +
+    "<p>Une association pour " + nf0(parHab) + " habitants, c'est un chiffre à lire avec précaution&nbsp;: " +
+    "« active » veut dire ici <em>qui n'a pas déclaré sa dissolution</em>, ce qui n'est pas la même chose que vivante. " +
+    "Il n'empêche&nbsp;: <strong>la densité associative n'est pas une hypothèse ici, c'est un fait mesuré</strong>, et l'idée " +
+    "d'un territoire vide où tout serait à construire ne tient pas.</p>";
+  document.getElementById("faits").innerHTML = Object.entries(FAITS).map(([k, v]) =>
+    tuile(v[0], nf0(d.par_fait[k] || 0), "", v[1])).join("");
+  const fam = Object.entries(d.par_famille).sort((a, b) => b[1] - a[1]).slice(0, 14);
+  document.getElementById("familles").innerHTML =
+    "<table class='donnees'><thead><tr><th>Famille déclarée</th><th>Associations</th><th>Part</th></tr></thead><tbody>" +
+    fam.map((x) => "<tr><td>" + (d.familles[x[0]] || x[0]) + "</td><td>" + nf0(x[1]) + "</td><td>" +
+      nf(100 * x[1] / d.actives, 1) + " %</td></tr>").join("") + "</tbody></table>";
+  const actives = new Set();
+  const zf = document.getElementById("filtres-faits");
+  zf.innerHTML = Object.entries(FAITS).map(([k, v]) =>
+    "<button type='button' aria-pressed='false' data-f='" + k + "'>" + v[0] +
+    " <span class='nb'>" + nf0(d.par_fait[k] || 0) + "</span></button>").join("") +
+    "<button type='button' data-f='' aria-pressed='true'>Tout</button>";
+  zf.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    const f = b.dataset.f;
+    if (!f) actives.clear();
+    else if (actives.has(f)) actives.delete(f); else actives.add(f);
+    zf.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed",
+      x.dataset.f ? String(actives.has(x.dataset.f)) : String(actives.size === 0)));
+    rendre();
+  });
+  function rendre() {
+    const vus = d.retenues.filter((a) => !actives.size || a.faits.some((f) => actives.has(f)));
+    document.getElementById("intro-retenues").innerHTML =
+      "<strong>" + nf0(vus.length) + " associations</strong>, de la plus proche à la plus éloignée" +
+      (actives.size ? " — filtre : " + [...actives].map((k) => FAITS[k][0].toLowerCase()).join(", ") : "") +
+      ". Chacune porte ce qu'elle déclare faire.";
+    document.getElementById("liste").innerHTML = vus.map((a) =>
+      "<p><span class='lieu-nom'>" + a.nom + "</span> <span class='lieu-detail'>" +
+      a.commune + " · " + nf(a.km, 1) + " km" + (a.annee ? " · " + a.annee : "") + "</span>" +
+      "<br><span class='lecture'>" + a.lecture + "</span></p>").join("");
+  }
+  rendre();
+  if (dt) {
+    document.getElementById("intro-douteuses").innerHTML =
+      "<strong>" + nf0(dt.total) + " associations</strong> pour lesquelles la lecture de l'objet n'a pas suffi à trancher.";
+    document.getElementById("liste-douteuses").innerHTML = dt.douteuses.map((a) =>
+      "<p><span class='lieu-nom'>" + a.nom + "</span> <span class='lieu-detail'>" +
+      a.commune + " · " + nf(a.km, 1) + " km" + (a.famille ? " · " + a.famille : "") + "</span></p>").join("");
+  }
+  document.getElementById("horodatage").textContent =
+    "Recensement du " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · Répertoire national des associations (millésime du 1er septembre 2026) et nomenclature DILA · Licence Ouverte 2.0.";
+})();
+</script>
+<script src="site.js?v=12"></script>
+</body>
+</html>

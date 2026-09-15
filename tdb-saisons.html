@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chauffage, verger, fenaison — Domaine du Mons</title>
 <meta name="description" content="Trois décisions chiffrées sur 76 ans à Vitrac-sur-Montane : degrés-jours de chauffage, gel après débourrement, fenêtres de fenaison.">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 <div class="bandeau">
@@ -17,7 +17,16 @@
                 <li><a href="index.html">Le lieu</a></li>
         <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
         <li><a href="marcher-libre.html">Marcher libre</a></li>
-        <li><a href="reseau.html">Le réseau</a></li>
+        <li>
+          <span class="menu-deroulant"><a href="reseau.html">Le réseau</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-res" aria-label="Ouvrir le menu du réseau">⌄</button></span>
+          <ul class="sous-menu" id="m-res" hidden>
+            <li><a href="reseau-carte.html">La cartographie des lieux</a></li>
+            <li><a href="reseau-fil.html">Le fil commun</a></li>
+            <li><a href="reseau-associations.html">Les associations d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="reseau.html">Vue d'ensemble</a></li>
+          </ul>
+        </li>
         <li>
           <span class="menu-deroulant"><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-tdb" aria-label="Ouvrir le menu des tableaux de bord">⌄</button></span>
           <ul class="sous-menu" id="m-tdb" hidden>
@@ -262,7 +271,7 @@
     </ul>
   </div>
 </footer>
-<script src="tdb.js?v=11"></script>
+<script src="tdb.js?v=12"></script>
 <script>
 function bloc(zone, titre, legende, serie, opts) {
   const d = document.createElement("div");
@@ -394,6 +403,6 @@ function jourDeLAnnee(doy) {
     " sur " + d.periode[0] + "-" + d.periode[1] + " · " + d.source + " · Licence Ouverte 2.0.";
 })();
 </script>
-<script src="site.js?v=11"></script>
+<script src="site.js?v=12"></script>
 </body>
 </html>

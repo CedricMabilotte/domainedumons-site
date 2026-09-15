@@ -326,3 +326,37 @@ h1 + .chapeau { margin-top: -.25rem; }
 .liste-lieux li { margin: 0; padding: .4rem 0; border-bottom: 1px solid var(--trait); }
 .liste-lieux .lieu-nom { font-weight: 600; }
 .liste-lieux .lieu-detail { color: var(--douce); font-size: .86rem; }
+
+/* ---------------------------------------------------------------- la carte */
+/* Leaflet sans tuiles : le fond de carte, c'est le papier de la page.
+   Les couleurs viennent des variables du site, pas des valeurs de Leaflet. */
+.carte-leaflet { margin: 1.2rem 0 .4rem; height: 560px; background: var(--surface);
+                 border: 1px solid var(--trait); }
+@media (max-width: 700px) { .carte-leaflet { height: 420px; } }
+@media (min-width: 860px) { .carte-leaflet { margin-left: -70px; margin-right: -70px; } }
+.leaflet-container { background: var(--surface); font-family: Georgia, serif; }
+.leaflet-container path.commune { stroke: var(--trait); stroke-width: 1; fill: var(--papier);
+                                  fill-opacity: 1; }
+.leaflet-container path.commune:hover { fill: var(--grille); }
+.leaflet-container path.limite { stroke: var(--douce); stroke-width: 1.4;
+                                 stroke-dasharray: 7 5; opacity: .75; }
+.leaflet-container path.ici { fill: var(--alerte); fill-opacity: 1; }
+.leaflet-container path.lieu { fill: var(--accent); fill-opacity: .8; stroke: var(--papier);
+                               cursor: pointer; transition: fill-opacity .15s; }
+.leaflet-container path.lieu:hover { fill: var(--alerte); fill-opacity: 1; }
+.leaflet-container path.lieu.actif { fill: var(--alerte); fill-opacity: 1; stroke: var(--encre); }
+.leaflet-container path.lieu.masque { fill-opacity: .1; stroke-opacity: .2; }
+.leaflet-tooltip { background: var(--papier); border: 1px solid var(--trait); color: var(--encre);
+                   font-family: Georgia, serif; font-size: .82rem; box-shadow: none;
+                   border-radius: 0; padding: 2px 6px; }
+.leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before, .leaflet-tooltip-right:before { border: none; }
+.leaflet-tooltip.bulle-commune { color: var(--douce); }
+.leaflet-tooltip.bulle-ici { font-weight: 600; border-color: var(--alerte); }
+.leaflet-control-zoom a { background: var(--papier); color: var(--encre);
+                          border-color: var(--trait); font-family: Georgia, serif; }
+.leaflet-control-zoom a:hover { background: var(--grille); }
+.leaflet-control-scale-line { background: transparent; border-color: var(--douce);
+                              color: var(--douce); font-family: Georgia, serif; }
+.liste-lieux .lecture { color: var(--douce); font-size: .88rem; font-style: italic; }
+details > summary { cursor: pointer; color: var(--accent); margin: .6rem 0; }
