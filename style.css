@@ -278,3 +278,20 @@ h1 + .chapeau { margin-top: -.25rem; }
   border: 1px solid var(--trait); border-radius: 2px;
 }
 .epoques button[aria-pressed="true"] { background: var(--encre); color: var(--papier); border-color: var(--encre); }
+
+/* --------------------------------------------------- le condensé de tête */
+.condense {
+  margin: 0 0 1.7rem; padding: .8rem .95rem;
+  background: var(--surface); box-shadow: inset 2px 0 0 var(--accent);
+}
+.condense ul { margin: 0; padding: 0; list-style: none; }
+.condense li {
+  margin: 0 0 .34rem; padding-left: .95rem; position: relative; line-height: 1.44;
+}
+.condense li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: .45rem; height: 1px; background: var(--douce);
+}
+.condense li:last-child { margin-bottom: 0; }
+.condense p { margin: 0; }
+@media (max-width: 34rem) { .condense { font-size: .96rem; padding: .7rem .8rem; } }

@@ -51,6 +51,16 @@ class Crayon:
             p += self.trait(x2, y2, x2 + math.cos(a) * 11, y2 + math.sin(a) * 11, passes=1)
         return p
 
+    def cercle(self, cx, cy, rx, ry=None, passes=2, n=34):
+        """Un ovale tracé à la main : jamais tout à fait fermé, jamais rond."""
+        ry = rx if ry is None else ry
+        pts = []
+        for i in range(n + 1):
+            a = 2 * math.pi * i / n + self._bruit(0.03)
+            pts.append((cx + math.cos(a) * rx * (1 + self._bruit(0.012)),
+                        cy + math.sin(a) * ry * (1 + self._bruit(0.012))))
+        return self.courbe(pts, passes=passes)
+
     def courbe(self, points, passes=2):
         """Une polyligne tremblée — pour un profil de terrain."""
         out = []

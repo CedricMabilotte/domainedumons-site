@@ -83,3 +83,56 @@ open("dessins/coupe.svg", "w", encoding="utf-8").write(coupe)
 open("dessins/filet.svg", "w", encoding="utf-8").write(filet)
 for f, s in (("montage", montage), ("coupe", coupe), ("filet", filet)):
     print(f"  {f}.svg : {len(s)} octets")
+
+# ------------------------------------------------- marcher libre : les cercles
+c3 = Crayon(graine=41, rugosite=1.15)
+r = []
+r += c3.cercle(320, 176, 300, 140)          # le dehors
+r += c3.cercle(300, 176, 196, 108)          # le collectif
+r += c3.cercle(232, 180, 92, 66)            # chacun
+cercles = f'''<svg viewBox="0 0 640 356" role="img" aria-labelledby="t-cer d-cer" class="croquis">
+  <title id="t-cer">Trois cercles emboîtés</title>
+  <desc id="d-cer">Un cercle intérieur pour ce qui reste à chacun, un cercle intermédiaire pour ce que le collectif met en commun, un cercle extérieur pour ce qui est ouvert au dehors. Les trois se contiennent sans se confondre.</desc>
+  {chemin(r, "trait-croquis")}
+  <g class="texte-croquis">
+    <text x="176" y="166" class="fort">chacun</text>
+    <text x="164" y="190">la chambre, le revenu,</text>
+    <text x="164" y="211">les liens, le silence</text>
+    <text x="392" y="132" class="fort">le collectif</text>
+    <text x="392" y="156">la terre, les outils, les décisions,</text>
+    <text x="392" y="177">le travail partagé, la table</text>
+    <text x="392" y="272" class="fort">le dehors</text>
+    <text x="392" y="296">l'accueil, les chantiers,</text>
+    <text x="392" y="317">ce qui est transmis</text>
+  </g>
+</svg>'''
+
+# --------------------------------------- marcher libre : la boucle de décision
+c4 = Crayon(graine=57, rugosite=1.3)
+b = []
+b += c4.cadre(20, 20, 176, 76)        # une proposition
+b += c4.cadre(432, 20, 188, 76)       # les objections
+b += c4.cadre(432, 210, 188, 76)      # on tranche
+b += c4.cadre(20, 210, 176, 76)       # on revoit à date
+b += c4.fleche(200, 58, 426, 58)
+b += c4.fleche(526, 100, 526, 206)
+b += c4.fleche(428, 248, 202, 248)
+b += c4.fleche(108, 206, 108, 102)
+boucle = f'''<svg viewBox="0 0 640 306" role="img" aria-labelledby="t-bou d-bou" class="croquis">
+  <title id="t-bou">La boucle d'une décision</title>
+  <desc id="d-bou">Une proposition est écrite, les objections sont recueillies et intégrées, la décision est tranchée puis consignée, et une date de réexamen est fixée dès le départ.</desc>
+  {chemin(b, "trait-croquis")}
+  <g class="texte-croquis">
+    <text x="38" y="50" class="fort">une proposition</text>
+    <text x="38" y="74">écrite, datée, signée</text>
+    <text x="450" y="50" class="fort">les objections</text>
+    <text x="450" y="74">recueillies, puis intégrées</text>
+    <text x="450" y="240" class="fort">on tranche</text>
+    <text x="450" y="264">et on consigne le motif</text>
+    <text x="38" y="240" class="fort">on revoit à date</text>
+    <text x="38" y="264">fixée dès le départ</text>
+  </g>
+</svg>'''
+open("dessins/cercles.svg", "w", encoding="utf-8").write(cercles)
+open("dessins/boucle.svg", "w", encoding="utf-8").write(boucle)
+print("dessins écrits :", ", ".join(sorted(os.listdir("dessins"))))
