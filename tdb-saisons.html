@@ -45,6 +45,7 @@
 <main class="tdb">
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>Chauffage, verger, fenaison</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
 <p>La page précédente décrit le climat. Celle-ci en tire trois décisions : combien de bois mettre sous abri, si un fruitier a ses chances ici, et combien de fois par été le foin peut sécher. Chacune est recalculée sur les mêmes 76 années.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement des séries</p></div></div>
 
@@ -141,6 +142,16 @@ function jourDeLAnnee(doy) {
     tuile("Gel en floraison", recent.part_gelee_en_floraison, "%", "des années 1996-2025, contre " + ancien.part_gelee_en_floraison + " % en 1961-1990",
           recent.part_gelee_en_floraison > ancien.part_gelee_en_floraison ? "alerte" : null) +
     tuile("Fenaison", nf(n.fenetres, 1), "fenêtres", "par été, de 3 jours secs ou plus");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>Chauffage&nbsp;: <strong>" + nf0(Math.abs(tr.dju.pente_par_decennie)) + " degrés-jours de moins par décennie</strong>, " +
+      nf(100 * (1 - tr.dju.y1 / tr.dju.y0), 0) + " % depuis les années 1950. Mais le stock se cale sur le mauvais hiver.</li>" +
+    "<li>Verger&nbsp;: la floraison avance de " + nf(Math.abs(tr.floraison.pente_par_decennie), 1) +
+      " jours par décennie, <strong>les gelées qui la suivent ne reculent pas</strong>.</li>" +
+    "<li>Gelée sur fleur ouverte&nbsp;: <strong>" + ancien.part_gelee_en_floraison + " % des années en 1961-1990, " +
+      recent.part_gelee_en_floraison + " % sur 1996-2025</strong> — net, pas encore démontré (p = " + nf(tr.gel_floraison.p, 3) + ").</li>" +
+    "<li>Fenaison&nbsp;: " + nf(n.fenetres, 1) + " fenêtres par été, <strong>sans tendance</strong>. Ce n'est pas là que le climat a changé.</li>" +
+    "</ul>";
 
   /* --- bois --- */
   const zb = document.getElementById("g-bois");

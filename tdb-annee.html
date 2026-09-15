@@ -49,6 +49,7 @@
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 
 <h1 id="titre-annee">L'année</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
 
 <p class="chapeau">Un cumul de pluie ne dit rien seul : il faut le rapporter à ce qu'une année reçoit d'habitude à la même date. Cette page compare l'année en cours, jour pour jour, aux 30 années de la normale 1991-2020, puis fait de même sur les 12 derniers mois glissants.</p>
 
@@ -139,6 +140,14 @@ function etatDe(pos) {
     tuile("Jours à 30 °C", nf0(a.chaud30), "jours", "depuis le 1ᵉʳ janvier") +
     tuile("Jours de gel", nf0(a.gel), "jours", "depuis le 1ᵉʳ janvier") +
     tuile("Somme de températures", nf0(a.sommeT), "°Cj", "base 0 depuis le 1ᵉʳ février");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>Arrêtée au " + dateLongue(d.arrete_au) + ", sur " + a.jours + " jours.</li>" +
+    "<li>Pluie <strong>" + nf0(a.pluie) + " mm</strong>" + (p.pluie ? " — " + p.pluie.position : "") + ".</li>" +
+    "<li>Température moyenne <strong>" + nf(a.tmoy) + " °C</strong>" + (p.tmoy ? " — " + p.tmoy.position : "") + ".</li>" +
+    "<li>Déficit d'été <strong>" + (a.deficit > 0 ? "+" : "") + nf0(a.deficit) + " mm</strong>" + (p.defic ? " — " + p.defic.position : "") + ".</li>" +
+    "<li><strong>" + nf0(a.chaud30) + " jours à 30 °C</strong> et " + nf0(a.gel) + " jours de gel depuis janvier.</li>" +
+    "</ul>";
 
   const ecart = (cle) => p[cle] ? (p[cle].ecart_mediane > 0 ? "+" : "") + nf(p[cle].ecart_mediane, 1) : "—";
   document.getElementById("lecture-ytd").innerHTML =

@@ -45,6 +45,7 @@
 <main class="tdb">
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>L'eau, depuis 1957</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
 <p>Le tableau de la semaine donne le débit de la Montane à l'instant où vous ouvrez la page. Celui-ci donne les soixante-dix étés précédents, et permet de répondre à la seule question qui compte pour s'installer&nbsp;: <strong>jusqu'où la rivière descend-elle, et combien de temps</strong>.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
 
@@ -120,6 +121,16 @@ function nomPropre(n) {
     tuile("Sous 20 l/s", cur.sous_seuil["20"].jours, "jours", cur.sous_seuil["20"].premier ? "depuis le " + JOUR(cur.sous_seuil["20"].premier) : "cette année") +
     tuile("Module", nf0(d.module_l_s), "l/s", "moyenne sur " + nf0(d.jours) + " jours") +
     (d.prelevements ? tuile("Prélevé sur la commune", nf0(d.prelevements.par_annee[d.prelevements.derniere_annee]), "m³", "en " + d.prelevements.derniere_annee + ", " + (d.prelevements.usages.join(", ").toLowerCase() || "—")) : "");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>Étiage " + an + "&nbsp;: <strong>" + rang + (rang === 1 ? "ᵉʳ" : "ᵉ") + " plus sévère sur " + total + " étés</strong>, " +
+      "plus bas débit " + nf(cur.min, 1) + " l/s, " + cur.sous_seuil["20"].jours + " jours sous 20 l/s.</li>" +
+    "<li>Le plus sévère de la série&nbsp;: <strong>" + pireAnnee + "</strong>" +
+      (A[pireAnnee] && A[pireAnnee].min === 0 ? ", où la rivière s'est arrêtée" : "") + ".</li>" +
+    "<li><strong>" + classement.slice(0, 10).filter((y) => +y >= 2000).length + " des dix plus bas</strong> depuis " + d.periode[0] + " sont postérieurs à 2000.</li>" +
+    (d.prelevements ? "<li>" + nf0(d.prelevements.par_annee[d.prelevements.derniere_annee]) + " m³ prélevés sur la commune en " +
+      d.prelevements.derniere_annee + ", <strong>en totalité pour l'eau potable</strong>.</li>" : "") +
+    "</ul>";
 
   /* --- étiages annuels --- */
   const zone = document.getElementById("g-etiage");

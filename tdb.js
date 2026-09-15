@@ -23,7 +23,12 @@ function extremes(vals) {
 
 /* Échelle « jolie » : bornes arrondies et pas régulier */
 function echelle(min, max, cible = 4) {
-  if (min === max) { min -= 1; max += 1; }
+  if (min === max) {
+    /* une série entièrement plate — souvent une pluie nulle — ne doit pas
+       inventer des valeurs négatives */
+    if (min === 0) { max = 1; }
+    else { const e = Math.abs(min) * 0.1 || 1; min -= e; max += e; }
+  }
   const brut = (max - min) / cible;
   const mag = Math.pow(10, Math.floor(Math.log10(brut)));
   const pas = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((p) => p >= brut) || 10 * mag;

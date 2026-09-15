@@ -45,6 +45,7 @@
 <main class="tdb">
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>Le terrain, le gel, l'eau</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
 <p>La page <a href="tdb-saisons.html#verger">chauffage, verger, fenaison</a> laisse une question ouverte&nbsp;: le modèle climatique voit une maille de neuf kilomètres, alors que le gel de printemps se joue sur cent mètres et trois mètres de dénivelé. Cette page-ci descend à cette échelle, avec le relevé laser de l'IGN — un point tous les cinquante centimètres, volé le 24 août 2022.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement du relief</p></div></div>
 
@@ -110,6 +111,16 @@ function legende(items) {
           p.classe_air_froid === 0 ? "le point n'est pas dans une poche" : "à vérifier au thermomètre",
           p.classe_air_froid === 0 ? "calme" : "vigilance") +
     (pp ? tuile("Poche la plus proche", nf0(pp.distance_m), "m", nf(pp.denivele_m, 1) + " m plus bas, au " + cardinal(pp.direction_deg), "vigilance") : "");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li><strong>Le bâti n'est pas dans une poche de gel</strong>&nbsp;: il est " + nf(p.tpi_400m, 1) +
+      " m au-dessus de la moyenne de son voisinage, et " + nf(f.part_plus_bas_que_le_point, 0) + " % du terrain alentour est plus bas.</li>" +
+    (pp ? "<li>La première accumulation marquée est à <strong>" + nf0(pp.distance_m) + " m, " + nf(pp.denivele_m, 1) +
+      " m plus bas, au " + cardinal(pp.direction_deg) + "</strong>. C'est là qu'il ne faut pas planter.</li>" : "") +
+    "<li>" + nf(f.part_air_froid_2 + f.part_air_froid_3, 1) + " % du terrain est en accumulation marquée ou forte&nbsp;; " +
+      nf(f.part_ligneux_3m, 0) + " % est boisé, et une lisière en travers de pente retient l'air froid.</li>" +
+    "<li>Depuis 1959, le parcellaire s'est simplifié et <strong>les lignes d'arbres qui bordaient les parcelles ont disparu</strong>.</li>" +
+    "</ul>";
 
   document.getElementById("c-froid").innerHTML =
     "<figure><img src='dessins/relief-airfroid.png' width='860' height='860' loading='lazy'" +

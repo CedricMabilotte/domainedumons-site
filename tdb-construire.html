@@ -45,6 +45,7 @@
 <main class="tdb">
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>Construire ici</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
 <p>Ce que les données publiques disent du terrain avant qu'on y pose quoi que ce soit&nbsp;: le règlement qui s'applique, ce que le sous-sol impose, ce que le sol contient, et ce qui se trouve autour. Rassemblé une fois, pour ne pas le redécouvrir au moment du devis.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Lecture</p><p class="valeur chargement">…</p><p class="detail">chargement de la fiche</p></div></div>
 
@@ -106,6 +107,19 @@
     tuile("Argiles", (r.argiles || {}).exposition || "—", "", "retrait-gonflement") +
     tuile("Séisme", (r.sismicite || "").split(" - ")[1] ? (r.sismicite || "").split(" - ")[1].toLowerCase() : r.sismicite, "", "zone " + (r.sismicite || "").split(" ")[0]) +
     tuile("Sondes géothermiques", g.sonde_200m === "vert" ? "possibles" : (g.sonde_200m || "—"), "", g.profondeur ? g.profondeur.toLowerCase() : "");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>" + (u.rnu ? "<strong>Commune au RNU</strong>&nbsp;: aucun plan local d'urbanisme, avis conforme du préfet pour toute construction."
+                    : "Un document d'urbanisme local s'applique.") + "</li>" +
+    "<li><strong>Radon en classe " + radon + "</strong> et argiles en " + ((r.argiles || {}).exposition || "—").toLowerCase() +
+      "&nbsp;: soubassement ventilé, dalle étanche, semelles profondes.</li>" +
+    (forages.length ? "<li>Les forages voisins descendent à <strong>" + forages.map((x) => nf0(x.profondeur_m)).join(" et ") +
+      " mètres</strong>. Sondes géothermiques verticales " + (g.sonde_200m === "vert" ? "possibles en télédéclaration" : "à vérifier") + ".</li>" : "") +
+    "<li>Sol à <strong>pH " + nf(s.ph_eau, 1) + "</strong> avec l'aluminium à " +
+      nf0(100 * s.aluminium_echangeable_cmol_kg / s.cec_cmol_kg) + " % du complexe, mesuré à " + nf(s.site_distance_km, 1) +
+      " km&nbsp;: <strong>faire une analyse de terre</strong> avant tout amendement.</li>" +
+    "<li>Classée <strong>" + z.frr + "</strong>&nbsp;: exonérations ouvertes pour une activité créée ici.</li>" +
+    "</ul>";
 
   /* --- règles --- */
   document.getElementById("regles").innerHTML =

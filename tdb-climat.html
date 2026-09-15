@@ -49,6 +49,7 @@
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 
 <h1>Le climat d'ici, 1950-2025</h1>
+<div class="condense" id="condense"><p class="chargement">…</p></div>
 
 <p>76 années de relevés quotidiens au point du lieu, résumées année par année. Chaque tendance est testée : quand l'intervalle de confiance contient zéro, nous écrivons qu'il n'y a <em>pas de tendance détectable</em>, et non que c'est stable.</p>
 
@@ -133,6 +134,16 @@ function phraseTendance(cle, t, unite) {
     tuile("Réchauffement", "+" + nf(tr.tmoy.pente_par_decennie, 2), "°C", 'par décennie · <span class="pastille alerte"></span>significatif', "alerte") +
     tuile("Jours de gel", nf0(n.gel), "par an", nf(tr.gel.pente_par_decennie, 1) + " par décennie") +
     tuile("Jours à 30 °C", nf(n.chaud), "par an", "+" + nf(tr.chaud.pente_par_decennie, 2) + " par décennie");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li><strong>+" + nf(tr.tmoy.pente_par_decennie, 2) + " °C par décennie</strong>, soit " +
+      nf(tr.tmoy.pente_par_decennie * 7.6, 1) + " °C sur la période.</li>" +
+    "<li>Jours de gel <strong>" + nf(tr.gel.pente_par_decennie, 1) + " par décennie</strong>, jours à 30 °C <strong>+" +
+      nf(tr.chaud.pente_par_decennie, 2) + "</strong>.</li>" +
+    "<li>Cumul de pluie&nbsp;: <strong>aucune tendance détectable</strong> — mais " +
+      nf(Math.abs(tr.jp.pente_par_decennie), 1) + " jours de pluie en moins par décennie.</li>" +
+    "<li>Déficit d'été <strong>+" + nf0(tr.defic.pente_par_decennie) + " mm par décennie</strong>.</li>" +
+    "</ul>";
 
   const zone = document.getElementById("graphiques");
   for (const s of SERIES) {
