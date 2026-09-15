@@ -196,34 +196,62 @@ l'historique complet a été reconstitué fichier par fichier et n'est pas rejou
 d'où sa publication ici.
 **Source** : Météo-France, [données SIM quotidiennes](https://www.data.gouv.fr/fr/datasets/donnees-changement-climatique-sim-quotidienne/), Licence Ouverte 2.0.
 
-## `zone-une-heure.json`, `reseau-lieux.json`, `associations.json` et `carte-zone.json`
-Les quatre fichiers de la page **Le réseau**, produits par `scripts/reseau.py` et
+## `zone-une-heure.json`, `reseau-lieux.json` et `carte-zone.json`
+Les fichiers de la **cartographie du réseau**, produits par `scripts/reseau.py` et
 `scripts/carte.py`. La « zone d'une heure » est approchée par un rayon de **45 km à vol
 d'oiseau** autour du lieu : sur ces routes de moyenne montagne, une heure porte plus loin vers
 Tulle que vers le plateau, et aucune approximation simple ne corrige cela.
 | Fichier | Contenu |
 |---|---|
-| `zone-une-heure.json` | Les 284 communes dont le chef-lieu est dans le rayon, avec code INSEE, nom, coordonnées et population ; total et population cumulée |
+| `zone-une-heure.json` | Les 284 communes dont le chef-lieu est dans le rayon, avec code INSEE, nom, coordonnées, population et distance ; total et population cumulée |
 | `reseau-lieux.json` | Les 191 lieux portés par des collectifs déjà référencés dans la zone : nom, commune, coordonnées, distance, catégories d'origine, carte source et date de la fiche |
-| `associations.json` | Comptage des associations actives de la zone : total, par commune, par thème, par décennie de création, et la liste des noms dont l'objet apparent dépasse le cercle des membres |
-| `carte-zone.json` | Paramètres de la projection équirectangulaire locale utilisée par `dessins/zone.svg`, pour replacer n'importe quel point sur la carte |
+| `zone-communes.geojson` | Les mêmes 284 contours communaux en GeoJSON, simplifiés par Douglas-Peucker à 0,0012° (≈ 95 m), coordonnées arrondies à la quatrième décimale. C'est le **fond de la carte Leaflet** : il est servi par le dépôt, il n'y a aucune tuile distante |
+| `carte-zone.json` | Paramètres de la projection équirectangulaire locale de `dessins/zone.svg`, la carte statique |
 **Les lieux** viennent de [Transiscope](https://transiscope.org/), qui agrège une vingtaine de
 cartes d'alternatives (Près de chez nous, Colibris, Alternatiba, réseau des ressourceries,
 Longue vie aux objets). **Aucune fiche n'a été vérifiée sur place** : certaines datent de 2017,
 un lieu peut avoir fermé, changé d'objet, ou ne plus vouloir y figurer. Les catégories affichées
 sont celles des cartes d'origine. Toute personne concernée peut demander correction ou retrait à
 contact@actitude.org ; le retrait est fait sans discussion.
-**Les associations** viennent de l'[annuaire public des entreprises et
-associations](https://recherche-entreprises.api.gouv.fr/), activité 94.99Z, établissements
-actifs. Le classement par thème repose sur les **mots du nom déposé** : c'est un repérage
-grossier, pas une qualification d'intérêt général — laquelle ne se décide ni sur un nom ni sur
-un code d'activité, mais sur les faits.
-**Ce qui est publié, et rien de plus** : le nom de l'association, sa commune et son année de
-création, tels qu'ils figurent déjà au Journal officiel. Aucune adresse, aucun nom de dirigeant,
-aucun recoupement entre sources.
-**Le fond de carte** est un fichier du dépôt : aucune tuile distante, aucun traceur.
-Contours communaux de [geo.api.gouv.fr](https://geo.api.gouv.fr/), simplifiés par
-Douglas-Peucker à 0,0045°.
+**Ces lieux n'ont pas été passés à la grille d'intérêt général** appliquée aux associations : la
+carte montre le milieu des collectifs, pas le noyau d'intérêt général.
+**La bibliothèque de carte** est [Leaflet 1.9.4](https://leafletjs.com/), sous licence
+BSD-2-Clause, déposée dans `vendor/`. Deux nettoyages avant dépôt : la référence à la sourcemap
+est retirée du JS, et les trois règles CSS qui appelaient `images/*.png` sont supprimées — aucune
+n'est utilisée, mais autant que le fichier ne les mentionne plus.
+Contours communaux : [geo.api.gouv.fr](https://geo.api.gouv.fr/) (Admin Express, IGN).
+
+## `associations.json`, `associations-douteuses.json` et `lecture-associations.json`
+Le **recensement associatif** de la zone, produit par `scripts/assos.py`.
+| Fichier | Contenu |
+|---|---|
+| `associations.json` | Décomptes sur toute la population active (par commune, par famille officielle, par décennie de création) et la liste des **989 associations retenues**, chacune avec les faits relevés et une demi-phrase disant ce qu'elle déclare faire |
+| `associations-douteuses.json` | Les **917 associations** dont la lecture de l'objet n'a pas suffi à trancher |
+| `lecture-associations.json` | Le **verdict de lecture des 3 303 objets du vivier**, un par un : `v` = retenu / douteux / hors, `f` = les faits, `n` = la lecture (portée par les retenues) |
+**La source est le Répertoire national des associations** (dump Waldec du 1ᵉʳ septembre 2026,
+ministère de l'Intérieur), et non l'annuaire des entreprises. C'est une correction de fond :
+l'annuaire des entreprises ne voit que les associations immatriculées à SIRENE — celles qui
+emploient, perçoivent des subventions publiques ou sont assujetties à la TVA, soit environ une
+sur quatre. Le total passe ainsi de **1 952 à 8 340**, soit une association pour 29 habitants.
+Le retex correspondant est `RX-04-source-hors-de-son-domaine`.
+Le script extrait les sept départements que la zone recoupe par requêtes de plage sur le zip
+distant — une quinzaine de mégaoctets au lieu de quatre cents —, retient les associations dont
+l'adresse déclarée est dans une commune de la zone et dont la position est « active », et joint
+la **nomenclature officielle d'objet social** de la DILA (297 codes, 29 familles).
+**Le tri n'est pas automatique.** Chaque objet déclaré du vivier a été lu et classé à la main
+contre `scripts/GRILLE-ASSOCIATIONS.md`, écrite avant la lecture et non ajustée après. Un
+mot-clé ne qualifie pas un intérêt général — c'est précisément l'erreur que cette version
+corrige.
+**Limites.** La grille lit une déclaration, pas une pratique : une association peut déclarer un
+objet généreux et ne plus rien faire depuis quinze ans. Et « active » veut seulement dire
+*qui n'a pas déclaré sa dissolution* : le total est un majorant. Aucune n'a été vérifiée sur
+place, et ce tri n'est pas une qualification juridique d'intérêt général.
+**Ce qui est publié, et rien de plus** : nom, numéro RNA, commune, année de création, famille
+déclarée — tous publiés au Journal officiel des associations. Aucune adresse, aucun dirigeant,
+aucun contact, aucun recoupement entre sources.
+**Sources** : [RNA](https://www.data.gouv.fr/datasets/repertoire-national-des-associations)
+(ministère de l'Intérieur) et [nomenclature JOAFE](https://journal-officiel-datadila.opendatasoft.com/)
+(DILA), toutes deux sous Licence Ouverte.
 
 ## `registre-interet-general.json`
 
