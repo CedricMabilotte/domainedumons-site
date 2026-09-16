@@ -1,0 +1,86 @@
+{
+  "nom": "reseau-lieux",
+  "titre": "Lieux portés par des collectifs, à 45 km de Vitrac-sur-Montane",
+  "explication": "La fiche de la carte, au format du plugin carto-territoire. Elle décrit entièrement la carte : ce qui la nourrit, comment elle est rendue, et ce qu'elle ne montre pas. Elle suffit à la régénérer.",
+  "date_carte": "2026-09-16",
+  "date_donnees": "2026-09-15",
+  "maillage": "communes, code officiel géographique 2026",
+  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Les associations d'intérêt général, qui relèvent d'une autre page et d'une autre grille. Les contours communaux sont généralisés à environ 130 m entre sommets : ils sont indicatifs au-delà du zoom 10, ce pourquoi le zoom est borné à 12.",
+  "licence": "Licence Ouverte 2.0 pour les contours et la zone ; ODbL pour les lieux, repris de Transiscope. Les deux jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
+  "sources": [
+    {
+      "quoi": "contours et population des communes",
+      "ou": "https://geo.api.gouv.fr — IGN Admin Express",
+      "licence": "Licence Ouverte 2.0",
+      "extrait_le": "2026-09-15",
+      "regenerer": "python3 scripts/reseau.py"
+    },
+    {
+      "quoi": "lieux portés par des collectifs",
+      "ou": "https://transiscope.org/",
+      "licence": "ODbL",
+      "extrait_le": "2026-09-15",
+      "regenerer": "python3 scripts/reseau.py"
+    }
+  ],
+  "rendu": {
+    "mode": "local",
+    "molette": "cooperative",
+    "hote": "github-pages",
+    "biblio": "Leaflet 1.9.4 (BSD-2-Clause), copie locale dans vendor/",
+    "zoom": [
+      8,
+      12
+    ],
+    "note_hote": "Sonde du 16/09/2026 : GitHub Pages annonce Accept-Ranges mais renvoie un total incohérent selon la compression (147625 sans, 43253 avec). Le mode pmtiles y est donc inutilisable."
+  },
+  "zone": {
+    "type": "rayon",
+    "centre": [
+      45.35137,
+      1.93221
+    ],
+    "rayon_km": 45,
+    "communes": 284,
+    "population": 238575,
+    "projection": "webmercator",
+    "note_projection": "Web Mercator est conforme, donc non équivalent. Aucune surface n'est comparée sur cette carte, donc c'est sans conséquence ici. Une choroplèthe exigerait Lambert-93.",
+    "avertissement": "Rayon à vol d'oiseau, pas temps de trajet."
+  },
+  "couches": [
+    {
+      "id": "communes",
+      "fichier": "data/zone-communes.geojson",
+      "role": "maille",
+      "source": "IGN Admin Express",
+      "licence": "Licence Ouverte 2.0"
+    },
+    {
+      "id": "lieux",
+      "fichier": "data/reseau-lieux.json",
+      "role": "points",
+      "source": "Transiscope",
+      "licence": "ODbL",
+      "entites": 191
+    }
+  ],
+  "thematique": {
+    "type": "aucune",
+    "note": "Aucune variable n'est représentée : ce sont des lieux sur un fond. Pas de discrétisation, pas de palette, donc aucun des pièges de la choroplèthe."
+  },
+  "acces": {
+    "liste_html": true,
+    "tableau_equivalent": true,
+    "ecrit_au_build": true,
+    "lien_evitement": true,
+    "export": [
+      "json",
+      "geojson"
+    ],
+    "note": "Le tableau est écrit dans la page au moment de la publication et se filtre avec la carte. Sans JavaScript, la liste reste entière."
+  },
+  "souverainete": {
+    "requetes_sortantes": "aucune",
+    "verifie_le": "2026-09-16"
+  }
+}

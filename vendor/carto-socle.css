@@ -1,0 +1,117 @@
+/* carto-territoire — socle de styles.
+   Les couleurs sont des variables : le site hôte les redéfinit, le socle ne
+   les impose pas. Les dimensions sont en rem, jamais en px, pour que le zoom
+   navigateur à 200 % et 400 % ne casse rien. */
+
+.carto {
+  --carto-encre: #1f1d1a;
+  --carto-douce: #6b665e;
+  --carto-trait: #cfc9bf;
+  --carto-fond: #f4f2ee;
+  --carto-accent: #b4451f;
+  --carto-maille: #bdb6aa;
+}
+
+/* Hauteur bornée, jamais 100vh : au zoom à 400 %, il ne resterait rien
+   d'autre à l'écran. */
+.carto-zone {
+  height: clamp(300px, 60vh, 620px);
+  background: var(--carto-fond);
+  border: 1px solid var(--carto-trait);
+  position: relative;
+}
+.carto-zone:focus-visible {
+  outline: 3px solid var(--carto-accent);
+  outline-offset: 2px;
+}
+
+/* Le fond de carte recule, le contraste est dépensé sur la donnée. */
+.carto-maille { stroke: var(--carto-maille); fill: #fbfaf8; }
+.carto-point {
+  stroke: #ffffff;
+  fill: var(--carto-accent);
+  cursor: pointer;
+}
+.carto-point:focus-visible {
+  outline: 3px solid var(--carto-encre);
+  outline-offset: 2px;
+}
+.carto-point.en-avant, .leaflet-interactive.en-avant {
+  stroke: var(--carto-encre);
+  stroke-width: 3;
+}
+
+/* Le voile de la molette coopérative. */
+.carto-voile {
+  position: absolute; inset: 0; z-index: 800;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(31, 29, 26, .55);
+  color: #fff; font-size: 1.05rem; text-align: center; padding: 1rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity .18s;
+}
+.carto-voile.visible { opacity: 1; }
+
+/* Infobulles : lisibles sur n'importe quel fond, donc opaques et cernées. */
+.carto-bulle, .leaflet-tooltip {
+  background: #fff; color: var(--carto-encre);
+  border: 1px solid var(--carto-trait); border-radius: 0;
+  box-shadow: none; font-size: .9rem; padding: .2rem .45rem;
+}
+
+/* Cibles tactiles : le plancher réglementaire est 24 px, l'usage demande 44.
+   On élargit la zone sensible sans grossir le point. */
+@media (pointer: coarse) {
+  .carto-point { stroke-width: 14; stroke-opacity: .001; }
+}
+
+/* Légende : dans le flux sous la carte par défaut, jamais posée dessus quand
+   l'écran est étroit. */
+.carto-legende { margin: .6rem 0 0; font-size: .9rem; }
+.carto-legende ul { list-style: none; padding: 0; margin: .3rem 0 0;
+                    display: flex; flex-wrap: wrap; gap: .3rem .9rem; }
+.carto-legende li { display: flex; align-items: center; gap: .4rem; }
+.carto-pastille { width: 1rem; height: 1rem; border: 1px solid var(--carto-trait);
+                  flex: 0 0 auto; }
+/* Sans donnée : hors palette, hachuré, jamais confondu avec un zéro. */
+.carto-pastille.sans-donnee {
+  background: repeating-linear-gradient(45deg, #e8e6e1 0 3px, #fff 3px 6px);
+}
+
+.carto-meta { font-size: .85rem; color: var(--carto-douce); margin-top: .6rem; }
+.carto-meta dt { font-weight: 600; display: inline; }
+.carto-meta dd { display: inline; margin: 0 .8rem 0 .2rem; }
+
+/* Le lien d'évitement : invisible jusqu'à ce qu'on l'atteigne au clavier. */
+.carto-evitement {
+  position: absolute; left: -9999px;
+  background: var(--carto-encre); color: #fff; padding: .5rem .8rem; z-index: 900;
+}
+.carto-evitement:focus { left: .5rem; top: .5rem; position: absolute; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Le tableau équivalent n'est pas un repli : c'est la source de vérité. */
+.carto-liste { margin-top: 1rem; }
+.carto-liste table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+.carto-liste th, .carto-liste td {
+  text-align: left; padding: .35rem .5rem;
+  border-bottom: 1px solid var(--carto-trait);
+}
+.carto-liste tr.en-avant { background: var(--carto-fond); }
+.carto-liste tr { cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carto-voile { transition: none; }
+  .leaflet-pane, .leaflet-marker-icon, .leaflet-tile-container {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 40rem) {
+  .carto-zone { height: clamp(260px, 52vh, 420px); }
+  .carto-legende ul { flex-direction: column; gap: .25rem; }
+}

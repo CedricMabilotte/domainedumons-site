@@ -6,7 +6,8 @@
 <title>La cartographie des lieux — Domaine du Mons</title>
 <meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="style.css?v=13">
+<link rel="stylesheet" href="vendor/carto-socle.css?v=14">
+<link rel="stylesheet" href="style.css?v=14">
 </head>
 <body>
 <div class="bandeau">
@@ -56,41 +57,260 @@
 <main>
 <p class="retour"><a href="reseau.html">← Le réseau</a></p>
 <h1>La cartographie des lieux</h1>
-<div class="condense" id="condense"><p class="chargement">…</p></div>
-
-<p>Les communes dont le centre est à moins de 45&nbsp;km d'ici, ce qui correspond à peu près à une heure de route sur ces routes-là. Chaque point est un lieu porté par un collectif, déjà référencé sur un annuaire public. <strong>Cliquez sur un point</strong> pour lire sa fiche&nbsp;; la molette ne zoome qu'après un clic sur la carte, pour ne pas bloquer le défilement de la page.</p>
-
+<div class="condense"><ul>
+<li><strong>191 lieux</strong> portés par des collectifs sont déjà référencés dans l'heure, sur 96 communes.</li>
+<li>Le plus proche est à 4,4 km, le plus lointain à 44,9 km.</li>
+<li>La zone couvre 284 communes et 238 575 habitants, à 45 km à la ronde.</li>
+<li><strong>Aucune fiche n'a été vérifiée sur place</strong> — la nôtre non plus, et elle date de 2019.</li>
+</ul></div>
+<p>Les communes dont le centre est à moins de 45&nbsp;km d'ici, ce qui correspond à peu près à une heure de route sur ces routes-là. Chaque point est un lieu porté par un collectif, déjà référencé sur un annuaire public.</p>
+<p><a href="#annuaire" class="carto-evitement">Passer la carte, aller à la liste des lieux</a></p>
+<h2 id="carte-titre">La carte</h2>
+<p id="carte-desc">191 points sur 96 communes de Corrèze et des départements voisins. La molette fait défiler la page&nbsp;; <kbd>Ctrl</kbd> + molette zoome, ou deux doigts sur écran tactile. Échap rend la main. <strong>La même information figure dans le tableau sous la carte</strong>, qui se filtre en même temps qu'elle.</p>
 <div class="filtres" id="filtres"></div>
-<div class="carte-leaflet" id="carte"><p class="chargement">Chargement de la carte…</p></div>
-<p class="legende-carte">Contours communaux&nbsp;: Admin Express (IGN), via geo.api.gouv.fr. <strong>Aucune tuile distante</strong>&nbsp;: le fond est un fichier du dépôt, et la bibliothèque de carte en est une copie locale. Ouvrir cette page n'envoie rien à personne.</p>
-<div id="fiche"></div>
-
-<h2 id="l-annuaire">L'annuaire</h2>
-<p id="intro-annuaire"><span class="chargement">Chargement…</span></p>
-
-<div class="note">
-  <span class="etiquette">Ce que vaut cette liste, et ce qu'elle ne vaut pas</span>
-  <p>Elle est reprise telle quelle d'un agrégateur de cartes d'alternatives. <strong>Aucune fiche n'a été vérifiée sur place</strong>, certaines datent de plusieurs années, et un lieu peut avoir fermé, changé d'objet ou ne plus vouloir y figurer.</p>
-  <p>Notre propre fiche en est l'exemple&nbsp;: elle date du 3 janvier 2019 et décrit encore le lieu comme un élevage en vente directe. Nous la corrigeons — et c'est exactement ce que nous proposons à chacun de faire pour la sienne.</p>
-  <p>Cette carte montre <strong>le milieu des collectifs</strong>, pas le noyau d'intérêt général. Les lieux n'ont pas été passés à la grille appliquée aux associations&nbsp;: ce sont deux usages différents, et cette page ne fait que le premier.</p>
-  <p><strong>Droit de réponse.</strong> Toute personne concernée par une fiche peut demander sa correction ou son retrait à <a href="mailto:contact@actitude.org">contact@actitude.org</a>. Le retrait est fait sans discussion et sans délai&nbsp;; la correction est datée dans le journal des versions, en bas de page.</p>
+<div class="carto">
+<div class="carto-zone" id="carte"><p class="chargement">La carte se charge. Le tableau ci-dessous donne la même information.</p></div>
 </div>
-
-<div class="liste-lieux" id="liste"><p class="chargement">Chargement…</p></div>
-
+<dl class="carto-meta">
+<dt>Contours</dt><dd>Admin Express (IGN), via geo.api.gouv.fr — Licence Ouverte 2.0</dd>
+<dt>Lieux</dt><dd>Transiscope, agrégation d'une vingtaine de cartes — ODbL</dd>
+<dt>Données arrêtées au</dt><dd>15 septembre 2026</dd>
+<dt>Carte produite le</dt><dd>16/09/2026</dd>
+<dt>Maillage</dt><dd>communes, code officiel géographique 2026</dd>
+<dt>Projection</dt><dd>Web Mercator (EPSG:3857) — aucune surface n'est comparée ici</dd>
+<dt>Non représenté</dt><dd>les lieux sans coordonnées publiées ; les fiches non vérifiées sur place, soit la totalité ; les contours sont généralisés à environ 130 m, donc indicatifs au-delà du zoom 10</dd>
+<dt>Requêtes sortantes</dt><dd>aucune — bibliothèque et contours servis par ce dépôt</dd>
+</dl>
+<div id="fiche"></div>
+<h2 id="annuaire">L'annuaire</h2>
+<div class="note">
+<span class="etiquette">Ce que vaut cette liste, et ce qu'elle ne vaut pas</span>
+<p>Elle est reprise telle quelle d'un agrégateur de cartes d'alternatives. <strong>Aucune fiche n'a été vérifiée sur place</strong>, certaines datent de plusieurs années, et un lieu peut avoir fermé, changé d'objet ou ne plus vouloir y figurer.</p>
+<p>Notre propre fiche en est l'exemple&nbsp;: elle date du 3 janvier 2019 et décrit encore le lieu comme un élevage en vente directe. Nous la corrigeons — et c'est exactement ce que nous proposons à chacun de faire pour la sienne.</p>
+<p>Cette carte montre <strong>le milieu des collectifs</strong>, pas le noyau d'intérêt général. Les lieux n'ont pas été passés à la grille appliquée aux associations&nbsp;: ce sont deux usages différents, et cette page ne fait que le premier.</p>
+<p><strong>Droit de réponse.</strong> Toute personne concernée par une fiche peut demander sa correction ou son retrait à <a href="mailto:contact@actitude.org">contact@actitude.org</a>. Le retrait est fait sans discussion et sans délai&nbsp;; la correction est datée dans le journal des versions, en bas de page.</p>
+</div>
+<p id="intro-annuaire">191 lieux, du plus proche au plus éloigné. Cliquer une ligne la montre sur la carte.</p>
+<div class="carto-liste" id="liste-bloc">
+<table id="liste">
+<caption class="sr-only">Lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane</caption>
+<thead><tr><th scope="col">Lieu</th><th scope="col">Commune</th><th scope="col">Distance</th><th scope="col">Familles</th><th scope="col">Fiche mise à jour</th></tr></thead><tbody>
+<tr tabindex="0" data-i="0" data-nom="Domaine du Mons" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.35137" data-lon="1.93221"><td>Domaine du Mons</td><td>Vitrac-sur-montane</td><td>0,0 km, sur place</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2019-01-03</td></tr>
+<tr tabindex="0" data-i="1" data-nom="Les Seigles du Massif Central" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.33932" data-lon="1.87828"><td>Les Seigles du Massif Central</td><td>Correze</td><td>4,4 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="2" data-nom="Les vergers de la Guillaumie" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.37691" data-lon="2.00701"><td>Les vergers de la Guillaumie</td><td>Rosiers-d&#x27;Égletons</td><td>6,5 km, au nord-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2021-09-17</td></tr>
+<tr tabindex="0" data-i="3" data-nom="Le Verger de la Guillaumie" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.42657" data-lon="1.98117"><td>Le Verger de la Guillaumie</td><td>Saint yrieix le dejelat</td><td>9,2 km, au nord-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="4" data-nom="COMITE D&#x27;AMIS EMMAÜS EGLETONS" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.39536" data-lon="2.03690"><td>COMITE D&#x27;AMIS EMMAÜS EGLETONS</td><td>Rosiers-d&#x27;Égletons</td><td>9,5 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="5" data-nom="EMMAÜS EGLETONS" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.39680" data-lon="2.03582"><td>EMMAÜS EGLETONS</td><td>Rosiers-d&#x27;Égletons</td><td>9,6 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="6" data-nom="Le Jardin Partagé du MLAP" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.40237" data-lon="2.03238"><td>Le Jardin Partagé du MLAP</td><td>Rosiers-d&#x27;Égletons</td><td>9,7 km, au nord-est</td><td>Terre et alimentation, Lien social et culture</td><td>2018-03-22</td></tr>
+<tr tabindex="0" data-i="7" data-nom="Le Jardin du Centaure" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.43615" data-lon="1.95997"><td>Le Jardin du Centaure</td><td>Saint-Yrieix-le-Déjalat</td><td>9,7 km, au nord</td><td>Terre et alimentation, Lien social et culture</td><td>2022-08-17</td></tr>
+<tr tabindex="0" data-i="8" data-nom="Antan Voulu" data-fam="Lien social et culture" data-lat="45.29316" data-lon="2.03688"><td>Antan Voulu</td><td>Chabanier</td><td>10,5 km, au sud-est</td><td>Lien social et culture</td><td>2020-02-26</td></tr>
+<tr tabindex="0" data-i="9" data-nom="COMITE D&#x27;AMIS EMMAUS EGLETONS" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.39655" data-lon="2.05093"><td>COMITE D&#x27;AMIS EMMAUS EGLETONS</td><td>Égletons</td><td>10,6 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="10" data-nom="Panier Paysan de Haute Corrèze" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.40670" data-lon="2.04536"><td>Panier Paysan de Haute Corrèze</td><td>Égletons</td><td>10,8 km, au nord-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2018-03-22</td></tr>
+<tr tabindex="0" data-i="11" data-nom="Le Café des Artistes" data-fam="Lien social et culture" data-lat="45.40783" data-lon="2.04500"><td>Le Café des Artistes</td><td>Égletons</td><td>10,8 km, au nord-est</td><td>Lien social et culture</td><td>2018-03-22</td></tr>
+<tr tabindex="0" data-i="12" data-nom="A la Boutique du Coin Epicerie bio" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.40670" data-lon="2.04536"><td>A la Boutique du Coin Epicerie bio</td><td>Égletons</td><td>10,8 km, au nord-est</td><td>Terre et alimentation, Lien social et culture</td><td>2018-03-22</td></tr>
+<tr tabindex="0" data-i="13" data-nom="Extension de l’activité de la scierie Farges Bois" data-fam="Terre et alimentation|Économie sociale" data-lat="45.39606" data-lon="2.06248"><td>Extension de l’activité de la scierie Farges Bois</td><td>Égletons</td><td>11,3 km, au nord-est</td><td>Terre et alimentation, Économie sociale</td><td>2026-02-20</td></tr>
+<tr tabindex="0" data-i="14" data-nom="La Goutte d&#x27;Eau qui..." data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.29305" data-lon="1.80085"><td>La Goutte d&#x27;Eau qui...</td><td>Gimel les cascades</td><td>12,1 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="15" data-nom="FRCIVAM Limousin" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.32367" data-lon="1.77230"><td>FRCIVAM Limousin</td><td>Naves</td><td>12,8 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="16" data-nom="La ferme du Mouton Chapeauté" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.25763" data-lon="2.02786"><td>La ferme du Mouton Chapeauté</td><td>Marcillac-la-croisille</td><td>12,9 km, au sud-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="17" data-nom="EURL Récoltes locales" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.31289" data-lon="1.76609"><td>EURL Récoltes locales</td><td>Naves</td><td>13,6 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="18" data-nom="Récoltes locales" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.34034" data-lon="1.74777"><td>Récoltes locales</td><td>Naves</td><td>14,4 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="19" data-nom="Adrien selle récoltant sève de bouleau" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.32953" data-lon="2.11498"><td>Adrien selle récoltant sève de bouleau</td><td>Saint hilaire foissac</td><td>14,5 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="20" data-nom="A Tout Venant Ressourceries / Ressourcerie Du Carnyx" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.34203" data-lon="1.74674"><td>A Tout Venant Ressourceries / Ressourcerie Du Carnyx</td><td>Naves</td><td>14,5 km, à l&#x27;ouest</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="21" data-nom="La Ressourcerie Du Carnyx - A Tout Venant" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.34153" data-lon="1.74661"><td>La Ressourcerie Du Carnyx - A Tout Venant</td><td>Naves</td><td>14,5 km, à l&#x27;ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="22" data-nom="En choeur au coeur de soi" data-fam="Lien social et culture" data-lat="45.35079" data-lon="2.12330"><td>En choeur au coeur de soi</td><td>Saint-Hilaire-Foissac</td><td>15,0 km, à l&#x27;est</td><td>Lien social et culture</td><td>2019-01-03</td></tr>
+<tr tabindex="0" data-i="23" data-nom="La Ferme du Goutillou" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.35117" data-lon="2.12347"><td>La Ferme du Goutillou</td><td>Saint hilaire foissac</td><td>15,0 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="24" data-nom="EARL La Grange des Délices" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.41827" data-lon="1.76562"><td>EARL La Grange des Délices</td><td>Chamboulive</td><td>15,0 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="25" data-nom="Repair Café Tulle del&#x27;Atelier Lowtech" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.27111" data-lon="1.77576"><td>Repair Café Tulle del&#x27;Atelier Lowtech</td><td>Tulle</td><td>15,1 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="26" data-nom="Moment d&#x27;Enfance" data-fam="Lien social et culture" data-lat="45.26969" data-lon="1.77519"><td>Moment d&#x27;Enfance</td><td>Tulle</td><td>15,3 km, au sud-ouest</td><td>Lien social et culture</td><td>2018-06-13</td></tr>
+<tr tabindex="0" data-i="27" data-nom="RESF Corrèze" data-fam="Solidarité et droits" data-lat="45.26989" data-lon="1.77157"><td>RESF Corrèze</td><td>Tulle</td><td>15,5 km, au sud-ouest</td><td>Solidarité et droits</td><td>2026-07-04</td></tr>
+<tr tabindex="0" data-i="28" data-nom="SECOURS CATHOLIQUE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.26808" data-lon="1.77257"><td>SECOURS CATHOLIQUE</td><td>Tulle</td><td>15,5 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="29" data-nom="Chantepages" data-fam="Lien social et culture" data-lat="45.26936" data-lon="1.76951"><td>Chantepages</td><td>Tulle</td><td>15,6 km, au sud-ouest</td><td>Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="30" data-nom="Droguerie Neige" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.26736" data-lon="1.77222"><td>Droguerie Neige</td><td>Tulle</td><td>15,6 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2018-04-15</td></tr>
+<tr tabindex="0" data-i="31" data-nom="Librairie Chantepages" data-fam="Lien social et culture" data-lat="45.26938" data-lon="1.76948"><td>Librairie Chantepages</td><td>Tulle</td><td>15,6 km, au sud-ouest</td><td>Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="32" data-nom="Frédéric Aussourd" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.25687" data-lon="2.08143"><td>Frédéric Aussourd</td><td>Saint merd de lapleau</td><td>15,7 km, au sud-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="33" data-nom="La Réserve du Bio" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.26608" data-lon="1.77026"><td>La Réserve du Bio</td><td>Tulle</td><td>15,8 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2018-07-08</td></tr>
+<tr tabindex="0" data-i="34" data-nom="EUX C’EST NOUS (Réseau Corrézien d’aide aux migrants et aux accueillants)" data-fam="Solidarité et droits" data-lat="45.26501" data-lon="1.77205"><td>EUX C’EST NOUS (Réseau Corrézien d’aide aux migrants et aux accueillants)</td><td>Tulle</td><td>15,8 km, au sud-ouest</td><td>Solidarité et droits</td><td>2026-07-04</td></tr>
+<tr tabindex="0" data-i="35" data-nom="A bicyclette !" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.26601" data-lon="1.76954"><td>A bicyclette !</td><td>Tulle</td><td>15,9 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2019-05-30</td></tr>
+<tr tabindex="0" data-i="36" data-nom="Les Cahiers de Constance" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.26193" data-lon="1.76072"><td>Les Cahiers de Constance</td><td>Tulle</td><td>16,7 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="37" data-nom="A BICYCLETTE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.26142" data-lon="1.75988"><td>A BICYCLETTE</td><td>Tulle</td><td>16,8 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="38" data-nom="Unité Locale-Maison De Tulle Vestiboutique - Croix Rouge" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.26047" data-lon="1.75684"><td>Unité Locale-Maison De Tulle Vestiboutique - Croix Rouge</td><td>Tulle</td><td>17,0 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="39" data-nom="Secours Populaire Français ANTENNE DE TULLE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.25667" data-lon="1.75864"><td>Secours Populaire Français ANTENNE DE TULLE</td><td>Tulle</td><td>17,2 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="40" data-nom="Jardin d&#x27;Eden" data-fam="Lien social et culture|Solidarité et droits" data-lat="45.19468" data-lon="1.94759"><td>Jardin d&#x27;Eden</td><td>Champagnac-la-Prune</td><td>17,5 km, au sud</td><td>Lien social et culture, Solidarité et droits</td><td>2018-12-04</td></tr>
+<tr tabindex="0" data-i="41" data-nom="Le Rucher de Montusclat" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.44438" data-lon="2.11735"><td>Le Rucher de Montusclat</td><td>Darnetz</td><td>17,8 km, au nord-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="42" data-nom="Les Horts Grands" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.30913" data-lon="2.15469"><td>Les Horts Grands</td><td>Laborie</td><td>18,0 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2019-04-12</td></tr>
+<tr tabindex="0" data-i="43" data-nom="Eco-Lieu Sainte Marie Les Fleurs de Vie" data-fam="Habiter ensemble" data-lat="45.25337" data-lon="1.74580"><td>Eco-Lieu Sainte Marie Les Fleurs de Vie</td><td>Tulle</td><td>18,2 km, au sud-ouest</td><td>Habiter ensemble</td><td>2024-12-27</td></tr>
+<tr tabindex="0" data-i="44" data-nom="Les Vergers de Veix" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.50956" data-lon="1.83657"><td>Les Vergers de Veix</td><td>Veix</td><td>19,1 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="45" data-nom="Ecole Natur&#x27;ailes" data-fam="Lien social et culture|Solidarité et droits" data-lat="45.47172" data-lon="2.14134"><td>Ecole Natur&#x27;ailes</td><td>Maussac</td><td>21,1 km, au nord-est</td><td>Lien social et culture, Solidarité et droits</td><td>2019-07-31</td></tr>
+<tr tabindex="0" data-i="46" data-nom="Les Hortsgrand" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.32032" data-lon="2.19895"><td>Les Hortsgrand</td><td>Lapleau</td><td>21,2 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="47" data-nom="Le Rucher Sauvage" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.53979" data-lon="1.85729"><td>Le Rucher Sauvage</td><td>Lestards</td><td>21,7 km, au nord</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="48" data-nom="Collectif Oxygène" data-fam="Terre et alimentation|Lien social et culture|Solidarité et droits" data-lat="45.30628" data-lon="1.65383"><td>Collectif Oxygène</td><td>Saint-Clément</td><td>22,3 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Solidarité et droits</td><td>2025-09-22</td></tr>
+<tr tabindex="0" data-i="49" data-nom="La Sole à Mie" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.47427" data-lon="2.16034"><td>La Sole à Mie</td><td>Combressol</td><td>22,5 km, au nord-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2018-03-22</td></tr>
+<tr tabindex="0" data-i="50" data-nom="Village Tadaïma" data-fam="Habiter ensemble" data-lat="45.15541" data-lon="1.84081"><td>Village Tadaïma</td><td>Albussac</td><td>22,9 km, au sud</td><td>Habiter ensemble</td><td>2025-01-20</td></tr>
+<tr tabindex="0" data-i="51" data-nom="Nicolas Soubrane" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.29483" data-lon="2.22814"><td>Nicolas Soubrane</td><td>Latronche</td><td>24,0 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="52" data-nom="La maison sur la place La maison sur la place" data-fam="Lien social et culture" data-lat="45.52646" data-lon="2.11741"><td>La maison sur la place La maison sur la place</td><td>19250 Ambrugeat</td><td>24,3 km, au nord-est</td><td>Lien social et culture</td><td>2025-05-30</td></tr>
+<tr tabindex="0" data-i="53" data-nom="La source" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.26413" data-lon="1.63945"><td>La source</td><td>Saint-Germain-les-Vergnes</td><td>24,8 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2018-05-31</td></tr>
+<tr tabindex="0" data-i="54" data-nom="Le Battement d&#x27;Ailes" data-fam="Habiter ensemble" data-lat="45.22337" data-lon="1.67228"><td>Le Battement d&#x27;Ailes</td><td>Cornil</td><td>24,8 km, au sud-ouest</td><td>Habiter ensemble</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="55" data-nom="Hêtre sous le Charme" data-fam="Habiter ensemble" data-lat="45.12025" data-lon="1.97267"><td>Hêtre sous le Charme</td><td>Saint-Martial-Entraygues</td><td>25,9 km, au sud</td><td>Habiter ensemble</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="56" data-nom="PêlMêl" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.53630" data-lon="2.14662"><td>PêlMêl</td><td>Meymac</td><td>26,5 km, au nord-est</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="57" data-nom="La Bruyère Limousine" data-fam="Terre et alimentation|Réparer, réemployer|Économie sociale" data-lat="45.53572" data-lon="2.14761"><td>La Bruyère Limousine</td><td>Meymac</td><td>26,5 km, au nord-est</td><td>Terre et alimentation, Réparer, réemployer, Économie sociale</td><td>2021-05-03</td></tr>
+<tr tabindex="0" data-i="58" data-nom="Eco-Triouzoune" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.53668" data-lon="2.14649"><td>Eco-Triouzoune</td><td>Meymac</td><td>26,5 km, au nord-est</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="59" data-nom="Eco-Triouzoune" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.53581" data-lon="2.14704"><td>Eco-Triouzoune</td><td>Meymac</td><td>26,5 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="60" data-nom="ECO-Trouzoune Neuvic" data-fam="Terre et alimentation|Réparer, réemployer|Économie sociale" data-lat="45.38088" data-lon="2.27165"><td>ECO-Trouzoune Neuvic</td><td>Neuvic</td><td>26,7 km, à l&#x27;est</td><td>Terre et alimentation, Réparer, réemployer, Économie sociale</td><td>2020-02-05</td></tr>
+<tr tabindex="0" data-i="61" data-nom="Montcalin" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.17944" data-lon="2.17211"><td>Montcalin</td><td>Rilhac Xaintrie</td><td>26,8 km, au sud-est</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="62" data-nom="ECO-TRIOUZOUNE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.38018" data-lon="2.27218"><td>ECO-TRIOUZOUNE</td><td>Neuvic</td><td>26,8 km, à l&#x27;est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="63" data-nom="Ruche de la Clauzade" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.25223" data-lon="1.61540"><td>Ruche de la Clauzade</td><td>Siant germain les vergnes</td><td>27,1 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2018-06-14</td></tr>
+<tr tabindex="0" data-i="64" data-nom="Oasis d&#x27;Aubazine" data-fam="Habiter ensemble" data-lat="45.17415" data-lon="1.67245"><td>Oasis d&#x27;Aubazine</td><td>Aubazine</td><td>28,3 km, au sud-ouest</td><td>Habiter ensemble</td><td>2022-06-16</td></tr>
+<tr tabindex="0" data-i="65" data-nom="Faîte et racines" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.09255" data-lon="1.93778"><td>Faîte et racines</td><td>Argentat-sur-Dordogne</td><td>28,8 km, au sud</td><td>Terre et alimentation, Lien social et culture</td><td>2023-03-16</td></tr>
+<tr tabindex="0" data-i="66" data-nom="Le Petit Pain Perdu - Le Piaf" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.09284" data-lon="1.93834"><td>Le Petit Pain Perdu - Le Piaf</td><td>Argentat-sur-Dordogne</td><td>28,8 km, au sud</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="67" data-nom="Le Petit Pain Perdu (La Ressourcerie d&#x27;Argentat)" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.09256" data-lon="1.93913"><td>Le Petit Pain Perdu (La Ressourcerie d&#x27;Argentat)</td><td>Argentat-sur-Dordogne</td><td>28,8 km, au sud</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="68" data-nom="Usine de biomasse" data-fam="Terre et alimentation|Économie sociale" data-lat="45.60916" data-lon="1.88331"><td>Usine de biomasse</td><td>Viam</td><td>28,9 km, au nord</td><td>Terre et alimentation, Économie sociale</td><td>2026-02-10</td></tr>
+<tr tabindex="0" data-i="69" data-nom="La Colline de Chanteclerc" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.60532" data-lon="1.83937"><td>La Colline de Chanteclerc</td><td>Saint hilaire les courbes</td><td>29,1 km, au nord</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="70" data-nom="Auberge de Saint-Julien-aux-Bois" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.13081" data-lon="2.13973"><td>Auberge de Saint-Julien-aux-Bois</td><td>Saint-julien-aux-bois</td><td>29,4 km, au sud-est</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="71" data-nom="L&#x27;épicerie" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.42690" data-lon="1.56580"><td>L&#x27;épicerie</td><td>Uzerche</td><td>29,8 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2018-05-31</td></tr>
+<tr tabindex="0" data-i="72" data-nom="La P&#x27;tite Fabrique Solidaire" data-fam="Solidarité et droits" data-lat="45.42983" data-lon="1.56664"><td>La P&#x27;tite Fabrique Solidaire</td><td>Uzerche</td><td>29,8 km, à l&#x27;ouest</td><td>Solidarité et droits</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="73" data-nom="Ressourcerie Aux pas perdus" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.41995" data-lon="1.56327"><td>Ressourcerie Aux pas perdus</td><td>Uzerche</td><td>29,8 km, à l&#x27;ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="74" data-nom="La p&#x27;tite fabrique solidaire" data-fam="Lien social et culture" data-lat="45.42438" data-lon="1.56290"><td>La p&#x27;tite fabrique solidaire</td><td>Uzerche</td><td>29,9 km, à l&#x27;ouest</td><td>Lien social et culture</td><td>2018-02-15</td></tr>
+<tr tabindex="0" data-i="75" data-nom="La P’tite Fabrique Solidaire" data-fam="Solidarité et droits" data-lat="45.42440" data-lon="1.56288"><td>La P’tite Fabrique Solidaire</td><td>Uzerche</td><td>29,9 km, à l&#x27;ouest</td><td>Solidarité et droits</td><td>2025-11-29</td></tr>
+<tr tabindex="0" data-i="76" data-nom="Aux Pas Perdus" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.42433" data-lon="1.56373"><td>Aux Pas Perdus</td><td>Uzerche</td><td>29,9 km, à l&#x27;ouest</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="77" data-nom="La P&#x27;tite fabrique solidaire La P&#x27;tite fabrique solidaire" data-fam="Lien social et culture" data-lat="45.42488" data-lon="1.56367"><td>La P&#x27;tite fabrique solidaire La P&#x27;tite fabrique solidaire</td><td>19140 Uzerche</td><td>29,9 km, à l&#x27;ouest</td><td>Lien social et culture</td><td>2025-05-30</td></tr>
+<tr tabindex="0" data-i="78" data-nom="Brasserie de la Vézère" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.42430" data-lon="1.56364"><td>Brasserie de la Vézère</td><td>Uzerche</td><td>29,9 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="79" data-nom="GAEC de St Dulcet" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.57088" data-lon="1.69953"><td>GAEC de St Dulcet</td><td>Chamberet</td><td>30,4 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="80" data-nom="Secours Populaire Fédération de la Corrèze" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.58199" data-lon="1.72119"><td>Secours Populaire Fédération de la Corrèze</td><td>Chamberet</td><td>30,4 km, au nord-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="81" data-nom="Comptoir des plantes médicinales" data-fam="Terre et alimentation|Économie sociale" data-lat="45.58648" data-lon="1.71443"><td>Comptoir des plantes médicinales</td><td>Chamberet</td><td>31,2 km, au nord-ouest</td><td>Terre et alimentation, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="82" data-nom="LE SECOURS POPULAIRE CHAMBERET" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.58880" data-lon="1.71124"><td>LE SECOURS POPULAIRE CHAMBERET</td><td>Chamberet</td><td>31,5 km, au nord-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="83" data-nom="GAEC Beaulande" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.09951" data-lon="2.15954"><td>GAEC Beaulande</td><td>Saint julien aux bois</td><td>33,2 km, au sud-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="84" data-nom="association Equirelax" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.60466" data-lon="2.15974"><td>association Equirelax</td><td>St sulpice les bois</td><td>33,3 km, au nord-est</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="85" data-nom="La Vie Claire Malemort" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.17692" data-lon="1.58415"><td>La Vie Claire Malemort</td><td>Malemort</td><td>33,4 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="86" data-nom="Biocoop" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.17578" data-lon="1.58067"><td>Biocoop</td><td>Malemort sur correze</td><td>33,7 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="87" data-nom="La Ferme bio la Serpentine" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.05457" data-lon="1.84192"><td>La Ferme bio la Serpentine</td><td>Chenailler mascheix</td><td>33,8 km, au sud</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="88" data-nom="Le Verger du Pré de Sagne" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.28027" data-lon="1.50202"><td>Le Verger du Pré de Sagne</td><td>Allassac</td><td>34,5 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="89" data-nom="Christina Stainte Marie" data-fam="Solidarité et droits" data-lat="45.38202" data-lon="1.49198"><td>Christina Stainte Marie</td><td>Vigeois</td><td>34,5 km, à l&#x27;ouest</td><td>Solidarité et droits</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="90" data-nom="Marché" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.21783" data-lon="2.33185"><td>Marché</td><td>Mauriac</td><td>34,6 km, au sud-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="91" data-nom="A cœur d&#x27;apprendre - Laëtitia CLAUD-" data-fam="Lien social et culture" data-lat="45.21878" data-lon="2.33308"><td>A cœur d&#x27;apprendre - Laëtitia CLAUD-</td><td>Mauriac</td><td>34,7 km, au sud-est</td><td>Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="92" data-nom="Gaec du Puy Larcy" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.57602" data-lon="1.62145"><td>Gaec du Puy Larcy</td><td>La croisille sur briance</td><td>34,8 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="93" data-nom="secours catholique" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.22141" data-lon="2.33781"><td>secours catholique</td><td>Mauriac</td><td>34,9 km, au sud-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="94" data-nom="Association APF France handicap" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.16373" data-lon="1.57220"><td>Association APF France handicap</td><td>Malemort</td><td>35,0 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="95" data-nom="RESTAURANTS DU COEUR DE BRIVE CORREZE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.16362" data-lon="1.56787"><td>RESTAURANTS DU COEUR DE BRIVE CORREZE</td><td>Malemort</td><td>35,3 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="96" data-nom="LaBergerie d&#x27;Aurélien" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.57381" data-lon="2.25687"><td>LaBergerie d&#x27;Aurélien</td><td>Chaveroche</td><td>35,4 km, au nord-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="97" data-nom="Le Tri Porteur - Le Hangar" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.06332" data-lon="1.73763"><td>Le Tri Porteur - Le Hangar</td><td>Saint-Bazile-de-Meyssac</td><td>35,5 km, au sud-ouest</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="98" data-nom="Les pépites du Cantal" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.21347" data-lon="2.34140"><td>Les pépites du Cantal</td><td>Mauriac</td><td>35,5 km, au sud-est</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="99" data-nom="Le Tri Porteur" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.06330" data-lon="1.73752"><td>Le Tri Porteur</td><td>Saint-Bazile-de-Meyssac</td><td>35,5 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="100" data-nom="Le Triporteur - Le Hangar" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.06305" data-lon="1.73768"><td>Le Triporteur - Le Hangar</td><td>Saint-Bazile-de-Meyssac</td><td>35,5 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="101" data-nom="LE TRI-PORTEUR 19" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.06335" data-lon="1.73760"><td>LE TRI-PORTEUR 19</td><td>Saint-Bazile-de-Meyssac</td><td>35,5 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="102" data-nom="Ecohus" data-fam="Terre et alimentation|Habiter ensemble" data-lat="45.22652" data-lon="2.35393"><td>Ecohus</td><td>Le vigean</td><td>35,8 km, au sud-est</td><td>Terre et alimentation, Habiter ensemble</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="103" data-nom="Roue Allemande" data-fam="Lien social et culture" data-lat="45.58077" data-lon="1.60538"><td>Roue Allemande</td><td>La Croisille sur Briance</td><td>36,0 km, au nord-ouest</td><td>Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="104" data-nom="Anne-Marie Bugeat" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.32478" data-lon="1.47079"><td>Anne-Marie Bugeat</td><td>Estivaux</td><td>36,2 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="105" data-nom="D²R² Technologies" data-fam="Habiter ensemble" data-lat="45.08779" data-lon="1.65614"><td>D²R² Technologies</td><td>Collonges la rouge</td><td>36,4 km, au sud-ouest</td><td>Habiter ensemble</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="106" data-nom="Coupe rase de forêt" data-fam="Terre et alimentation|Économie sociale" data-lat="45.67930" data-lon="1.94616"><td>Coupe rase de forêt</td><td>Tarnac</td><td>36,5 km, au nord</td><td>Terre et alimentation, Économie sociale</td><td>2025-12-04</td></tr>
+<tr tabindex="0" data-i="107" data-nom="Ferme de Saint-Roch" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.15243" data-lon="1.55932"><td>Ferme de Saint-Roch</td><td>Brive la gaillarde</td><td>36,6 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="108" data-nom="A Tout Venant Ressourceries / Ressourcerie Gaillarde" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.15797" data-lon="1.55387"><td>A Tout Venant Ressourceries / Ressourcerie Gaillarde</td><td>Cosnac</td><td>36,6 km, au sud-ouest</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="109" data-nom="Unité Locale-Espace D&#x27;Ussel Vestiboutique - Croix Rouge" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.54184" data-lon="2.31530"><td>Unité Locale-Espace D&#x27;Ussel Vestiboutique - Croix Rouge</td><td>Ussel</td><td>36,6 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="110" data-nom="Repair Café Brive la Gaillarde" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.15801" data-lon="1.55394"><td>Repair Café Brive la Gaillarde</td><td>Cosnac</td><td>36,6 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="111" data-nom="SECOURS CATHOLIQUE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.54761" data-lon="2.30874"><td>SECOURS CATHOLIQUE</td><td>Ussel</td><td>36,6 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="112" data-nom="A TOUT VENANT RESSOURCERIE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.15802" data-lon="1.55395"><td>A TOUT VENANT RESSOURCERIE</td><td>Cosnac</td><td>36,6 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="113" data-nom="Bioshop" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.54902" data-lon="2.31354"><td>Bioshop</td><td>Ussel</td><td>37,0 km, au nord-est</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="114" data-nom="HECF" data-fam="Terre et alimentation|Habiter ensemble|Économie sociale" data-lat="45.16318" data-lon="1.53767"><td>HECF</td><td>Brive-la-gaillarde</td><td>37,3 km, au sud-ouest</td><td>Terre et alimentation, Habiter ensemble, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="115" data-nom="Elisabeth Carbone - Amap Conseil" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.04019" data-lon="1.74750"><td>Elisabeth Carbone - Amap Conseil</td><td>Marcillac la croze</td><td>37,5 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="116" data-nom="Les amis de Lucie FER" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.16552" data-lon="1.53180"><td>Les amis de Lucie FER</td><td>Brive-la-Gaillarde</td><td>37,5 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="117" data-nom="Unité Locale-Maison De Brive La Gaillarde Vestiboutique - Croix Rouge" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.16060" data-lon="1.53503"><td>Unité Locale-Maison De Brive La Gaillarde Vestiboutique - Croix Rouge</td><td>Brive-la-Gaillarde</td><td>37,6 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="118" data-nom="La Capselle" data-fam="" data-lat="45.43189" data-lon="1.46236"><td>La Capselle</td><td>Saint-Pardoux-Corbier</td><td>37,7 km, à l&#x27;ouest</td><td>—</td><td>2020-04-23</td></tr>
+<tr tabindex="0" data-i="119" data-nom="Citoyliens" data-fam="Terre et alimentation|Lien social et culture|Solidarité et droits" data-lat="45.16014" data-lon="1.53437"><td>Citoyliens</td><td>Brive-la-Gaillarde</td><td>37,7 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Solidarité et droits</td><td>2021-05-03</td></tr>
+<tr tabindex="0" data-i="120" data-nom="Association TOGO 19" data-fam="Solidarité et droits" data-lat="45.16022" data-lon="1.53438"><td>Association TOGO 19</td><td>Brive la Gaillarde</td><td>37,7 km, au sud-ouest</td><td>Solidarité et droits</td><td>2022-09-26</td></tr>
+<tr tabindex="0" data-i="121" data-nom="Amnesty International Groupe 37" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.16023" data-lon="1.53441"><td>Amnesty International Groupe 37</td><td>Brive-la-Gaillarde</td><td>37,7 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="122" data-nom="CITOYLIENS : plateforme, réseau ... mouvement ?" data-fam="Lien social et culture|Solidarité et droits" data-lat="45.14629" data-lon="1.54655"><td>CITOYLIENS : plateforme, réseau ... mouvement ?</td><td>Brive-la-Gaillarde</td><td>37,8 km, au sud-ouest</td><td>Lien social et culture, Solidarité et droits</td><td>2019-01-03</td></tr>
+<tr tabindex="0" data-i="123" data-nom="Les Coiffeurs bio" data-fam="Terre et alimentation|Économie sociale" data-lat="45.15747" data-lon="1.53535"><td>Les Coiffeurs bio</td><td>Brive-la-gaillarde</td><td>37,8 km, au sud-ouest</td><td>Terre et alimentation, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="124" data-nom="Essens&#x27;uelle Cosmétiques" data-fam="Terre et alimentation|Économie sociale" data-lat="45.16002" data-lon="1.53231"><td>Essens&#x27;uelle Cosmétiques</td><td>Brive-la-gaillarde</td><td>37,8 km, au sud-ouest</td><td>Terre et alimentation, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="125" data-nom="Le Fournil bio" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.15354" data-lon="1.53908"><td>Le Fournil bio</td><td>Brive-la-Gaillarde</td><td>37,8 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="126" data-nom="L&#x27;arbre aux minutes" data-fam="Habiter ensemble" data-lat="45.43169" data-lon="1.46204"><td>L&#x27;arbre aux minutes</td><td>Saint-Pardoux-Corbier</td><td>37,8 km, à l&#x27;ouest</td><td>Habiter ensemble</td><td>2022-04-15</td></tr>
+<tr tabindex="0" data-i="127" data-nom="Atelier vélo de la Ressourcerie Gaillarde" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.15774" data-lon="1.53492"><td>Atelier vélo de la Ressourcerie Gaillarde</td><td>Brive-la-Gaillarde</td><td>37,8 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="128" data-nom="La Ferme de Bassignac" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.31756" data-lon="2.41403"><td>La Ferme de Bassignac</td><td>Bassignac</td><td>37,9 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2026-04-19</td></tr>
+<tr tabindex="0" data-i="129" data-nom="Noix Bio du Périgord" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.05786" data-lon="1.68325"><td>Noix Bio du Périgord</td><td>Meyssac</td><td>38,0 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="130" data-nom="Denis Genier" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.28590" data-lon="1.45460"><td>Denis Genier</td><td>Voutezac</td><td>38,0 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="131" data-nom="AMAPiens au Pays de Brive" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.15652" data-lon="1.53316"><td>AMAPiens au Pays de Brive</td><td>Brive-la-Gaillarde</td><td>38,0 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-15</td></tr>
+<tr tabindex="0" data-i="132" data-nom="SECOURS CATHOLIQUE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.15432" data-lon="1.53576"><td>SECOURS CATHOLIQUE</td><td>Brive-la-Gaillarde</td><td>38,0 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="133" data-nom="&quot;TERRE DE PARTAGE&quot; Madagascar" data-fam="Solidarité et droits" data-lat="45.16039" data-lon="1.52778"><td>&quot;TERRE DE PARTAGE&quot; Madagascar</td><td>BRIVE LA GAILLARDE</td><td>38,1 km, au sud-ouest</td><td>Solidarité et droits</td><td>2022-09-26</td></tr>
+<tr tabindex="0" data-i="134" data-nom="Ressourcerie Le Carroussel" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.55313" data-lon="2.32735"><td>Ressourcerie Le Carroussel</td><td>Ussel</td><td>38,1 km, au nord-est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="135" data-nom="Pavillon bleu" data-fam="Terre et alimentation|Habiter ensemble|Lien social et culture|Économie sociale" data-lat="45.55372" data-lon="2.32783"><td>Pavillon bleu</td><td>Ussel</td><td>38,2 km, au nord-est</td><td>Terre et alimentation, Habiter ensemble, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="136" data-nom="Le Carroussel / Renouvellerie De Haute Correze" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.55395" data-lon="2.32771"><td>Le Carroussel / Renouvellerie De Haute Correze</td><td>Ussel</td><td>38,2 km, au nord-est</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="137" data-nom="Agir 19" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.16430" data-lon="1.52188"><td>Agir 19</td><td>Brive-la-Gaillarde</td><td>38,2 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="138" data-nom="Le Carroussel" data-fam="Terre et alimentation|Réparer, réemployer|Économie sociale" data-lat="45.55476" data-lon="2.32763"><td>Le Carroussel</td><td>Ussel</td><td>38,3 km, au nord-est</td><td>Terre et alimentation, Réparer, réemployer, Économie sociale</td><td>2020-02-05</td></tr>
+<tr tabindex="0" data-i="139" data-nom="Amapiens au Pays de Brive" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.15664" data-lon="1.52750"><td>Amapiens au Pays de Brive</td><td>Brive</td><td>38,4 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="140" data-nom="Coloc Marbeau" data-fam="Habiter ensemble" data-lat="45.15414" data-lon="1.52959"><td>Coloc Marbeau</td><td>Brive-la-gaillarde</td><td>38,4 km, au sud-ouest</td><td>Habiter ensemble</td><td>2025-12-12</td></tr>
+<tr tabindex="0" data-i="141" data-nom="Jardin de la passerelle" data-fam="Terre et alimentation|Économie sociale" data-lat="45.15241" data-lon="1.52998"><td>Jardin de la passerelle</td><td>Brive la gaillarde</td><td>38,5 km, au sud-ouest</td><td>Terre et alimentation, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="142" data-nom="Les Pieds dans la Salade" data-fam="" data-lat="45.43164" data-lon="1.45098"><td>Les Pieds dans la Salade</td><td>Saint-Pardoux-Corbier</td><td>38,6 km, à l&#x27;ouest</td><td>—</td><td>2020-04-23</td></tr>
+<tr tabindex="0" data-i="143" data-nom="Le Tri Porteur - Le Comptoir" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.05618" data-lon="1.67148"><td>Le Tri Porteur - Le Comptoir</td><td>Meyssac</td><td>38,7 km, au sud-ouest</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="144" data-nom="Le Tri Porteur 19" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.05611" data-lon="1.67162"><td>Le Tri Porteur 19</td><td>Meyssac</td><td>38,7 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="145" data-nom="La Halle Fermière" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.06203" data-lon="1.65526"><td>La Halle Fermière</td><td>Collonges la rouge</td><td>38,8 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="146" data-nom="Secours Populaire comité de Brive" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.14873" data-lon="1.51958"><td>Secours Populaire comité de Brive</td><td>Brive-la-Gaillarde</td><td>39,4 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="147" data-nom="La Pierre Noire" data-fam="Lien social et culture" data-lat="45.34709" data-lon="2.43782"><td>La Pierre Noire</td><td>Ydes</td><td>39,5 km, à l&#x27;est</td><td>Lien social et culture</td><td>2018-06-08</td></tr>
+<tr tabindex="0" data-i="148" data-nom="Association Les Amis du Pont du Saillant" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.28991" data-lon="1.43253"><td>Association Les Amis du Pont du Saillant</td><td>Voutezac</td><td>39,6 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="149" data-nom="Energies pour Demain" data-fam="Terre et alimentation" data-lat="45.70092" data-lon="2.05837"><td>Energies pour Demain</td><td>
+Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="150" data-nom="Energie pour demain" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.70220" data-lon="2.05603"><td>Energie pour demain</td><td>Peyrelevade</td><td>40,2 km, au nord</td><td>Terre et alimentation, Lien social et culture</td><td>2018-11-14</td></tr>
+<tr tabindex="0" data-i="151" data-nom="Association D&#x27;entraide Du Plateau (Aep)" data-fam="Réparer, réemployer|Lien social et culture|Solidarité et droits" data-lat="45.70270" data-lon="2.05227"><td>Association D&#x27;entraide Du Plateau (Aep)</td><td>Peyrelevade</td><td>40,2 km, au nord</td><td>Réparer, réemployer, Lien social et culture, Solidarité et droits</td><td>2024-08-14</td></tr>
+<tr tabindex="0" data-i="152" data-nom="AEP (Association Entraide du Plateau)" data-fam="Terre et alimentation|Réparer, réemployer|Économie sociale" data-lat="45.70445" data-lon="2.05025"><td>AEP (Association Entraide du Plateau)</td><td>Peyrelevade</td><td>40,3 km, au nord</td><td>Terre et alimentation, Réparer, réemployer, Économie sociale</td><td>2019-10-27</td></tr>
+<tr tabindex="0" data-i="153" data-nom="CIMADE Peyrelevade" data-fam="Solidarité et droits" data-lat="45.70361" data-lon="2.05408"><td>CIMADE Peyrelevade</td><td>Peyrelevade</td><td>40,3 km, au nord</td><td>Solidarité et droits</td><td>2026-07-04</td></tr>
+<tr tabindex="0" data-i="154" data-nom="Association D&#x27;Entraide Du Plateau (Aep)" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.70461" data-lon="2.05035"><td>Association D&#x27;Entraide Du Plateau (Aep)</td><td>Peyrelevade</td><td>40,3 km, au nord</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="155" data-nom="Association D&#x27;Entraide Plateau" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.70440" data-lon="2.04992"><td>Association D&#x27;Entraide Plateau</td><td>Peyrelevade</td><td>40,3 km, au nord</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="156" data-nom="Laurence et Djemel Kasmi" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="44.99784" data-lon="1.80205"><td>Laurence et Djemel Kasmi</td><td>Sionac</td><td>40,6 km, au sud</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="157" data-nom="COMITE D&#x27;AMIS EMMAÜS BRIVE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.14859" data-lon="1.49798"><td>COMITE D&#x27;AMIS EMMAÜS BRIVE</td><td>Brive-la-Gaillarde</td><td>40,8 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="158" data-nom="EMMAUS BRIVE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.14854" data-lon="1.49752"><td>EMMAUS BRIVE</td><td>Brive-la-Gaillarde</td><td>40,8 km, au sud-ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="159" data-nom="La Ferme de Vitrax" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.02439" data-lon="1.68840"><td>La Ferme de Vitrax</td><td>Branceilles</td><td>41,1 km, au sud-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="160" data-nom="Les fées Ceuillettes et le Verger de la Lune" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.70485" data-lon="1.77351"><td>Les fées Ceuillettes et le Verger de la Lune</td><td>Eymoutiers</td><td>41,2 km, au nord</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2020-05-10</td></tr>
+<tr tabindex="0" data-i="161" data-nom="Le Champ des Arts" data-fam="" data-lat="45.58034" data-lon="1.51713"><td>Le Champ des Arts</td><td>La Porcherie</td><td>41,2 km, au nord-ouest</td><td>—</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="162" data-nom="Miculibio" data-fam="Terre et alimentation|Économie sociale" data-lat="45.19374" data-lon="1.45128"><td>Miculibio</td><td>Varetz</td><td>41,5 km, au sud-ouest</td><td>Terre et alimentation, Économie sociale</td><td>2019-01-04</td></tr>
+<tr tabindex="0" data-i="163" data-nom="Best Energétique" data-fam="Habiter ensemble" data-lat="45.00410" data-lon="1.73382"><td>Best Energétique</td><td>La salle</td><td>41,6 km, au sud</td><td>Habiter ensemble</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="164" data-nom="Collectif de Rhodes" data-fam="Habiter ensemble" data-lat="45.01111" data-lon="1.70971"><td>Collectif de Rhodes</td><td>Branceilles</td><td>41,7 km, au sud-ouest</td><td>Habiter ensemble</td><td>2023-11-22</td></tr>
+<tr tabindex="0" data-i="165" data-nom="Allez Ginette, soyons loco" data-fam="Lien social et culture" data-lat="44.98215" data-lon="1.82897"><td>Allez Ginette, soyons loco</td><td>Beaulieu-sur-Dordogne</td><td>41,8 km, au sud</td><td>Lien social et culture</td><td>2020-06-22</td></tr>
+<tr tabindex="0" data-i="166" data-nom="Chèvrefeuille" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.26236" data-lon="1.40800"><td>Chèvrefeuille</td><td>Objat</td><td>42,1 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="167" data-nom="Kacalou" data-fam="Lien social et culture" data-lat="44.97735" data-lon="1.83789"><td>Kacalou</td><td>Beaulieu-sur-Dordogne</td><td>42,2 km, au sud</td><td>Lien social et culture</td><td>2018-02-15</td></tr>
+<tr tabindex="0" data-i="168" data-nom="Repair Café Objat" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.26600" data-lon="1.40626"><td>Repair Café Objat</td><td>Objat</td><td>42,2 km, à l&#x27;ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="169" data-nom="SECOURS CATHOLIQUE" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.44348" data-lon="1.40712"><td>SECOURS CATHOLIQUE</td><td>Lubersac</td><td>42,2 km, à l&#x27;ouest</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="170" data-nom="Le Jardin des BienFées" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.31912" data-lon="1.38972"><td>Le Jardin des BienFées</td><td>Vignols</td><td>42,5 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="171" data-nom="Oasis des MorduEs" data-fam="Habiter ensemble" data-lat="45.62819" data-lon="1.55596"><td>Oasis des MorduEs</td><td>Saint-Vitte-sur-Briance</td><td>42,5 km, au nord-ouest</td><td>Habiter ensemble</td><td>2020-06-04</td></tr>
+<tr tabindex="0" data-i="172" data-nom="Canton de Lubersac" data-fam="Habiter ensemble" data-lat="45.45411" data-lon="1.39698"><td>Canton de Lubersac</td><td>Lubersac</td><td>43,3 km, à l&#x27;ouest</td><td>Habiter ensemble</td><td>2022-04-14</td></tr>
+<tr tabindex="0" data-i="173" data-nom="Ambiance Bois" data-fam="Terre et alimentation|Économie sociale" data-lat="45.74571" data-lon="1.91913"><td>Ambiance Bois</td><td>Faux la montagne</td><td>43,9 km, au nord</td><td>Terre et alimentation, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="174" data-nom="Ambiance Bois" data-fam="Habiter ensemble" data-lat="45.74582" data-lon="1.92011"><td>Ambiance Bois</td><td>Faux La Montagne</td><td>43,9 km, au nord</td><td>Habiter ensemble</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="175" data-nom="Fabrice et Anne Lacroix" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.70749" data-lon="1.68122"><td>Fabrice et Anne Lacroix</td><td>Sainte anne saint priest</td><td>44,1 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="176" data-nom="Arôme 15 Mademoiselle Edwige" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.02719" data-lon="2.25625"><td>Arôme 15 Mademoiselle Edwige</td><td>Saint santin cantales</td><td>44,1 km, au sud-est</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="177" data-nom="Ferme Brasserie Monts et barrages" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.70887" data-lon="1.68696"><td>Ferme Brasserie Monts et barrages</td><td>Sainte Anne Saint Priest</td><td>44,1 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="178" data-nom="Le Constance Social Club" data-fam="Lien social et culture" data-lat="45.74937" data-lon="1.93592"><td>Le Constance Social Club</td><td>Faux-la-Montagne</td><td>44,2 km, au nord</td><td>Lien social et culture</td><td>2018-02-15</td></tr>
+<tr tabindex="0" data-i="179" data-nom="Ctrl-A" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.74938" data-lon="1.93592"><td>Ctrl-A</td><td>Faux-la-Montagne</td><td>44,3 km, au nord</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="180" data-nom="Tambour Battant - Emmaüs Montagne Limousine" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.75021" data-lon="1.93194"><td>Tambour Battant - Emmaüs Montagne Limousine</td><td>Faux-la-Montagne</td><td>44,3 km, au nord</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="181" data-nom="La navette" data-fam="Lien social et culture" data-lat="45.75036" data-lon="1.93379"><td>La navette</td><td>Faux la montagne</td><td>44,4 km, au nord</td><td>Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="182" data-nom="IPNS" data-fam="Lien social et culture" data-lat="45.75068" data-lon="1.93392"><td>IPNS</td><td>Faux-la-Montagne</td><td>44,4 km, au nord</td><td>Lien social et culture</td><td>2020-04-23</td></tr>
+<tr tabindex="0" data-i="183" data-nom="La biscuiterie du plateau - Le Volubilis" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="45.75034" data-lon="1.93381"><td>La biscuiterie du plateau - Le Volubilis</td><td>Faux la montagne</td><td>44,4 km, au nord</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2023-08-30</td></tr>
+<tr tabindex="0" data-i="184" data-nom="Syndicat de la montagne limousine" data-fam="Terre et alimentation|Lien social et culture|Solidarité et droits" data-lat="45.75035" data-lon="1.93383"><td>Syndicat de la montagne limousine</td><td>Faux-la-Montagne</td><td>44,4 km, au nord</td><td>Terre et alimentation, Lien social et culture, Solidarité et droits</td><td>2023-03-16</td></tr>
+<tr tabindex="0" data-i="185" data-nom="Bio 2000" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.40088" data-lon="2.49720"><td>Bio 2000</td><td>Bort-les-Orgues</td><td>44,5 km, à l&#x27;est</td><td>Terre et alimentation, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="186" data-nom="Les Simples de Sophie" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-lat="44.96528" data-lon="1.77686"><td>Les Simples de Sophie</td><td>Queyssac les vignes</td><td>44,6 km, au sud</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="187" data-nom="AR-iMAGE" data-fam="Habiter ensemble|Lien social et culture" data-lat="45.66874" data-lon="1.57800"><td>AR-iMAGE</td><td>Saint méard</td><td>44,8 km, au nord-ouest</td><td>Habiter ensemble, Lien social et culture</td><td>2017-12-29</td></tr>
+<tr tabindex="0" data-i="188" data-nom="Le Panier de Germaine" data-fam="Terre et alimentation|Lien social et culture" data-lat="45.61432" data-lon="1.49599"><td>Le Panier de Germaine</td><td>Saint Germain les Belles</td><td>44,8 km, au nord-ouest</td><td>Terre et alimentation, Lien social et culture</td><td>2026-09-08</td></tr>
+<tr tabindex="0" data-i="189" data-nom="Matériauthèque REEMPLOI BTP HAUT CANTAL" data-fam="Réparer, réemployer|Économie sociale" data-lat="45.29914" data-lon="2.49963"><td>Matériauthèque REEMPLOI BTP HAUT CANTAL</td><td>Saignes</td><td>44,8 km, à l&#x27;est</td><td>Réparer, réemployer, Économie sociale</td><td>2026-09-11</td></tr>
+<tr tabindex="0" data-i="190" data-nom="Association des cités solidaires" data-fam="Habiter ensemble" data-lat="45.61414" data-lon="1.49525"><td>Association des cités solidaires</td><td>Saint Germain les Belles</td><td>44,9 km, au nord-ouest</td><td>Habiter ensemble</td><td>2026-09-08</td></tr>
+</tbody></table></div>
+<p class="nb"><a href="data/reseau-lieux.json">Télécharger les lieux (JSON)</a> · <a href="data/zone-communes.geojson">les contours (GeoJSON)</a> · <a href="data/carte.json">la fiche de la carte</a></p>
 <h2 id="la-methode">Méthode</h2>
-<p><strong>La zone.</strong> Une heure de route est approchée par 45&nbsp;km à vol d'oiseau. C'est une simplification&nbsp;: sur ces routes de moyenne montagne, une heure porte plus loin vers Tulle que vers le plateau. La liste des communes vient du découpage administratif officiel.</p>
+<p><strong>La zone.</strong> Une heure de route est approchée par 45&nbsp;km à vol d'oiseau. C'est une simplification&nbsp;: sur ces routes de moyenne montagne, une heure porte plus loin vers Tulle que vers le plateau, et aucune approximation simple ne corrige cela. La liste des communes vient du découpage administratif officiel.</p>
 <p><strong>Les lieux.</strong> Repris de <a href="https://transiscope.org/">Transiscope</a>, qui agrège une vingtaine de cartes — Près de chez nous, Colibris, Alternatiba, le réseau des ressourceries, Longue vie aux objets. Les catégories affichées sont celles des cartes d'origine, pas les nôtres.</p>
-<p><strong>La carte.</strong> Elle est dessinée par <a href="https://leafletjs.com/">Leaflet</a>, dont une copie est déposée dans le dépôt du site. Il n'y a ni fond photographique ni tuiles&nbsp;: seulement les contours des 284 communes de la zone, servis eux aussi par le dépôt. C'est plus sobre qu'un fond routier, et cela tient la promesse faite en bas de chaque page — <strong>rien ne part vers un tiers quand vous ouvrez cette page</strong>. Le prix est assumé&nbsp;: pas de routes, pas de relief, pas de noms de hameaux.</p>
-<p>Données téléchargeables — <a href="data/reseau-lieux.json">les lieux</a>, <a href="data/zone-communes.geojson">les contours</a>, <a href="data/zone-une-heure.json">la zone</a> — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>.</p>
-
+<p><strong>La carte.</strong> Elle est dessinée par <a href="https://leafletjs.com/">Leaflet</a>, dont une copie est déposée dans le dépôt du site. Il n'y a ni fond photographique ni tuiles&nbsp;: seulement les contours des 284 communes de la zone, servis eux aussi par le dépôt. <strong>Rien ne part vers un tiers quand vous ouvrez cette page.</strong> Le prix est assumé&nbsp;: pas de routes, pas de relief, pas de noms de hameaux.</p>
+<p><strong>Ce que la carte ne sait pas.</strong> Les contours publics sont généralisés&nbsp;: environ 130 mètres entre deux sommets. Ils sont donc fidèles jusqu'au zoom 10 et seulement indicatifs au-delà. Le zoom est borné à 12 pour cette raison — les points, eux, restent à leur coordonnée exacte quel que soit le zoom. Nous avons mesuré ce que coûterait un tracé plus fin&nbsp;: trois fois le poids du fichier pour un gain invisible aux échelles réellement consultées.</p>
+<p><strong>Accessibilité.</strong> Le tableau ci-dessus contient la même information que la carte et se filtre avec elle. Il est écrit dans la page et ne dépend d'aucun script&nbsp;: sans JavaScript, la liste reste entière. Les points sont atteignables au clavier, la molette ne confisque pas le défilement, et les animations sont supprimées si le système le demande.</p>
 <h2 id="les-versions">Journal des versions</h2>
 <ul>
-  <li><strong>15 septembre 2026</strong> — première version. Reprise de 191 lieux depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</li>
-  <li><strong>16 septembre 2026</strong> — la carte devient navigable&nbsp;: zoom, déplacement, fiche au clic, contours communaux au trait fin. Toujours sans aucune tuile distante.</li>
+<li><strong>15 septembre 2026</strong> — première version. Reprise de 191 lieux depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</li>
+<li><strong>16 septembre 2026</strong> — la carte devient navigable&nbsp;: zoom, déplacement, fiche au clic, contours communaux au trait fin. Toujours sans aucune tuile distante.</li>
+<li><strong>16 septembre 2026</strong> — l'annuaire est écrit dans la page et non plus par un script&nbsp;: il reste lisible sans JavaScript, au clavier et au lecteur d'écran. La molette rend le défilement à la page. Le zoom est ramené à 12, la fidélité réelle des contours étant plus grossière que ce que le zoom 14 laissait croire.</li>
 </ul>
 <p class="horodatage" id="horodatage"></p>
 </main>
+
+
+
+
+
+
+
+
 
 
 
@@ -109,132 +329,116 @@
   </div>
 </footer>
 <script src="vendor/leaflet.js"></script>
-<script src="tdb.js?v=13"></script>
+<script src="vendor/carto-socle.js?v=14"></script>
+<script src="tdb.js?v=14"></script>
 <script>
-/* Familles d'affichage : les cartes d'origine ont des dizaines de catégories,
-   on les ramène à six pour que le filtre reste utilisable. */
-const FAMILLES = [
-  ["Terre et alimentation", ["agricult", "aliment", "producteur", "forêt nourric", "amap", "écologie"]],
-  ["Réparer, réemployer", ["répar", "zéro déchet", "objets", "recycler", "ressourcer"]],
-  ["Habiter ensemble", ["habitat", "urbanisme", "oasis"]],
-  ["Lien social et culture", ["rencontre", "lien social", "culture", "média"]],
-  ["Solidarité et droits", ["solidarit", "citoyenneté", "droits"]],
-  ["Économie sociale", ["économie sociale", "magasin", "commerce"]]
-];
-const sansAcc = (t) => (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-function familles(cats) {
-  const c = (cats || []).map(sansAcc).join(" | ");
-  return FAMILLES.filter(([, mots]) => mots.some((m) => c.includes(sansAcc(m)))).map(([n]) => n);
-}
-const ICI = [45.351433, 1.931875];
+/* La carte du réseau, posée sur le socle carto-territoire.
+   La liste est déjà dans la page : ce script ne la construit pas, il s'y
+   accroche. Si rien ne s'exécute ici, la page reste entière. */
+const ICI = [45.351370, 1.932210];
+const FAMILLES = ["Terre et alimentation", "Réparer, réemployer",
+                  "Habiter ensemble", "Lien social et culture",
+                  "Solidarité et droits", "Économie sociale"];
+
 (async () => {
-  let L2, C, contours;
+  const lignes = [...document.querySelectorAll("#liste tbody tr")];
+  if (!lignes.length) { return; }
+
+  /* --- les filtres : ils agissent sur la carte ET sur le tableau, sinon les
+     deux vues divergent et l'équivalence est rompue --- */
+  const zf = document.getElementById("filtres");
+  const compte = {};
+  lignes.forEach((l) => (l.dataset.fam || "").split("|").filter(Boolean)
+                        .forEach((f) => { compte[f] = (compte[f] || 0) + 1; }));
+  zf.innerHTML = FAMILLES.filter((f) => compte[f]).map((f) =>
+      "<button type='button' data-f=\"" + f + "\" aria-pressed='false'>" + f +
+      " <span class='nb'>" + compte[f] + "</span></button>").join("") +
+    "<button type='button' data-f='' aria-pressed='true' class='actif'>Tout</button>";
+
+  let contours, marques = null, ctx = null;
   try {
-    [L2, C, contours] = await Promise.all([
-      json("data/reseau-lieux.json"), json("data/zone-une-heure.json"),
-      json("data/zone-communes.geojson")]);
+    contours = await json("data/zone-communes.geojson");
   } catch (e) {
-    echec("condense", "Données du réseau indisponibles.");
-    echec("carte", "");
+    document.getElementById("carte").innerHTML =
+      "<p class='echec'>Les contours n'ont pas pu être chargés. " +
+      "<a href='#annuaire'>La liste des lieux reste disponible ci-dessous.</a></p>";
     return;
   }
-  const lieux = L2.lieux.map((l) => Object.assign({}, l, { fam: familles(l.categories) }));
-  const communes = new Set(lieux.map((l) => l.commune)).size;
-  document.getElementById("condense").innerHTML = "<ul>" +
-    "<li><strong>" + lieux.length + " lieux</strong> portés par des collectifs sont déjà référencés dans l'heure, sur " + communes + " communes.</li>" +
-    "<li>Le plus proche est à " + nf(lieux.filter((l) => l.km > 0.4)[0].km, 1) + " km, le plus lointain à " + nf(lieux[lieux.length - 1].km, 1) + " km.</li>" +
-    "<li>La zone couvre " + nf0(C.total) + " communes et " + nf0(C.population) + " habitants, à 45 km à la ronde.</li>" +
-    "<li><strong>Aucune fiche n'a été vérifiée sur place</strong> — la nôtre non plus, et elle date de 2019.</li>" +
-    "</ul>";
-  /* --- la carte : Leaflet sans aucune tuile --- */
-  const zone = document.getElementById("carte");
-  zone.innerHTML = "";
-  const carte = L.map(zone, {
-    center: ICI, zoom: 9, minZoom: 8, maxZoom: 14,
-    scrollWheelZoom: false, attributionControl: false
+
+  ctx = Carto.creer({
+    zone: "carte", centre: ICI, zoom: 9, zoomMin: 8, zoomMax: 12,
+    molette: "cooperative", titreId: "carte-titre", descId: "carte-desc"
   });
-  L.control.scale({ imperial: false, maxWidth: 140 }).addTo(carte);
-  /* la molette ne prend la main qu'après un clic : sinon on ne peut plus
-     faire défiler la page quand le curseur passe sur la carte */
-  carte.once("click", () => carte.scrollWheelZoom.enable());
-  L.geoJSON(contours, {
-    style: { className: "commune", fill: true, fillOpacity: 0, weight: 1 },
-    onEachFeature: (f, c) => {
-      c.bindTooltip(f.properties.nom + (f.properties.pop ? " — " + nf0(f.properties.pop) + " hab." : ""),
-                    { sticky: true, className: "bulle-commune" });
-    }
-  }).addTo(carte);
-  L.circle(ICI, { radius: 45000, className: "limite", fill: false, weight: 1.4 }).addTo(carte);
-  L.circleMarker(ICI, { className: "ici", radius: 6, weight: 0 }).addTo(carte)
+
+  Carto.contours(ctx, contours, {
+    intitule: (p) => p.nom + (p.pop ? " — " + Carto.nf(p.pop) + " hab." : "")
+  });
+  L.circle(ICI, { radius: 45000, className: "limite", fill: false, weight: 1.4 })
+    .addTo(ctx.carte);
+  L.circleMarker(ICI, { className: "ici", radius: 6, weight: 0 }).addTo(ctx.carte)
     .bindTooltip("le Mons", { permanent: true, direction: "right", className: "bulle-ici" });
-  const points = lieux.map((l, i) => {
-    if (l.km < 0.4) return null;      /* notre propre point est déjà là */
-    const m = L.circleMarker([l.lat, l.lon], { className: "lieu", radius: 5, weight: 1 });
-    m.bindTooltip(l.nom, { direction: "top" });
-    m.on("click", () => fiche(i, m));
-    m.addTo(carte);
-    return m;
+
+  /* Les coordonnées viennent du tableau : une seule source, pas deux. */
+  const lieux = lignes.map((l) => ({
+    nom: l.dataset.nom,
+    commune: l.children[1].textContent,
+    distance: l.children[2].textContent,
+    fam: (l.dataset.fam || "").split("|").filter(Boolean),
+    lat: +l.dataset.lat, lon: +l.dataset.lon
+  }));
+
+  marques = Carto.points(ctx, lieux, {
+    intitule: (d) => d.nom,
+    alt: (d) => d.nom + ", " + d.commune + ", à " + d.distance,
+    surClic: (d, i) => montrer(i)
   });
-  let choisi = null;
-  function fiche(i, m) {
-    const l = lieux[i];
-    if (choisi && choisi.getElement()) choisi.getElement().classList.remove("actif");
-    choisi = m;
-    if (m.getElement()) m.getElement().classList.add("actif");
+  Carto.lier(ctx, marques, lignes, { zoom: 11 });
+  lignes.forEach((l, i) => l.addEventListener("click", () => montrer(i)));
+  lignes.forEach((l, i) => l.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { l.click(); }
+  }));
+
+  function montrer(i) {
+    const d = lieux[i];
     document.getElementById("fiche").innerHTML =
-      "<div class='fiche-lieu'><p><strong>" + l.nom + "</strong> — " + (l.commune || "commune inconnue") +
-      ", à " + nf(l.km, 1) + " km.</p>" +
-      (l.categories.length ? "<p>" + l.categories.join(" · ") + "</p>" : "") +
-      "<p class='nb'>Fiche reprise de " + (l.source || "un annuaire public") +
-      (l.maj ? ", mise à jour le " + new Date(l.maj).toLocaleDateString("fr-FR", { dateStyle: "long" }) : "") +
-      (l.commune_deduite ? " · commune déduite des coordonnées" : "") + ".</p></div>";
+      "<p><span class='lieu-nom'>" + d.nom + "</span> <span class='lieu-detail'>" +
+      d.commune + ", à " + d.distance + "</span>" +
+      (d.fam.length ? "<br><span class='lecture'>" + d.fam.join(" · ") + "</span>" : "") +
+      "</p>";
   }
-  /* --- filtres --- */
-  const actives = new Set();
-  const zoneF = document.getElementById("filtres");
-  zoneF.innerHTML = FAMILLES.map(([n]) =>
-    "<button type='button' aria-pressed='false' data-f=\"" + n + "\">" + n +
-    " <span class='nb'>" + lieux.filter((l) => l.fam.includes(n)).length + "</span></button>").join("") +
-    "<button type='button' data-f='' aria-pressed='true'>Tout</button>";
-  function appliquer() {
-    points.forEach((m, i) => {
-      if (!m) return;
-      const ok = !actives.size || lieux[i].fam.some((f) => actives.has(f));
-      const el = m.getElement();
-      if (el) el.classList.toggle("masque", !ok);
+
+  /* --- filtrer --- */
+  let actives = new Set();
+  function filtrer() {
+    let vus = 0;
+    lignes.forEach((l, i) => {
+      const f = (l.dataset.fam || "").split("|").filter(Boolean);
+      const ok = !actives.size || f.some((x) => actives.has(x));
+      l.hidden = !ok;
+      const el = marques[i] && marques[i].getElement();
+      if (el) { el.classList.toggle("masque", !ok); }
+      if (ok) { vus++; }
     });
-    liste();
-    zoneF.querySelectorAll("button").forEach((b) => {
-      const f = b.dataset.f;
-      b.setAttribute("aria-pressed", f ? String(actives.has(f)) : String(actives.size === 0));
-    });
+    document.getElementById("intro-annuaire").textContent =
+      vus + " lieux sur " + lignes.length +
+      (actives.size ? " — filtre : " + [...actives].join(", ") : "") +
+      ". Cliquer une ligne la montre sur la carte.";
+    ctx.dire(vus + " lieux affichés sur " + lignes.length + ".");
   }
-  zoneF.addEventListener("click", (e) => {
-    const b = e.target.closest("button");
-    if (!b) return;
+  zf.addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) { return; }
     const f = b.dataset.f;
-    if (!f) actives.clear();
-    else if (actives.has(f)) actives.delete(f);
-    else actives.add(f);
-    appliquer();
+    if (!f) { actives.clear(); } else if (actives.has(f)) { actives.delete(f); }
+    else { actives.add(f); }
+    [...zf.querySelectorAll("button")].forEach((x) => {
+      const on = x.dataset.f ? actives.has(x.dataset.f) : !actives.size;
+      x.classList.toggle("actif", on);
+      x.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    filtrer();
   });
-  /* --- l'annuaire --- */
-  function liste() {
-    const vus = lieux.filter((l) => !actives.size || l.fam.some((f) => actives.has(f)));
-    document.getElementById("intro-annuaire").innerHTML =
-      "<strong>" + vus.length + " lieux</strong>, du plus proche au plus éloigné" +
-      (actives.size ? " — filtre : " + [...actives].join(", ") : "") + ".";
-    document.getElementById("liste").innerHTML = vus.map((l) =>
-      "<p><span class='lieu-nom'>" + l.nom + "</span> <span class='lieu-detail'>" +
-      (l.commune || "—") + " · " + nf(l.km, 1) + " km" +
-      (l.maj ? " · fiche de " + l.maj.slice(0, 4) : "") + "</span></p>").join("");
-  }
-  appliquer();
-  document.getElementById("horodatage").textContent =
-    "Relevé le " + new Date(L2.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
-    " · Transiscope, geo.api.gouv.fr · fond de carte servi par le dépôt · Licence Ouverte 2.0.";
 })();
 </script>
-<script src="site.js?v=13"></script>
+<script src="site.js?v=14"></script>
 </body>
 </html>
