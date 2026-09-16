@@ -6,8 +6,8 @@
 <title>La cartographie des lieux — Domaine du Mons</title>
 <meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="vendor/carto-socle.css?v=16">
-<link rel="stylesheet" href="style.css?v=16">
+<link rel="stylesheet" href="vendor/carto-socle.css?v=17">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
 <div class="bandeau">
@@ -72,6 +72,7 @@
 <div class="carto-zone" id="carte"><p class="chargement">La carte se charge. Le tableau ci-dessous donne la même information.</p></div>
 <p class="nb" id="note-etiquettes">Zoomez pour faire apparaître les noms de communes.</p>
 <div id="legende"></div>
+<p class="nb" id="note-familles"></p>
 <div class="carto-fiche" id="fiche" role="region" aria-label="Fiche du lieu survolé"><p class="carto-fiche-vide">Survolez un point, ou choisissez une ligne dans la liste, pour lire sa fiche.</p></div>
 </div>
 <dl class="carto-meta">
@@ -322,6 +323,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
 
 
 
+
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -336,8 +339,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
   </div>
 </footer>
 <script src="vendor/leaflet.js"></script>
-<script src="vendor/carto-socle.js?v=16"></script>
-<script src="tdb.js?v=16"></script>
+<script src="vendor/carto-socle.js?v=17"></script>
+<script src="tdb.js?v=17"></script>
 <script>
 /* La carte du réseau, posée sur le socle carto-territoire.
    La liste est déjà dans la page : ce script ne la construit pas, il s'y
@@ -449,12 +452,25 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
     surClic: (d, i) => { fiche.epingler(html(d), i); ctx.aller([d.lat, d.lon], 11); }
   });
 
-  Carto.legende(ctx, "legende",
-    FAMILLES.map((f, i) => ({
+  const sansFamille = lieux.filter((d) => !d.prim).length;
+  const entrees = FAMILLES.map((f, i) => ({
       libelle: f, couleur: COULEURS[i], forme: FORMES[i],
       effectif: lieux.filter((d) => d.prim === f).length
-    })).filter((e) => e.effectif),
+    })).filter((e) => e.effectif);
+  if (sansFamille) {
+    /* Hors catégorie : sa propre forme et un gris hors palette, jamais la
+       forme d'une famille — sinon seule la couleur les distinguerait. */
+    entrees.push({ libelle: "Aucune famille déclarée", couleur: "#6b665e",
+                   forme: "baton", effectif: sansFamille });
+  }
+  Carto.legende(ctx, "legende", entrees,
     { titre: "Famille principale — couleur et forme" });
+  const zn = document.getElementById("note-familles");
+  if (zn) {
+    zn.textContent = "Un lieu relève souvent de plusieurs familles. Le symbole "
+      + "porte la première ; les filtres, eux, tiennent compte de toutes — c'est "
+      + "pourquoi les comptes des boutons et ceux de la légende diffèrent.";
+  }
 
   Carto.lier(ctx, marques, lignes, { zoom: 11 });
   lignes.forEach((l, i) => {
@@ -509,6 +525,6 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
   });
 })();
 </script>
-<script src="site.js?v=16"></script>
+<script src="site.js?v=17"></script>
 </body>
 </html>

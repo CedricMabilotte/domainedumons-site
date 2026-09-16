@@ -115,6 +115,7 @@ def main():
     a('<p class="nb" id="note-etiquettes">Zoomez pour faire apparaître les '
       'noms de communes.</p>')
     a('<div id="legende"></div>')
+    a('<p class="nb" id="note-familles"></p>')
     a('<div class="carto-fiche" id="fiche" role="region" '
       'aria-label="Fiche du lieu survolé"><p class="carto-fiche-vide">'
       'Survolez un point, ou choisissez une ligne dans la liste, pour lire sa '

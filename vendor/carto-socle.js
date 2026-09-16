@@ -63,8 +63,13 @@
       clearTimeout(cache);
       cache = setTimeout(function () { voile.classList.remove("visible"); }, 1200);
     }, { passive: false });
-    /* sur tactile : un doigt fait défiler la page, deux doigts manipulent */
-    if (carte.dragging) {
+    /* Sur TACTILE seulement : un doigt fait défiler la page, deux doigts
+       manipulent la carte. À la souris, le glisser doit rester actif — le
+       désactiver partout rend la carte immobile, et c'est un piège dans lequel
+       on tombe une fois. */
+    var tactile = global.matchMedia &&
+      global.matchMedia("(pointer: coarse)").matches;
+    if (tactile && carte.dragging) {
       zone.addEventListener("touchstart", function (e) {
         if (e.touches.length > 1) { carte.dragging.enable(); }
         else { carte.dragging.disable(); }
@@ -342,7 +347,11 @@
       var k = cle(d);
       var j = cats.indexOf(k);
       var couleur = j >= 0 ? couleurs[j] : (opts.couleurDefaut || "#6b665e");
-      var forme = FORMES[j >= 0 ? formes[j] : "rond"] || FORMES.rond;
+      /* Sans catégorie : une forme À PART. Réutiliser celle de la première
+         catégorie ferait deux symboles que seule la couleur distingue — c'est
+         exactement ce que le double codage doit empêcher. */
+      var forme = FORMES[j >= 0 ? formes[j] : (opts.formeDefaut || "baton")]
+                  || FORMES.baton;
       var svg = '<svg viewBox="-10 -10 20 20" width="17" height="17" '
               + 'aria-hidden="true" focusable="false">'
               + '<path d="' + forme + '" fill="' + couleur + '" '
