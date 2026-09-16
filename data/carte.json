@@ -5,8 +5,8 @@
   "date_carte": "2026-09-16",
   "date_donnees": "2026-09-15",
   "maillage": "communes, code officiel géographique 2026",
-  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Les associations d'intérêt général, qui relèvent d'une autre page et d'une autre grille. Les contours communaux sont généralisés à environ 130 m entre sommets : ils sont indicatifs au-delà du zoom 10, ce pourquoi le zoom est borné à 12.",
-  "licence": "Licence Ouverte 2.0 pour les contours et la zone ; ODbL pour les lieux, repris de Transiscope. Les deux jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
+  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Les petites routes, les noms de rue et le bâti — le fond routier ne porte que les axes structurants. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m entre sommets : indicatifs au-delà du zoom 10, ce pourquoi le zoom est borné à 12.",
+  "licence": "Licence Ouverte 2.0 pour les contours et la zone ; CC BY-SA pour les lieux, repris de Transiscope ; ODbL pour le fond routier, repris d'OpenStreetMap. Les trois jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
   "sources": [
     {
       "quoi": "contours et population des communes",
@@ -21,6 +21,14 @@
       "licence": "ODbL",
       "extrait_le": "2026-09-15",
       "regenerer": "python3 scripts/reseau.py"
+    },
+    {
+      "quoi": "fond routier — axes structurants",
+      "ou": "OpenStreetMap via Overpass",
+      "licence": "ODbL",
+      "attribution": "© les contributeurs OpenStreetMap",
+      "extrait_le": "2026-09-16",
+      "regenerer": "python3 scripts/fond-routier.py"
     }
   ],
   "rendu": {
@@ -62,6 +70,13 @@
       "source": "Transiscope",
       "licence": "ODbL",
       "entites": 191
+    },
+    {
+      "id": "routes",
+      "fichier": "data/zone-routes.geojson",
+      "role": "fond",
+      "source": "OpenStreetMap",
+      "licence": "ODbL"
     }
   ],
   "thematique": {
@@ -82,5 +97,43 @@
   "souverainete": {
     "requetes_sortantes": "aucune",
     "verifie_le": "2026-09-16"
+  },
+  "fond": {
+    "routes": "geojson-local",
+    "routes_jusqua": "departementale",
+    "note": "Extrait au moment de la publication et servi par le dépôt. Zéro requête sortante. Ni petites routes, ni noms de rue, ni bâti."
+  },
+  "etiquettes": {
+    "communes": "par-zoom",
+    "depuis_zoom": 10,
+    "seuils": [
+      [
+        10,
+        2500
+      ],
+      [
+        11,
+        900
+      ],
+      [
+        12,
+        0
+      ]
+    ],
+    "note": "Leaflet ne gère aucun évitement de chevauchement : sans paliers, les 284 noms s'empilent."
+  },
+  "fiche": {
+    "declencheur": "survol-et-clic",
+    "note": "Un panneau dans le flux, pas une bulle qui suit le curseur : une bulle disparaît dès qu'on veut la lire, masque la carte, et n'existe ni au doigt ni au clavier."
+  },
+  "symboles": {
+    "double_codage": true,
+    "palette": "Okabe-Ito",
+    "categorie": "famille principale",
+    "note": "Six familles, chacune avec une couleur ET une forme. Un lieu relevant de plusieurs familles est porté par la première dans l'ordre déclaré."
+  },
+  "contacts": {
+    "publier": "sans-courriel",
+    "note": "Site, horaires, description et lien vers la fiche d'origine. Courriel et téléphone ne sont pas republiés : ils sont publics à la source, mais pour un petit collectif le courriel est souvent une boîte personnelle."
   }
 }

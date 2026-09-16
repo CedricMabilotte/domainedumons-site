@@ -29,6 +29,13 @@ FAMILLES = [
     ("Économie sociale", ["economie sociale", "magasin", "commerce"]),
 ]
 
+# Okabe & Ito : la palette qualitative de référence en accessibilité. Chaque
+# famille porte AUSSI une forme — la couleur seule ne suffit jamais, et une
+# carte photocopiée en noir et blanc est un usage réel en milieu rural.
+COULEURS = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9"]
+FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"]
+
+
 def sans_acc(t):
     import unicodedata
     return "".join(c for c in unicodedata.normalize("NFD", t or "")
@@ -95,8 +102,9 @@ def main():
     a('<p id="carte-desc">%d points sur %d communes de Corrèze et des '
       'départements voisins. La molette fait défiler la page&nbsp;; '
       '<kbd>Ctrl</kbd> + molette zoome, ou deux doigts sur écran tactile. '
-      'Échap rend la main. <strong>La même information figure dans le tableau '
-      'sous la carte</strong>, qui se filtre en même temps qu\'elle.</p>'
+      'Échap rend la main. Chaque famille porte une couleur <em>et</em> une '
+      'forme. <strong>La même information figure dans le tableau sous la '
+      'carte</strong>, qui se filtre en même temps qu\'elle.</p>'
       % (len(lieux), communes))
 
     a('<div class="filtres" id="filtres"></div>')
@@ -104,26 +112,36 @@ def main():
     a('<div class="carto-zone" id="carte">'
       '<p class="chargement">La carte se charge. Le tableau ci-dessous donne '
       'la même information.</p></div>')
+    a('<p class="nb" id="note-etiquettes">Zoomez pour faire apparaître les '
+      'noms de communes.</p>')
+    a('<div id="legende"></div>')
+    a('<div class="carto-fiche" id="fiche" role="region" '
+      'aria-label="Fiche du lieu survolé"><p class="carto-fiche-vide">'
+      'Survolez un point, ou choisissez une ligne dans la liste, pour lire sa '
+      'fiche.</p></div>')
     a('</div>')
 
     # --- le bloc de métadonnées : non supprimable
     a('<dl class="carto-meta">')
     for terme, valeur in [
         ("Contours", "Admin Express (IGN), via geo.api.gouv.fr — Licence Ouverte 2.0"),
-        ("Lieux", "Transiscope, agrégation d'une vingtaine de cartes — ODbL"),
+        ("Lieux", "Transiscope, agrégation d'une vingtaine de cartes — CC BY-SA"),
+        ("Fond routier", "OpenStreetMap — ODbL — © les contributeurs "
+                         "OpenStreetMap. Fichier séparé, superposé au rendu."),
         ("Données arrêtées au", "15 septembre 2026"),
         ("Carte produite le", date.today().strftime("%d/%m/%Y")),
         ("Maillage", "communes, code officiel géographique 2026"),
         ("Projection", "Web Mercator (EPSG:3857) — aucune surface n'est comparée ici"),
         ("Non représenté", "les lieux sans coordonnées publiées ; les fiches non "
-                           "vérifiées sur place, soit la totalité ; les contours "
-                           "sont généralisés à environ 130 m, donc indicatifs "
-                           "au-delà du zoom 10"),
+                           "vérifiées sur place, soit la totalité ; les petites "
+                           "routes, les noms de rue et le bâti ; les courriels "
+                           "et téléphones, qui restent sur la fiche d'origine ; "
+                           "les contours sont généralisés à environ 130 m, donc "
+                           "indicatifs au-delà du zoom 10"),
         ("Requêtes sortantes", "aucune — bibliothèque et contours servis par ce dépôt"),
     ]:
         a('<dt>%s</dt><dd>%s</dd>' % (e(terme), valeur))
     a('</dl>')
-    a('<div id="fiche"></div>')
 
     # --- l'annuaire, en dur
     a('<h2 id="annuaire">L\'annuaire</h2>')
@@ -156,16 +174,35 @@ def main():
       'de Vitrac-sur-Montane</caption>' % z["rayon_km"])
     a('<thead><tr><th scope="col">Lieu</th><th scope="col">Commune</th>'
       '<th scope="col">Distance</th><th scope="col">Familles</th>'
+      '<th scope="col">Ce qu\'il dit faire</th>'
       '<th scope="col">Fiche mise à jour</th></tr></thead><tbody>')
     for i, l in enumerate(lieux):
         km = ("%.1f" % l["km"]).replace(".", ",")
         ou = cardinal(l["lat"], l["lon"])
+        prim = l["fam"][0] if l["fam"] else ""
+        nom = e(l["nom"])
+        if l.get("site"):
+            nom = '<a href="%s" rel="noopener nofollow">%s</a>' % (e(l["site"]), nom)
+        dit = e(l.get("decrit") or "")
+        if l.get("heures"):
+            dit += ('<br><span class="nb">Horaires déclarés : %s</span>'
+                    % e(l["heures"]))
+        if l.get("origine"):
+            dit += ('<br><a class="nb" href="%s" rel="noopener nofollow">'
+                    'Fiche d\'origine, avec les contacts</a>' % e(l["origine"]))
         a('<tr tabindex="0" data-i="%d" data-nom="%s" data-fam="%s" '
-          'data-lat="%.5f" data-lon="%.5f">'
-          '<td>%s</td><td>%s</td><td>%s km, %s</td><td>%s</td><td>%s</td></tr>'
-          % (i, e(l["nom"]), e("|".join(l["fam"])), l["lat"], l["lon"],
-             e(l["nom"]), e(l["commune"]), km, e(ou),
-             e(", ".join(l["fam"]) or "—"), e(l.get("maj") or "—")))
+          'data-prim="%s" data-lat="%.5f" data-lon="%.5f" data-km="%s" '
+          'data-ou="%s"%s%s%s%s>'
+          '<td>%s</td><td>%s</td><td>%s km, %s</td><td>%s</td>'
+          '<td class="carto-dit">%s</td><td>%s</td></tr>'
+          % (i, e(l["nom"]), e("|".join(l["fam"])), e(prim), l["lat"], l["lon"],
+             km, e(ou),
+             (' data-site="%s"' % e(l["site"])) if l.get("site") else "",
+             (' data-decrit="%s"' % e(l["decrit"])) if l.get("decrit") else "",
+             (' data-heures="%s"' % e(l["heures"])) if l.get("heures") else "",
+             (' data-origine="%s"' % e(l["origine"])) if l.get("origine") else "",
+             nom, e(l["commune"]), km, e(ou),
+             e(", ".join(l["fam"]) or "—"), dit or "—", e(l.get("maj") or "—")))
     a('</tbody></table></div>')
     a('<p class="nb"><a href="data/reseau-lieux.json">Télécharger les lieux '
       '(JSON)</a> · <a href="data/zone-communes.geojson">les contours '

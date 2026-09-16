@@ -95,7 +95,7 @@ def lieux():
         if dist > RAYON:
             continue
         a = e.get("address") or {}
-        out.append({
+        fiche = {
             "id": e.get("id"), "nom": (e.get("name") or "").strip(),
             "lat": round(float(la), 5), "lon": round(float(lo), 5),
             "km": round(dist, 1),
@@ -104,7 +104,42 @@ def lieux():
             "categories": [c for c in (e.get("categories") or [])
                            if c not in ("CC-By-SA", "Alternatives", "Près De Chez Nous")][:6],
             "maj": (e.get("updatedAt") or "")[:10],
-        })
+        }
+        # La fiche de contact, moins le courriel et le téléphone. Ces deux-là
+        # sont publics à la source, mais pour un petit collectif le courriel est
+        # souvent la boîte personnelle de quelqu'un : la republier sur un
+        # nouveau site l'expose aux aspirateurs d'adresses sans rien apporter.
+        # Ils restent à un clic, sur la fiche d'origine.
+        site = (e.get("website") or e.get("site") or "").strip()
+        if site.startswith(("http://", "https://")):
+            fiche["site"] = site
+        desc = (e.get("abstract") or e.get("description") or "").strip()
+        if desc:
+            fiche["decrit"] = " ".join(desc.split())[:400]
+        # openHours arrive tantôt en chaîne, tantôt en dictionnaire par jour
+        oh = e.get("openHours")
+        if isinstance(oh, dict):
+            JOURS = [("Mo", "lun"), ("Tu", "mar"), ("We", "mer"), ("Th", "jeu"),
+                     ("Fr", "ven"), ("Sa", "sam"), ("Su", "dim")]
+            bouts = []
+            for k, court in JOURS:
+                v = oh.get(k)
+                if not v:
+                    continue
+                if isinstance(v, list):
+                    v = ", ".join(str(x) for x in v if x)
+                v = " ".join(str(v).split())
+                if v:
+                    bouts.append("%s %s" % (court, v))
+            heures = " · ".join(bouts)
+        else:
+            heures = " ".join(str(oh or "").split())
+        if heures:
+            fiche["heures"] = heures[:200]
+        origine = (e.get("showUrl") or "").strip()
+        if origine.startswith(("http://", "https://")):
+            fiche["origine"] = origine
+        out.append(fiche)
     # Transiscope ne renseigne pas toujours la commune : on prend alors la plus proche
     try:
         z = json.load(open(sortie("zone-une-heure.json")))["communes"]

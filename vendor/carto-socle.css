@@ -120,3 +120,65 @@
   .carto-zone { height: clamp(260px, 52vh, 420px); }
   .carto-legende ul { flex-direction: column; gap: .25rem; }
 }
+
+/* ------------------------------------------------ étiquettes de communes */
+/* Sur un fond variable, le halo est le seul moyen fiable de tenir le
+   contraste du texte. Pas de fond opaque : il masquerait la donnée. */
+.carto-etiquette {
+  background: none; border: none; box-shadow: none; padding: 0;
+  color: var(--carto-encre); font-size: .72rem; font-weight: 600;
+  white-space: nowrap; pointer-events: none;
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff;
+}
+.carto-etiquette::before { display: none; }
+
+/* ----------------------------------------------------- fond de routes */
+/* Le fond recule : gris sourd, jamais coloré. Le contraste se dépense sur
+   la donnée, pas sur les routes. */
+.carto-route-a, .carto-route-n, .carto-route-d, .carto-route-x {
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+}
+.carto-route-a { stroke: #b9b2a6; }
+.carto-route-n { stroke: #c2bbb0; }
+.carto-route-d { stroke: #cfc9bf; }
+.carto-route-x { stroke: #dcd7cf; }
+
+/* --------------------------------------------- symboles de catégorie */
+.carto-symbole-hote { background: none; border: none; }
+.carto-symbole {
+  background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+  width: 17px; height: 17px; display: block; line-height: 0;
+}
+.carto-symbole svg { display: block; overflow: visible; }
+.carto-symbole:focus-visible {
+  outline: 3px solid var(--carto-encre); outline-offset: 3px; border-radius: 2px;
+}
+.carto-symbole-hote.en-avant .carto-symbole svg path,
+.carto-symbole:hover svg path { stroke: var(--carto-encre); stroke-width: 2.4; }
+.carto-symbole-hote.masque { opacity: .14; pointer-events: none; }
+/* Cible tactile : 24 px est le plancher réglementaire, 44 l'usage. On
+   élargit la zone sensible sans grossir le symbole. */
+@media (pointer: coarse) {
+  .carto-symbole { padding: 13px; margin: -13px; width: 43px; height: 43px; }
+}
+
+/* ------------------------------------------------- panneau de fiche */
+/* Un panneau dans le flux, pas une bulle qui suit le curseur : une bulle
+   disparaît dès qu'on veut la lire, masque la carte, et n'existe ni au
+   doigt ni au clavier. */
+.carto-fiche {
+  border: 1px solid var(--carto-trait); border-left: 3px solid var(--carto-accent);
+  padding: .7rem .9rem; margin: .7rem 0 0; min-height: 5.5rem;
+  background: var(--carto-fond);
+}
+.carto-fiche h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
+.carto-fiche p { margin: .25rem 0; font-size: .92rem; }
+.carto-fiche .carto-fiche-vide { color: var(--carto-douce); font-style: italic; }
+.carto-fiche dl { margin: .4rem 0 0; font-size: .88rem; }
+.carto-fiche dt { font-weight: 600; display: inline; }
+.carto-fiche dd { display: inline; margin: 0 0 0 .25rem; }
+.carto-fiche dd::after { content: ""; display: block; }
+.carto-fiche .carto-fiche-source { color: var(--carto-douce); font-size: .82rem; }
+
+.carto-pastille-svg { flex: 0 0 auto; line-height: 0; }
+.carto-legende-titre { margin: 0 0 .2rem; font-weight: 600; font-size: .9rem; }
