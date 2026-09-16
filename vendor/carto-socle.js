@@ -79,7 +79,7 @@
   }
 
   /* ---------------------------------------------------------- l'état d'URL */
-  function urlEtat(carte, lire) {
+  function urlEtat(carte) {
     var report = null;
     function ecrire() {
       clearTimeout(report);
@@ -92,10 +92,7 @@
       }, 400);
     }
     carte.on("moveend zoomend", ecrire);
-    if (lire && location.hash) {
-      var m = location.hash.match(/^#(\d+)\/(-?[\d.]+)\/(-?[\d.]+)/);
-      if (m) { carte.setView([+m[2], +m[3]], +m[1]); }
-    }
+    ecrire();
   }
 
   /* ------------------------------------------------------------- la carte */
@@ -110,8 +107,18 @@
     if (opts.titreId) { zone.setAttribute("aria-labelledby", opts.titreId); }
     if (opts.descId) { zone.setAttribute("aria-describedby", opts.descId); }
 
+    /* L'état d'URL est lu AVANT de construire la carte. Le poser après, par
+       setView, laissait la carte se créer au zoom par défaut puis sauter :
+       tout ce qui dépend du zoom à l'initialisation (les étiquettes, par
+       exemple) voyait alors la mauvaise valeur. */
+    var centre = opts.centre, zoom = opts.zoom;
+    if (opts.urlEtat !== false && opts.urlEtat !== "ecrire" && global.location.hash) {
+      var h = global.location.hash.match(/^#(\d+)\/(-?[\d.]+)\/(-?[\d.]+)/);
+      if (h) { zoom = +h[1]; centre = [+h[2], +h[3]]; }
+    }
+
     var carte = L.map(zone, {
-      center: opts.centre, zoom: opts.zoom,
+      center: centre, zoom: zoom,
       minZoom: opts.zoomMin, maxZoom: opts.zoomMax,
       scrollWheelZoom: false,
       attributionControl: false,
@@ -128,7 +135,7 @@
       if (e.key === "Escape") { zone.blur(); }
     });
 
-    if (opts.urlEtat !== false) { urlEtat(carte, opts.urlEtat !== "ecrire"); }
+    if (opts.urlEtat !== false) { urlEtat(carte); }
 
     return {
       carte: carte, zone: zone, dire: dire,
