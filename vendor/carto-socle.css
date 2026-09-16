@@ -124,12 +124,16 @@
 /* ------------------------------------------------ étiquettes de communes */
 /* Sur un fond variable, le halo est le seul moyen fiable de tenir le
    contraste du texte. Pas de fond opaque : il masquerait la donnée. */
-.carto-etiquette {
+/* Sélecteur doublé à dessein : la feuille du site hôte est chargée après
+   celle-ci, et une règle `.leaflet-tooltip` de même spécificité y remettrait
+   un cadre blanc autour de chaque nom. */
+.leaflet-tooltip.carto-etiquette, .carto-etiquette {
   background: none; border: none; box-shadow: none; padding: 0;
   color: var(--carto-encre); font-size: .72rem; font-weight: 600;
   white-space: nowrap; pointer-events: none;
   text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff;
 }
+.leaflet-tooltip.carto-etiquette::before,
 .carto-etiquette::before { display: none; }
 
 /* ----------------------------------------------------- fond de routes */

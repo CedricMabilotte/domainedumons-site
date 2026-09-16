@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le terrain, le gel, l'eau — Domaine du Mons</title>
 <meta name="description" content="Où l'air froid s'accumule, où l'eau se rassemble, et ce que le parcellaire a perdu depuis 1959. Calculé sur le relevé LiDAR de l'IGN à 50 cm.">
-<link rel="stylesheet" href="style.css?v=19">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 <div class="bandeau">
@@ -150,7 +150,7 @@
     </ul>
   </div>
 </footer>
-<script src="tdb.js?v=19"></script>
+<script src="tdb.js?v=20"></script>
 <script>
 const CARDINAUX = ["nord", "nord-est", "est", "sud-est", "sud", "sud-ouest", "ouest", "nord-ouest"];
 const cardinal = (deg) => CARDINAUX[Math.round(((deg % 360) + 360) % 360 / 45) % 8];
@@ -254,6 +254,6 @@ function legende(items) {
     " · " + d.source + " · Licence Ouverte 2.0.";
 })();
 </script>
-<script src="site.js?v=19"></script>
+<script src="site.js?v=20"></script>
 </body>
 </html>
