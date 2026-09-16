@@ -258,7 +258,13 @@
       var n = 0;
       posees.forEach(function (e) {
         var veut = actif && e.rang >= s;
-        if (veut === e.visible) { if (veut) { n++; } return; }
+        /* Idempotent : on repose l'étiquette si elle devrait être là mais ne
+           l'est pas. Se fier au seul drapeau `visible` laissait les étiquettes
+           liées mais jamais peintes quand le premier appel tombait avant que
+           la carte ait fini de se poser. */
+        var posee = e.visible && e.couche.isTooltipOpen && e.couche.isTooltipOpen();
+        if (veut && posee) { n++; return; }
+        if (!veut && !e.visible) { return; }
         e.visible = veut;
         if (veut) {
           e.couche.bindTooltip(e.nom, {
@@ -276,7 +282,8 @@
       });
       if (opts.surChangement) { opts.surChangement(n, actif); }
     }
-    ctx.carte.on("zoomend", revoir);
+    ctx.carte.on("zoomend moveend", revoir);
+    ctx.carte.whenReady(revoir);
     revoir();
     return { revoir: revoir, compte: function () { return posees.length; } };
   }
