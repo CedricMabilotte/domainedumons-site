@@ -26,10 +26,15 @@
 }
 
 /* Le fond de carte recule, le contraste est dépensé sur la donnée. */
-.carto-maille { stroke: var(--carto-maille); fill: #fbfaf8; }
+.carto-maille { stroke: var(--carto-maille); fill: #fbfaf8; fill-opacity: 0;
+                stroke-opacity: 1; }
 .carto-point {
   stroke: #ffffff;
   fill: var(--carto-accent);
+  /* Leaflet pose fill-opacity="0.2" en ATTRIBUT sur chaque tracé : sans cette
+     ligne, les points sortent délavés et personne ne comprend pourquoi. */
+  fill-opacity: 1;
+  stroke-opacity: 1;
   cursor: pointer;
 }
 .carto-point:focus-visible {
