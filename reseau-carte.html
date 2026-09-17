@@ -6,8 +6,8 @@
 <title>La cartographie des lieux — Domaine du Mons</title>
 <meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="vendor/carto-socle.css?v=26">
-<link rel="stylesheet" href="style.css?v=26">
+<link rel="stylesheet" href="vendor/carto-socle.css?v=27">
+<link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
 <div class="bandeau">
@@ -348,6 +348,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
 
 
 
+
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -362,8 +364,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
   </div>
 </footer>
 <script src="vendor/leaflet.js"></script>
-<script src="vendor/carto-socle.js?v=26"></script>
-<script src="tdb.js?v=26"></script>
+<script src="vendor/carto-socle.js?v=27"></script>
+<script src="tdb.js?v=27"></script>
 <script>
 /* La carte du réseau, posée sur le socle carto-territoire.
    La liste est déjà dans la page : ce script ne la construit pas, il s'y
@@ -391,15 +393,25 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
     return;
   }
   /* Le fond est un supplément : s'il manque, la carte marche quand même. */
-  let toponymes = null;
+  let toponymes = null, eau = null;
   try { routes = await json("data/zone-routes.geojson"); } catch (e) { routes = null; }
   try { toponymes = await json("data/zone-toponymes.geojson"); } catch (e) { toponymes = null; }
+  try { eau = await json("data/zone-eau.geojson"); } catch (e) { eau = null; }
 
   const ctx = Carto.creer({
     zone: "carte", centre: ICI, zoom: 9, zoomMin: 8, zoomMax: 13,
     molette: "cooperative", titreId: "carte-titre", descId: "carte-desc"
   });
 
+  /* L'eau passe sous les routes : c'est à une rivière qu'on se situe en
+     rural, mais une rivière ne franchit pas un pont par-dessus la route. */
+  if (eau) { Carto.eau(ctx, eau, { depuisZoom: 0 }); }
+  /* Les ruisseaux pèsent autant que tout le reste de l'eau et ne servent
+     qu'au détail : la page ne va les chercher qu'en arrivant au zoom 12.
+     Tant qu'on reste au-dessus, cet octet-là n'est jamais envoyé. */
+  Carto.differer(ctx, "data/zone-eau-fine.geojson", 12, function (d) {
+    Carto.eau(ctx, d, { depuisZoom: 12 });
+  });
   if (routes) { Carto.routes(ctx, routes, { depuisZoom: 0 }); }
 
   const cc = Carto.contours(ctx, contours, {
@@ -576,6 +588,6 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
   });
 })();
 </script>
-<script src="site.js?v=26"></script>
+<script src="site.js?v=27"></script>
 </body>
 </html>

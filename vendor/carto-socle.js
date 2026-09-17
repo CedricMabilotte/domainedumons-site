@@ -424,9 +424,9 @@
      tout le reste, dans un bleu sourd : c'est un repère, pas une donnée. */
   function eau(ctx, geojson, opts) {
     opts = opts || {};
-    pane(ctx);
+    paneEau(ctx);
     var couche = L.geoJSON(geojson, {
-      pane: "carto-fond",
+      pane: "carto-eau",
       style: function (f) {
         var plan = (f.properties || {}).genre === "plan";
         return plan
@@ -503,6 +503,46 @@
       ctx.carte.createPane("carto-fond");
       ctx.carte.getPane("carto-fond").style.zIndex = 390;
     }
+  }
+  /* L'eau a son propre plan, SOUS les routes. Dans un même plan, Leaflet
+     empile dans l'ordre d'ajout : une couche d'eau posée après coup — parce
+     qu'elle n'est allée se chercher qu'au zoom de détail — passerait alors
+     par-dessus les routes. Un plan séparé rend l'ordre indépendant du moment
+     où la couche arrive. */
+  function paneEau(ctx) {
+    if (ctx.carte.getPane("carto-eau") === undefined) {
+      ctx.carte.createPane("carto-eau");
+      ctx.carte.getPane("carto-eau").style.zIndex = 385;
+    }
+  }
+
+  /* N'aller chercher un calque qu'au moment où il sert.
+
+     Un fond qui ne s'affiche qu'à partir d'un zoom n'a aucune raison d'être
+     téléchargé à l'ouverture. En rural la liaison est ce qu'elle est, et
+     l'octet le moins cher reste celui qu'on n'envoie pas. La requête part une
+     seule fois, au premier franchissement du seuil.
+
+     Un échec est définitif et silencieux : c'est un fond, la carte se lit
+     sans lui. Réessayer à chaque zoom sur une liaison déjà en peine ne ferait
+     qu'ajouter à la panne. */
+  function differer(ctx, url, depuisZoom, poser) {
+    var etat = 0;              /* 0 rien, 1 en cours, 2 posé, 3 échoué */
+    function voir() {
+      if (etat !== 0 || ctx.carte.getZoom() < depuisZoom) { return; }
+      etat = 1;
+      fetch(url, { credentials: "omit" })
+        .then(function (r) {
+          if (!r.ok) { throw new Error(r.status); }
+          return r.json();
+        })
+        .then(function (d) { etat = 2; poser(d); })
+        .catch(function () { etat = 3; });
+    }
+    ctx.carte.on("zoomend", voir);
+    ctx.carte.whenReady(voir);
+    voir();
+    return { voir: voir };
   }
   function borner(ctx, couche, opts) {
     var depuis = opts.depuisZoom || 0;
@@ -706,6 +746,7 @@
     creer: creer, contours: contours, points: points, lier: lier,
     etiquettes: etiquettes, routes: routes, tuiles: tuiles,
     eau: eau, toponymes: toponymes, symboles: symboles,
+    differer: differer,
     fiche: fiche, legende: legende,
     FORMES: FORMES, ORDRE_FORMES: ORDRE_FORMES,
     nf: nf, sobre: sobre

@@ -16,7 +16,7 @@ qu'au rendu. Attribution « © les contributeurs OpenStreetMap » obligatoire.
 
     python3 scripts/fond-local.py toponymes|eau|routes-fines
 """
-import json, math, os, sys, time, urllib.parse, urllib.request
+import hashlib, heapq, io, json, math, os, sys, time, urllib.parse, urllib.request
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OVERPASS = "https://overpass-api.de/api/interpreter"
@@ -33,19 +33,35 @@ def bbox():
     return (ICI[0] - dlat, ICI[1] - dlon, ICI[0] + dlat, ICI[1] + dlon)
 
 
-def appel(req, essais=3):
+CACHE = os.path.expanduser("~/ddm-tmp/overpass")
+
+def appel(req, essais=5):
+    """Une requete rendue est gardee sur disque. Un reseau qui lache ou une
+    instance qui rend 504 ne fait alors perdre que la case en cours : la
+    relance repart de la, pas du debut. Le cache est hors du depot."""
+    os.makedirs(CACHE, exist_ok=True)
+    cle = os.path.join(CACHE, hashlib.sha1(req.encode("utf-8")).hexdigest() + ".json")
+    if os.path.exists(cle) and os.path.getsize(cle) > 2:
+        with io.open(cle, encoding="utf-8") as fh:
+            return json.load(fh)
     for e in range(essais):
         try:
             r = urllib.request.Request(
                 OVERPASS, data=urllib.parse.urlencode({"data": req}).encode(),
                 headers={"User-Agent": UA})
-            with urllib.request.urlopen(r, timeout=240) as rep:
-                return json.loads(rep.read().decode("utf-8"))
+            with urllib.request.urlopen(r, timeout=180) as rep:
+                d = json.loads(rep.read().decode("utf-8"))
+            with io.open(cle, "w", encoding="utf-8") as fh:
+                json.dump(d, fh)
+            return d
         except Exception as ex:
             if e == essais - 1:
                 raise
-            print("      (reprise : %s)" % str(ex)[:60])
-            time.sleep(8 * (e + 1))
+            # 504 veut dire que l'instance est chargee : attendre franchement,
+            # sans quoi on ne fait qu'ajouter a sa charge.
+            attente = 15 * (2 ** e)
+            print("      (reprise dans %d s : %s)" % (attente, str(ex)[:70]))
+            time.sleep(attente)
 
 
 def cases(n):
@@ -87,23 +103,48 @@ def aire(a, b, c):
 
 
 def simplifier(pts, tol, mini=2):
-    if len(pts) <= mini:
-        return list(pts)
-    seuil, p = tol * tol, list(pts)
-    while len(p) > mini:
-        ai = [(aire(p[i-1], p[i], p[i+1]), i) for i in range(1, len(p)-1)]
-        if not ai:
+    """Visvalingam par tas. Une entree perimee est recalculee et repoussee,
+    jamais jetee : la jeter laisse derriere des sommets que l'algorithme croit
+    deja traites, et la simplification ne retire presque rien. La version
+    naive, elle, est en O(n2) et ne rend pas la main sur une riviere de
+    quatre mille sommets."""
+    n = len(pts)
+    if n <= mini:
+        return [list(p) for p in pts]
+    p = [list(x) for x in pts]
+    prec = list(range(-1, n - 1))
+    suiv = list(range(1, n + 1)); suiv[-1] = -1
+    vivant = [True] * n
+    tas = []
+    for i in range(1, n - 1):
+        heapq.heappush(tas, (aire(p[i-1], p[i], p[i+1]), i))
+    restants, seuil = n, tol * tol
+    while tas and restants > mini:
+        a, i = heapq.heappop(tas)
+        if not vivant[i] or prec[i] < 0 or suiv[i] < 0:
+            continue
+        courante = aire(p[prec[i]], p[i], p[suiv[i]])
+        if courante > a + 1e-18:
+            heapq.heappush(tas, (courante, i))
+            continue
+        if courante > seuil:
             break
-        m, i = min(ai)
-        if m > seuil:
-            break
-        del p[i]
-    return p
+        vivant[i] = False; restants -= 1
+        g, d = prec[i], suiv[i]
+        suiv[g] = d; prec[d] = g
+        for k in (g, d):
+            if 0 < k < n - 1 and vivant[k] and prec[k] >= 0 and suiv[k] >= 0:
+                heapq.heappush(tas, (aire(p[prec[k]], p[k], p[suiv[k]]), k))
+    return [p[i] for i in range(n) if vivant[i]]
 
 
-def tolerance():
+def tolerance(pixels=0.5):
+    """Le deplacement admis, exprime en pixels au zoom maximal. 0,5 px pour la
+    donnee : on ne deforme pas ce qu'on mesure. 1 px pour un fond : il recule,
+    et le sommet economise est un octet de moins a telecharger sur une liaison
+    qui, en rural, n'est pas toujours la."""
     return (40075016.686 * math.cos(math.radians(ICI[0]))
-            / (2 ** (ZOOM_MAX + 8))) * 0.5 / 111120.0
+            / (2 ** (ZOOM_MAX + 8))) * pixels / 111120.0
 
 
 def ecrire(fc, nom, note):
@@ -155,13 +196,54 @@ def toponymes():
 
 
 # --------------------------------------------------------------------- eau
+def longueur_m(co):
+    t = 0.0
+    for k in range(len(co) - 1):
+        x1, y1 = co[k]; x2, y2 = co[k + 1]
+        t += math.hypot((x2 - x1) * 111320 * math.cos(math.radians(ICI[0])),
+                        (y2 - y1) * 111120)
+    return t
+
+
+def aire_m2(co):
+    t = 0.0
+    for k in range(len(co) - 1):
+        x1, y1 = co[k]; x2, y2 = co[k + 1]
+        t += x1 * y2 - x2 * y1
+    return abs(t) / 2 * 111120 * 111320 * math.cos(math.radians(ICI[0]))
+
+
+#: Un plan d'eau plus petit que cela fait moins de cinq pixels au zoom
+#: maximal : ce n'est plus un repere, c'est une poussiere bleue.
+PLAN_MIN_HA = 0.45
+#: Un ruisseau plus court que cela fait moins de quarante pixels : il ne dit
+#: pas ou l'on est.
+RUISSEAU_MIN_M = 500.0
+
+
 def eau():
-    gab = ('[out:json][timeout:180];('
+    """Deux fichiers, pas un.
+
+    Les rivieres, les canaux et les plans d'eau tiennent en 220 Ko compresses
+    et servent des le premier zoom : c'est a une riviere qu'on se situe en
+    rural, avant toute limite administrative.
+
+    Les ruisseaux pesent autant a eux seuls, et ne servent qu'au zoom de
+    detail. Les mettre dans le meme fichier ferait payer a chaque visiteur,
+    des l'ouverture, une couche que la plupart ne verront jamais. Ils vont
+    donc dans un fichier a part, que la page ne va chercher qu'en arrivant au
+    zoom ou ils s'affichent.
+
+    Limite assumee : seules les geometries portees par des chemins sont
+    reprises. Les grandes retenues decrites comme relations multipolygones
+    sont absentes.
+    """
+    gab = ('[out:json][timeout:120];('
            'way["natural"="water"](%(s)f,%(o)f,%(n)f,%(e)f);'
-           'way["waterway"~"^(river|canal)$"](%(s)f,%(o)f,%(n)f,%(e)f););'
+           'way["waterway"~"^(river|stream|canal)$"](%(s)f,%(o)f,%(n)f,%(e)f););'
            "out geom;")
-    vus, traits = set(), []
-    liste = cases(4)
+    vus, bruts = set(), []
+    liste = cases(6)
     for i, c in enumerate(liste, 1):
         rep = appel(gab % {"s": c[0], "o": c[1], "n": c[2], "e": c[3]})
         neufs = 0
@@ -169,42 +251,59 @@ def eau():
             k = (el.get("type"), el.get("id"))
             if k in vus:
                 continue
-            vus.add(k)
-            geo = el.get("geometry")
-            if not geo or len(geo) < 2:
-                continue
-            t = el.get("tags") or {}
-            co = [[p["lon"], p["lat"]] for p in geo]
-            if not any(km(y, x) <= RAYON + 1.5 for x, y in co):
-                continue
-            plan = t.get("natural") == "water" and co[0] == co[-1]
-            traits.append({"type": "Feature",
-                           "properties": {"genre": "plan" if plan else "cours"},
-                           "geometry": ({"type": "Polygon", "coordinates": [co]}
-                                        if plan else
-                                        {"type": "LineString", "coordinates": co})})
-            neufs += 1
+            vus.add(k); bruts.append(el); neufs += 1
         print("    case %d/%d : %d objets (%d nouveaux)"
               % (i, len(liste), len(rep.get("elements", [])), neufs))
         time.sleep(2.0)
-    tol, n0, n1 = tolerance(), 0, 0
-    for f in traits:
-        g = f["geometry"]
-        if g["type"] == "LineString":
-            n0 += len(g["coordinates"])
-            s = simplifier(g["coordinates"], tol)
-            g["coordinates"] = [[round(x, 4), round(y, 4)] for x, y in s]; n1 += len(s)
-        else:
-            a = g["coordinates"][0]; n0 += len(a)
-            s = simplifier(a, tol, 4)
-            if s[0] != s[-1]:
-                s.append(s[0])
-            g["coordinates"] = [[[round(x, 4), round(y, 4)] for x, y in s]]; n1 += len(s)
-    print("  sommets : %d → %d" % (n0, n1))
-    ecrire({"type": "FeatureCollection", "features": traits}, "zone-eau.geojson",
-           "Plans d'eau et cours d'eau. Seules les géométries portées par des "
-           "chemins sont reprises : les grandes retenues décrites comme "
-           "relations multipolygones sont absentes.")
+
+    # Un fond recule : 1 px de deplacement admis, contre 0,5 px pour la donnee.
+    tol = tolerance(1.0)
+    large, fine = [], []
+    n0 = n1 = 0
+    for el in bruts:
+        t = el.get("tags") or {}
+        geo = el.get("geometry")
+        if not geo or len(geo) < 2:
+            continue
+        co = [[p["lon"], p["lat"]] for p in geo]
+        if not any(km(y, x) <= RAYON + 1.5 for x, y in co):
+            continue
+        n0 += len(co)
+        plan = t.get("natural") == "water" and co[0] == co[-1]
+        if plan:
+            if aire_m2(co) < PLAN_MIN_HA * 10000:
+                continue
+            sp = simplifier(co, tol, 4)
+            if sp[0] != sp[-1]:
+                sp.append(sp[0])
+            n1 += len(sp)
+            large.append({"type": "Feature", "properties": {"genre": "plan"},
+                          "geometry": {"type": "Polygon", "coordinates":
+                                       [[[round(x, 4), round(y, 4)] for x, y in sp]]}})
+            continue
+        w = t.get("waterway")
+        if w not in ("river", "canal", "stream"):
+            continue
+        if w == "stream" and longueur_m(co) < RUISSEAU_MIN_M:
+            continue
+        sp = simplifier(co, tol)
+        n1 += len(sp)
+        f = {"type": "Feature", "properties": {"genre": "cours"},
+             "geometry": {"type": "LineString",
+                          "coordinates": [[round(x, 4), round(y, 4)] for x, y in sp]}}
+        (fine if w == "stream" else large).append(f)
+
+    print("  sommets : %d -> %d" % (n0, n1))
+    ecrire({"type": "FeatureCollection", "features": large}, "zone-eau.geojson",
+           "Rivieres, canaux et plans d'eau d'au moins %g ha. Seules les "
+           "geometries portees par des chemins sont reprises : les grandes "
+           "retenues decrites comme relations multipolygones sont absentes."
+           % PLAN_MIN_HA)
+    ecrire({"type": "FeatureCollection", "features": fine}, "zone-eau-fine.geojson",
+           "Ruisseaux d'au moins %d m. Fichier separe, que la page ne va "
+           "chercher qu'au zoom ou ils s'affichent : il pese autant que tout "
+           "le reste de l'eau et ne sert qu'au detail."
+           % int(RUISSEAU_MIN_M))
 
 
 if __name__ == "__main__":

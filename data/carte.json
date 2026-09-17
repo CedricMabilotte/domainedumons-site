@@ -1,152 +1,160 @@
 {
-  "nom": "reseau-lieux",
-  "titre": "Lieux portés par des collectifs, à 45 km de Vitrac-sur-Montane",
-  "explication": "La fiche de la carte, au format du plugin carto-territoire. Elle décrit entièrement la carte : ce qui la nourrit, comment elle est rendue, et ce qu'elle ne montre pas. Elle suffit à la régénérer.",
-  "date_carte": "2026-09-17",
-  "date_donnees": "2026-09-15",
-  "maillage": "communes, code officiel géographique 2026",
-  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Le bâti, les noms de rue et le relief — un fond servi par le dépôt ne les porte pas. Les lieux-dits, écarts isolés et fermes : près de cinq mille noms écartés, qui auraient empilé les étiquettes sans aider à se repérer. L'eau : l'extraction a échoué sur un délai dépassé d'Overpass, elle reste à faire. Les noms qui ne tiennent pas sans en recouvrir un autre : à chaque échelle, seuls les plus importants sont écrits. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m : indicatifs au-delà du zoom 10, et le zoom monte désormais à 13 pour les hameaux — les points, eux, restent exacts.",
-  "licence": "Licence Ouverte 2.0 pour les contours et la zone ; CC BY-SA pour les lieux, repris de Transiscope ; ODbL pour le fond routier, repris d'OpenStreetMap. Les trois jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
-  "sources": [
-    {
-      "quoi": "contours et population des communes",
-      "ou": "https://geo.api.gouv.fr — IGN Admin Express",
-      "licence": "Licence Ouverte 2.0",
-      "extrait_le": "2026-09-15",
-      "regenerer": "python3 scripts/reseau.py"
-    },
-    {
-      "quoi": "lieux portés par des collectifs",
-      "ou": "https://transiscope.org/",
-      "licence": "ODbL",
-      "extrait_le": "2026-09-15",
-      "regenerer": "python3 scripts/reseau.py"
-    },
-    {
-      "quoi": "fond de carte — routes structurantes et noms de lieux",
-      "ou": "OpenStreetMap via Overpass",
-      "licence": "ODbL",
-      "attribution": "© les contributeurs OpenStreetMap",
-      "extrait_le": "2026-09-17",
-      "regenerer": "python3 scripts/fond-routier.py ; python3 scripts/fond-local.py toponymes"
-    }
-  ],
-  "rendu": {
-    "mode": "local",
-    "molette": "cooperative",
-    "hote": "github-pages",
-    "biblio": "Leaflet 1.9.4 (BSD-2-Clause), copie locale dans vendor/",
-    "zoom": [
-      8,
-      12
-    ],
-    "note_hote": "Sonde du 16/09/2026 : GitHub Pages annonce Accept-Ranges mais renvoie un total incohérent selon la compression (147625 sans, 43253 avec). Le mode pmtiles y est donc inutilisable."
+ "nom": "reseau-lieux",
+ "titre": "Lieux portés par des collectifs, à 45 km de Vitrac-sur-Montane",
+ "explication": "La fiche de la carte, au format du plugin carto-territoire. Elle décrit entièrement la carte : ce qui la nourrit, comment elle est rendue, et ce qu'elle ne montre pas. Elle suffit à la régénérer.",
+ "date_carte": "2026-09-17",
+ "date_donnees": "2026-09-15",
+ "maillage": "communes, code officiel géographique 2026",
+ "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Le bâti, les noms de rue et le relief — un fond servi par le dépôt ne les porte pas. Les lieux-dits, écarts isolés et fermes : près de cinq mille noms écartés, qui auraient empilé les étiquettes sans aider à se repérer. Les plans d'eau de moins de 0,45 hectare et les ruisseaux de moins de 500 mètres : au zoom le plus serré de cette carte, un pixel vaut 13,4 mètres, et ils y font moins de cinq pixels — ils n'aident plus à se repérer, ils encombrent. Les grandes retenues décrites dans OpenStreetMap comme relations multipolygones, que l'extraction ne reprend pas. Les noms qui ne tiennent pas sans en recouvrir un autre : à chaque échelle, seuls les plus importants sont écrits. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m : indicatifs au-delà du zoom 10, et le zoom monte désormais à 13 pour les hameaux — les points, eux, restent exacts.",
+ "licence": "Licence Ouverte 2.0 pour les contours et la zone ; CC BY-SA pour les lieux, repris de Transiscope ; ODbL pour le fond routier, repris d'OpenStreetMap. Les trois jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
+ "sources": [
+  {
+   "quoi": "contours et population des communes",
+   "ou": "https://geo.api.gouv.fr — IGN Admin Express",
+   "licence": "Licence Ouverte 2.0",
+   "extrait_le": "2026-09-15",
+   "regenerer": "python3 scripts/reseau.py"
   },
-  "zone": {
-    "type": "rayon",
-    "centre": [
-      45.35137,
-      1.93221
-    ],
-    "rayon_km": 45,
-    "communes": 284,
-    "population": 238575,
-    "projection": "webmercator",
-    "note_projection": "Web Mercator est conforme, donc non équivalent. Aucune surface n'est comparée sur cette carte, donc c'est sans conséquence ici. Une choroplèthe exigerait Lambert-93.",
-    "avertissement": "Rayon à vol d'oiseau, pas temps de trajet."
+  {
+   "quoi": "lieux portés par des collectifs",
+   "ou": "https://transiscope.org/",
+   "licence": "ODbL",
+   "extrait_le": "2026-09-15",
+   "regenerer": "python3 scripts/reseau.py"
   },
-  "couches": [
-    {
-      "id": "communes",
-      "fichier": "data/zone-communes.geojson",
-      "role": "maille",
-      "source": "IGN Admin Express",
-      "licence": "Licence Ouverte 2.0"
-    },
-    {
-      "id": "lieux",
-      "fichier": "data/reseau-lieux.json",
-      "role": "points",
-      "source": "Transiscope",
-      "licence": "ODbL",
-      "entites": 191
-    },
-    {
-      "id": "routes",
-      "fichier": "data/zone-routes.geojson",
-      "role": "fond",
-      "source": "OpenStreetMap",
-      "licence": "ODbL"
-    },
-    {
-      "id": "toponymes",
-      "fichier": "data/zone-toponymes.geojson",
-      "role": "fond",
-      "source": "OpenStreetMap",
-      "licence": "ODbL",
-      "entites": 3772
-    }
-  ],
-  "thematique": {
-    "type": "aucune",
-    "note": "Aucune variable n'est représentée : ce sont des lieux sur un fond. Pas de discrétisation, pas de palette, donc aucun des pièges de la choroplèthe."
-  },
-  "acces": {
-    "liste_html": true,
-    "tableau_equivalent": true,
-    "ecrit_au_build": true,
-    "lien_evitement": true,
-    "export": [
-      "json",
-      "geojson"
-    ],
-    "note": "Le tableau est écrit dans la page au moment de la publication et se filtre avec la carte. Sans JavaScript, la liste reste entière."
-  },
-  "souverainete": {
-    "requetes_sortantes": "aucune",
-    "verifie_le": "2026-09-17",
-    "note": "Aucun fond tuilé. Tout est servi par ce dépôt."
-  },
-  "fond": {
-    "routes": "geojson-local",
-    "routes_jusqua": "departementale",
-    "toponymes": "geojson-local",
-    "tuiles": "aucune",
-    "note": "Extraits d'OpenStreetMap au moment de la publication et servis par le dépôt. Les DONNÉES d'OpenStreetMap sont libres ; ses SERVEURS DE TUILES sont une infrastructure tierce comme une autre — changer de fournisseur de tuiles ne changerait rien à ce qui part du navigateur du visiteur, seulement le destinataire. Seul un fond servi par notre propre domaine n'envoie rien."
-  },
-  "etiquettes": {
-    "communes": "placement sans chevauchement",
-    "depuis_zoom": 10,
-    "max_communes": 40,
-    "toponymes_seuils": [
-      [
-        11,
-        3
-      ],
-      [
-        12,
-        4
-      ],
-      [
-        13,
-        5
-      ]
-    ],
-    "max_toponymes": 55,
-    "note": "Leaflet n'écarte pas les étiquettes, il les empile. Le socle place donc les noms un par un, triés par importance, et saute tout ce qui recouvrirait un nom déjà posé — seul ce qui est dans la vue est considéré. Sans cela, 3 472 noms s'affichaient d'un coup au zoom 12. Les noms déjà portés par une étiquette de commune sont écartés des toponymes pour ne pas s'écrire deux fois."
-  },
-  "fiche": {
-    "declencheur": "survol-et-clic",
-    "note": "Un panneau dans le flux, pas une bulle qui suit le curseur : une bulle disparaît dès qu'on veut la lire, masque la carte, et n'existe ni au doigt ni au clavier."
-  },
-  "symboles": {
-    "double_codage": true,
-    "palette": "Okabe-Ito",
-    "categorie": "famille principale",
-    "note": "Six familles, chacune avec une couleur ET une forme. Un lieu relevant de plusieurs familles est porté par la première dans l'ordre déclaré."
-  },
-  "contacts": {
-    "publier": "sans-courriel",
-    "note": "Site, horaires, description et lien vers la fiche d'origine. Courriel et téléphone ne sont pas republiés : ils sont publics à la source, mais pour un petit collectif le courriel est souvent une boîte personnelle."
+  {
+   "quoi": "fond de carte — routes structurantes, noms de lieux, eau",
+   "ou": "OpenStreetMap via Overpass",
+   "licence": "ODbL",
+   "attribution": "© les contributeurs OpenStreetMap",
+   "extrait_le": "2026-09-17",
+   "regenerer": "python3 scripts/fond-routier.py ; python3 scripts/fond-local.py toponymes ; python3 scripts/fond-local.py eau"
   }
+ ],
+ "rendu": {
+  "mode": "local",
+  "molette": "cooperative",
+  "hote": "github-pages",
+  "biblio": "Leaflet 1.9.4 (BSD-2-Clause), copie locale dans vendor/",
+  "zoom": [
+   8,
+   12
+  ],
+  "note_hote": "Sonde du 16/09/2026 : GitHub Pages annonce Accept-Ranges mais renvoie un total incohérent selon la compression (147625 sans, 43253 avec). Le mode pmtiles y est donc inutilisable."
+ },
+ "zone": {
+  "type": "rayon",
+  "centre": [
+   45.35137,
+   1.93221
+  ],
+  "rayon_km": 45,
+  "communes": 284,
+  "population": 238575,
+  "projection": "webmercator",
+  "note_projection": "Web Mercator est conforme, donc non équivalent. Aucune surface n'est comparée sur cette carte, donc c'est sans conséquence ici. Une choroplèthe exigerait Lambert-93.",
+  "avertissement": "Rayon à vol d'oiseau, pas temps de trajet."
+ },
+ "couches": [
+  {
+   "id": "communes",
+   "fichier": "data/zone-communes.geojson",
+   "role": "maille",
+   "source": "IGN Admin Express",
+   "licence": "Licence Ouverte 2.0"
+  },
+  {
+   "id": "lieux",
+   "fichier": "data/reseau-lieux.json",
+   "role": "points",
+   "source": "Transiscope",
+   "licence": "ODbL",
+   "entites": 191
+  },
+  {
+   "id": "routes",
+   "fichier": "data/zone-routes.geojson",
+   "role": "fond",
+   "source": "OpenStreetMap",
+   "licence": "ODbL"
+  },
+  {
+   "id": "toponymes",
+   "fichier": "data/zone-toponymes.geojson",
+   "role": "fond",
+   "source": "OpenStreetMap",
+   "licence": "ODbL",
+   "entites": 3772
+  }
+ ],
+ "thematique": {
+  "type": "aucune",
+  "note": "Aucune variable n'est représentée : ce sont des lieux sur un fond. Pas de discrétisation, pas de palette, donc aucun des pièges de la choroplèthe."
+ },
+ "acces": {
+  "liste_html": true,
+  "tableau_equivalent": true,
+  "ecrit_au_build": true,
+  "lien_evitement": true,
+  "export": [
+   "json",
+   "geojson"
+  ],
+  "note": "Le tableau est écrit dans la page au moment de la publication et se filtre avec la carte. Sans JavaScript, la liste reste entière."
+ },
+ "souverainete": {
+  "requetes_sortantes": "aucune",
+  "verifie_le": "2026-09-17",
+  "note": "Aucun fond tuilé. Tout est servi par ce dépôt."
+ },
+ "fond": {
+  "routes": "geojson-local",
+  "routes_jusqua": "departementale",
+  "toponymes": "geojson-local",
+  "tuiles": "aucune",
+  "note": "Extraits d'OpenStreetMap au moment de la publication et servis par le dépôt. Les DONNÉES d'OpenStreetMap sont libres ; ses SERVEURS DE TUILES sont une infrastructure tierce comme une autre — changer de fournisseur de tuiles ne changerait rien à ce qui part du navigateur du visiteur, seulement le destinataire. Seul un fond servi par notre propre domaine n'envoie rien.",
+  "eau": {
+   "fichiers": [
+    "data/zone-eau.geojson",
+    "data/zone-eau-fine.geojson"
+   ],
+   "pourquoi_deux": "Rivières, canaux et plans d'eau sont servis dès l'ouverture. Les ruisseaux pèsent autant à eux seuls et ne servent qu'au détail : la page ne va les chercher qu'en arrivant au zoom 12. Sur une liaison rurale, l'octet le moins cher est celui qu'on n'envoie pas.",
+   "simplification": "1 pixel de déplacement admis au zoom maximal, contre 0,5 pixel pour la donnée : un fond recule."
+  }
+ },
+ "etiquettes": {
+  "communes": "placement sans chevauchement",
+  "depuis_zoom": 10,
+  "max_communes": 40,
+  "toponymes_seuils": [
+   [
+    11,
+    3
+   ],
+   [
+    12,
+    4
+   ],
+   [
+    13,
+    5
+   ]
+  ],
+  "max_toponymes": 55,
+  "note": "Leaflet n'écarte pas les étiquettes, il les empile. Le socle place donc les noms un par un, triés par importance, et saute tout ce qui recouvrirait un nom déjà posé — seul ce qui est dans la vue est considéré. Sans cela, 3 472 noms s'affichaient d'un coup au zoom 12. Les noms déjà portés par une étiquette de commune sont écartés des toponymes pour ne pas s'écrire deux fois."
+ },
+ "fiche": {
+  "declencheur": "survol-et-clic",
+  "note": "Un panneau dans le flux, pas une bulle qui suit le curseur : une bulle disparaît dès qu'on veut la lire, masque la carte, et n'existe ni au doigt ni au clavier."
+ },
+ "symboles": {
+  "double_codage": true,
+  "palette": "Okabe-Ito",
+  "categorie": "famille principale",
+  "note": "Six familles, chacune avec une couleur ET une forme. Un lieu relevant de plusieurs familles est porté par la première dans l'ordre déclaré."
+ },
+ "contacts": {
+  "publier": "sans-courriel",
+  "note": "Site, horaires, description et lien vers la fiche d'origine. Courriel et téléphone ne sont pas republiés : ils sont publics à la source, mais pour un petit collectif le courriel est souvent une boîte personnelle."
+ }
 }
