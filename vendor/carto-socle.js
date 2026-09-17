@@ -244,6 +244,18 @@
 
      On ne considère que ce qui est dans la vue : au zoom de détail, c'est une
      fraction du jeu, et le coût s'effondre. */
+  /* Le placement dépend des dimensions de la carte. Un premier passage
+     synchrone tombe parfois avant que le navigateur ait fait la mise en page :
+     les bornes sont alors vides et rien n'est retenu. On rejoue donc après la
+     mise en page, et à chaque changement de taille. */
+  function reveiller(ctx, revoir) {
+    ctx.carte.on("zoomend moveend resize", revoir);
+    ctx.carte.whenReady(revoir);
+    revoir();
+    setTimeout(revoir, 0);
+    setTimeout(revoir, 300);
+  }
+
   function placer(ctx, candidats, opts) {
     opts = opts || {};
     var carte = ctx.carte;
@@ -319,7 +331,13 @@
       candidats.forEach(function (e) {
         var veut = garde.has(e);
         if (veut) { n++; }
-        if (veut === e.posee) { return; }
+        /* Idempotent : on repose ce qui devrait être là et ne l'est pas. Se
+           fier au seul drapeau laisse des étiquettes liées mais jamais
+           peintes quand un passage tombe avant que la carte ait ses
+           dimensions. */
+        var posee = e.posee && e.couche.isTooltipOpen && e.couche.isTooltipOpen();
+        if (veut && posee) { return; }
+        if (!veut && !e.posee) { return; }
         e.posee = veut;
         if (veut) {
           e.couche.bindTooltip(e.texte, {
@@ -337,9 +355,7 @@
       });
       if (opts.surChangement) { opts.surChangement(n, actif); }
     }
-    ctx.carte.on("zoomend moveend", revoir);
-    ctx.carte.whenReady(revoir);
-    revoir();
+    reveiller(ctx, revoir);
     return { revoir: revoir, compte: function () { return candidats.length; } };
   }
 
@@ -458,9 +474,7 @@
       });
       if (opts.surChangement) { opts.surChangement(retenus.length, candidats.length); }
     }
-    ctx.carte.on("zoomend moveend", revoir);
-    ctx.carte.whenReady(revoir);
-    revoir();
+    reveiller(ctx, revoir);
     return { revoir: revoir, total: candidats.length };
   }
 
