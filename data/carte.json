@@ -5,7 +5,7 @@
   "date_carte": "2026-09-17",
   "date_donnees": "2026-09-15",
   "maillage": "communes, code officiel géographique 2026",
-  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Le bâti, les noms de rue et le relief — un fond servi par le dépôt ne les porte pas. Les lieux-dits, écarts isolés et fermes : près de cinq mille noms écartés, qui auraient empilé les étiquettes sans aider à se repérer. L'eau, pas encore reprise. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m : indicatifs au-delà du zoom 10, et le zoom monte désormais à 13 pour les hameaux — les points, eux, restent exacts.",
+  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Le bâti, les noms de rue et le relief — un fond servi par le dépôt ne les porte pas. Les lieux-dits, écarts isolés et fermes : près de cinq mille noms écartés, qui auraient empilé les étiquettes sans aider à se repérer. L'eau : l'extraction a échoué sur un délai dépassé d'Overpass, elle reste à faire. Les noms qui ne tiennent pas sans en recouvrir un autre : à chaque échelle, seuls les plus importants sont écrits. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m : indicatifs au-delà du zoom 10, et le zoom monte désormais à 13 pour les hameaux — les points, eux, restent exacts.",
   "licence": "Licence Ouverte 2.0 pour les contours et la zone ; CC BY-SA pour les lieux, repris de Transiscope ; ODbL pour le fond routier, repris d'OpenStreetMap. Les trois jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
   "sources": [
     {
@@ -115,22 +115,9 @@
     "note": "Extraits d'OpenStreetMap au moment de la publication et servis par le dépôt. Les DONNÉES d'OpenStreetMap sont libres ; ses SERVEURS DE TUILES sont une infrastructure tierce comme une autre — changer de fournisseur de tuiles ne changerait rien à ce qui part du navigateur du visiteur, seulement le destinataire. Seul un fond servi par notre propre domaine n'envoie rien."
   },
   "etiquettes": {
-    "communes": "par-zoom",
+    "communes": "placement sans chevauchement",
     "depuis_zoom": 10,
-    "seuils": [
-      [
-        10,
-        2500
-      ],
-      [
-        11,
-        900
-      ],
-      [
-        12,
-        0
-      ]
-    ],
+    "max_communes": 40,
     "toponymes_seuils": [
       [
         11,
@@ -145,7 +132,8 @@
         5
       ]
     ],
-    "note": "Leaflet n'écarte pas les étiquettes, il les empile : sans paliers, tout se chevauche. Les noms déjà portés par une étiquette de commune sont écartés des toponymes pour ne pas s'écrire deux fois."
+    "max_toponymes": 55,
+    "note": "Leaflet n'écarte pas les étiquettes, il les empile. Le socle place donc les noms un par un, triés par importance, et saute tout ce qui recouvrirait un nom déjà posé — seul ce qui est dans la vue est considéré. Sans cela, 3 472 noms s'affichaient d'un coup au zoom 12. Les noms déjà portés par une étiquette de commune sont écartés des toponymes pour ne pas s'écrire deux fois."
   },
   "fiche": {
     "declencheur": "survol-et-clic",
