@@ -6,8 +6,8 @@
 <title>La cartographie des lieux — Domaine du Mons</title>
 <meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="vendor/carto-socle.css?v=21">
-<link rel="stylesheet" href="style.css?v=21">
+<link rel="stylesheet" href="vendor/carto-socle.css?v=22">
+<link rel="stylesheet" href="style.css?v=22">
 </head>
 <body>
 <div class="bandeau">
@@ -338,6 +338,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
 
 
 
+
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -352,8 +354,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
   </div>
 </footer>
 <script src="vendor/leaflet.js"></script>
-<script src="vendor/carto-socle.js?v=21"></script>
-<script src="tdb.js?v=21"></script>
+<script src="vendor/carto-socle.js?v=22"></script>
+<script src="tdb.js?v=22"></script>
 <script>
 /* La carte du réseau, posée sur le socle carto-territoire.
    La liste est déjà dans la page : ce script ne la construit pas, il s'y
@@ -397,17 +399,21 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
   });
   /* Les noms de communes : Leaflet ne gère aucun évitement de chevauchement,
      donc on les fait apparaître par paliers, les bourgs d'abord. */
+  /* Le socle place les noms un par un et saute ceux qui en recouvriraient un
+     autre : c'est la seule façon d'en afficher beaucoup sans bouillie, Leaflet
+     n'évitant rien de lui-même. Les plus peuplées passent en premier. */
   Carto.etiquettes(ctx, cc, {
     depuisZoom: 10,
+    max: 40,
     rang: (p) => p.pop || 0,
     nom: (p) => p.nom,
-    seuils: [[10, 2500], [11, 900], [12, 0]],
     intituleSurvol: (p) => p.nom + (p.pop ? " — " + Carto.nf(p.pop) + " hab." : ""),
     surChangement: (n, actif) => {
       const z = document.getElementById("note-etiquettes");
       if (z) {
         z.textContent = actif
-          ? n + " noms de communes affichés à ce niveau de zoom."
+          ? n + " noms de communes affichés ici — les plus peuplées d'abord, "
+            + "et seulement ceux qui tiennent sans se chevaucher."
           : "Zoomez pour faire apparaître les noms de communes.";
       }
     }
@@ -422,11 +428,13 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
     Carto.toponymes(ctx, toponymes, {
       seuils: [[11, 3], [12, 4], [13, 5]],
       exclure: nomsCommunes,
-      surChangement: (n) => {
+      max: 55,
+      surChangement: (n, total) => {
         const z = document.getElementById("note-toponymes");
         if (z) {
           z.textContent = n
-            ? n + " villages et hameaux nommés à ce niveau de zoom."
+            ? n + " villages et hameaux nommés ici, sur " + Carto.nf(total)
+              + " repris — on n'affiche que ceux qui tiennent sans se recouvrir."
             : "Zoomez pour faire apparaître les villages et les hameaux.";
         }
       }
@@ -560,6 +568,6 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
   });
 })();
 </script>
-<script src="site.js?v=21"></script>
+<script src="site.js?v=22"></script>
 </body>
 </html>

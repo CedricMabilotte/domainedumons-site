@@ -232,6 +232,59 @@
   }
 
 
+  /* ----------------------------------------- placement sans chevauchement */
+  /* Leaflet ne gère AUCUN évitement : il empile des blocs positionnés. Des
+     paliers par rang ne suffisent pas — il y a trois mille hameaux dans un
+     carré de quatre-vingt-dix kilomètres, et au zoom où ils deviennent
+     pertinents ils s'écrasent tous les uns sur les autres.
+
+     La parade est le placement glouton : on trie par importance, on pose, et
+     on saute tout ce qui recouvrirait un nom déjà posé. C'est ce que font les
+     vrais moteurs de rendu ; ça tient en trente lignes et ça change tout.
+
+     On ne considère que ce qui est dans la vue : au zoom de détail, c'est une
+     fraction du jeu, et le coût s'effondre. */
+  function placer(ctx, candidats, opts) {
+    opts = opts || {};
+    var carte = ctx.carte;
+    var bornes = carte.getBounds().pad(opts.marge == null ? 0.08 : opts.marge);
+    var max = opts.max || 70;
+    var parCar = opts.largeurCaractere || 5.6;
+    var hauteur = opts.hauteur || 15;
+    var ecart = opts.ecart || 3;
+
+    var vus = [];
+    for (var i = 0; i < candidats.length; i++) {
+      var c = candidats[i];
+      if (c.rangMax != null && c.rang > c.rangMax) { continue; }
+      if (!bornes.contains(c.latlng)) { continue; }
+      vus.push(c);
+    }
+    vus.sort(function (a, b) {
+      return (a.rang - b.rang) || ((b.poids || 0) - (a.poids || 0));
+    });
+
+    var pris = [], retenus = [];
+    for (var j = 0; j < vus.length && retenus.length < max; j++) {
+      var d = vus[j];
+      var p = carte.latLngToContainerPoint(d.latlng);
+      var l = d.texte.length * parCar + 8;
+      var r = [p.x - l / 2 - ecart, p.y - hauteur / 2 - ecart,
+               p.x + l / 2 + ecart, p.y + hauteur / 2 + ecart];
+      var libre = true;
+      for (var k = 0; k < pris.length; k++) {
+        var q = pris[k];
+        if (r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1]) {
+          libre = false; break;
+        }
+      }
+      if (!libre) { continue; }
+      pris.push(r);
+      retenus.push(d);
+    }
+    return retenus;
+  }
+
   /* ------------------------------------------------ étiquettes de communes */
   /* Leaflet ne gère AUCUN évitement de chevauchement : il empile des blocs
      positionnés. Poser 284 noms d'un coup donne une bouillie. On n'en affiche
@@ -242,48 +295,43 @@
     var depuis = opts.depuisZoom || 11;
     var rang = opts.rang || function (p) { return p.pop || 0; };
     var nom = opts.nom || function (p) { return p.nom; };
-    var seuils = opts.seuils || [[11, 1500], [12, 600], [13, 0]];
-    var posees = [];
+    var candidats = [];
 
     couche.eachLayer(function (l) {
       var p = l.feature && l.feature.properties;
       if (!p || !nom(p)) { return; }
-      posees.push({ couche: l, rang: rang(p), nom: nom(p), visible: false });
+      var centre;
+      try { centre = l.getBounds().getCenter(); } catch (e) { return; }
+      candidats.push({ latlng: centre, texte: nom(p), couche: l,
+                       /* le rang est inversé : plus la commune est peuplée,
+                          plus elle passe tôt */
+                       rang: -(rang(p) || 0), poids: rang(p) || 0,
+                       posee: false });
     });
 
-    function seuilPour(z) {
-      for (var i = 0; i < seuils.length; i++) {
-        if (z <= seuils[i][0]) { return seuils[i][1]; }
-      }
-      return 0;
-    }
-
     function revoir() {
-      var z = ctx.carte.getZoom();
-      var actif = z >= depuis;
-      var s = seuilPour(z);
+      var actif = ctx.carte.getZoom() >= depuis;
+      var retenus = actif ? placer(ctx, candidats, {
+        max: opts.max || 45, hauteur: 15, largeurCaractere: 5.8
+      }) : [];
+      var garde = new Set(retenus);
       var n = 0;
-      posees.forEach(function (e) {
-        var veut = actif && e.rang >= s;
-        /* Idempotent : on repose l'étiquette si elle devrait être là mais ne
-           l'est pas. Se fier au seul drapeau `visible` laissait les étiquettes
-           liées mais jamais peintes quand le premier appel tombait avant que
-           la carte ait fini de se poser. */
-        var posee = e.visible && e.couche.isTooltipOpen && e.couche.isTooltipOpen();
-        if (veut && posee) { n++; return; }
-        if (!veut && !e.visible) { return; }
-        e.visible = veut;
+      candidats.forEach(function (e) {
+        var veut = garde.has(e);
+        if (veut) { n++; }
+        if (veut === e.posee) { return; }
+        e.posee = veut;
         if (veut) {
-          e.couche.bindTooltip(e.nom, {
+          e.couche.bindTooltip(e.texte, {
             permanent: true, direction: "center", className: "carto-etiquette",
             interactive: false
           }).openTooltip();
-          n++;
         } else {
           e.couche.unbindTooltip();
           if (opts.intituleSurvol) {
-            e.couche.bindTooltip(opts.intituleSurvol(e.couche.feature.properties),
-                                 { sticky: true, className: "carto-bulle" });
+            e.couche.bindTooltip(
+              opts.intituleSurvol(e.couche.feature.properties),
+              { sticky: true, className: "carto-bulle" });
           }
         }
       });
@@ -292,7 +340,7 @@
     ctx.carte.on("zoomend moveend", revoir);
     ctx.carte.whenReady(revoir);
     revoir();
-    return { revoir: revoir, compte: function () { return posees.length; } };
+    return { revoir: revoir, compte: function () { return candidats.length; } };
   }
 
   /* ------------------------------------------------------- fond de routes */
@@ -366,21 +414,16 @@
     opts = opts || {};
     var seuils = opts.seuils || [[11, 2], [12, 3], [13, 4], [14, 5]];
     var exclure = opts.exclure || null;   /* noms déjà portés par les communes */
-    var posees = [];
+    var candidats = [];
 
     (geojson.features || []).forEach(function (f) {
       var p = f.properties || {};
       if (!p.nom) { return; }
       if (exclure && exclure.has(p.nom)) { return; }
       var c = f.geometry.coordinates;
-      var m = L.marker([c[1], c[0]], {
-        icon: L.divIcon({ className: "carto-toponyme-hote",
-                          html: '<span class="carto-toponyme carto-toponyme-'
-                                + (p.genre || "lieu") + '">' + p.nom + "</span>",
-                          iconSize: null }),
-        interactive: false, keyboard: false
-      });
-      posees.push({ marque: m, rang: p.rang || 5, visible: false });
+      candidats.push({ latlng: L.latLng(c[1], c[0]), texte: p.nom,
+                       rang: p.rang || 5, poids: p.pop || 0,
+                       genre: p.genre || "lieu", marque: null });
     });
 
     function rangMax(z) {
@@ -392,21 +435,33 @@
     function revoir() {
       var z = ctx.carte.getZoom();
       var max = z < seuils[0][0] ? 0 : rangMax(z);
-      var n = 0;
-      posees.forEach(function (e) {
-        var veut = e.rang <= max;
-        if (veut) { n++; }
-        if (veut === e.visible) { return; }
-        e.visible = veut;
-        if (veut) { e.marque.addTo(ctx.carte); }
-        else { ctx.carte.removeLayer(e.marque); }
+      candidats.forEach(function (e) { e.rangMax = max; });
+      var retenus = max ? placer(ctx, candidats, {
+        max: opts.max || 60, hauteur: 13, largeurCaractere: 5.2
+      }) : [];
+      var garde = new Set(retenus);
+      candidats.forEach(function (e) {
+        if (garde.has(e)) {
+          if (!e.marque) {
+            e.marque = L.marker(e.latlng, {
+              icon: L.divIcon({
+                className: "carto-toponyme-hote",
+                html: '<span class="carto-toponyme carto-toponyme-' + e.genre
+                      + '">' + e.texte + "</span>",
+                iconSize: null }),
+              interactive: false, keyboard: false });
+          }
+          if (!ctx.carte.hasLayer(e.marque)) { e.marque.addTo(ctx.carte); }
+        } else if (e.marque && ctx.carte.hasLayer(e.marque)) {
+          ctx.carte.removeLayer(e.marque);
+        }
       });
-      if (opts.surChangement) { opts.surChangement(n); }
+      if (opts.surChangement) { opts.surChangement(retenus.length, candidats.length); }
     }
-    ctx.carte.on("zoomend", revoir);
+    ctx.carte.on("zoomend moveend", revoir);
     ctx.carte.whenReady(revoir);
     revoir();
-    return { revoir: revoir, total: posees.length };
+    return { revoir: revoir, total: candidats.length };
   }
 
   /* --------------------------------------------------------- outils communs */
