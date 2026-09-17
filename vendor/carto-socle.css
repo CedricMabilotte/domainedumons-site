@@ -142,10 +142,31 @@
 .carto-route-a, .carto-route-n, .carto-route-d, .carto-route-x {
   fill: none; stroke-linecap: round; stroke-linejoin: round;
 }
-.carto-route-a { stroke: #b9b2a6; }
-.carto-route-n { stroke: #c2bbb0; }
-.carto-route-d { stroke: #cfc9bf; }
-.carto-route-x { stroke: #dcd7cf; }
+/* Ardoise bleutée, et non gris chaud : les bordures de communes sont dans un
+   gris chaud, et deux gris chauds voisins se confondent — mesuré à 1,05:1 de
+   contraste entre les deux, autant dire indiscernables. La teinte fait ici le
+   travail que la seule clarté ne peut pas faire, et le rang le plus élevé
+   passe 3:1 sur le fond. */
+.carto-route-a { stroke: #7c8e9f; }
+.carto-route-n { stroke: #8d9dac; }
+.carto-route-d { stroke: #a4b1bd; }
+.carto-route-x { stroke: #bcc6cf; }
+
+/* Tuiles distantes : désaturées et éclaircies, pour que le fond reste un fond.
+   Un fond de carte complet à pleine saturation concurrence la donnée. */
+.carto-tuiles { filter: saturate(.55) brightness(1.06); }
+@media (prefers-contrast: more) { .carto-tuiles { filter: none; } }
+
+/* L'attribution d'un fond tiers : visible sur la carte, jamais cachée derrière
+   un bouton, et affichée seulement quand le fond l'est. */
+.carto-attribution {
+  position: absolute; right: 0; bottom: 0; z-index: 700; margin: 0;
+  background: rgba(255,255,255,.88); color: var(--carto-encre);
+  font-size: .72rem; padding: .15rem .4rem;
+  border-top: 1px solid var(--carto-trait);
+  border-left: 1px solid var(--carto-trait);
+}
+.carto-attribution a { color: inherit; }
 
 /* --------------------------------------------- symboles de catégorie */
 .carto-symbole-hote { background: none; border: none; }
@@ -186,3 +207,29 @@
 
 .carto-pastille-svg { flex: 0 0 auto; line-height: 0; }
 .carto-legende-titre { margin: 0 0 .2rem; font-weight: 600; font-size: .9rem; }
+
+/* ------------------------------------------------------------------ l'eau */
+/* Un bleu sourd, sous tout le reste : un repère, pas une donnée. En rural on
+   se situe à une rivière et à un étang avant de se situer à une limite
+   administrative. */
+.carto-eau-plan  { fill: #cfdce4; stroke: #b4c7d2; fill-opacity: 1; }
+.carto-eau-cours { stroke: #b4c7d2; fill: none; stroke-linecap: round; }
+
+/* ------------------------------------------------------------ toponymes */
+.carto-toponyme-hote { background: none; border: none; width: auto !important;
+                       height: auto !important; margin: 0 !important; }
+.carto-toponyme {
+  display: block; white-space: nowrap; transform: translate(-50%, -50%);
+  color: var(--carto-encre); pointer-events: none;
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff;
+}
+/* La hiérarchie se lit à la taille et à la graisse, pas seulement au fait
+   d'être présent : une ville et un hameau ne se valent pas. */
+.carto-toponyme-city    { font-size: .86rem; font-weight: 700; }
+.carto-toponyme-town    { font-size: .78rem; font-weight: 700; }
+.carto-toponyme-village { font-size: .72rem; font-weight: 600; }
+.carto-toponyme-hamlet,
+.carto-toponyme-locality,
+.carto-toponyme-isolated_dwelling,
+.carto-toponyme-farm    { font-size: .66rem; font-weight: 400;
+                          color: var(--carto-douce); }

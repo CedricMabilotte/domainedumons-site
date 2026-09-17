@@ -116,6 +116,8 @@ def main():
       'noms de communes.</p>')
     a('<div id="legende"></div>')
     a('<p class="nb" id="note-familles"></p>')
+    a('<p class="nb" id="note-toponymes">Zoomez pour faire apparaître les '
+      'villages et les hameaux.</p>')
     a('<div class="carto-fiche" id="fiche" role="region" '
       'aria-label="Fiche du lieu survolé"><p class="carto-fiche-vide">'
       'Survolez un point, ou choisissez une ligne dans la liste, pour lire sa '
@@ -127,8 +129,11 @@ def main():
     for terme, valeur in [
         ("Contours", "Admin Express (IGN), via geo.api.gouv.fr — Licence Ouverte 2.0"),
         ("Lieux", "Transiscope, agrégation d'une vingtaine de cartes — CC BY-SA"),
-        ("Fond routier", "OpenStreetMap — ODbL — © les contributeurs "
-                         "OpenStreetMap. Fichier séparé, superposé au rendu."),
+        ("Fond de carte", "Routes structurantes et noms de lieux repris "
+                          "d'OpenStreetMap — ODbL — © les contributeurs "
+                          "OpenStreetMap. Extraits à la publication et servis "
+                          "par ce dépôt, dans leurs propres fichiers, "
+                          "superposés au rendu seulement."),
         ("Données arrêtées au", "15 septembre 2026"),
         ("Carte produite le", date.today().strftime("%d/%m/%Y")),
         ("Maillage", "communes, code officiel géographique 2026"),

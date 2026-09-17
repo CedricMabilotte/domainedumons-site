@@ -2,10 +2,10 @@
   "nom": "reseau-lieux",
   "titre": "Lieux portés par des collectifs, à 45 km de Vitrac-sur-Montane",
   "explication": "La fiche de la carte, au format du plugin carto-territoire. Elle décrit entièrement la carte : ce qui la nourrit, comment elle est rendue, et ce qu'elle ne montre pas. Elle suffit à la régénérer.",
-  "date_carte": "2026-09-16",
+  "date_carte": "2026-09-17",
   "date_donnees": "2026-09-15",
   "maillage": "communes, code officiel géographique 2026",
-  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Les petites routes, les noms de rue et le bâti — le fond routier ne porte que les axes structurants. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m entre sommets : indicatifs au-delà du zoom 10, ce pourquoi le zoom est borné à 12.",
+  "non_represente": "Les lieux sans coordonnées publiées. Les fiches non vérifiées sur place, soit la totalité. Le bâti, les noms de rue et le relief — un fond servi par le dépôt ne les porte pas. Les lieux-dits, écarts isolés et fermes : près de cinq mille noms écartés, qui auraient empilé les étiquettes sans aider à se repérer. L'eau, pas encore reprise. Les courriels et téléphones, qui restent sur la fiche d'origine. Les contours communaux sont généralisés à environ 130 m : indicatifs au-delà du zoom 10, et le zoom monte désormais à 13 pour les hameaux — les points, eux, restent exacts.",
   "licence": "Licence Ouverte 2.0 pour les contours et la zone ; CC BY-SA pour les lieux, repris de Transiscope ; ODbL pour le fond routier, repris d'OpenStreetMap. Les trois jeux sont dans des fichiers SÉPARÉS et ne sont superposés qu'au rendu : c'est ce qui évite que l'ODbL s'étende aux données du collectif.",
   "sources": [
     {
@@ -23,12 +23,12 @@
       "regenerer": "python3 scripts/reseau.py"
     },
     {
-      "quoi": "fond routier — axes structurants",
+      "quoi": "fond de carte — routes structurantes et noms de lieux",
       "ou": "OpenStreetMap via Overpass",
       "licence": "ODbL",
       "attribution": "© les contributeurs OpenStreetMap",
-      "extrait_le": "2026-09-16",
-      "regenerer": "python3 scripts/fond-routier.py"
+      "extrait_le": "2026-09-17",
+      "regenerer": "python3 scripts/fond-routier.py ; python3 scripts/fond-local.py toponymes"
     }
   ],
   "rendu": {
@@ -77,6 +77,14 @@
       "role": "fond",
       "source": "OpenStreetMap",
       "licence": "ODbL"
+    },
+    {
+      "id": "toponymes",
+      "fichier": "data/zone-toponymes.geojson",
+      "role": "fond",
+      "source": "OpenStreetMap",
+      "licence": "ODbL",
+      "entites": 3772
     }
   ],
   "thematique": {
@@ -96,12 +104,15 @@
   },
   "souverainete": {
     "requetes_sortantes": "aucune",
-    "verifie_le": "2026-09-16"
+    "verifie_le": "2026-09-17",
+    "note": "Aucun fond tuilé. Tout est servi par ce dépôt."
   },
   "fond": {
     "routes": "geojson-local",
     "routes_jusqua": "departementale",
-    "note": "Extrait au moment de la publication et servi par le dépôt. Zéro requête sortante. Ni petites routes, ni noms de rue, ni bâti."
+    "toponymes": "geojson-local",
+    "tuiles": "aucune",
+    "note": "Extraits d'OpenStreetMap au moment de la publication et servis par le dépôt. Les DONNÉES d'OpenStreetMap sont libres ; ses SERVEURS DE TUILES sont une infrastructure tierce comme une autre — changer de fournisseur de tuiles ne changerait rien à ce qui part du navigateur du visiteur, seulement le destinataire. Seul un fond servi par notre propre domaine n'envoie rien."
   },
   "etiquettes": {
     "communes": "par-zoom",
@@ -120,7 +131,21 @@
         0
       ]
     ],
-    "note": "Leaflet ne gère aucun évitement de chevauchement : sans paliers, les 284 noms s'empilent."
+    "toponymes_seuils": [
+      [
+        11,
+        3
+      ],
+      [
+        12,
+        4
+      ],
+      [
+        13,
+        5
+      ]
+    ],
+    "note": "Leaflet n'écarte pas les étiquettes, il les empile : sans paliers, tout se chevauche. Les noms déjà portés par une étiquette de commune sont écartés des toponymes pour ne pas s'écrire deux fois."
   },
   "fiche": {
     "declencheur": "survol-et-clic",

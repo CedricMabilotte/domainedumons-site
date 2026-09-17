@@ -6,8 +6,8 @@
 <title>La cartographie des lieux — Domaine du Mons</title>
 <meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="vendor/carto-socle.css?v=20">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="vendor/carto-socle.css?v=21">
+<link rel="stylesheet" href="style.css?v=21">
 </head>
 <body>
 <div class="bandeau">
@@ -73,14 +73,15 @@
 <p class="nb" id="note-etiquettes">Zoomez pour faire apparaître les noms de communes.</p>
 <div id="legende"></div>
 <p class="nb" id="note-familles"></p>
+<p class="nb" id="note-toponymes">Zoomez pour faire apparaître les villages et les hameaux.</p>
 <div class="carto-fiche" id="fiche" role="region" aria-label="Fiche du lieu survolé"><p class="carto-fiche-vide">Survolez un point, ou choisissez une ligne dans la liste, pour lire sa fiche.</p></div>
 </div>
 <dl class="carto-meta">
 <dt>Contours</dt><dd>Admin Express (IGN), via geo.api.gouv.fr — Licence Ouverte 2.0</dd>
 <dt>Lieux</dt><dd>Transiscope, agrégation d'une vingtaine de cartes — CC BY-SA</dd>
-<dt>Fond routier</dt><dd>OpenStreetMap — ODbL — © les contributeurs OpenStreetMap. Fichier séparé, superposé au rendu.</dd>
+<dt>Fond de carte</dt><dd>Routes structurantes et noms de lieux repris d'OpenStreetMap — ODbL — © les contributeurs OpenStreetMap. Extraits à la publication et servis par ce dépôt, dans leurs propres fichiers, superposés au rendu seulement.</dd>
 <dt>Données arrêtées au</dt><dd>15 septembre 2026</dd>
-<dt>Carte produite le</dt><dd>16/09/2026</dd>
+<dt>Carte produite le</dt><dd>17/09/2026</dd>
 <dt>Maillage</dt><dd>communes, code officiel géographique 2026</dd>
 <dt>Projection</dt><dd>Web Mercator (EPSG:3857) — aucune surface n'est comparée ici</dd>
 <dt>Non représenté</dt><dd>les lieux sans coordonnées publiées ; les fiches non vérifiées sur place, soit la totalité ; les petites routes, les noms de rue et le bâti ; les courriels et téléphones, qui restent sur la fiche d'origine ; les contours sont généralisés à environ 130 m, donc indicatifs au-delà du zoom 10</dd>
@@ -303,10 +304,14 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
 <ul>
 <li><strong>15 septembre 2026</strong> — première version. Reprise de 191 lieux depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</li>
 <li><strong>16 septembre 2026</strong> — la carte devient navigable&nbsp;: zoom, déplacement, fiche au clic, contours communaux au trait fin. Toujours sans aucune tuile distante.</li>
-<li><strong>16 septembre 2026</strong> — l'annuaire est écrit dans la page et non plus par un script&nbsp;: il reste lisible sans JavaScript, au clavier et au lecteur d'écran. La molette rend le défilement à la page. Le zoom est ramené à 12, la fidélité réelle des contours étant plus grossière que ce que le zoom 14 laissait croire.</li>
+<li><strong>17 septembre 2026</strong> — l'annuaire est écrit dans la page et non plus par un script&nbsp;: il reste lisible sans JavaScript, au clavier et au lecteur d'écran. La molette rend le défilement à la page. Le zoom est ramené à 12, la fidélité réelle des contours étant plus grossière que ce que le zoom 14 laissait croire.</li>
 </ul>
 <p class="horodatage" id="horodatage"></p>
 </main>
+
+
+
+
 
 
 
@@ -347,8 +352,8 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
   </div>
 </footer>
 <script src="vendor/leaflet.js"></script>
-<script src="vendor/carto-socle.js?v=20"></script>
-<script src="tdb.js?v=20"></script>
+<script src="vendor/carto-socle.js?v=21"></script>
+<script src="tdb.js?v=21"></script>
 <script>
 /* La carte du réseau, posée sur le socle carto-territoire.
    La liste est déjà dans la page : ce script ne la construit pas, il s'y
@@ -375,11 +380,13 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
       "<a href='#annuaire'>La liste des lieux reste disponible ci-dessous.</a></p>";
     return;
   }
-  /* Le fond routier est un supplément : s'il manque, la carte marche quand même. */
+  /* Le fond est un supplément : s'il manque, la carte marche quand même. */
+  let toponymes = null;
   try { routes = await json("data/zone-routes.geojson"); } catch (e) { routes = null; }
+  try { toponymes = await json("data/zone-toponymes.geojson"); } catch (e) { toponymes = null; }
 
   const ctx = Carto.creer({
-    zone: "carte", centre: ICI, zoom: 9, zoomMin: 8, zoomMax: 12,
+    zone: "carte", centre: ICI, zoom: 9, zoomMin: 8, zoomMax: 13,
     molette: "cooperative", titreId: "carte-titre", descId: "carte-desc"
   });
 
@@ -405,6 +412,26 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
       }
     }
   });
+
+  /* Les noms de villages et de hameaux, par paliers. On écarte ceux que
+     l'étiquette de commune porte déjà : sinon le même nom s'écrit deux fois,
+     à quelques pixels l'un de l'autre. */
+  if (toponymes) {
+    const nomsCommunes = new Set(
+      (contours.features || []).map((f) => (f.properties || {}).nom).filter(Boolean));
+    Carto.toponymes(ctx, toponymes, {
+      seuils: [[11, 3], [12, 4], [13, 5]],
+      exclure: nomsCommunes,
+      surChangement: (n) => {
+        const z = document.getElementById("note-toponymes");
+        if (z) {
+          z.textContent = n
+            ? n + " villages et hameaux nommés à ce niveau de zoom."
+            : "Zoomez pour faire apparaître les villages et les hameaux.";
+        }
+      }
+    });
+  }
 
   L.circle(ICI, { radius: 45000, className: "limite", fill: false, weight: 1.4 })
     .addTo(ctx.carte);
@@ -533,6 +560,6 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
   });
 })();
 </script>
-<script src="site.js?v=20"></script>
+<script src="site.js?v=21"></script>
 </body>
 </html>

@@ -308,6 +308,11 @@
   function routes(ctx, geojson, opts) {
     opts = opts || {};
     var depuis = opts.depuisZoom || 0;
+    /* Borne haute : quand des tuiles prennent le relais, ces routes-ci doivent
+       DISPARAÎTRE. Sans ça on dessine deux fois le même réseau, celui du dépôt
+       par-dessus celui du fond, avec des tracés qui ne coïncident pas tout à
+       fait — c'est illisible et ça se voit. */
+    var jusqua = opts.jusquaZoom == null ? 99 : opts.jusquaZoom;
     var couche = L.geoJSON(geojson, {
       style: function (f) {
         var r = ROUTES[(f.properties || {}).rang] || ROUTES.autre;
@@ -322,12 +327,164 @@
     couche.options.pane = "carto-fond";
     function revoir() {
       var z = ctx.carte.getZoom();
-      if (z >= depuis && !ctx.carte.hasLayer(couche)) { couche.addTo(ctx.carte); }
-      else if (z < depuis && ctx.carte.hasLayer(couche)) { ctx.carte.removeLayer(couche); }
+      var veut = z >= depuis && z <= jusqua;
+      if (veut && !ctx.carte.hasLayer(couche)) { couche.addTo(ctx.carte); }
+      else if (!veut && ctx.carte.hasLayer(couche)) { ctx.carte.removeLayer(couche); }
     }
     ctx.carte.on("zoomend", revoir);
     revoir();
     return couche;
+  }
+
+  /* ------------------------------------------------------------- l'eau */
+  /* Sur un territoire rural, on se repère à une rivière et à un étang bien
+     avant de se repérer à une limite administrative. L'eau passe donc sous
+     tout le reste, dans un bleu sourd : c'est un repère, pas une donnée. */
+  function eau(ctx, geojson, opts) {
+    opts = opts || {};
+    pane(ctx);
+    var couche = L.geoJSON(geojson, {
+      pane: "carto-fond",
+      style: function (f) {
+        var plan = (f.properties || {}).genre === "plan";
+        return plan
+          ? { className: "carto-eau-plan", weight: 0.6, fill: true,
+              fillOpacity: 1, interactive: false }
+          : { className: "carto-eau-cours", weight: 1.1, fill: false,
+              interactive: false };
+      }
+    });
+    return borner(ctx, couche, opts);
+  }
+
+  /* ------------------------------------------------------- les toponymes */
+  /* Villages et hameaux, par paliers de zoom. Même raison que pour les
+     communes : Leaflet empile les étiquettes sans les écarter, donc sans
+     hiérarchie tout se chevauche. Le rang vient de la source — ville, bourg,
+     village, hameau — et on en montre de plus en plus en descendant. */
+  function toponymes(ctx, geojson, opts) {
+    opts = opts || {};
+    var seuils = opts.seuils || [[11, 2], [12, 3], [13, 4], [14, 5]];
+    var exclure = opts.exclure || null;   /* noms déjà portés par les communes */
+    var posees = [];
+
+    (geojson.features || []).forEach(function (f) {
+      var p = f.properties || {};
+      if (!p.nom) { return; }
+      if (exclure && exclure.has(p.nom)) { return; }
+      var c = f.geometry.coordinates;
+      var m = L.marker([c[1], c[0]], {
+        icon: L.divIcon({ className: "carto-toponyme-hote",
+                          html: '<span class="carto-toponyme carto-toponyme-'
+                                + (p.genre || "lieu") + '">' + p.nom + "</span>",
+                          iconSize: null }),
+        interactive: false, keyboard: false
+      });
+      posees.push({ marque: m, rang: p.rang || 5, visible: false });
+    });
+
+    function rangMax(z) {
+      for (var i = 0; i < seuils.length; i++) {
+        if (z <= seuils[i][0]) { return seuils[i][1]; }
+      }
+      return 9;
+    }
+    function revoir() {
+      var z = ctx.carte.getZoom();
+      var max = z < seuils[0][0] ? 0 : rangMax(z);
+      var n = 0;
+      posees.forEach(function (e) {
+        var veut = e.rang <= max;
+        if (veut) { n++; }
+        if (veut === e.visible) { return; }
+        e.visible = veut;
+        if (veut) { e.marque.addTo(ctx.carte); }
+        else { ctx.carte.removeLayer(e.marque); }
+      });
+      if (opts.surChangement) { opts.surChangement(n); }
+    }
+    ctx.carte.on("zoomend", revoir);
+    ctx.carte.whenReady(revoir);
+    revoir();
+    return { revoir: revoir, total: posees.length };
+  }
+
+  /* --------------------------------------------------------- outils communs */
+  function pane(ctx) {
+    if (ctx.carte.getPane("carto-fond") === undefined) {
+      ctx.carte.createPane("carto-fond");
+      ctx.carte.getPane("carto-fond").style.zIndex = 390;
+    }
+  }
+  function borner(ctx, couche, opts) {
+    var depuis = opts.depuisZoom || 0;
+    var jusqua = opts.jusquaZoom == null ? 99 : opts.jusquaZoom;
+    function revoir() {
+      var z = ctx.carte.getZoom();
+      var veut = z >= depuis && z <= jusqua;
+      if (veut && !ctx.carte.hasLayer(couche)) { couche.addTo(ctx.carte); }
+      else if (!veut && ctx.carte.hasLayer(couche)) { ctx.carte.removeLayer(couche); }
+    }
+    ctx.carte.on("zoomend", revoir);
+    ctx.carte.whenReady(revoir);
+    revoir();
+    return couche;
+  }
+
+  /* ------------------------------------------- tuiles, à partir d'un zoom */
+  /* Des tuiles, c'est une requête par carreau vers un tiers : il reçoit
+     l'adresse du visiteur ET la suite des carreaux demandés, donc son parcours
+     de regard. On ne les allume donc qu'à partir d'un zoom, et JAMAIS sur la
+     vue d'ensemble : tant que personne n'a zoomé, rien ne sort.
+
+     Trois obligations qui vont avec, et que cette fonction rend difficiles à
+     oublier : l'attribution doit être visible sur la carte, la page doit dire
+     ce qui se déclenche et à partir de quand, et la politique de sécurité de
+     contenu doit lister l'hôte — sinon la carte reste grise sans explication. */
+  function tuiles(ctx, opts) {
+    opts = opts || {};
+    if (!opts.url) { throw new Error("tuiles() : url manquante."); }
+    if (!opts.attribution) {
+      throw new Error("tuiles() : attribution obligatoire. Un fond servi par "
+                    + "un tiers se cite, visiblement, sur la carte.");
+    }
+    var depuis = opts.depuisZoom == null ? 12 : opts.depuisZoom;
+    var couche = L.tileLayer(opts.url, {
+      minZoom: depuis,
+      maxZoom: opts.maxZoom || 19,
+      /* Pas de crossOrigin : il n'apporte rien ici et fait échouer le
+         chargement chez tout fournisseur qui n'envoie pas d'en-tête CORS. */
+      /* Le pane des tuiles est sous les surcouches : les contours, les routes
+         et les points restent lisibles par-dessus. */
+      className: "carto-tuiles"
+    });
+    var bandeau = null;
+    if (opts.dansLaCarte !== false) {
+      bandeau = document.createElement("p");
+      bandeau.className = "carto-attribution";
+      bandeau.hidden = true;
+      bandeau.innerHTML = opts.attribution;
+      ctx.zone.appendChild(bandeau);
+    }
+    var allume = false;
+    function revoir() {
+      var veut = ctx.carte.getZoom() >= depuis;
+      if (veut === allume) { return; }
+      allume = veut;
+      if (veut) { couche.addTo(ctx.carte); }
+      else { ctx.carte.removeLayer(couche); }
+      if (bandeau) { bandeau.hidden = !veut; }
+      if (opts.surBascule) { opts.surBascule(veut); }
+      ctx.dire(veut
+        ? "Fond de carte détaillé affiché. Il est servi par " +
+          (opts.fournisseur || "un tiers") + ", qui reçoit votre adresse."
+        : "Fond de carte détaillé retiré. Plus aucune requête ne sort.");
+    }
+    ctx.carte.on("zoomend", revoir);
+    ctx.carte.whenReady(revoir);
+    revoir();
+    return { couche: couche, revoir: revoir, depuisZoom: depuis,
+             estAllume: function () { return allume; } };
   }
 
   /* --------------------------------------- symboles : couleur ET forme */
@@ -459,7 +616,8 @@
 
   global.Carto = {
     creer: creer, contours: contours, points: points, lier: lier,
-    etiquettes: etiquettes, routes: routes, symboles: symboles,
+    etiquettes: etiquettes, routes: routes, tuiles: tuiles,
+    eau: eau, toponymes: toponymes, symboles: symboles,
     fiche: fiche, legende: legende,
     FORMES: FORMES, ORDRE_FORMES: ORDRE_FORMES,
     nf: nf, sobre: sobre
