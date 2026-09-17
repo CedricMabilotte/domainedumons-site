@@ -263,7 +263,22 @@
     var max = opts.max || 70;
     var parCar = opts.largeurCaractere || 5.6;
     var hauteur = opts.hauteur || 15;
-    var ecart = opts.ecart || 3;
+    var ecart = opts.ecart || 4;
+
+    /* Deux calques de noms placés chacun dans son coin s'ignorent et finissent
+       par se recouvrir. Ils partagent donc le terrain : chacun évite les
+       calques PLUS importants que lui, jamais les moins importants — sinon
+       l'ordre d'exécution déciderait qui gagne et les noms clignoteraient d'un
+       passage à l'autre. */
+    var id = opts.id || "anonyme";
+    var priorite = opts.priorite == null ? 5 : opts.priorite;
+    if (!ctx._pris) { ctx._pris = {}; }
+    var occupe = [];
+    for (var cle in ctx._pris) {
+      if (cle !== id && ctx._pris[cle].priorite < priorite) {
+        occupe = occupe.concat(ctx._pris[cle].rects);
+      }
+    }
 
     var vus = [];
     for (var i = 0; i < candidats.length; i++) {
@@ -276,7 +291,7 @@
       return (a.rang - b.rang) || ((b.poids || 0) - (a.poids || 0));
     });
 
-    var pris = [], retenus = [];
+    var pris = occupe.slice(), miens = [], retenus = [];
     for (var j = 0; j < vus.length && retenus.length < max; j++) {
       var d = vus[j];
       var p = carte.latLngToContainerPoint(d.latlng);
@@ -292,8 +307,10 @@
       }
       if (!libre) { continue; }
       pris.push(r);
+      miens.push(r);
       retenus.push(d);
     }
+    ctx._pris[id] = { priorite: priorite, rects: miens };
     return retenus;
   }
 
@@ -324,7 +341,8 @@
     function revoir() {
       var actif = ctx.carte.getZoom() >= depuis;
       var retenus = actif ? placer(ctx, candidats, {
-        max: opts.max || 45, hauteur: 15, largeurCaractere: 5.8
+        id: "communes", priorite: opts.priorite == null ? 1 : opts.priorite,
+        max: opts.max || 45, hauteur: 15, largeurCaractere: 6.2
       }) : [];
       var garde = new Set(retenus);
       var n = 0;
@@ -453,7 +471,8 @@
       var max = z < seuils[0][0] ? 0 : rangMax(z);
       candidats.forEach(function (e) { e.rangMax = max; });
       var retenus = max ? placer(ctx, candidats, {
-        max: opts.max || 60, hauteur: 13, largeurCaractere: 5.2
+        id: "toponymes", priorite: opts.priorite == null ? 2 : opts.priorite,
+        max: opts.max || 60, hauteur: 13, largeurCaractere: 5.4
       }) : [];
       var garde = new Set(retenus);
       candidats.forEach(function (e) {
