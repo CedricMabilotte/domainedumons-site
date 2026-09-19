@@ -51,10 +51,6 @@
   --mesure-texte: 34rem;   /* ~64 signes en Georgia 16 px */
   --mesure-large: 52rem;   /* cartes, tableaux larges, graphes */
 
-  /* alias de transition : les règles non encore reprises continuent de
-     fonctionner. À retirer quand plus rien ne les appelle. */
-  --trait: var(--filet);
-  --mesure: var(--mesure-texte);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -100,7 +96,7 @@ main { padding: 0 var(--e-4) var(--e-4); }
 .bandeau {
   position: sticky; top: 0; z-index: 20;
   background: var(--papier);
-  border-bottom: 1px solid var(--trait);
+  border-bottom: 1px solid var(--filet);
   transition: transform .22s ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -148,7 +144,7 @@ nav .chevron:hover, nav .chevron[aria-expanded="true"] { opacity: 1; border-bott
 .sous-menu {
   position: absolute; top: calc(100% + .45rem); right: 0; z-index: 10;
   min-width: 13rem; margin: 0; padding: var(--e-1) 0; list-style: none;
-  background: var(--papier); border: 1px solid var(--trait);
+  background: var(--papier); border: 1px solid var(--filet);
   box-shadow: 0 4px 14px rgba(0,0,0,.09);
 }
 /* pont invisible : la souris peut descendre du titre au menu sans le fermer */
@@ -157,7 +153,7 @@ nav .chevron:hover, nav .chevron[aria-expanded="true"] { opacity: 1; border-bott
 .sous-menu li { margin: 0; }
 .sous-menu a { display: block; padding: var(--e-1) var(--e-3); border: 0; white-space: nowrap; }
 .sous-menu a:hover { background: var(--surface); border: 0; }
-.sous-menu hr { border: 0; border-top: 1px solid var(--trait); margin: var(--e-1) 0; }
+.sous-menu hr { border: 0; border-top: 1px solid var(--filet); margin: var(--e-1) 0; }
 .sous-menu .groupe {
   padding: var(--e-2) var(--e-3) var(--e-1); font-size: var(--t-xs); letter-spacing: .04em;
   text-transform: uppercase; color: var(--douce);
@@ -256,16 +252,16 @@ figcaption { font-size: var(--t-s); color: var(--douce); margin-top: var(--e-1);
 .etats { list-style: none; padding: 0; margin: var(--e-4) 0 var(--e-5); }
 .etats li {
   display: grid; grid-template-columns: 5.4rem 1fr; gap: var(--e-1) var(--e-4);
-  padding: var(--e-2) 0; border-top: 1px solid var(--trait); margin: 0;
+  padding: var(--e-2) 0; border-top: 1px solid var(--filet); margin: 0;
 }
-.etats li:last-child { border-bottom: 1px solid var(--trait); }
+.etats li:last-child { border-bottom: 1px solid var(--filet); }
 .etat { font-size: var(--t-xs); font-style: italic; color: var(--douce); padding-top: var(--e-1); }
 @media (max-width: 30rem) { .etats li { grid-template-columns: 1fr; } .etat { padding-top: 0; } }
 
 /* ------------------------------------------------------------- les tuiles */
 
 .tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; margin: var(--e-4) 0 var(--e-5); }
-.tuile { background: var(--papier); padding: var(--e-3) var(--e-3) var(--e-3); box-shadow: 0 0 0 1px var(--trait); }
+.tuile { background: var(--papier); padding: var(--e-3) var(--e-3) var(--e-3); box-shadow: 0 0 0 1px var(--filet); }
 .tuile .libelle { margin: 0 0 var(--e-1); font-size: var(--t-xs); font-style: italic; color: var(--douce); }
 .tuile .valeur { margin: 0 0 var(--e-1); font-size: var(--t-chiffre); line-height: 1.05; font-variant-numeric: tabular-nums; }
 .tuile .valeur .unite { font-size: var(--t-xs); color: var(--douce); font-variant-numeric: normal; }
@@ -307,7 +303,7 @@ figcaption { font-size: var(--t-s); color: var(--douce); margin-top: var(--e-1);
 
 .infobulle {
   position: absolute; pointer-events: none; z-index: 30;
-  background: var(--papier); border: 1px solid var(--trait);
+  background: var(--papier); border: 1px solid var(--filet);
   padding: var(--e-1) var(--e-2); font-size: var(--t-xs); line-height: 1.35;
   box-shadow: 0 2px 8px rgba(0,0,0,.08); white-space: nowrap;
 }
@@ -317,7 +313,7 @@ figcaption { font-size: var(--t-s); color: var(--douce); margin-top: var(--e-1);
 /* --------------------------------------------------------- les tableaux */
 
 .donnees { width: 100%; border-collapse: collapse; font-size: var(--t-s); margin: var(--e-3) 0 var(--e-4); }
-.donnees th, .donnees td { text-align: left; padding: var(--e-1) var(--e-2) var(--e-1) 0; border-bottom: 1px solid var(--trait); }
+.donnees th, .donnees td { text-align: left; padding: var(--e-1) var(--e-2) var(--e-1) 0; border-bottom: 1px solid var(--filet); }
 /* l'italique sur 12,6 px coûte de la lisibilité et n'apporte rien */
 .donnees th { font-weight: 600; font-size: var(--t-xs); color: var(--douce); }
 .donnees td { font-variant-numeric: tabular-nums; }
@@ -328,24 +324,24 @@ details.tableau-brut summary { cursor: pointer; font-size: var(--t-s); color: va
 /* ------------------------------------------------------------ les cartes */
 
 .cartes { list-style: none; padding: 0; margin: var(--e-4) 0 var(--e-5); }
-.cartes li { border-top: 1px solid var(--trait); padding: var(--e-3) 0; margin: 0; }
-.cartes li:last-child { border-bottom: 1px solid var(--trait); }
+.cartes li { border-top: 1px solid var(--filet); padding: var(--e-3) 0; margin: 0; }
+.cartes li:last-child { border-bottom: 1px solid var(--filet); }
 .cartes h3 { margin: 0 0 var(--e-1); font-size: var(--t-m); }
-.cartes h3 a { text-decoration: none; border-bottom: 1px solid var(--trait); }
+.cartes h3 a { text-decoration: none; border-bottom: 1px solid var(--filet); }
 .cartes h3 a:hover { border-bottom-color: var(--encre); }
 .cartes p { margin: 0 0 var(--e-1); font-size: var(--t-m); }
-.cartes .source { margin: 0; font-size: var(--t-xs); color: var(--douce); font-style: italic; }
+.cartes .source { margin: 0; }
 .cartes .bientot h3 { color: var(--douce); }
 
 /* ------------------------------------------------------------------ états */
 
 .chargement { color: var(--douce); font-style: italic; }
 .echec { border-left: 2px solid var(--vigilance); padding-left: var(--e-3); font-size: var(--t-s); color: var(--douce); }
-.horodatage { font-size: var(--t-xs); color: var(--douce); font-style: italic; margin-top: var(--e-5); }
+.horodatage { margin-top: var(--e-5); }
 
 /* ----------------------------------------------------------------- le pied */
 
-footer { border-top: 1px solid var(--trait); margin-top: 2.4rem; padding: var(--e-4) var(--e-4) 2.4rem; font-size: var(--t-s); color: var(--douce); }
+footer { border-top: 1px solid var(--filet); margin-top: 2.4rem; padding: var(--e-4) var(--e-4) 2.4rem; font-size: var(--t-s); color: var(--douce); }
 footer p { margin: 0 0 var(--e-1); }
 footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap;
             gap: var(--e-1) var(--e-4); }
@@ -360,7 +356,7 @@ h1 + .chapeau { margin-top: -.25rem; }
 .carte figure { margin: 0 0 var(--e-4); }
 .carte img {
   display: block; width: 100%; height: auto;
-  box-shadow: 0 0 0 1px var(--trait); background: var(--surface);
+  box-shadow: 0 0 0 1px var(--filet); background: var(--surface);
 }
 .carte figcaption { margin-top: var(--e-2); font-size: var(--t-s); color: var(--douce); }
 .legende-carte {
@@ -423,7 +419,7 @@ h1 + .chapeau { margin-top: -.25rem; }
 
 
 .liste-lieux { list-style: none; padding: 0; margin: 0; }
-.liste-lieux li { margin: 0; padding: var(--e-2) 0; border-bottom: 1px solid var(--trait); }
+.liste-lieux li { margin: 0; padding: var(--e-2) 0; border-bottom: 1px solid var(--filet); }
 .liste-lieux .lieu-nom { font-weight: 600; }
 .liste-lieux .lieu-detail { color: var(--douce); font-size: var(--t-s); }
 
@@ -442,7 +438,7 @@ h1 + .chapeau { margin-top: -.25rem; }
 
 
 
-.leaflet-tooltip { background: var(--papier); border: 1px solid var(--trait); color: var(--encre);
+.leaflet-tooltip { background: var(--papier); border: 1px solid var(--filet); color: var(--encre);
                    font-family: var(--serif); font-size: var(--t-xs); box-shadow: none;
                    border-radius: 0; padding: 2px 6px; }
 .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before,
@@ -450,7 +446,7 @@ h1 + .chapeau { margin-top: -.25rem; }
 .leaflet-tooltip.bulle-commune { color: var(--douce); }
 .leaflet-tooltip.bulle-ici { font-weight: 600; border-color: var(--alerte); }
 .leaflet-control-zoom a { background: var(--papier); color: var(--encre);
-                          border-color: var(--trait); font-family: var(--serif); }
+                          border-color: var(--filet); font-family: var(--serif); }
 .leaflet-control-zoom a:hover { background: var(--grille); }
 .leaflet-control-scale-line { background: transparent; border-color: var(--douce);
                               color: var(--douce); font-family: var(--serif); }
@@ -513,6 +509,21 @@ button.suite:hover { background: var(--grille); }
    Il défile dans son propre cadre, comme .defilant. Mesuré au rendu. */
 .carto-liste { overflow-x: auto; }
 .carto-liste table { min-width: 34rem; }
+
+/* ------------------------------------------------- le débordement contrôlé
+   La carte du réseau faisait 544 px de large sur un écran de 1400 : elle
+   était enfermée dans la mesure de lecture, qui est faite pour du texte.
+   Deux règles visaient ce cas, avec un décalage forfaitaire de −70 px ; elles
+   ciblaient l'ancienne carte et sont mortes avec elle.
+   Le débordement est ici symétrique et calculé. Sous 56rem, le bloc reprend
+   simplement la largeur du conteneur : aucune bascule, aucun saut. */
+.carto-zone, .carto-liste, .defilant.large { max-width: var(--mesure-large); }
+@media (min-width: 56rem) {
+  .carto-zone, .carto-liste, .defilant.large {
+    width: var(--mesure-large);
+    margin-inline: calc((var(--mesure-texte) - var(--mesure-large)) / 2);
+  }
+}
 .carto-dit { max-width: 22rem; font-size: var(--t-s); color: var(--douce); }
 @media (max-width: 40rem) {
   /* la description libre est la colonne la plus large : on la borne */
@@ -522,3 +533,56 @@ button.suite:hover { background: var(--grille); }
 /* Un nombre se compare en colonne, et c'est la seule raison d'être d'un
    tableau de données : il s'aligne à droite. */
 .donnees td.nombre, .donnees th.nombre { text-align: right; font-variant-numeric: tabular-nums; }
+
+
+/* --------------------------------------------------- le cartouche de source
+   L'argument du site est la traçabilité : dire d'où vient chaque chiffre. Ce
+   cartouche existait sous quatre formes — .cartes .source, .horodatage,
+   .carto-meta, .carto-fiche-source — toutes en italique, aucune nommée comme
+   un composant. Elles partagent maintenant une seule définition. L'italique
+   est retirée : une source se cite. */
+.source,
+.cartes .source,
+.horodatage,
+.carto-meta,
+.carto-fiche .carto-fiche-source {
+  font-size: var(--t-xs);
+  line-height: 1.45;
+  color: var(--douce);
+  font-style: normal;
+}
+.source a,
+.horodatage a,
+.carto-meta a { color: inherit; }
+/* trois champs, toujours dans cet ordre : origine — date de relevé — licence */
+.source { margin-top: var(--e-2); padding-top: var(--e-2); border-top: 1px solid var(--filet); }
+.source dt, .carto-meta dt { font-weight: 600; display: inline; }
+.source dd { display: inline; margin: 0 var(--e-4) 0 var(--e-1); }
+.source dd::after { content: ""; display: block; }
+
+/* ------------------------------------------------------------- impression
+   Un tableau de bord dont l'argument est la traçabilité finit imprimé, ne
+   serait-ce que pour une réunion. Sans cette feuille, il sortait avec son
+   bandeau collant, ses liens muets et ses tuiles coupées en deux. */
+@media print {
+  :root {
+    --papier: #fff; --surface: #fff; --encre: #000; --douce: #333;
+    --filet: #bbb; --bord: #666; --grille: #ddd;
+  }
+  .bandeau, footer, .carto-evitement, .filtres, .epoques, .recherche,
+  button.suite, details.tableau-brut summary { display: none !important; }
+  body { background: #fff; color: #000; }
+  main { max-width: none; padding: 0; }
+  details.tableau-brut[open] > *:not(summary) { display: block; }
+  details.tableau-brut { display: block; }
+  /* un lien imprimé sans son adresse ne mène nulle part */
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; color: #555; word-break: break-all; }
+  a[href^="#"]::after, a[href^="mailto"]::after { content: ""; }
+  .tuile, figure, .note, .donnees tr, .condense { break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; }
+  .croquis, img { max-width: 100%; }
+  .carto-zone { display: none; }   /* une carte Leaflet ne s'imprime pas ;
+                                      le tableau équivalent, si */
+  .carto-liste { overflow: visible; }
+  .carto-liste table { min-width: 0; }
+}
