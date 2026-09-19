@@ -56,7 +56,7 @@
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>L'eau, depuis 1957</h1>
 <div class="condense" id="condense"><p class="chargement">…</p></div>
-<p>Le tableau de la semaine donne le débit de la Montane à l'instant où vous ouvrez la page. Celui-ci donne les soixante-dix étés précédents, et permet de répondre à la seule question qui compte pour s'installer&nbsp;: <strong>jusqu'où la rivière descend-elle, et combien de temps</strong>.</p>
+<p>Le tableau de la semaine donne le débit de la Montane à l'instant où vous ouvrez la page. Celui-ci donne les 69 étés précédents, et mesure la profondeur des étiages successifs et leur durée.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
 
 <h2 id="etiages">Les étiages, année par année</h2>
@@ -248,7 +248,7 @@ function nomPropre(n) {
       ans.slice().reverse().map((y) => "<tr><td>" + y + "</td><td>" + pa[y].observations + "</td><td>" + pa[y].faibles +
         "</td><td>" + (pa[y].assecs ? "<strong>" + pa[y].assecs + "</strong>" : "0") + "</td></tr>").join("") +
       "</tbody></table></div>" +
-      "<p>Quatorze ans de passages, et des assecs dans " + avecAssec.length + " années seulement&nbsp;: <strong>" + avecAssec.join(", ") +
+      "<p>" + nf0(ans.length) + " ans de passages, et des assecs dans " + avecAssec.length + " années seulement&nbsp;: <strong>" + avecAssec.join(", ") +
       "</strong>. Toutes depuis 2019. Sur un ruisseau de ce calibre, l'arrêt de l'écoulement dure alors deux à trois mois — " +
       "ce qui exclut de faire reposer l'abreuvement ou l'arrosage sur un ruisseau de tête de bassin.</p>";
   }

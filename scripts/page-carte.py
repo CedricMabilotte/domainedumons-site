@@ -66,6 +66,18 @@ def main():
     for l in lieux:
         l["fam"] = familles(l.get("categories"))
     communes = len({l["commune"] for l in lieux})
+    # Les 191 fiches ne sont pas 191 lieux, et tous ne sont pas des collectifs.
+    # La grille d'intérêt général leur a été appliquée le 17/09/2026 ; les
+    # comptes sont recalculés ici plutôt qu'écrits à la main, pour qu'une
+    # reprise des données ne laisse pas une phrase fausse derrière elle.
+    distincts = [l for l in lieux if not l.get("doublon_de")]
+    verd = {}
+    nat = {}
+    for l in distincts:
+        verd[l.get("verdict")] = verd.get(l.get("verdict"), 0) + 1
+        nat[l.get("nature")] = nat.get(l.get("nature"), 0) + 1
+    retenus = [l for l in distincts if l.get("verdict") == "retenu"]
+    sur_reseau = sum(1 for l in retenus if l.get("base") == "reseau")
     loin = [l for l in lieux if l["km"] > 0.4]
     nf = lambda n: format(int(n), ",d").replace(",", " ")
 
@@ -78,8 +90,14 @@ def main():
     # --- le condensé, écrit ici et non par le script : il doit être lisible
     #     même si rien ne s'exécute
     a('<div class="condense"><ul>')
-    a('<li><strong>%d lieux</strong> portés par des collectifs sont déjà '
-      'référencés dans l\'heure, sur %d communes.</li>' % (len(lieux), communes))
+    a('<li><strong>%d fiches</strong> d\'annuaire, soit <strong>au plus %d lieux '
+      'distincts</strong> dans l\'heure, sur %d communes.</li>'
+      % (len(lieux), len(distincts), communes))
+    a('<li>Passés à la grille d\'intérêt général&nbsp;: <strong>%d retenus</strong>, '
+      '%d laissés en doute, %d écartés. <strong>%d sont des acteurs marchands</strong> '
+      'et non des collectifs.</li>'
+      % (verd.get("retenu", 0), verd.get("douteux", 0), verd.get("hors", 0),
+         nat.get("commerce", 0)))
     a('<li>Le plus proche est à %s km, le plus lointain à %s km.</li>'
       % (("%.1f" % loin[0]["km"]).replace(".", ","),
          ("%.1f" % lieux[-1]["km"]).replace(".", ",")))
@@ -91,8 +109,10 @@ def main():
 
     a('<p>Les communes dont le centre est à moins de %d&nbsp;km d\'ici, ce qui '
       'correspond à peu près à une heure de route sur ces routes-là. Chaque '
-      'point est un lieu porté par un collectif, déjà référencé sur un annuaire '
-      'public.</p>' % z["rayon_km"])
+      'point est une fiche reprise d\'un annuaire public. <strong>Tous ne sont pas '
+      'des collectifs</strong>&nbsp;: %d des %d lieux distincts sont des acteurs '
+      'marchands — fermes en vente directe, épiceries, une enseigne nationale.</p>'
+      % (z["rayon_km"], nat.get("commerce", 0), len(distincts)))
 
     # --- lien d'évitement : au clavier, on ne traverse pas 191 points
     a('<p><a href="#annuaire" class="carto-evitement">Passer la carte, aller à '
@@ -161,10 +181,15 @@ def main():
       'et décrit encore le lieu comme un élevage en vente directe. Nous la '
       'corrigeons — et c\'est exactement ce que nous proposons à chacun de faire '
       'pour la sienne.</p>')
-    a('<p>Cette carte montre <strong>le milieu des collectifs</strong>, pas le '
-      'noyau d\'intérêt général. Les lieux n\'ont pas été passés à la grille '
-      'appliquée aux associations&nbsp;: ce sont deux usages différents, et cette '
-      'page ne fait que le premier.</p>')
+    a('<p>Cette carte montre <strong>le milieu</strong>, pas le noyau d\'intérêt '
+      'général. Les fiches ont été passées à la grille appliquée aux associations '
+      'le 17 septembre 2026&nbsp;: <strong>%d lieux distincts sur %d sont retenus</strong>, '
+      '%d restent douteux et sont publiés comme tels. Et <strong>%d des %d retenus '
+      'le sont sur l\'attestation d\'un réseau tiers</strong>, pas sur ce qu\'ils '
+      'déclarent eux-mêmes. La grille lit une déclaration d\'annuaire, souvent '
+      'vieille de plusieurs années&nbsp;: elle repère, elle ne constate pas.</p>'
+      % (verd.get("retenu", 0), len(distincts), verd.get("douteux", 0),
+         sur_reseau, len(retenus)))
     a('<p><strong>Droit de réponse.</strong> Toute personne concernée par une '
       'fiche peut demander sa correction ou son retrait à '
       '<a href="mailto:contact@actitude.org">contact@actitude.org</a>. Le retrait '
@@ -172,11 +197,12 @@ def main():
       'le journal des versions, en bas de page.</p>')
     a('</div>')
 
-    a('<p id="intro-annuaire">%d lieux, du plus proche au plus éloigné. '
-      'Cliquer une ligne la montre sur la carte.</p>' % len(lieux))
+    a('<p id="intro-annuaire">%d fiches, du plus proche au plus éloigné. '
+      'Un même lieu peut y figurer plusieurs fois, sous des graphies '
+      'différentes. Cliquer une ligne la montre sur la carte.</p>' % len(lieux))
     a('<div class="carto-liste" id="liste-bloc">')
     a('<table id="liste">')
-    a('<caption class="sr-only">Lieux portés par des collectifs à moins de %d km '
+    a('<caption class="sr-only">Fiches de lieux référencés à moins de %d km '
       'de Vitrac-sur-Montane</caption>' % z["rayon_km"])
     a('<thead><tr><th scope="col">Lieu</th><th scope="col">Commune</th>'
       '<th scope="col">Distance</th><th scope="col">Familles</th>'
@@ -248,9 +274,9 @@ def main():
       'demande.</p>')
     a('<h2 id="les-versions">Journal des versions</h2>')
     a('<ul>')
-    a('<li><strong>15 septembre 2026</strong> — première version. Reprise de 191 '
-      'lieux depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée '
-      'sur place.</li>')
+    a('<li><strong>15 septembre 2026</strong> — première version. Reprise de %d '
+      'fiches depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée '
+      'sur place.</li>' % len(lieux))
     a('<li><strong>16 septembre 2026</strong> — la carte devient navigable&nbsp;: '
       'zoom, déplacement, fiche au clic, contours communaux au trait fin. '
       'Toujours sans aucune tuile distante.</li>')
@@ -258,8 +284,12 @@ def main():
       'par un script&nbsp;: il reste lisible sans JavaScript, au clavier et au '
       'lecteur d\'écran. La molette rend le défilement à la page. Le zoom est '
       'ramené à 12, la fidélité réelle des contours étant plus grossière que ce '
-      'que le zoom 14 laissait croire.</li>' % date.today().strftime("%d %B %Y")
-      .replace("September", "septembre"))
+      'que le zoom 14 laissait croire.</li>' % "17 septembre 2026")
+    a('<li><strong>19 septembre 2026</strong> — correction. La page annonçait '
+      '«&nbsp;191 lieux portés par des collectifs&nbsp;». Il y a 191 fiches, au plus '
+      '%d lieux distincts, et %d d\'entre eux sont des acteurs marchands. Les '
+      'verdicts de la grille du 17 septembre sont désormais affichés.</li>'
+      % (len(distincts), nat.get("commerce", 0)))
     a('</ul>')
     a('<p class="horodatage" id="horodatage"></p>')
     a('</main>')

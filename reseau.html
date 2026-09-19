@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le réseau — Domaine du Mons</title>
-<meta name="description" content="Les lieux portés par des collectifs et les associations d'intérêt général à une heure de Vitrac-sur-Montane, et une lettre commune à ouvrir.">
+<meta name="description" content="Les lieux référencés et les associations d'intérêt général à une heure de Vitrac-sur-Montane, et une lettre commune à ouvrir.">
 <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
@@ -56,20 +56,20 @@
 <h1>Le réseau</h1>
 <div class="condense" id="condense"><p class="chargement">…</p></div>
 
-<p>Un lieu isolé ne tient pas. Ni politiquement, ni pratiquement, ni devant une administration qui demandera toujours à qui d'autre on parle. Cette section recense ce qui existe déjà autour — les lieux portés par des collectifs, et les associations qui font vivre le territoire — et propose de mettre en commun leurs nouvelles plutôt que de les laisser se perdre.</p>
+<p>Un lieu isolé ne tient pas. Ni politiquement, ni pratiquement, ni devant une administration qui demandera toujours à qui d'autre on parle. Cette section recense ce qui existe déjà autour — les lieux référencés par les annuaires, et les associations qui font vivre le territoire — et propose de mettre en commun leurs nouvelles plutôt que de les laisser se perdre.</p>
 
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement</p></div></div>
 
 <h2 id="trois-entrees">Trois entrées</h2>
 
 <h3><a href="reseau-carte.html">La cartographie des lieux</a></h3>
-<p>Les lieux portés par des collectifs déjà référencés à moins d'une heure, sur une carte navigable et dans un annuaire trié par distance. Les fiches sont reprises d'un agrégateur public&nbsp;: <strong>aucune n'a été vérifiée sur place</strong>, la nôtre pas davantage, et elle date de 2019.</p>
+<p>Les lieux déjà référencés à moins d'une heure, sur une carte navigable et dans un annuaire trié par distance, avec le verdict de la grille d'intérêt général pour chacun. Les fiches sont reprises d'un agrégateur public&nbsp;: <strong>aucune n'a été vérifiée sur place</strong>, la nôtre pas davantage, et elle date de 2019.</p>
 
 <h3><a href="reseau-fil.html">Le fil commun</a></h3>
 <p>Une lettre mensuelle que chacun édite dans ses mots, figée à date fixe et archivée. Trois règles, aucun traceur, pas de plateforme. <strong>Elle n'existe pas encore</strong> et démarrera à trois lieux participants.</p>
 
 <h3><a href="reseau-associations.html">Les associations d'intérêt général</a></h3>
-<p>Le recensement complet des associations actives de la zone, à partir du répertoire du ministère de l'Intérieur, et le tri de celles dont l'objet déclaré les engage envers des non-membres — <strong>chaque objet lu un par un</strong> contre une grille écrite d'avance.</p>
+<p>Le recensement des associations <strong>déclarées actives</strong> de la zone — «&nbsp;active&nbsp;» voulant dire, au répertoire, <em>qui n'a pas déclaré sa dissolution</em>&nbsp;: c'est un majorant — à partir du répertoire du ministère de l'Intérieur, et le tri de celles dont l'objet déclaré les engage envers des non-membres — <strong>chaque objet lu un par un</strong> contre une grille écrite d'avance.</p>
 
 <h2 id="pourquoi">Pourquoi nous faisons ça</h2>
 <p>Trois besoins se recouvrent, et un seul travail les sert.</p>
@@ -138,6 +138,8 @@
 
 
 
+
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -161,7 +163,7 @@
   } catch (e) { echec("condense", "Données du réseau indisponibles."); echec("synthese", ""); return; }
   const communes = new Set(L2.lieux.map((l) => l.commune)).size;
   document.getElementById("condense").innerHTML = "<ul>" +
-    "<li><strong>" + nf0(L2.total) + " lieux</strong> portés par des collectifs, déjà référencés dans l'heure, sur " + communes + " communes.</li>" +
+    "<li><strong>" + nf0(L2.total) + " fiches</strong> d'annuaire dans l'heure, sur " + communes + " communes — au plus " + nf0(L2.lieux.filter((l) => !l.doublon_de).length) + " lieux distincts.</li>" +
     "<li><strong>" + nf0(A.actives) + " associations actives</strong> domiciliées dans la zone, dont <strong>" +
       nf0(A.verdicts.retenu) + "</strong> retenues après lecture de leur objet déclaré.</li>" +
     "<li>La zone couvre " + nf0(C.total) + " communes et " + nf0(C.population) + " habitants, à 45 km à la ronde.</li>" +

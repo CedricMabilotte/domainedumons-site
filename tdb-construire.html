@@ -207,9 +207,9 @@
     "<p>La commune est classée <strong>" + z.frr + "</strong> — France ruralités revitalisation, niveau renforcé — depuis le " + z.frr_date +
     ". Une activité créée ici ouvre droit à des exonérations d'impôt sur les bénéfices et de cotisation foncière des entreprises, sous conditions. " +
     "Elle appartient aussi au périmètre du <strong>" + z.pnr + "</strong>, ce qui donne un interlocuteur et une charte, pas une servitude.</p>" +
-    (r.risques_gaspar === 0 ? "<p>Aucun plan de prévention des risques ne s'applique&nbsp;: la commune n'a aucun risque majeur recensé au fichier national.</p>" : "") +
+    (r.risques_gaspar === 0 ? "<p><strong>Aucun plan de prévention des risques ne s'applique</strong> à la commune. Cela ne veut pas dire qu'il ne s'y passe rien.</p>" : "") +
     (r.catnat && r.catnat.length
-      ? "<p>Quatre arrêtés de catastrophe naturelle ont visé la commune depuis 1982&nbsp;: " +
+      ? "<p>" + nf0(r.catnat.length) + " arrêté" + (r.catnat.length > 1 ? "s" : "") + " de catastrophe naturelle " + (r.catnat.length > 1 ? "ont" : "a") + " visé la commune depuis 1982&nbsp;: " +
         r.catnat.map((c) => c.risque.toLowerCase() + " (" + c.debut.slice(6) + ")").join(", ") +
         ". Le mouvement de terrain de décembre 1999 est le seul qui engage vraiment une précaution — <strong>attention aux talus lors des terrassements</strong>.</p>"
       : "");
@@ -236,7 +236,7 @@
   /* --- forages --- */
   document.getElementById("forages").innerHTML =
     (forages.length
-      ? "<p>Deux forages déclarés à moins de huit cents mètres donnent la réponse locale à la question de la profondeur.</p>" +
+      ? "<p>" + nf0(forages.length) + " forage" + (forages.length > 1 ? "s déclarés" : " déclaré") + " à moins de 800&nbsp;m " + (forages.length > 1 ? "donnent" : "donne") + " la réponse locale à la question de la profondeur.</p>" +
         "<div class='defilant'><table class='donnees'><thead><tr><th>Ouvrage</th><th>Nature</th><th>Lieu-dit</th><th>Distance</th><th>Profondeur</th></tr></thead><tbody>" +
         (d.forages || []).map((f) => "<tr><td>" + f.code + "</td><td>" + (f.nature || "—") + "</td><td>" + (f.lieu || "—") +
           "</td><td>" + nf(f.distance_km, 2) + " km</td><td>" + (f.profondeur_m ? nf0(f.profondeur_m) + " m" : "—") + "</td></tr>").join("") +
@@ -244,7 +244,7 @@
         "<p>Sur ce socle, l'eau n'est pas dans une nappe continue mais dans les fissures du granite et dans l'arène qui le recouvre. " +
         "Les deux forages du voisinage immédiat descendent à <strong>" + forages.map((f) => nf0(f.profondeur_m)).join(" et ") + " mètres</strong>&nbsp;: " +
         "c'est l'ordre de grandeur à inscrire dans un devis, et la raison de ne pas espérer un puits à quinze mètres. " +
-        "Les ouvrages à dix mètres de la liste sont des piézomètres de surveillance de la zone d'activité voisine&nbsp;: ils ne disent rien de la nappe utile. " +
+        "Les ouvrages à 10&nbsp;m de la liste portent des codes en «&nbsp;PZ&nbsp;» et une adresse de zone d'activité&nbsp;: ce sont vraisemblablement des piézomètres de surveillance, qui ne disent rien de la nappe utile. La donnée les déclare seulement comme forages. " +
         "Les coupes détaillées n'existent qu'en fiches papier, à demander au BRGM.</p>"
       : "<p>Aucun ouvrage déclaré à proximité.</p>") +
     "<p class='nb'>Un forage domestique se déclare en mairie&nbsp;; au-delà de 1 000 m³ par an, le régime change. Et la commune prélève déjà de l'eau potable ici même — voir <a href='tdb-eau.html#ou-va-l-eau'>la page eau</a>.</p>";
@@ -264,7 +264,7 @@
     "<tr><td>Phosphore assimilable</td><td>" + s.phosphore_assimilable + "</td></tr>" +
     "</tbody></table></div>" +
     "<p><strong>Un sol acide, riche en matière organique, et probablement en toxicité aluminique.</strong> " +
-    "À pH " + nf(s.ph_eau, 1) + ", l'aluminium occupe les trois quarts du complexe absorbant&nbsp;: il brûle les jeunes racines, " +
+    "À pH " + nf(s.ph_eau, 1) + ", l'aluminium occupe " + nf0(100 * s.aluminium_echangeable_cmol_kg / s.cec_cmol_kg) + "&nbsp;% du complexe absorbant&nbsp;: il brûle les jeunes racines, " +
     "et les légumineuses, les brassicacées et les fruitiers à pépins y végètent. Le phosphore est sous le seuil de détection, " +
     "le magnésium très bas.</p>" +
     "<p>Dans l'autre sens, " + s.matiere_organique_g_kg + " g/kg de matière organique est une valeur remarquable&nbsp;: réserve en eau, structure, " +
@@ -292,9 +292,9 @@
     "<p class='nb'>Une précision qui évite un contresens&nbsp;: une entreprise de la zone d'activité voisine porte le mot « Seveso » dans sa raison sociale, " +
     "et le registre national la classe pourtant <em>non Seveso</em>. Le nom trompe, le régime fait foi.</p>" +
     ((r.sites_pollues || []).length
-      ? "<p>Côté sols pollués, l'inventaire recense " + r.sites_pollues_total + " anciens sites industriels dans un rayon de cinq kilomètres&nbsp;; " +
+      ? "<p>Côté sols, l'inventaire <strong>CASIAS</strong> des anciens sites industriels et d'activité de service en recense " + r.sites_pollues_total + " dans un rayon de 5&nbsp;km&nbsp;; " +
         "le plus proche est à " + nf(r.sites_pollues[0].distance_km, 1) + " km (" + (r.sites_pollues[0].nom || "").toLowerCase() + "). " +
-        "Aucun site pollué appelant une action des pouvoirs publics.</p>"
+        "<strong>C'est un inventaire de mémoire, pas un constat de pollution.</strong> L'inventaire BASOL, qui recense les sites appelant une action des pouvoirs publics, en compte deux, le plus proche à 2,9&nbsp;km.</p>"
       : "");
 
   document.getElementById("horodatage").textContent =

@@ -114,13 +114,13 @@
 <div class="defilant"><table class="donnees">
   <thead><tr><th>Fenêtre</th><th>Condition</th><th>Pourquoi</th></tr></thead>
   <tbody>
-    <tr><td>Gelée</td><td>minimale ≤ +2 °C</td><td>La température au ras du sol est de 2 à 5 °C sous celle mesurée sous abri. Une gelée blanche se produit couramment quand le thermomètre annonce encore +3.</td></tr>
+    <tr><td>Gelée</td><td>minimale ≤ +2&nbsp;°C<br><span class="nb">nous ne testons ici que la température : une nuit ventée ou couverte annule le risque sans que cette ligne s'éteigne</span></td><td>La température au ras du sol est de 2 à 5 °C sous celle mesurée sous abri. Une gelée blanche se produit couramment quand le thermomètre annonce encore +3.</td></tr>
     <tr><td>Gelée destructrice</td><td>minimale ≤ 0 °C</td><td>Report des semis et plants gélifs : haricot, courge, tomate.</td></tr>
     <tr><td>Fenaison</td><td>3 jours consécutifs à moins de 1 mm, et plus de 10 mm d'évaporation cumulée</td><td>Faucher engage trois jours. Sans pouvoir séchant, trois jours sans pluie ne suffisent pas.</td></tr>
     <tr><td>Traitement</td><td>vent moyen ≤ 19 km/h et pas plus de 5 mm dans les 12 h</td><td>Le seuil de vent est réglementaire (arrêté du 4 mai 2017). La pluie lessive l'application.</td></tr>
     <tr><td>Semis</td><td>sol à 6 cm au-dessus de 8 °C pendant 3 jours</td><td>En dessous, la levée traîne et les graines pourrissent plus qu'elles ne germent.</td></tr>
     <tr><td>Passage d'engin</td><td>moins de 15 mm tombés sur 3 jours</td><td>Approximation grossière de la portance, à confirmer à la bêche : un sol qui colle à la botte ne porte pas.</td></tr>
-    <tr><td>Travail en hauteur</td><td>rafales sous 60 km/h</td><td>Au-delà, ni échelle, ni bâche, ni tunnel.</td></tr>
+    <tr><td>Travail en hauteur</td><td>rafales sous 60&nbsp;km/h<br><span class="nb">seuil volontairement plus bas que les 80&nbsp;km/h de notre note de cadrage&nbsp;: le travail en hauteur se fait ici à deux et sans nacelle</span></td><td>Au-delà, pas de travail sur échelle, ni pose de bâche ou de film de tunnel.</td></tr>
     <tr><td>Veille mildiou</td><td>minimale ≥ 10 °C et humidité ≥ 75 % pendant 11 h, deux jours de suite</td><td>Règle de Beaumont. Elle signale un <em>risque climatique</em>, pas une maladie : elle déclenche une observation, pas un traitement.</td></tr>
   </tbody>
 </table></div>
@@ -128,11 +128,11 @@
 <h2>Lecture</h2>
 <div class="note">
   <span class="etiquette">La donnée modélisée, ici</span>
-  <p>Le lieu est à <strong>588 mètres, sur un replat exposé au sud</strong> — pas en fond de vallée : dans un rayon de 800 mètres, 84&nbsp;% du terrain est plus bas. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de deux mètres de l'altitude réelle</strong>. La donnée est donc ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
+  <p>Le lieu est à <strong>588 mètres, sur un replat</strong> — pas en fond de vallée : sur les 2,4&nbsp;km de terrain analysés autour, 84&nbsp;% est plus bas que lui. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de deux mètres de l'altitude réelle</strong>. La donnée est donc ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
   <p>Deux réserves. La maille fait environ neuf kilomètres&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — la <a href="tdb-terrain.html#air-froid">carte de l'air froid</a> dit où.</p>
 </div>
 <p>Le <strong>bilan hydrique</strong> est la différence entre ce qui est tombé et ce que l'atmosphère a évaporé sur sept jours. Négatif, le sol se vide&nbsp;; positif, il se recharge. C'est une approximation&nbsp;: la réserve réelle dépend de la profondeur du sol et de sa charge en cailloux, qui se mesurent à la bêche et pas au modèle.</p>
-<p>Toutes les valeurs sont appelées par votre navigateur, directement auprès des services publics. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
+<p>Toutes les valeurs sont appelées par votre navigateur, directement auprès de leurs fournisseurs&nbsp;: <strong>Hub'Eau et VigiEau</strong>, services publics français, et <strong>Open-Meteo</strong>, entreprise privée allemande qui redistribue les réanalyses sous licence ouverte. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
 <p class="horodatage" id="horodatage"></p>
 </main>
 <footer>
@@ -397,7 +397,7 @@ async function archive() {
 
 (async () => {
   const taches = [
-    [meteo, "tuiles", "Météo indisponible pour l'instant. Les sources publiques ont des interruptions ; réessayez plus tard."],
+    [meteo, "tuiles", "Météo indisponible pour l'instant. Les services interrogés ont des interruptions ; réessayez plus tard."],
     [riviere, "riviere", "Débit de la Montane indisponible pour l'instant."],
     [secheresse, "secheresse", "État des restrictions indisponible pour l'instant."],
     [archive, "archive-secheresse", "Archive des restrictions indisponible."]

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La cartographie des lieux — Domaine du Mons</title>
-<meta name="description" content="Carte navigable des lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane. Aucune tuile distante, aucun traceur.">
+<meta name="description" content="Carte navigable des lieux référencés à moins de 45 km de Vitrac-sur-Montane, passés à la grille d'intérêt général. Aucune tuile distante, aucun traceur.">
 <link rel="stylesheet" href="vendor/leaflet.css">
 <link rel="stylesheet" href="vendor/carto-socle.css?v=27">
 <link rel="stylesheet" href="style.css?v=27">
@@ -58,12 +58,13 @@
 <p class="retour"><a href="reseau.html">← Le réseau</a></p>
 <h1>La cartographie des lieux</h1>
 <div class="condense"><ul>
-<li><strong>191 lieux</strong> portés par des collectifs sont déjà référencés dans l'heure, sur 96 communes.</li>
+<li><strong>191 fiches</strong> d'annuaire, soit <strong>au plus 172 lieux distincts</strong> dans l'heure, sur 96 communes.</li>
+<li>Passés à la grille d'intérêt général&nbsp;: <strong>68 retenus</strong>, 38 laissés en doute, 62 écartés. <strong>75 sont des acteurs marchands</strong> et non des collectifs.</li>
 <li>Le plus proche est à 4,4 km, le plus lointain à 44,9 km.</li>
 <li>La zone couvre 284 communes et 238 575 habitants, à 45 km à la ronde.</li>
 <li><strong>Aucune fiche n'a été vérifiée sur place</strong> — la nôtre non plus, et elle date de 2019.</li>
 </ul></div>
-<p>Les communes dont le centre est à moins de 45&nbsp;km d'ici, ce qui correspond à peu près à une heure de route sur ces routes-là. Chaque point est un lieu porté par un collectif, déjà référencé sur un annuaire public.</p>
+<p>Les communes dont le centre est à moins de 45&nbsp;km d'ici, ce qui correspond à peu près à une heure de route sur ces routes-là. Chaque point est une fiche reprise d'un annuaire public. <strong>Tous ne sont pas des collectifs</strong>&nbsp;: 75 des 172 lieux distincts sont des acteurs marchands — fermes en vente directe, épiceries, une enseigne nationale.</p>
 <p><a href="#annuaire" class="carto-evitement">Passer la carte, aller à la liste des lieux</a></p>
 <h2 id="carte-titre">La carte</h2>
 <p id="carte-desc">191 points sur 96 communes de Corrèze et des départements voisins. La molette fait défiler la page&nbsp;; <kbd>Ctrl</kbd> + molette zoome, ou deux doigts sur écran tactile. Échap rend la main. Chaque famille porte une couleur <em>et</em> une forme. <strong>La même information figure dans le tableau sous la carte</strong>, qui se filtre en même temps qu'elle.</p>
@@ -81,7 +82,7 @@
 <dt>Lieux</dt><dd>Transiscope, agrégation d'une vingtaine de cartes — CC BY-SA</dd>
 <dt>Fond de carte</dt><dd>Routes structurantes et noms de lieux repris d'OpenStreetMap — ODbL — © les contributeurs OpenStreetMap. Extraits à la publication et servis par ce dépôt, dans leurs propres fichiers, superposés au rendu seulement.</dd>
 <dt>Données arrêtées au</dt><dd>15 septembre 2026</dd>
-<dt>Carte produite le</dt><dd>17/09/2026</dd>
+<dt>Carte produite le</dt><dd>19/09/2026</dd>
 <dt>Maillage</dt><dd>communes, code officiel géographique 2026</dd>
 <dt>Projection</dt><dd>Web Mercator (EPSG:3857) — aucune surface n'est comparée ici</dd>
 <dt>Non représenté</dt><dd>les lieux sans coordonnées publiées ; les fiches non vérifiées sur place, soit la totalité ; les petites routes, les noms de rue et le bâti ; les courriels et téléphones, qui restent sur la fiche d'origine ; les contours sont généralisés à environ 130 m, donc indicatifs au-delà du zoom 10</dd>
@@ -92,13 +93,13 @@
 <span class="etiquette">Ce que vaut cette liste, et ce qu'elle ne vaut pas</span>
 <p>Elle est reprise telle quelle d'un agrégateur de cartes d'alternatives. <strong>Aucune fiche n'a été vérifiée sur place</strong>, certaines datent de plusieurs années, et un lieu peut avoir fermé, changé d'objet ou ne plus vouloir y figurer.</p>
 <p>Notre propre fiche en est l'exemple&nbsp;: elle date du 3 janvier 2019 et décrit encore le lieu comme un élevage en vente directe. Nous la corrigeons — et c'est exactement ce que nous proposons à chacun de faire pour la sienne.</p>
-<p>Cette carte montre <strong>le milieu des collectifs</strong>, pas le noyau d'intérêt général. Les lieux n'ont pas été passés à la grille appliquée aux associations&nbsp;: ce sont deux usages différents, et cette page ne fait que le premier.</p>
+<p>Cette carte montre <strong>le milieu</strong>, pas le noyau d'intérêt général. Les fiches ont été passées à la grille appliquée aux associations le 17 septembre 2026&nbsp;: <strong>68 lieux distincts sur 172 sont retenus</strong>, 38 restent douteux et sont publiés comme tels. Et <strong>38 des 68 retenus le sont sur l'attestation d'un réseau tiers</strong>, pas sur ce qu'ils déclarent eux-mêmes. La grille lit une déclaration d'annuaire, souvent vieille de plusieurs années&nbsp;: elle repère, elle ne constate pas.</p>
 <p><strong>Droit de réponse.</strong> Toute personne concernée par une fiche peut demander sa correction ou son retrait à <a href="mailto:contact@actitude.org">contact@actitude.org</a>. Le retrait est fait sans discussion et sans délai&nbsp;; la correction est datée dans le journal des versions, en bas de page.</p>
 </div>
-<p id="intro-annuaire">191 lieux, du plus proche au plus éloigné. Cliquer une ligne la montre sur la carte.</p>
+<p id="intro-annuaire">191 fiches, du plus proche au plus éloigné. Un même lieu peut y figurer plusieurs fois, sous des graphies différentes. Cliquer une ligne la montre sur la carte.</p>
 <div class="carto-liste" id="liste-bloc">
 <table id="liste">
-<caption class="sr-only">Lieux portés par des collectifs à moins de 45 km de Vitrac-sur-Montane</caption>
+<caption class="sr-only">Fiches de lieux référencés à moins de 45 km de Vitrac-sur-Montane</caption>
 <thead><tr><th scope="col">Lieu</th><th scope="col">Commune</th><th scope="col">Distance</th><th scope="col">Familles</th><th scope="col">Ce qu'il dit faire</th><th scope="col">Fiche mise à jour</th></tr></thead><tbody>
 <tr tabindex="0" data-i="0" data-nom="Domaine du Mons" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-prim="Terre et alimentation" data-lat="45.35137" data-lon="1.93221" data-km="0,0" data-ou="sur place" data-site="http://www.domainedumons.com" data-decrit="Producteur bio – Élevage ovin et bovin. Vente directe. ." data-origine="https://presdecheznous.fr/annuaire#/fiche/id/ASG"><td><a href="http://www.domainedumons.com" rel="noopener nofollow">Domaine du Mons</a></td><td>Vitrac-sur-montane</td><td>0,0 km, sur place</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td class="carto-dit">Producteur bio – Élevage ovin et bovin. Vente directe. .<br><a class="nb" href="https://presdecheznous.fr/annuaire#/fiche/id/ASG" rel="noopener nofollow">Fiche d'origine, avec les contacts</a></td><td>2019-01-03</td></tr>
 <tr tabindex="0" data-i="1" data-nom="Les Seigles du Massif Central" data-fam="Terre et alimentation|Lien social et culture|Économie sociale" data-prim="Terre et alimentation" data-lat="45.33932" data-lon="1.87828" data-km="4,4" data-ou="à l&#x27;ouest" data-site="http://www.pailleetpaillon.fr" data-decrit="Vente de paille de seigle pour toit de chaume et construction paille. Fabrication de paillassons en paille naturelle (pour protéger les semis sous leurs châssis). Fabrication de paillons à fromage." data-origine="https://presdecheznous.fr/annuaire#/fiche/id/ASC"><td><a href="http://www.pailleetpaillon.fr" rel="noopener nofollow">Les Seigles du Massif Central</a></td><td>Correze</td><td>4,4 km, à l&#x27;ouest</td><td>Terre et alimentation, Lien social et culture, Économie sociale</td><td class="carto-dit">Vente de paille de seigle pour toit de chaume et construction paille. Fabrication de paillassons en paille naturelle (pour protéger les semis sous leurs châssis). Fabrication de paillons à fromage.<br><a class="nb" href="https://presdecheznous.fr/annuaire#/fiche/id/ASC" rel="noopener nofollow">Fiche d'origine, avec les contacts</a></td><td>2017-12-29</td></tr>
@@ -302,12 +303,15 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
 <p><strong>Accessibilité.</strong> Le tableau ci-dessus contient la même information que la carte et se filtre avec elle. Il est écrit dans la page et ne dépend d'aucun script&nbsp;: sans JavaScript, la liste reste entière. Les points sont atteignables au clavier, la molette ne confisque pas le défilement, et les animations sont supprimées si le système le demande.</p>
 <h2 id="les-versions">Journal des versions</h2>
 <ul>
-<li><strong>15 septembre 2026</strong> — première version. Reprise de 191 lieux depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</li>
+<li><strong>15 septembre 2026</strong> — première version. Reprise de 191 fiches depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</li>
 <li><strong>16 septembre 2026</strong> — la carte devient navigable&nbsp;: zoom, déplacement, fiche au clic, contours communaux au trait fin. Toujours sans aucune tuile distante.</li>
 <li><strong>17 septembre 2026</strong> — l'annuaire est écrit dans la page et non plus par un script&nbsp;: il reste lisible sans JavaScript, au clavier et au lecteur d'écran. La molette rend le défilement à la page. Le zoom est ramené à 12, la fidélité réelle des contours étant plus grossière que ce que le zoom 14 laissait croire.</li>
+<li><strong>19 septembre 2026</strong> — correction. La page annonçait «&nbsp;191 lieux portés par des collectifs&nbsp;». Il y a 191 fiches, au plus 172 lieux distincts, et 75 d'entre eux sont des acteurs marchands. Les verdicts de la grille du 17 septembre sont désormais affichés.</li>
 </ul>
 <p class="horodatage" id="horodatage"></p>
 </main>
+
+
 
 
 

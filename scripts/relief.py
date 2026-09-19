@@ -20,6 +20,7 @@ import heapq, json, math, os, sys, urllib.request
 from datetime import date
 import numpy as np
 import tifffile
+from scipy import ndimage
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.expanduser("~/ddm-relief")
@@ -64,10 +65,16 @@ def moyenne_fenetre(a, rayon_px):
     return tot / (k * k)
 
 
-def remplir(z):
-    """Remplissage des cuvettes par inondation prioritaire (Barnes 2014).
-    Renvoie la surface remplie ; la différence avec l'original donne la
-    profondeur de chaque cuvette."""
+def remplir(z, eps=1e-3):
+    """Remplissage des cuvettes par inondation prioritaire AVEC INCRÉMENT
+    (Barnes 2014). Renvoie la surface remplie ; la différence avec l'original
+    donne la profondeur de chaque cuvette.
+    L'incrément n'est pas un raffinement. Sans lui, le remplissage crée des
+    surfaces parfaitement planes, une surface plane n'a pas de direction
+    d'écoulement, et toute l'aire amont qui aurait dû transiter s'arrête au
+    bord de la cuvette — sans que rien ne le signale. Corrigé le 19/09/2026 :
+    au chemin du Mons, l'indice d'humidité passait de 9,57 à 7,11 sans cet
+    incrément, soit une sous-estimation muette d'un facteur dix sur l'aire."""
     n, m = z.shape
     rempli = np.full((n, m), np.inf)
     ferme = np.zeros((n, m), dtype=bool)
@@ -85,32 +92,41 @@ def remplir(z):
             a, b = i + di, j + dj
             if 0 <= a < n and 0 <= b < m and not ferme[a, b]:
                 ferme[a, b] = True
-                rempli[a, b] = max(z[a, b], v)
+                rempli[a, b] = max(z[a, b], v + eps)
                 heapq.heappush(tas, (rempli[a, b], a, b))
     return rempli
 
 
-def accumulation(z, res):
-    """Accumulation de flux D8 sur une surface sans cuvette."""
+def accumulation(z, res, p=1.1):
+    """Accumulation de flux multidirectionnelle (Freeman 1991) sur une surface
+    sans cuvette. D8 est inadapté sous 2° de pente : la discrétisation de la
+    direction d'écoulement en huit valeurs produit, sur un plateau, des
+    filaments parallèles artificiels. Ici la pente médiane est de 4° et plus
+    de 60 % de la surface est sous 5° : l'écoulement multidirectionnel est une
+    nécessité, pas un raffinement. Corrigé le 19/09/2026."""
     n, m = z.shape
-    ordre = np.argsort(z, axis=None)[::-1]
-    acc = np.ones(n * m)
     zf = z.ravel()
-    vois = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    ordre = np.argsort(zf)[::-1]
+    acc = np.ones(n * m)
+    vois = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
     for k in ordre:
-        i, j = divmod(int(k), m)
-        best, bk = 0.0, -1
+        k = int(k)
+        i, j = divmod(k, m)
+        zk = zf[k]
+        pentes, cibles = [], []
         for di, dj in vois:
             a, b = i + di, j + dj
             if 0 <= a < n and 0 <= b < m:
-                d = (zf[k] - z[a, b]) / (res * math.hypot(di, dj))
-                if d > best:
-                    best, bk = d, a * m + b
-        if bk >= 0:
-            acc[bk] += acc[k]
+                d = (zk - z[a, b]) / (res * math.hypot(di, dj))
+                if d > 0:
+                    pentes.append(d ** p)
+                    cibles.append(a * m + b)
+        if cibles:
+            somme = sum(pentes)
+            v = acc[k]
+            for w, cible in zip(pentes, cibles):
+                acc[cible] += v * w / somme
     return acc.reshape(n, m)
-
-
 def ombrage(z, res, azimut=315, hauteur=40):
     gy, gx = np.gradient(z, res)
     pente = np.arctan(np.hypot(gx, gy))
@@ -184,26 +200,46 @@ def main():
     aire = acc * RES * RES
     twi = np.log(aire / np.maximum(np.tan(np.radians(np.maximum(pente_deg, 0.2))), 1e-3))
 
-    # --- indice d'air froid -------------------------------------------------
-    # L'air froid se comporte comme un fluide : il descend la pente, s'accumule
-    # dans les creux et stagne là où la pente s'annule. Trois ingrédients :
-    # la profondeur de cuvette, la position topographique basse, et l'aire
-    # amont qui alimente le point.
-    a_creux = np.clip(creux / 1.5, 0, 1)
-    a_bas = np.clip(-tpi_g / 8.0, 0, 1)
-    a_amont = np.clip((np.log10(np.maximum(aire, 1)) - 3.0) / 2.0, 0, 1)
-    a_plat = np.clip(1 - pente_deg / 4.0, 0, 1)
-    froid = 0.45 * a_creux + 0.30 * a_bas + 0.15 * a_amont * a_plat + 0.10 * a_plat
-    classes = np.digitize(froid, [0.22, 0.38, 0.55])       # 0 à 3
-
+    # --- l'air froid, en grandeurs séparées ---------------------------------
+    # Aucune donnée thermique n'existe sur cette emprise. Un indice agrégé y
+    # aurait la forme d'une mesure sans en être une : on n'en construit pas.
+    # Trois grandeurs, chacune dans son unité, et le critère de poche est
+    # celui de l'analyse LiDAR du 17/09/2026 — position topographique sous
+    # −3 m à 400 m, pente sous 2°, micro-cuvette de plus de 0,30 m.
+    bas = tpi_g < -1.0                                  # bas dans le versant
+    plat_bas = (tpi_g < -3.0) & (pente_deg < 2.0)       # bas ET plat
+    poche = plat_bas & (creux > 0.30)                   # bas, plat, et en creux
+    # Les cuvettes brutes surestiment de deux ordres de grandeur : le modèle
+    # de terrain restitue les remblais de route et de voie ferrée mais pas les
+    # ouvrages qui les traversent, et chaque busage devient un barrage fictif.
+    # On ne garde que les objets compacts et de taille plausible (RX-06).
+    etiq, n_obj = ndimage.label(creux > 0.30)
+    surfaces = ndimage.sum(np.ones_like(etiq), etiq, range(1, n_obj + 1)) * RES * RES
+    # périmètre par comptage de bord, en une passe
+    bord = np.zeros(etiq.shape, dtype=bool)
+    for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        bord |= (etiq != np.roll(etiq, (di, dj), (0, 1)))
+    bord &= etiq > 0
+    perim = ndimage.sum(bord, etiq, range(1, n_obj + 1)) * RES
+    with np.errstate(divide="ignore", invalid="ignore"):
+        compacite = np.where(perim > 0, 4 * math.pi * surfaces / perim ** 2, 0)
+    garde = (compacite >= 0.25) & (surfaces <= 10000)   # compact, et sous l'hectare
+    avere = np.zeros(etiq.shape, dtype=bool)
+    if n_obj:
+        table = np.concatenate([[False], garde])
+        avere = table[etiq]
+    classes = np.zeros(z.shape, dtype=int)
+    classes[bas] = 1
+    classes[plat_bas] = 2
+    classes[poche] = 3
     print("  rendu…")
     om = ombrage(z, RES)
     om = np.round(om * 10) / 10          # aplati le dégradé : une image indexée reste légère
     base = np.stack([247 - (1 - om) * 120, 244 - (1 - om) * 125, 236 - (1 - om) * 130], axis=-1)
     carte = base.copy()
-    carte = melange(carte, (150, 180, 205), classes == 1, 0.30)
-    carte = melange(carte, (95, 145, 190), classes == 2, 0.45)
-    carte = melange(carte, (40, 95, 160), classes == 3, 0.62)
+    carte = melange(carte, (150, 180, 205), classes == 1, 0.28)   # bas dans le versant
+    carte = melange(carte, (95, 145, 190), classes == 2, 0.44)    # bas et plat
+    carte = melange(carte, (40, 95, 160), classes == 3, 0.62)     # bas, plat, en creux
     # les boisements et haies, qui font barrage
     ligneux = np.where(np.isnan(mnh), 0, mnh) > 3
     carte = melange(carte, (74, 96, 58), ligneux, 0.34)
@@ -230,18 +266,23 @@ def main():
                   "exposition_large_deg": round(float(expo_large[c, c])),
                   "tpi_100m": round(float(tpi_p[c, c]), 2),
                   "tpi_400m": round(float(tpi_g[c, c]), 2),
-                  "classe_air_froid": int(classes[c, c]),
-                  "twi": round(float(twi[c, c]), 2)},
+                  "twi": round(float(twi[c, c]), 2),
+                  "aire_amont_m2": round(float(aire[c, c])),
+                  "en_poche_froide": bool(poche[c, c])},
         "fenetre": {
             "altitude_min": round(float(z.min()), 1), "altitude_max": round(float(z.max()), 1),
             "part_plus_bas_que_le_point": part(z < z[c, c]),
-            "part_air_froid_1": part(classes == 1), "part_air_froid_2": part(classes == 2),
-            "part_air_froid_3": part(classes == 3),
+            "part_bas_dans_le_versant": part(bas),
+            "part_bas_et_plat": part(plat_bas),
+            "part_poche_froide": part(poche),
+            "part_creux_brut": part(creux > 0.30),
+            "part_creux_avere": part(avere),
             "part_ligneux_3m": part(ligneux),
             "part_ligneux_10m": part(np.where(np.isnan(mnh), 0, mnh) > 10),
             "hauteur_vegetation_max_m": round(float(np.nanpercentile(mnh[~np.isnan(mnh)], 99.9)), 1),
             "hauteur_vegetation_extreme_m": round(float(np.nanmax(mnh)), 1),
             "creux_max_m": round(float(creux.max()), 2),
+            "creux_avere_max_m": round(float(creux[avere].max()) if avere.any() else 0.0, 2),
             "part_twi_humide": part(twi > 9.0),
         },
         "calcule_le": date.today().isoformat(),
@@ -263,8 +304,11 @@ def main():
     fen = z[max(0, c - r):c + r, max(0, c - r):c + r]
     out["fenetre"]["denivele_sous_le_point_400m"] = round(float(z[c, c] - fen.min()), 1)
 
-    # la poche d'air froid marquée la plus proche : distance, dénivelé
-    yy, xx = np.nonzero(classes >= 2)
+    # La poche d'air froid la plus proche, au critère de l'analyse du
+    # 17/09/2026 : position topographique sous −3 m à 400 m, pente sous 2°,
+    # micro-cuvette de plus de 0,30 m. L'ancien critère passait par l'indice
+    # composite et désignait un point à 114 m au nord-ouest — à l'opposé.
+    yy, xx = np.nonzero(poche)
     if len(yy):
         dd = np.hypot(yy - c, xx - c) * RES
         k = int(np.argmin(dd))
@@ -272,20 +316,22 @@ def main():
             "distance_m": round(float(dd[k])),
             "denivele_m": round(float(z[c, c] - z[yy[k], xx[k]]), 1),
             "direction_deg": round(float((math.degrees(math.atan2(xx[k] - c, c - yy[k])) + 360) % 360)),
+            "critere": "position topographique < −3 m à 400 m, pente < 2°, cuvette > 0,30 m",
         }
-        sc = classes[max(0, c - r):c + r, max(0, c - r):c + r]
-        out["fenetre"]["part_air_froid_marque_400m"] = round(100 * float(np.mean(sc >= 2)), 1)
-
+        sp = poche[max(0, c - r):c + r, max(0, c - r):c + r]
+        out["fenetre"]["part_poche_froide_400m"] = round(100 * float(np.mean(sp)), 1)
     json.dump(out, open(os.path.join(RACINE, "data", "relief.json"), "w"),
               ensure_ascii=False, separators=(",", ":"))
     print("\n  altitude %.1f m, pente %.2f°, exposition %d°" % (
         out["point"]["altitude_m"], out["point"]["pente_deg"], out["point"]["exposition_deg"]))
     print("  position : %+.2f m sur 100 m, %+.2f m sur 400 m" % (
         out["point"]["tpi_100m"], out["point"]["tpi_400m"]))
-    print("  classe d'air froid au point : %d sur 3" % out["point"]["classe_air_froid"])
+    print("  le point est-il en poche d'air froid : %s" % ("oui" if out["point"]["en_poche_froide"] else "non"))
+    print("  aire amont au point : %d m² · indice d'humidité %.2f"
+          % (out["point"]["aire_amont_m2"], out["point"]["twi"]))
     f = out["fenetre"]
     print("  air froid : %.1f %% faible, %.1f %% marqué, %.1f %% fort" % (
-        f["part_air_froid_1"], f["part_air_froid_2"], f["part_air_froid_3"]))
+        f["part_bas_dans_le_versant"], f["part_bas_et_plat"], f["part_poche_froide"]))
     print("  ligneux > 3 m : %.1f %%, > 10 m : %.1f %%, max %.1f m" % (
         f["part_ligneux_3m"], f["part_ligneux_10m"], f["hauteur_vegetation_max_m"]))
     print("  terrain plus bas que le point : %.1f %%" % f["part_plus_bas_que_le_point"])

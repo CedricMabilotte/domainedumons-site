@@ -66,7 +66,7 @@
 
 <p>Chacun des lieux de la zone produit des nouvelles — un chantier ouvert, une récolte, une assemblée, un départ, une demande de coup de main — et chacune se perd dans sa propre liste de diffusion. Les gens qui auraient pu venir prêter la main ne l'ont pas su. Ceux qui cherchaient exactement ce qu'un voisin proposait ne l'ont pas su non plus.</p>
 
-<p>Un réseau voisin, autour de Limoges, résout cela depuis des années avec un dispositif d'une simplicité obstinée&nbsp;: un document que tout le monde peut éditer, figé et envoyé une fois par mois, puis archivé. Pas de plateforme, pas de compte à créer, pas d'algorithme. Nous proposons le même ici.</p>
+<p><strong>Le dispositif n'est pas inventé ici.</strong> Nous faisons déjà tourner une lettre commune ailleurs, sur <code>sillon.actitude.org</code>, avec une mécanique obstinément simple&nbsp;: un document que tout le monde peut éditer, figé et envoyé une fois par mois, puis archivé. Ni plateforme, ni compte à créer. Nous proposons le même ici.</p>
 
 <h2 id="les-regles">Les trois règles</h2>
 
@@ -152,6 +152,8 @@
 
 
 
+
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -175,7 +177,7 @@
   } catch (e) { echec("condense", "Données du réseau indisponibles."); echec("synthese", ""); return; }
   const communes = new Set(L2.lieux.map((l) => l.commune)).size;
   document.getElementById("condense").innerHTML = "<ul>" +
-    "<li><strong>" + nf0(L2.total) + " lieux</strong> portés par des collectifs, déjà référencés dans l'heure, sur " + communes + " communes.</li>" +
+    "<li><strong>" + nf0(L2.total) + " fiches</strong> d'annuaire dans l'heure, sur " + communes + " communes — au plus " + nf0(L2.lieux.filter((l) => !l.doublon_de).length) + " lieux distincts.</li>" +
     "<li><strong>" + nf0(A.actives) + " associations actives</strong> domiciliées dans la zone, dont <strong>" +
       nf0(A.verdicts.retenu) + "</strong> retenues après lecture de leur objet déclaré.</li>" +
     "<li>La zone couvre " + nf0(C.total) + " communes et " + nf0(C.population) + " habitants, à 45 km à la ronde.</li>" +
