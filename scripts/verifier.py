@@ -9,7 +9,11 @@
    Quatre occurrences en deux jours, sur quatre pages différentes.
 2. Fichiers de données appelés mais absents du dépôt.
 3. Ressources sans numéro de version : un visiteur déjà venu garde l'ancienne.
-4. Clés appelées par une page mais absentes du JSON qu'elle charge. Ajouté le
+4. Étiquettes de croquis qui sortent du cadre. Les tailles sont en unités de
+   viewBox : grossir le texte pour le rendre lisible au téléphone pousse les
+   étiquettes hors du dessin, et cela ne se voit sur aucune page tant qu'on
+   ne mesure pas. Ajouté le 19/09/2026 avec le passage de 13,5 à 17 px.
+5. Clés appelées par une page mais absentes du JSON qu'elle charge. Ajouté le
    19/09/2026 : data/associations.json était resté en version 1 pendant trois
    jours, sans la clé « verdicts ». Les pages « Le réseau », « Les associations »
    et « Le fil commun » plantaient sur d.verdicts.retenu et restaient bloquées
@@ -18,6 +22,47 @@
 """
 import collections, glob, json, os, re, sys
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Tailles de .texte-croquis, en unités de viewBox. À tenir en phase avec
+# style.css : si l'une des deux bouge seule, ce contrôle ne mesure plus rien.
+TAILLES_CROQUIS = {"": 17.0, "fort": 22.0, "petit": 15.0, "sur": 15.0}
+# Georgia, avance moyenne ~0,50 em en bas de casse. Estimation volontairement
+# généreuse : mieux vaut une alerte de trop qu'une étiquette coupée en ligne.
+AVANCE = 0.50
+
+
+def croquis_qui_debordent(nom, t):
+    fautes = []
+    for vbs, corps in re.findall(r'<svg[^>]*viewBox="([^"]+)"[^>]*>(.*?)</svg>', t, re.S):
+        if "texte-croquis" not in corps:
+            continue
+        try:
+            x0, _, largeur, _ = [float(v) for v in vbs.split()]
+        except ValueError:
+            continue
+        for m in re.finditer(r"<text([^>]*)>(.*?)</text>", corps, re.S):
+            attrs, txt = m.group(1), re.sub(r"<[^>]+>", "", m.group(2))
+            px = re.search(r'x="([-\d.]+)"', attrs)
+            if not px:
+                continue
+            cls = re.search(r'class="([^"]*)"', attrs)
+            taille = TAILLES_CROQUIS[""]
+            if cls:
+                for c in ("fort", "petit", "sur"):
+                    if c in cls.group(1).split():
+                        taille = TAILLES_CROQUIS[c]
+                        break
+            anc = re.search(r'text-anchor="(\w+)"', attrs)
+            anc = anc.group(1) if anc else "start"
+            w = len(txt) * taille * AVANCE
+            x = float(px.group(1))
+            gauche = x - w / 2 if anc == "middle" else (x - w if anc == "end" else x)
+            if gauche < x0 - 1 or gauche + w > x0 + largeur + 1:
+                fautes.append("%s : l'étiquette « %s » sort du cadre du croquis "
+                              "(%.0f à %.0f, cadre %.0f à %.0f)"
+                              % (nom, txt[:32], gauche, gauche + w, x0, x0 + largeur))
+    return sorted(set(fautes))
+
+
 def aplatir(o, prefixe=""):
     """Toutes les clés d'un JSON, en notation pointée."""
     cles = set()
@@ -137,8 +182,9 @@ def main():
             if not os.path.exists(os.path.join(RACINE, d)):
                 fautes.append("%s : %s appelé mais absent du dépôt" % (nom, d))
         fautes += cles_manquantes(nom, t)
+        fautes += croquis_qui_debordent(nom, t)
     if fautes:
         print("\n".join("  ✗ " + x for x in fautes))
         sys.exit(1)
-    print("  ✓ identifiants, versions et fichiers appelés : rien à signaler")
+    print("  ✓ identifiants, versions, fichiers, clés et croquis : rien à signaler")
 main()

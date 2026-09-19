@@ -25,7 +25,7 @@ BUILD = os.path.join(RACINE, "build")
 # Le numéro de version des ressources, en un seul endroit. À incrémenter dès
 # que style.css, site.js ou tdb.js changent : sinon un visiteur déjà venu garde
 # l'ancienne feuille et voit une page à moitié neuve.
-VERSION = 27
+VERSION = 28
 
 VERSIONNES = ("style.css", "site.js", "tdb.js",
               "vendor/carto-socle.js", "vendor/carto-socle.css",
@@ -93,13 +93,11 @@ def main():
          "dont l'objet déclaré les engage envers des non-membres.",
          "corps-assos.html", "js-assos.js")
 
-    css = os.path.join(RACINE, "style.css")
-    s = open(css, encoding="utf-8").read()
-    if ".carte-leaflet" not in s:
-        open(css, "w", encoding="utf-8").write(s + lire("css-ajouts.css"))
-        print("  style.css : ajouts posés")
-    else:
-        print("  style.css : ajouts déjà présents")
+    # L'étape « ajouts CSS » est retirée le 19/09/2026. Elle recollait
+    # scripts/pages/css-ajouts.css en fin de feuille dès que « .carte-leaflet »
+    # n'y figurait plus — c'est-à-dire qu'elle aurait ressuscité, à la première
+    # reconstruction, les 55 lignes de l'ancienne carte qu'on vient de retirer.
+    # Les règles encore vivantes de ce fichier sont désormais dans style.css.
 
     # La version de TOUTES les ressources versionnées, sur toutes les pages.
     # La règle précédente en oubliait deux : elle ne couvrait ni leaflet.css

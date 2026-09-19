@@ -1,49 +1,99 @@
 /* Domaine du Mons — feuille unique. Aucune dépendance, aucune police distante. */
 
+/* ------------------------------------------------------------------ tokens
+   Une valeur écrite deux fois est une décision prise deux fois. Tout ce qui
+   suit se réfère à ces variables, jamais à un littéral.
+   Contrastes vérifiés au rapport WCAG, sur --papier et sur --surface. */
 :root {
-  --papier: #ffffff;
-  --encre: #1a1915;
-  --douce: #5b5749;
-  --trait: #e2dfd4;
-  --accent: #5c6b4a;
-  --surface: #f6f5f0;
-  --calme: #0b7f4e;
-  --vigilance: #bb9008;
-  --alerte: #d94d08;
-  --trace: #5c6b4a;
-  --grille: #ebe8df;
-  --mesure: 34rem;
-}
+  /* substrat */
+  --papier:  #ffffff;   /* fond de page */
+  --surface: #f6f5f0;   /* fond de bloc : condensé, fiche, note */
+  --encre:   #1a1915;   /* texte courant — 17,6:1, AAA */
+  --douce:   #5b5749;   /* texte secondaire — 7,2:1, AAA */
+  --filet:   #d8d4c7;   /* séparateur décoratif, hors critère de contraste */
+  --bord:    #7d7768;   /* limite VISIBLE d'un contrôle — 4,5:1, seuil 3:1 */
+  --grille:  #ebe8df;   /* quadrillage de graphe */
 
+  /* accent — un seul, identitaire */
+  --accent:      #5c6b4a;   /* 5,7:1 */
+  --accent-fort: #4a5a3a;   /* 7,5:1, AAA — dès qu'un accent porte du texte */
+
+  /* statuts — jamais sans le mot écrit à côté, jamais de changement de
+     famille chromatique entre les deux thèmes */
+  --calme:     #0a6f45;   /* 6,2:1 sur papier, 5,7:1 sur surface */
+  --vigilance: #7d6100;   /* 5,9:1 / 5,4:1 — un ocre sourd : à l'écran, un
+                             jaune sur blanc ne sera jamais conforme */
+  --alerte:    #b23a0c;   /* 6,0:1 / 5,5:1 */
+
+  /* le repère « nous sommes ici » : ce n'est pas une alerte, et une révision
+     de la sémantique d'alerte ne doit pas déplacer le lieu sur la carte */
+  --ici: #b23a0c;
+
+  --trace: #5c6b4a;     /* courbes de graphe */
+
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+           "Noto Serif", "Liberation Serif", "Times New Roman", serif;
+
+  /* échelle typographique — 7 crans, ratio 1,125 */
+  --t-xs:      0.79rem;   /* légendes, sources, horodatage, en-têtes */
+  --t-s:       0.889rem;  /* tableaux, nav, pied, notes */
+  --t-m:       1rem;      /* corps — plancher absolu pour du texte suivi */
+  --t-l:       1.125rem;  /* chapeau, h3 */
+  --t-xl:      1.266rem;  /* h2 */
+  --t-xxl:     1.424rem;  /* h1 */
+  --t-chiffre: 1.602rem;  /* .tuile .valeur */
+
+  /* échelle d'espacement — base 4 px */
+  --e-1: .25rem;  --e-2: .5rem;  --e-3: .75rem;  --e-4: 1rem;
+  --e-5: 1.5rem;  --e-6: 2rem;   --e-7: 3rem;
+
+  /* mesures */
+  --mesure-texte: 34rem;   /* ~64 signes en Georgia 16 px */
+  --mesure-large: 52rem;   /* cartes, tableaux larges, graphes */
+
+  /* alias de transition : les règles non encore reprises continuent de
+     fonctionner. À retirer quand plus rien ne les appelle. */
+  --trait: var(--filet);
+  --mesure: var(--mesure-texte);
+}
 @media (prefers-color-scheme: dark) {
   :root {
-    --papier: #14130e;
-    --encre: #e8e2d2;
-    --douce: #9d9682;
-    --trait: #302c23;
-    --accent: #9cb388;
+    --papier:  #14130e;
     --surface: #1c1a14;
-    --calme: #17a183;
-    --vigilance: #b0921f;
-    --alerte: #e3536f;
+    --encre:   #e8e2d2;   /* 14,4:1, AAA */
+    --douce:   #a8a18c;   /* 7,2:1, AAA — était #9d9682 à 6,3:1 */
+    --filet:   #3a352a;
+    --bord:    #7a7463;   /* 4,0:1 sur papier, 3,7:1 sur surface — #6b6555
+                             tombait pile sur 3,00:1, sans marge */
+    --grille:  #282419;
+    --accent:      #9cb388;
+    --accent-fort: #9cb388;
+    --calme:     #3fbc92;
+    --vigilance: #d2a83a;
+    --alerte:    #f0824e;   /* orange, comme en clair — c'était un rose */
+    --ici:       #f0824e;
     --trace: #9cb388;
-    --grille: #282419;
   }
 }
-
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 6rem; }
 
 body {
   margin: 0;
   background: var(--papier);
   color: var(--encre);
-  font: 1rem/1.5 Georgia, "Iowan Old Style", "Times New Roman", serif;
+  /* Georgia est absente d'Android et de la plupart des Linux, Times New Roman
+     aussi : sur la cible prioritaire, la pile s'effondrait jusqu'ici sur le
+     serif générique — c'est-à-dire Noto Serif — sans que ce soit un choix.
+     Les deux substituts sont nommés : le rendu ne change pas, il devient
+     prévisible. */
+  font: var(--t-m)/1.55 Georgia, "Iowan Old Style", "Palatino Linotype",
+        "Book Antiqua", "Noto Serif", "Liberation Serif", "Times New Roman", serif;
   -webkit-font-smoothing: antialiased;
 }
 
-.bandeau-contenu, main, footer > div { max-width: var(--mesure); margin-inline: auto; }
-main { padding: 0 1.1rem 1rem; }
+.bandeau-contenu, main, footer > div { max-width: var(--mesure-texte); margin-inline: auto; }
+main { padding: 0 var(--e-4) var(--e-4); }
 
 /* ---------------------------------------------------- bandeau rétractable */
 
@@ -53,35 +103,44 @@ main { padding: 0 1.1rem 1rem; }
   border-bottom: 1px solid var(--trait);
   transition: transform .22s ease;
 }
+@media (prefers-reduced-motion: reduce) {
+  .bandeau { transition: none; }
+  * { animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
 .bandeau.replie { transform: translateY(-100%); }
 
 .bandeau-contenu {
-  display: flex; align-items: baseline; gap: .1rem 1rem;
+  display: flex; align-items: baseline; gap: var(--e-1) var(--e-4);
   flex-wrap: wrap;
-  padding: .55rem 1.1rem .5rem;
+  padding: var(--e-2) var(--e-4) var(--e-2);
 }
 
-.titre { font-size: 1.05rem; font-weight: 600; margin: 0; letter-spacing: -.005em; white-space: nowrap; }
+.titre { font-size: var(--t-l); font-weight: 600; margin: 0; letter-spacing: -.005em; white-space: nowrap; }
 .titre a { text-decoration: none; color: inherit; }
-.sous-titre { margin: 0; font-size: .8rem; font-style: italic; color: var(--douce); }
+.sous-titre { margin: 0; font-size: var(--t-xs); font-style: italic; color: var(--douce); }
 
-nav { margin-left: auto; font-size: .875rem; }
-nav > ul { list-style: none; margin: 0; padding: 0; display: flex; gap: .2rem .9rem; align-items: center; }
+nav { margin-left: auto; font-size: var(--t-s); }
+nav > ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--e-1) var(--e-4); align-items: center; }
 nav > ul > li { margin: 0; position: relative; }
 nav a, nav button {
   color: inherit; text-decoration: none; background: none; border: 0;
-  font: inherit; cursor: pointer; padding: .15rem 0; display: inline-block;
+  font: inherit; cursor: pointer; padding: var(--e-1) 0; display: inline-block;
   border-bottom: 1px solid transparent;
 }
 nav a:hover, nav button:hover { border-bottom-color: var(--encre); }
 nav [aria-current="page"] { border-bottom: 1.5px solid var(--accent); }
-nav .chevron { padding: .15rem .15rem .15rem .1rem; line-height: 1; opacity: .55; }
+/* 24 px de cible au minimum (WCAG 2.2, 2.5.8). La marge négative annule
+   l'encombrement : le glyphe ne grossit pas, la zone sensible si. */
+nav .chevron { padding: var(--e-2); margin: calc(var(--e-2) * -1) -.2rem;
+               min-width: 1.5rem; min-height: 1.5rem;
+               line-height: 1; opacity: .55; }
 nav .chevron:hover, nav .chevron[aria-expanded="true"] { opacity: 1; border-bottom-color: transparent; }
-.menu-deroulant { display: inline-flex; align-items: baseline; gap: .05rem; }
+.menu-deroulant { display: inline-flex; align-items: baseline; gap: var(--e-1); }
 
 .sous-menu {
   position: absolute; top: calc(100% + .45rem); right: 0; z-index: 10;
-  min-width: 13rem; margin: 0; padding: .35rem 0; list-style: none;
+  min-width: 13rem; margin: 0; padding: var(--e-1) 0; list-style: none;
   background: var(--papier); border: 1px solid var(--trait);
   box-shadow: 0 4px 14px rgba(0,0,0,.09);
 }
@@ -89,109 +148,136 @@ nav .chevron:hover, nav .chevron[aria-expanded="true"] { opacity: 1; border-bott
 .sous-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -.65rem; height: .65rem; }
 .sous-menu[hidden] { display: none; }
 .sous-menu li { margin: 0; }
-.sous-menu a { display: block; padding: .32rem .8rem; border: 0; white-space: nowrap; }
+.sous-menu a { display: block; padding: var(--e-1) var(--e-3); border: 0; white-space: nowrap; }
 .sous-menu a:hover { background: var(--surface); border: 0; }
-.sous-menu hr { border: 0; border-top: 1px solid var(--trait); margin: .35rem 0; }
+.sous-menu hr { border: 0; border-top: 1px solid var(--trait); margin: var(--e-1) 0; }
 .sous-menu .groupe {
-  padding: .5rem .8rem .12rem; font-size: .74rem; letter-spacing: .04em;
+  padding: var(--e-2) var(--e-3) var(--e-1); font-size: var(--t-xs); letter-spacing: .04em;
   text-transform: uppercase; color: var(--douce);
 }
-.sous-menu .groupe:first-child { padding-top: .15rem; }
+.sous-menu .groupe:first-child { padding-top: var(--e-1); }
 
 @media (max-width: 34rem) {
-  .bandeau-contenu { padding-bottom: .45rem; }
+  .bandeau-contenu { padding-bottom: var(--e-2); }
   .sous-titre { flex-basis: 100%; }
-  nav { margin-left: 0; flex-basis: 100%; margin-top: .3rem; }
-  nav > ul { gap: .2rem .8rem; }
+  nav { margin-left: 0; flex-basis: 100%; margin-top: var(--e-1); }
+  nav > ul { gap: var(--e-1) var(--e-3); }
   .sous-menu { right: auto; left: 0; }
 }
 
 /* ------------------------------------------------------------- le contenu */
 
-main { padding-top: 1.6rem; }
+main { padding-top: var(--e-5); }
 
+/* h2 était à la taille exacte du chapeau : un titre de section ne se
+   distinguait de son propre chapeau par rien */
 h2 {
-  font-size: 1.1rem; line-height: 1.25; font-weight: 600;
-  margin: 2.1rem 0 .55rem;
+  font-size: var(--t-xl); line-height: 1.25; font-weight: 600;
+  margin: var(--e-6) 0 var(--e-2);
 }
 h2 + p, h2 + div, h2 + ul { margin-top: 0; }
-h3 { font-size: 1rem; font-weight: 600; margin: 1.4rem 0 .3rem; }
-h4 { font-size: .92rem; font-weight: 600; margin: 1.2rem 0 .3rem; }
+h3 { font-size: var(--t-l); line-height: 1.3; font-weight: 600; margin: var(--e-5) 0 var(--e-2); }
+/* un titre n'est jamais plus petit que le texte qu'il titre : h4 gagne en
+   graisse ce qu'il ne prend plus en taille */
+h4 { font-size: var(--t-m); line-height: 1.35; font-weight: 700; margin: var(--e-4) 0 var(--e-2); }
 .nb { color: var(--douce); font-size: .88em; }
 
-p, ul, ol { margin: 0 0 .85rem; }
-ul, ol { padding-left: 1.1rem; }
-li { margin-bottom: .25rem; }
+p, ul, ol { margin: 0 0 var(--e-3); }
+ul, ol { padding-left: var(--e-4); }
+li { margin-bottom: var(--e-1); }
 
-a { color: inherit; text-underline-offset: .14em; text-decoration-thickness: .5px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+a { color: inherit; text-underline-offset: .14em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+/* Un seul anneau de focus, pour tout ce qui se pose au clavier. Seuls les
+   liens en avaient un ; le chevron du menu, les boutons de filtre, le champ
+   de recherche et les <summary> tombaient sur l'anneau par défaut du
+   navigateur — variable, et invisible sur certains. Spécificité nulle :
+   déclaré ici, avant les composants, et aucun composant ne touche outline. */
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
 
-.chapeau { font-size: 1.1rem; line-height: 1.42; margin-bottom: 1.4rem; }
-.retour { font-size: .85rem; color: var(--douce); margin-bottom: 1rem; }
+.chapeau { font-size: var(--t-l); line-height: 1.45; margin-bottom: var(--e-5); }
+.retour { font-size: var(--t-s); color: var(--douce); margin-bottom: var(--e-4); }
 
 /* filet dessiné, en place des bordures */
-.filet-croquis { display: block; width: 100%; height: .6rem; margin: 1.9rem 0 1.5rem; opacity: .5; }
+
 
 /* ------------------------------------------------------------- les dessins */
 
-.croquis { display: block; width: 100%; height: auto; margin: .3rem 0 .4rem; }
+.croquis { display: block; width: 100%; height: auto; margin: var(--e-1) 0 var(--e-2); }
 .trait-croquis { fill: none; stroke: var(--encre); stroke-width: 1.15; stroke-linecap: round; opacity: .78; }
-.texte-croquis text { fill: var(--encre); font-family: Georgia, serif; font-size: 13.5px; opacity: .8; }
-.texte-croquis .fort { font-size: 17px; opacity: 1; }
-.texte-croquis .sur { font-size: 11.5px; font-style: italic; opacity: .62; }
-.texte-croquis .petit { font-size: 12px; font-style: italic; opacity: .72; }
+/* ------------------------------------------------- le texte des croquis
+   Ces tailles sont en unités du viewBox : elles se réduisent avec le dessin.
+   À 13,5 px dans un cadre de 640 rendu sur un téléphone de 360, l'étiquette
+   sortait à 6,9 px, et la plus petite à 5,8 px — les croquis portaient
+   l'argument, et l'argument ne se lisait pas. Mesuré, pas supposé.
+   Les cinq étiquettes qui débordaient aux nouvelles tailles ont été ancrées
+   à droite ; le contrôle de débordement est dans scripts/verifier.py. */
+.texte-croquis text  { fill: var(--encre); font-family: var(--serif); font-size: 17px; opacity: .8; }
+.texte-croquis .fort { font-size: 22px; font-weight: 600; opacity: .92; }
+.texte-croquis .petit,
+.texte-croquis .sur  { font-size: 15px; opacity: .62; font-style: italic; }
+@media (max-width: 40rem) {
+  /* sous 640 px de fenêtre, le dessin ne fait plus que ~330 px de large :
+     il faut grossir dans le viewBox pour que le rendu tienne à 13 px */
+  .texte-croquis text  { font-size: 26px; }
+  .texte-croquis .fort { font-size: 33px; }
+  .texte-croquis .petit,
+  .texte-croquis .sur  { font-size: 23px; }
+}
 
-figure { margin: 1.2rem 0 1.6rem; }
-figcaption { font-size: .85rem; color: var(--douce); font-style: italic; margin-top: .1rem; }
+figure { margin: var(--e-4) 0 var(--e-5); }
+figcaption { font-size: var(--t-s); color: var(--douce); margin-top: var(--e-1); }
 
 /* ------------------------------------------------------------- l'encadré */
 
 .note {
   border-left: 2px solid var(--accent);
-  padding: .1rem 0 .1rem .8rem;
-  margin: 1.1rem 0 1.3rem;
-  font-size: .925rem;
+  padding: var(--e-1) 0 var(--e-1) var(--e-3);
+  margin: var(--e-4) 0 var(--e-5);
+  font-size: var(--t-m);
 }
 .note p:last-child { margin-bottom: 0; }
-.note .etiquette { display: block; font-size: .8rem; font-style: italic; color: var(--douce); margin-bottom: .2rem; }
+.note .etiquette { display: block; font-size: var(--t-xs); font-style: italic; color: var(--douce); margin-bottom: var(--e-1); }
 
 /* ------------------------------------------------------- listes d'états */
 
-.etats { list-style: none; padding: 0; margin: 1rem 0 1.3rem; }
+.etats { list-style: none; padding: 0; margin: var(--e-4) 0 var(--e-5); }
 .etats li {
-  display: grid; grid-template-columns: 5.4rem 1fr; gap: .1rem .9rem;
-  padding: .55rem 0; border-top: 1px solid var(--trait); margin: 0;
+  display: grid; grid-template-columns: 5.4rem 1fr; gap: var(--e-1) var(--e-4);
+  padding: var(--e-2) 0; border-top: 1px solid var(--trait); margin: 0;
 }
 .etats li:last-child { border-bottom: 1px solid var(--trait); }
-.etat { font-size: .8rem; font-style: italic; color: var(--douce); padding-top: .12rem; }
+.etat { font-size: var(--t-xs); font-style: italic; color: var(--douce); padding-top: var(--e-1); }
 @media (max-width: 30rem) { .etats li { grid-template-columns: 1fr; } .etat { padding-top: 0; } }
 
 /* ------------------------------------------------------------- les tuiles */
 
-.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; margin: 1rem 0 1.4rem; }
-.tuile { background: var(--papier); padding: .65rem .75rem .7rem; box-shadow: 0 0 0 1px var(--trait); }
-.tuile .libelle { margin: 0 0 .25rem; font-size: .8rem; font-style: italic; color: var(--douce); }
-.tuile .valeur { margin: 0 0 .15rem; font-size: 1.5rem; line-height: 1.05; font-variant-numeric: tabular-nums; }
-.tuile .valeur .unite { font-size: .8rem; color: var(--douce); font-variant-numeric: normal; }
-.tuile .detail { margin: 0; font-size: .82rem; color: var(--douce); }
+.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; margin: var(--e-4) 0 var(--e-5); }
+.tuile { background: var(--papier); padding: var(--e-3) var(--e-3) var(--e-3); box-shadow: 0 0 0 1px var(--trait); }
+.tuile .libelle { margin: 0 0 var(--e-1); font-size: var(--t-xs); font-style: italic; color: var(--douce); }
+.tuile .valeur { margin: 0 0 var(--e-1); font-size: var(--t-chiffre); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.tuile .valeur .unite { font-size: var(--t-xs); color: var(--douce); font-variant-numeric: normal; }
+.tuile .detail { margin: 0; font-size: var(--t-xs); color: var(--douce); }
 .tuile[data-etat="calme"] .valeur { color: var(--calme); }
 .tuile[data-etat="vigilance"] .valeur { color: var(--vigilance); }
 .tuile[data-etat="alerte"] .valeur { color: var(--alerte); }
 
-.pastille { display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; margin-right: .3rem; }
+.pastille { display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; margin-right: var(--e-1); }
 .pastille.calme { background: var(--calme); }
 .pastille.vigilance { background: var(--vigilance); }
 .pastille.alerte { background: var(--alerte); }
 
 /* --------------------------------------------------------- les graphiques */
 
-.graphe { margin: 1.1rem 0 1.6rem; }
-.graphe h3 { margin: 0 0 .1rem; }
-.graphe .legende-axe { font-size: .85rem; color: var(--douce); margin: 0 0 .5rem; }
+.graphe { margin: var(--e-4) 0 var(--e-5); }
+.graphe h3 { margin: 0 0 var(--e-1); }
+.graphe .legende-axe { font-size: var(--t-s); color: var(--douce); margin: 0 0 var(--e-2); }
 .graphe svg { display: block; width: 100%; height: auto; overflow: visible; }
 
 .grille-ligne { stroke: var(--grille); stroke-width: 1; }
-.axe-texte { fill: var(--douce); font-size: 11px; font-family: Georgia, serif; }
+.axe-texte { fill: var(--douce); font-size: 11px; font-family: var(--serif); }
 .trace-ligne { fill: none; stroke: var(--trace); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
 .trace-bande { fill: var(--trace); opacity: .15; }
 .trace-barre { fill: var(--trace); }
@@ -202,8 +288,8 @@ figcaption { font-size: .85rem; color: var(--douce); font-style: italic; margin-
 .curseur { stroke: var(--douce); stroke-width: 1; }
 .point-actif { fill: var(--trace); stroke: var(--papier); stroke-width: 2; }
 
-.legende { list-style: none; padding: 0; margin: 0 0 .7rem; display: flex; flex-wrap: wrap; gap: .2rem 1.1rem; font-size: .82rem; color: var(--douce); }
-.legende li { margin: 0; display: flex; align-items: center; gap: .35rem; }
+.legende { list-style: none; padding: 0; margin: 0 0 var(--e-3); display: flex; flex-wrap: wrap; gap: var(--e-1) var(--e-4); font-size: var(--t-xs); color: var(--douce); }
+.legende li { margin: 0; display: flex; align-items: center; gap: var(--e-1); }
 .legende .ech { width: 1.4rem; height: .6rem; display: inline-block; }
 .legende .ech.ligne { height: 0; border-top: 1.8px solid var(--trace); }
 .legende .ech.bande { background: var(--douce); opacity: .18; }
@@ -212,81 +298,83 @@ figcaption { font-size: .85rem; color: var(--douce); font-style: italic; margin-
 .infobulle {
   position: absolute; pointer-events: none; z-index: 30;
   background: var(--papier); border: 1px solid var(--trait);
-  padding: .35rem .5rem; font-size: .82rem; line-height: 1.35;
+  padding: var(--e-1) var(--e-2); font-size: var(--t-xs); line-height: 1.35;
   box-shadow: 0 2px 8px rgba(0,0,0,.08); white-space: nowrap;
 }
-.infobulle strong { display: block; font-weight: 600; margin-bottom: .1rem; }
+.infobulle strong { display: block; font-weight: 600; margin-bottom: var(--e-1); }
 .enveloppe-graphe { position: relative; }
 
 /* --------------------------------------------------------- les tableaux */
 
-.donnees { width: 100%; border-collapse: collapse; font-size: .875rem; margin: .7rem 0 1rem; }
-.donnees th, .donnees td { text-align: left; padding: .3rem .6rem .3rem 0; border-bottom: 1px solid var(--trait); }
-.donnees th { font-weight: 600; font-size: .8rem; font-style: italic; color: var(--douce); }
+.donnees { width: 100%; border-collapse: collapse; font-size: var(--t-s); margin: var(--e-3) 0 var(--e-4); }
+.donnees th, .donnees td { text-align: left; padding: var(--e-1) var(--e-2) var(--e-1) 0; border-bottom: 1px solid var(--trait); }
+/* l'italique sur 12,6 px coûte de la lisibilité et n'apporte rien */
+.donnees th { font-weight: 600; font-size: var(--t-xs); color: var(--douce); }
 .donnees td { font-variant-numeric: tabular-nums; }
 .defilant { overflow-x: auto; }
-details.tableau-brut { margin: .2rem 0 1.4rem; }
-details.tableau-brut summary { cursor: pointer; font-size: .85rem; color: var(--douce); }
+details.tableau-brut { margin: var(--e-1) 0 var(--e-5); }
+details.tableau-brut summary { cursor: pointer; font-size: var(--t-s); color: var(--douce); }
 
 /* ------------------------------------------------------------ les cartes */
 
-.cartes { list-style: none; padding: 0; margin: 1rem 0 1.3rem; }
-.cartes li { border-top: 1px solid var(--trait); padding: .8rem 0; margin: 0; }
+.cartes { list-style: none; padding: 0; margin: var(--e-4) 0 var(--e-5); }
+.cartes li { border-top: 1px solid var(--trait); padding: var(--e-3) 0; margin: 0; }
 .cartes li:last-child { border-bottom: 1px solid var(--trait); }
-.cartes h3 { margin: 0 0 .2rem; font-size: 1rem; }
+.cartes h3 { margin: 0 0 var(--e-1); font-size: var(--t-m); }
 .cartes h3 a { text-decoration: none; border-bottom: 1px solid var(--trait); }
 .cartes h3 a:hover { border-bottom-color: var(--encre); }
-.cartes p { margin: 0 0 .25rem; font-size: .925rem; }
-.cartes .source { margin: 0; font-size: .82rem; color: var(--douce); font-style: italic; }
+.cartes p { margin: 0 0 var(--e-1); font-size: var(--t-m); }
+.cartes .source { margin: 0; font-size: var(--t-xs); color: var(--douce); font-style: italic; }
 .cartes .bientot h3 { color: var(--douce); }
 
 /* ------------------------------------------------------------------ états */
 
 .chargement { color: var(--douce); font-style: italic; }
-.echec { border-left: 2px solid var(--vigilance); padding-left: .7rem; font-size: .9rem; color: var(--douce); }
-.horodatage { font-size: .8rem; color: var(--douce); font-style: italic; margin-top: 1.6rem; }
+.echec { border-left: 2px solid var(--vigilance); padding-left: var(--e-3); font-size: var(--t-s); color: var(--douce); }
+.horodatage { font-size: var(--t-xs); color: var(--douce); font-style: italic; margin-top: var(--e-5); }
 
 /* ----------------------------------------------------------------- le pied */
 
-footer { border-top: 1px solid var(--trait); margin-top: 2.4rem; padding: .9rem 1.1rem 2.4rem; font-size: .85rem; color: var(--douce); }
-footer p { margin: 0 0 .35rem; }
-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .2rem 1rem; }
+footer { border-top: 1px solid var(--trait); margin-top: 2.4rem; padding: var(--e-4) var(--e-4) 2.4rem; font-size: var(--t-s); color: var(--douce); }
+footer p { margin: 0 0 var(--e-1); }
+footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--e-1) var(--e-4); }
 
-h1 { font-size: 1.35rem; line-height: 1.2; font-weight: 600; margin: 0 0 .7rem; letter-spacing: -.008em; }
+h1 { font-size: var(--t-xxl); line-height: 1.2; font-weight: 600; margin: 0 0 var(--e-3); letter-spacing: -.008em; }
 h1 + .chapeau { margin-top: -.25rem; }
 
 /* ------------------------------------------------------------- les cartes */
-.carte figure { margin: 0 0 1.1rem; }
+.carte figure { margin: 0 0 var(--e-4); }
 .carte img {
   display: block; width: 100%; height: auto;
   box-shadow: 0 0 0 1px var(--trait); background: var(--surface);
 }
-.carte figcaption { margin-top: .4rem; font-size: .84rem; color: var(--douce); }
+.carte figcaption { margin-top: var(--e-2); font-size: var(--t-s); color: var(--douce); }
 .legende-carte {
-  display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none;
-  padding: 0; margin: .5rem 0 0; font-size: .84rem;
+  display: flex; flex-wrap: wrap; gap: var(--e-1) var(--e-4); list-style: none;
+  padding: 0; margin: var(--e-2) 0 0; font-size: var(--t-s);
 }
-.legende-carte li { display: flex; align-items: center; gap: .35rem; margin: 0; }
+.legende-carte li { display: flex; align-items: center; gap: var(--e-1); margin: 0; }
 .pastille-carte {
   width: .8rem; height: .8rem; flex: none; border-radius: 2px;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.18);
 }
-.epoques { display: flex; gap: .4rem; margin: 0 0 .6rem; flex-wrap: wrap; }
+.epoques { display: flex; gap: var(--e-2); margin: 0 0 var(--e-2); flex-wrap: wrap; }
 .epoques button {
-  font: inherit; font-size: .88rem; padding: .22rem .7rem; cursor: pointer;
+  font: inherit; font-size: var(--t-s); padding: var(--e-2) var(--e-3); cursor: pointer;
+  min-height: 2.25rem;
   background: var(--papier); color: var(--encre);
-  border: 1px solid var(--trait); border-radius: 2px;
+  border: 1px solid var(--bord); border-radius: 2px;
 }
 .epoques button[aria-pressed="true"] { background: var(--encre); color: var(--papier); border-color: var(--encre); }
 
 /* --------------------------------------------------- le condensé de tête */
 .condense {
-  margin: 0 0 1.7rem; padding: .8rem .95rem;
+  margin: 0 0 var(--e-5); padding: var(--e-3) var(--e-4);
   background: var(--surface); box-shadow: inset 2px 0 0 var(--accent);
 }
 .condense ul { margin: 0; padding: 0; list-style: none; }
 .condense li {
-  margin: 0 0 .34rem; padding-left: .95rem; position: relative; line-height: 1.44;
+  margin: 0 0 var(--e-1); padding-left: var(--e-4); position: relative; line-height: 1.44;
 }
 .condense li::before {
   content: ""; position: absolute; left: 0; top: .62em;
@@ -294,89 +382,120 @@ h1 + .chapeau { margin-top: -.25rem; }
 }
 .condense li:last-child { margin-bottom: 0; }
 .condense p { margin: 0; }
-@media (max-width: 34rem) { .condense { font-size: .96rem; padding: .7rem .8rem; } }
+@media (max-width: 34rem) { .condense { font-size: var(--t-m); padding: var(--e-3) var(--e-3); } }
 
 /* ------------------------------------------------------- la carte du réseau */
-.carte-reseau { margin: 1.2rem 0 .6rem; }
-@media (min-width: 860px) { .carte-reseau { margin-left: -70px; margin-right: -70px; } }
-.carte-reseau svg { display: block; width: 100%; height: auto; }
-.carte-zone .commune { fill: none; stroke: var(--trait); stroke-width: .9; }
-.carte-zone .limite { fill: none; stroke: var(--douce); stroke-width: 1.8; stroke-dasharray: 8 6; opacity: .7; }
-.carte-zone .ville { fill: var(--douce); }
-.carte-zone .nom-ville { fill: var(--douce); font-family: Georgia, serif; font-size: 15px; }
-.carte-zone .centre circle { fill: var(--alerte); }
-.carte-zone .centre text { fill: var(--encre); font-family: Georgia, serif; font-size: 17px; font-weight: 600; }
-.carte-zone .lieu { fill: var(--accent); opacity: .75; cursor: pointer; }
-.carte-zone .lieu:hover, .carte-zone .lieu[data-actif="1"] { fill: var(--alerte); opacity: 1; }
-.carte-zone .lieu[data-masque="1"] { opacity: .12; }
-.filtres { display: flex; flex-wrap: wrap; gap: .35rem; margin: .2rem 0 .8rem; }
+
+@media (min-width: 860px) {  }
+
+
+
+
+
+
+
+
+
+
+.filtres { display: flex; flex-wrap: wrap; gap: var(--e-1); margin: var(--e-1) 0 var(--e-3); }
 .filtres button {
-  font: inherit; font-size: .84rem; padding: .2rem .6rem; cursor: pointer;
+  font: inherit; font-size: var(--t-s); padding: var(--e-2) var(--e-3); cursor: pointer;
+  min-height: 2.25rem;
   background: var(--papier); color: var(--encre);
-  border: 1px solid var(--trait); border-radius: 2px;
+  border: 1px solid var(--bord); border-radius: 2px;
 }
 .filtres button[aria-pressed="true"] { background: var(--encre); color: var(--papier); border-color: var(--encre); }
-.fiche-lieu {
-  margin: .6rem 0 0; padding: .7rem .85rem; background: var(--surface);
-  box-shadow: inset 2px 0 0 var(--accent); font-size: .94rem;
-}
-.fiche-lieu p { margin: 0 0 .25rem; }
-.fiche-lieu p:last-child { margin-bottom: 0; }
+
+
+
 .liste-lieux { list-style: none; padding: 0; margin: 0; }
-.liste-lieux li { margin: 0; padding: .4rem 0; border-bottom: 1px solid var(--trait); }
+.liste-lieux li { margin: 0; padding: var(--e-2) 0; border-bottom: 1px solid var(--trait); }
 .liste-lieux .lieu-nom { font-weight: 600; }
-.liste-lieux .lieu-detail { color: var(--douce); font-size: .86rem; }
+.liste-lieux .lieu-detail { color: var(--douce); font-size: var(--t-s); }
 
 /* ---------------------------------------------------------------- la carte */
 /* Leaflet sans tuiles : le fond de carte, c'est le papier de la page.
    Les couleurs viennent des variables du site, pas des valeurs de Leaflet. */
-.carte-leaflet { margin: 1.2rem 0 .4rem; height: 560px; background: var(--surface);
-                 border: 1px solid var(--trait); }
-@media (max-width: 700px) { .carte-leaflet { height: 420px; } }
-@media (min-width: 860px) { .carte-leaflet { margin-left: -70px; margin-right: -70px; } }
-.leaflet-container { background: var(--surface); font-family: Georgia, serif; }
-.leaflet-container path.commune { stroke: var(--trait); stroke-width: 1; fill: var(--papier);
-                                  fill-opacity: 1; }
-.leaflet-container path.commune:hover { fill: var(--grille); }
-.leaflet-container path.limite { stroke: var(--douce); stroke-width: 1.4;
-                                 stroke-dasharray: 7 5; opacity: .75; }
-.leaflet-container path.ici { fill: var(--alerte); fill-opacity: 1; }
-.leaflet-container path.lieu { fill: var(--accent); fill-opacity: .8; stroke: var(--papier);
-                               cursor: pointer; transition: fill-opacity .15s; }
-.leaflet-container path.lieu:hover { fill: var(--alerte); fill-opacity: 1; }
-.leaflet-container path.lieu.actif { fill: var(--alerte); fill-opacity: 1; stroke: var(--encre); }
-.leaflet-container path.lieu.masque { fill-opacity: .1; stroke-opacity: .2; }
+
+@media (max-width: 700px) {  }
+@media (min-width: 860px) {  }
+
+
+
+
+
+
+
+
+
 .leaflet-tooltip { background: var(--papier); border: 1px solid var(--trait); color: var(--encre);
-                   font-family: Georgia, serif; font-size: .82rem; box-shadow: none;
+                   font-family: var(--serif); font-size: var(--t-xs); box-shadow: none;
                    border-radius: 0; padding: 2px 6px; }
 .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before,
 .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { border: none; }
 .leaflet-tooltip.bulle-commune { color: var(--douce); }
 .leaflet-tooltip.bulle-ici { font-weight: 600; border-color: var(--alerte); }
 .leaflet-control-zoom a { background: var(--papier); color: var(--encre);
-                          border-color: var(--trait); font-family: Georgia, serif; }
+                          border-color: var(--trait); font-family: var(--serif); }
 .leaflet-control-zoom a:hover { background: var(--grille); }
 .leaflet-control-scale-line { background: transparent; border-color: var(--douce);
-                              color: var(--douce); font-family: Georgia, serif; }
-.liste-lieux .lecture { color: var(--douce); font-size: .88rem; font-style: italic; }
-details > summary { cursor: pointer; color: var(--accent); margin: .6rem 0; }
-.recherche { margin: .8rem 0 1rem; }
-.recherche label { display: block; color: var(--douce); font-size: .86rem; margin-bottom: .25rem; }
-.recherche input { width: 100%; max-width: 26rem; padding: .45rem .6rem; font-family: Georgia, serif;
-                   font-size: 1rem; color: var(--encre); background: var(--papier);
-                   border: 1px solid var(--trait); border-radius: 0; }
-.recherche input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
-button.suite { font-family: Georgia, serif; font-size: .95rem; color: var(--encre);
-               background: var(--surface); border: 1px solid var(--trait); border-radius: 0;
-               padding: .5rem .9rem; cursor: pointer; margin: .6rem 0 1.2rem; }
+                              color: var(--douce); font-family: var(--serif); }
+.liste-lieux .lecture { color: var(--douce); font-size: var(--t-s); font-style: italic; }
+details > summary { cursor: pointer; color: var(--accent); margin: var(--e-2) 0; }
+.recherche { margin: var(--e-3) 0 var(--e-4); }
+.recherche label { display: block; color: var(--douce); font-size: var(--t-s); margin-bottom: var(--e-1); }
+.recherche input { width: 100%; max-width: 26rem; padding: var(--e-2) var(--e-2); font-family: var(--serif);
+                   font-size: var(--t-m); color: var(--encre); background: var(--papier);
+                   border: 1px solid var(--bord); border-radius: 0; }
+.recherche input:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+button.suite { font: inherit; font-size: var(--t-s); color: var(--encre); min-height: 2.25rem;
+               background: var(--surface); border: 1px solid var(--bord); border-radius: 0;
+               padding: var(--e-2) var(--e-3); cursor: pointer; margin: var(--e-2) 0 var(--e-5); }
 button.suite:hover { background: var(--grille); }
 /* --- carte : filtres, points masqués, échec --- */
 .leaflet-interactive.masque { opacity: .12; pointer-events: none; }
 .carto-liste tr[hidden] { display: none; }
 .carto-liste tbody tr:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-.carto-zone p.chargement, .carto-zone p.echec { padding: 1.2rem; color: var(--douce); }
+.carto-zone p.chargement, .carto-zone p.echec { padding: var(--e-4); color: var(--douce); }
 .carto-zone p.echec { color: var(--encre); }
-.carto-meta { margin: .6rem 0 1.4rem; }
+.carto-meta { margin: var(--e-2) 0 var(--e-5); }
 .carto-meta dt { font-weight: 600; display: inline; }
-.carto-meta dd { display: inline; margin: 0 .9rem 0 .2rem; }
+.carto-meta dd { display: inline; margin: 0 var(--e-4) 0 var(--e-1); }
 .carto-meta dd::after { content: ""; display: block; }
+
+
+/* ------------------------------------------ le socle cartographique, branché
+   carto-socle.css annonce que le site hôte redéfinit ses variables. Aucune ne
+   l'était : deux jeux parallèles cohabitaient sur la même page — deux noirs,
+   deux crèmes, et surtout deux accents, donc deux couleurs de focus. */
+.carto {
+  --carto-encre:  var(--encre);
+  --carto-douce:  var(--douce);
+  --carto-trait:  var(--bord);
+  --carto-fond:   var(--surface);
+  --carto-accent: var(--ici);
+  --carto-maille: var(--filet);
+}
+@media (prefers-color-scheme: dark) {
+  /* La surface cartographique reste claire — un fond de carte sombre est un
+     autre travail cartographique, et les halos blancs des étiquettes y
+     comptent. Mais la fiche, la liste et les métadonnées sont dans le flux de
+     la page : elles suivaient jusqu'ici le crème du vendor, en blocs clairs
+     posés au milieu d'une page sombre. */
+  .carto-zone { --carto-fond: #f4f2ee; --carto-encre: #1f1d1a; --carto-trait: #cfc9bf; }
+}
+
+/* Les six couleurs de familles sont celles d'Okabe & Ito, validées pour les
+   trois dichromaties : on ne les modifie pas. Deux d'entre elles passent mal
+   en aplat sur fond crème (2,0:1) — le remède est de les cerner, pas de les
+   foncer. La forme reste le porteur d'information, la couleur un confort. */
+.carto-symbole svg path, .carto-pastille-svg svg path { stroke: var(--encre); stroke-width: 1; }
+.carto-pastille { border: 1px solid var(--bord); }
+
+/* 191 cellules de description libre, sans aucune règle jusqu'ici, dans un
+   tableau à 100 % de large. */
+.carto-dit { max-width: 22rem; font-size: var(--t-s); color: var(--douce); }
+
+/* Un nombre se compare en colonne, et c'est la seule raison d'être d'un
+   tableau de données : il s'aligne à droite. */
+.donnees td.nombre, .donnees th.nombre { text-align: right; font-variant-numeric: tabular-nums; }

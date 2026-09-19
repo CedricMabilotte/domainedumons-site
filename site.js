@@ -9,6 +9,13 @@
       bandeau.classList.toggle("replie", y > dernier && y > seuil);
       dernier = y;
     }, { passive: true });
+    /* WCAG 2.2, 2.4.11 : un élément atteint au clavier ne doit pas être
+       recouvert. Le bandeau replié masquait le haut de la page, donc le lien
+       ou le titre qu'on venait d'atteindre. Il se déplie dès qu'un élément
+       reçoit le focus. */
+    addEventListener("focusin", function () {
+      bandeau.classList.remove("replie");
+    });
   }
 
   var survol = matchMedia("(hover:hover)").matches;

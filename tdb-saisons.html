@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chauffage, verger, fenaison — Domaine du Mons</title>
 <meta name="description" content="Trois décisions chiffrées sur 76 ans à Vitrac-sur-Montane : degrés-jours de chauffage, gel après débourrement, fenêtres de fenaison.">
-<link rel="stylesheet" href="style.css?v=27">
+<link rel="stylesheet" href="style.css?v=28">
 </head>
 <body>
 <div class="bandeau">
@@ -55,6 +55,16 @@
 <main class="tdb">
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>Chauffage, verger, fenaison</h1>
+<noscript>
+  <div class="note">
+  <span class="etiquette">Sans JavaScript</span>
+  <p>Les chiffres de cette page sont calculés dans votre navigateur à partir de fichiers ouverts. Sans JavaScript ils ne s'affichent pas, mais <strong>les données restent lisibles et téléchargeables</strong>&nbsp;:</p>
+  <ul>
+    <li><a href="data/analyses.json">data/analyses.json</a> — relevé du 2026-09-14</li>
+  </ul>
+  <p>Publiées en Licence Ouverte 2.0. Les sources et la méthode sont décrites plus bas, dans du texte qui ne dépend d'aucun script.</p>
+  </div>
+</noscript>
 <div class="condense" id="condense"><p class="chargement">…</p></div>
 <p>La page précédente décrit le climat. Celle-ci en tire trois décisions&nbsp;: combien de bois mettre sous abri, si un fruitier a ses chances ici, et combien de fois par été le foin peut sécher. Chacune est recalculée sur les mêmes 76 années.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement des séries</p></div></div>
@@ -271,7 +281,7 @@
     </ul>
   </div>
 </footer>
-<script src="tdb.js?v=27"></script>
+<script src="tdb.js?v=28"></script>
 <script>
 function bloc(zone, titre, legende, serie, opts) {
   const d = document.createElement("div");
@@ -403,6 +413,6 @@ function jourDeLAnnee(doy) {
     " sur " + d.periode[0] + "-" + d.periode[1] + " · " + d.source + " · Licence Ouverte 2.0.";
 })();
 </script>
-<script src="site.js?v=27"></script>
+<script src="site.js?v=28"></script>
 </body>
 </html>

@@ -117,6 +117,16 @@ def main():
     # --- lien d'évitement : au clavier, on ne traverse pas 191 points
     a('<p><a href="#annuaire" class="carto-evitement">Passer la carte, aller à '
       'la liste des lieux</a></p>')
+    # Sans JavaScript, la carte ne se dessine pas — mais le tableau des
+    # 191 fiches est écrit dans la page, et c'est lui la source de vérité.
+    a('<noscript><div class="note">'
+      '<span class="etiquette">Sans JavaScript</span>'
+      '<p>La carte ne se dessine pas, mais <strong>le tableau des %d fiches '
+      'ci-dessous est écrit dans la page</strong> et porte la même information, '
+      'filtres en moins. Les données&nbsp;: '
+      '<a href="data/reseau-lieux.json">reseau-lieux.json</a> · '
+      '<a href="data/zone-communes.geojson">zone-communes.geojson</a>, '
+      'en Licence Ouverte 2.0.</p></div></noscript>' % len(lieux))
 
     a('<h2 id="carte-titre">La carte</h2>')
     a('<p id="carte-desc">%d points sur %d communes de Corrèze et des '

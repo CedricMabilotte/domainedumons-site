@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La cartographie des lieux — Domaine du Mons</title>
 <meta name="description" content="Carte navigable des lieux référencés à moins de 45 km de Vitrac-sur-Montane, passés à la grille d'intérêt général. Aucune tuile distante, aucun traceur.">
-<link rel="stylesheet" href="vendor/leaflet.css?v=27">
-<link rel="stylesheet" href="vendor/carto-socle.css?v=27">
-<link rel="stylesheet" href="style.css?v=27">
+<link rel="stylesheet" href="vendor/leaflet.css?v=28">
+<link rel="stylesheet" href="vendor/carto-socle.css?v=28">
+<link rel="stylesheet" href="style.css?v=28">
 </head>
 <body>
 <div class="bandeau">
@@ -66,6 +66,7 @@
 </ul></div>
 <p>Les communes dont le centre est à moins de 45&nbsp;km d'ici, ce qui correspond à peu près à une heure de route sur ces routes-là. Chaque point est une fiche reprise d'un annuaire public. <strong>Tous ne sont pas des collectifs</strong>&nbsp;: 75 des 172 lieux distincts sont des acteurs marchands — fermes en vente directe, épiceries, une enseigne nationale.</p>
 <p><a href="#annuaire" class="carto-evitement">Passer la carte, aller à la liste des lieux</a></p>
+<noscript><div class="note"><span class="etiquette">Sans JavaScript</span><p>La carte ne se dessine pas, mais <strong>le tableau des 191 fiches ci-dessous est écrit dans la page</strong> et porte la même information, filtres en moins. Les données&nbsp;: <a href="data/reseau-lieux.json">reseau-lieux.json</a> · <a href="data/zone-communes.geojson">zone-communes.geojson</a>, en Licence Ouverte 2.0.</p></div></noscript>
 <h2 id="carte-titre">La carte</h2>
 <p id="carte-desc">191 points sur 96 communes de Corrèze et des départements voisins. La molette fait défiler la page&nbsp;; <kbd>Ctrl</kbd> + molette zoome, ou deux doigts sur écran tactile. Échap rend la main. Chaque famille porte une couleur <em>et</em> une forme. <strong>La même information figure dans le tableau sous la carte</strong>, qui se filtre en même temps qu'elle.</p>
 <div class="filtres" id="filtres"></div>
@@ -366,6 +367,16 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
 
 
 
+
+
+
+
+
+
+
+
+
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -379,9 +390,9 @@ Peyrelevade</td><td>40,1 km, au nord</td><td>Terre et alimentation</td><td class
     </ul>
   </div>
 </footer>
-<script src="vendor/leaflet.js?v=27"></script>
-<script src="vendor/carto-socle.js?v=27"></script>
-<script src="tdb.js?v=27"></script>
+<script src="vendor/leaflet.js?v=28"></script>
+<script src="vendor/carto-socle.js?v=28"></script>
+<script src="tdb.js?v=28"></script>
 <script>
 /* La carte du réseau, posée sur le socle carto-territoire.
    La liste est déjà dans la page : ce script ne la construit pas, il s'y
@@ -604,6 +615,6 @@ const FORMES = ["rond", "carre", "triangle", "losange", "croix", "pentagone"];
   });
 })();
 </script>
-<script src="site.js?v=27"></script>
+<script src="site.js?v=28"></script>
 </body>
 </html>
