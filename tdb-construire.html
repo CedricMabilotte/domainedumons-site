@@ -34,17 +34,17 @@
             <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
             <li><a href="tdb-annee.html">L'année</a></li>
             <li class="groupe">La longue durée</li>
-            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-climat.html">Le climat, 1950-2025</a></li>
             <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
             <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
             <li class="groupe">Le lieu</li>
-            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, l'eau</a></li>
             <li><a href="tdb-construire.html">Construire ici</a></li>
             <li class="groupe">Le collectif</li>
             <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
             <li><hr></li>
             <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
-            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+            <li><a href="rapport-2025.html">Rapport annuel 2025</a></li>
           </ul>
         </li>
         <li><a href="nous-joindre.html">Nous joindre</a></li>
@@ -62,7 +62,7 @@
 <h2 id="urbanisme">Les règles qui s'appliquent</h2>
 <div id="regles"><p class="chargement">Chargement…</p></div>
 
-<h2 id="sous-sol">Ce que le sous-sol impose au bâti</h2>
+<h2 id="sous-sol">Radon, argiles, sismicité</h2>
 <div id="batir"><p class="chargement">Chargement…</p></div>
 
 <figure>
@@ -127,7 +127,7 @@
     <text x="392" y="336">le radon remonte du granite</text>
   </g>
 </svg>
-<figcaption>Ce que le radon et les argiles imposent aux fondations.</figcaption>
+<figcaption>Coupe de principe&nbsp;: vide sanitaire ventilé et semelles à 0,80&nbsp;m.</figcaption>
 </figure>
 <h2 id="eau-souterraine">Forer, et à quelle profondeur</h2>
 <div id="forages"><p class="chargement">Chargement…</p></div>
@@ -135,14 +135,14 @@
 <h2 id="la-terre">Le sol, et l'analyse qui reste à faire</h2>
 <div id="sol"><p class="chargement">Chargement…</p></div>
 
-<h2 id="autour">Ce qu'il y a autour</h2>
+<h2 id="autour">Le voisinage industriel et agricole</h2>
 <div id="voisinage"><p class="chargement">Chargement…</p></div>
 
 <h2>Méthode et réserves</h2>
 <p>Tout ce qui précède vient d'interrogations faites sur les coordonnées exactes du lieu ou sur le code de la commune, auprès de <a href="https://www.georisques.gouv.fr/">Géorisques</a>, du <a href="https://www.geoportail-urbanisme.gouv.fr/">Géoportail de l'urbanisme</a> et du <a href="https://infoterre.brgm.fr/">BRGM</a>. Le fichier est recalculé sur demande, pas tous les jours&nbsp;: ces données bougent d'une année à l'autre, pas d'une semaine à l'autre.</p>
 <div class="note">
-  <span class="etiquette">Ce que cette page ne remplace pas</span>
-  <p>Un classement de potentiel radon est une probabilité géologique à l'échelle de la commune, pas une mesure&nbsp;: <strong>seul un dosimètre posé deux mois en hiver dans une pièce de vie dit ce qu'il en est</strong>. Une exposition aux argiles est une carte au 1/50&nbsp;000, pas une étude de sol&nbsp;: c'est un G2 qui engage un constructeur. Et les valeurs de sol viennent d'un point situé à cinq kilomètres.</p>
+  <span class="etiquette">Limites d'usage</span>
+  <p>Un classement de potentiel radon est une probabilité géologique à l'échelle de la commune, pas une mesure&nbsp;: <strong>seul un dosimètre posé deux mois en hiver dans une pièce de vie dit ce qu'il en est</strong>. Une exposition aux argiles est une carte au 1/50&nbsp;000, pas une étude de sol&nbsp;: c'est un G2 qui engage un constructeur. Et les valeurs de sol viennent d'un point situé à 5&nbsp;km.</p>
   <p>Ces chiffres servent à poser les bonnes questions à un artisan, un bureau d'étude ou un notaire — pas à s'en passer.</p>
 </div>
 <p>Données téléchargeables — <a href="data/terrain.json">JSON</a> — sous Licence Ouverte 2.0.</p>
@@ -220,7 +220,7 @@
     "les granites du socle en émettent, et le gaz s'accumule dans les volumes clos mal ventilés. Ce que ça commande, concrètement&nbsp;: " +
     "<strong>soubassement ventilé ou vide sanitaire, dalle étanche, ventilation mécanique</strong>, et pas de pièce de vie en cave ou en sous-sol. " +
     "C'est décisif pour une construction en terre-paille, où l'étanchéité au sol se traite au moment des fondations, jamais après.</p>" +
-    "<p>Un classement n'est pas une mesure. Un dosimètre passif coûte une vingtaine d'euros, se pose deux mois en hiver, et tranche.</p>" +
+    "<p>Un classement n'est pas une mesure. Un dosimètre passif coûte environ 20&nbsp;€, se pose deux mois en hiver, et tranche.</p>" +
     "<p><strong>Les argiles sont en " + ((r.argiles || {}).exposition || "—").toLowerCase() + ".</strong> " +
     "Le retrait-gonflement fissure les maisons mal fondées après les étés secs — et les étés secs se multiplient. " +
     "Semelles descendues à 0,80 m au moins, chaînage horizontal et vertical, trottoir périphérique, et surtout " +
@@ -243,11 +243,11 @@
         "</tbody></table></div>" +
         "<p>Sur ce socle, l'eau n'est pas dans une nappe continue mais dans les fissures du granite et dans l'arène qui le recouvre. " +
         "Les deux forages du voisinage immédiat descendent à <strong>" + forages.map((f) => nf0(f.profondeur_m)).join(" et ") + " mètres</strong>&nbsp;: " +
-        "c'est l'ordre de grandeur à inscrire dans un devis, et la raison de ne pas espérer un puits à quinze mètres. " +
+        "c'est l'ordre de grandeur à inscrire dans un devis, et la raison de ne pas espérer un puits à 15&nbsp;m. " +
         "Les ouvrages à 10&nbsp;m de la liste portent des codes en «&nbsp;PZ&nbsp;» et une adresse de zone d'activité&nbsp;: ce sont vraisemblablement des piézomètres de surveillance, qui ne disent rien de la nappe utile. La donnée les déclare seulement comme forages. " +
         "Les coupes détaillées n'existent qu'en fiches papier, à demander au BRGM.</p>"
       : "<p>Aucun ouvrage déclaré à proximité.</p>") +
-    "<p class='nb'>Un forage domestique se déclare en mairie&nbsp;; au-delà de 1 000 m³ par an, le régime change. Et la commune prélève déjà de l'eau potable ici même — voir <a href='tdb-eau.html#ou-va-l-eau'>la page eau</a>.</p>";
+    "<p class='nb'>Un forage domestique se déclare en mairie&nbsp;; au-delà de 1 000 m³ par an, le régime change. Et la commune prélève déjà de l'eau potable ici même — voir <a href='tdb-eau.html#qui-preleve'>la page eau</a>.</p>";
 
   /* --- sol --- */
   document.getElementById("sol").innerHTML =
@@ -269,8 +269,8 @@
     "le magnésium très bas.</p>" +
     "<p>Dans l'autre sens, " + s.matiere_organique_g_kg + " g/kg de matière organique est une valeur remarquable&nbsp;: réserve en eau, structure, " +
     "vie du sol. <strong>Ce sol ne se laboure pas</strong>, il se couvre.</p>" +
-    "<div class='note'><span class='etiquette'>Ce qu'il faut faire, et dans cet ordre</span>" +
-    "<p>Ces valeurs viennent d'un point situé à cinq kilomètres. Elles justifient <strong>une analyse de terre</strong> — 40 à 80 € le point, " +
+    "<div class='note'><span class='etiquette'>L'ordre des opérations</span>" +
+    "<p>Ces valeurs viennent d'un point situé à 5&nbsp;km. Elles justifient <strong>une analyse de terre</strong> — 40 à 80 € le point, " +
     "trois points suffisent pour commencer — <strong>pas un camion d'amendement</strong>. Si l'analyse locale confirme un pH sous 5,0 avec l'aluminium dominant, " +
     "alors chaulage calcaro-magnésien avant toute plantation de fruitiers, et apport de phosphore.</p>" +
     "<p>Toujours le même laboratoire et la même méthode d'une campagne à l'autre, sinon les séries ne se comparent pas.</p></div>";

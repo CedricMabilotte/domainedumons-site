@@ -4,3 +4,4 @@ dist/
 .cache-rna/
 .cache-geo/
 __pycache__/
+build/

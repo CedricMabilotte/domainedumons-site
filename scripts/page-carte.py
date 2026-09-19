@@ -172,7 +172,7 @@ def main():
     # --- l'annuaire, en dur
     a('<h2 id="annuaire">L\'annuaire</h2>')
     a('<div class="note">')
-    a('<span class="etiquette">Ce que vaut cette liste, et ce qu\'elle ne vaut pas</span>')
+    a('<span class="etiquette">Portée de cette liste</span>')
     a('<p>Elle est reprise telle quelle d\'un agrégateur de cartes '
       'd\'alternatives. <strong>Aucune fiche n\'a été vérifiée sur place</strong>, '
       'certaines datent de plusieurs années, et un lieu peut avoir fermé, changé '

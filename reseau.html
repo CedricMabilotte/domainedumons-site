@@ -34,17 +34,17 @@
             <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
             <li><a href="tdb-annee.html">L'année</a></li>
             <li class="groupe">La longue durée</li>
-            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-climat.html">Le climat, 1950-2025</a></li>
             <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
             <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
             <li class="groupe">Le lieu</li>
-            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, l'eau</a></li>
             <li><a href="tdb-construire.html">Construire ici</a></li>
             <li class="groupe">Le collectif</li>
             <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
             <li><hr></li>
             <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
-            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+            <li><a href="rapport-2025.html">Rapport annuel 2025</a></li>
           </ul>
         </li>
         <li><a href="nous-joindre.html">Nous joindre</a></li>
@@ -73,7 +73,7 @@
 
 <h2 id="pourquoi">Pourquoi nous faisons ça</h2>
 <p>Trois besoins se recouvrent, et un seul travail les sert.</p>
-<p><strong>Savoir qui est là.</strong> Avant de prétendre soutenir un milieu de collectifs, il faut pouvoir dire ce que ce milieu contient. Sans ce dénombrement, « soutenir le tissu associatif d'intérêt général en milieu rural » reste une phrase — et c'est une phrase qu'on nous demandera de prouver.</p>
+<p><strong>Savoir qui est là.</strong> Avant de prétendre soutenir un milieu de collectifs, il faut pouvoir dire ce que ce milieu contient. Sans ce dénombrement, «&nbsp;soutenir le tissu associatif d'intérêt général en milieu rural&nbsp;» reste une phrase — et c'est une phrase qu'on nous demandera de prouver.</p>
 <p><strong>Rendre visible ce qui existe.</strong> Les lieux d'ici sont référencés sur des annuaires que personne d'ici ne consulte, avec des fiches qui datent. L'information existe et ne circule pas.</p>
 <p><strong>Faire circuler les nouvelles.</strong> Chaque collectif produit de l'information qui se perd dans sa propre liste de diffusion. Ceux qui auraient pu venir prêter la main ne l'ont pas su.</p>
 
@@ -85,7 +85,7 @@
   <p><strong>La méthode avant le résultat.</strong> Chaque page dit d'où viennent ses chiffres, ce qui a été lu, ce qui ne l'a pas été, et ce qu'elle ne prouve pas.</p>
 </div>
 
-<h2 id="ce-qui-reste">Ce qui reste à faire</h2>
+<h2 id="ce-qui-reste">Les cinq chantiers ouverts</h2>
 <ul>
   <li><strong>Corriger notre propre fiche.</strong> Elle décrit encore un élevage en vente directe. C'est la première action, et elle est due&nbsp;: on ne reproche pas publiquement aux fiches d'être périmées en prenant la sienne pour exemple sans la corriger.</li>
   <li><strong>Ouvrir le fil commun.</strong> Trois conversations, pas un formulaire, et une date de premier envoi annoncée d'avance.</li>
@@ -96,6 +96,12 @@
 
 <p class="horodatage" id="horodatage"></p>
 </main>
+
+
+
+
+
+
 
 
 
@@ -156,27 +162,32 @@
 <script src="tdb.js?v=27"></script>
 <script>
 (async () => {
+  // Écrire dans un élément qui n'existe pas fait tomber tout ce qui suit.
+  // C'est ainsi que le condensé, les tuiles et l'horodatage de cette page
+  // sont restés muets trois jours quand une seule clé manquait.
+  const poser = (id, html) => { const e = document.getElementById(id); if (e) e.innerHTML = html; };
+  const texte = (id, t) => { const e = document.getElementById(id); if (e) e.textContent = t; };
   let L2, C, A;
   try {
     [L2, C, A] = await Promise.all([json("data/reseau-lieux.json"), json("data/zone-une-heure.json"),
                                     json("data/associations.json")]);
   } catch (e) { echec("condense", "Données du réseau indisponibles."); echec("synthese", ""); return; }
   const communes = new Set(L2.lieux.map((l) => l.commune)).size;
-  document.getElementById("condense").innerHTML = "<ul>" +
+  poser("condense", "<ul>" +
     "<li><strong>" + nf0(L2.total) + " fiches</strong> d'annuaire dans l'heure, sur " + communes + " communes — au plus " + nf0(L2.lieux.filter((l) => !l.doublon_de).length) + " lieux distincts.</li>" +
     "<li><strong>" + nf0(A.actives) + " associations actives</strong> domiciliées dans la zone, dont <strong>" +
       nf0(A.verdicts.retenu) + "</strong> retenues après lecture de leur objet déclaré.</li>" +
     "<li>La zone couvre " + nf0(C.total) + " communes et " + nf0(C.population) + " habitants, à 45 km à la ronde.</li>" +
     "<li>Le fil commun reste à ouvrir&nbsp;: il démarrera à trois lieux participants.</li>" +
-    "</ul>";
-  document.getElementById("synthese").innerHTML =
+    "</ul>");
+  poser("synthese",
     tuile("Lieux référencés", nf0(L2.total), "", "sur " + communes + " communes · aucun vérifié sur place") +
     tuile("Associations actives", nf0(A.actives), "", "une pour " + nf0(A.population_zone / A.actives) + " habitants") +
     tuile("Retenues après lecture", nf0(A.verdicts.retenu), "", nf0(A.lues) + " objets déclarés lus un par un") +
-    tuile("Le fil commun", "0", "envoi", "il démarre à trois lieux participants");
-  document.getElementById("horodatage").textContent =
+    tuile("Le fil commun", "0", "envoi", "il démarre à trois lieux participants"));
+  texte("horodatage",
     "Relevé le " + new Date(L2.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
-    " · Transiscope, Répertoire national des associations, geo.api.gouv.fr · Licence Ouverte 2.0.";
+    " · Transiscope, Répertoire national des associations, geo.api.gouv.fr · Licence Ouverte 2.0.");
 })();
 </script>
 <script src="site.js?v=27"></script>

@@ -34,17 +34,17 @@
             <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
             <li><a href="tdb-annee.html">L'année</a></li>
             <li class="groupe">La longue durée</li>
-            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-climat.html">Le climat, 1950-2025</a></li>
             <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
             <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
             <li class="groupe">Le lieu</li>
-            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, l'eau</a></li>
             <li><a href="tdb-construire.html">Construire ici</a></li>
             <li class="groupe">Le collectif</li>
             <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
             <li><hr></li>
             <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
-            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+            <li><a href="rapport-2025.html">Rapport annuel 2025</a></li>
           </ul>
         </li>
         <li><a href="nous-joindre.html">Nous joindre</a></li>
@@ -56,16 +56,16 @@
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 <h1>Chauffage, verger, fenaison</h1>
 <div class="condense" id="condense"><p class="chargement">…</p></div>
-<p>La page précédente décrit le climat. Celle-ci en tire trois décisions : combien de bois mettre sous abri, si un fruitier a ses chances ici, et combien de fois par été le foin peut sécher. Chacune est recalculée sur les mêmes 76 années.</p>
+<p>La page précédente décrit le climat. Celle-ci en tire trois décisions&nbsp;: combien de bois mettre sous abri, si un fruitier a ses chances ici, et combien de fois par été le foin peut sécher. Chacune est recalculée sur les mêmes 76 années.</p>
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement des séries</p></div></div>
 
 <h2 id="bois">Le bois</h2>
-<p>Le degré-jour unifié mesure la somme des écarts quotidiens sous 18 °C : c'est la grandeur à laquelle la consommation de chauffage est à peu près proportionnelle, et la seule qui permette de comparer deux hivers.</p>
+<p>Le degré-jour unifié mesure la somme des écarts quotidiens sous 18&nbsp;°C&nbsp;: c'est la grandeur à laquelle la consommation de chauffage est à peu près proportionnelle, et la seule qui permette de comparer deux hivers.</p>
 <div id="g-bois"></div>
 <div id="l-bois"><p class="chargement">Chargement…</p></div>
 
 <h2 id="verger">Le verger</h2>
-<p>Le point qui décide d'un verger n'est pas la date de la dernière gelée, ni celle du débourrement : c'est l'écart entre les deux. Le verdict est habituellement importé de la littérature nationale. Il est ici calculé sur place.</p>
+<p>Le point qui décide d'un verger n'est pas la date de la dernière gelée, ni celle du débourrement&nbsp;: c'est l'écart entre les deux. Le verdict est habituellement importé de la littérature nationale. Il est ici calculé sur place.</p>
 <figure>
 <svg viewBox="0 0 640 262" role="img" aria-labelledby="t-cou d-cou" class="croquis">
   <title id="t-cou">La course entre la gelée et la floraison</title>
@@ -233,9 +233,9 @@
 <div id="g-verger"></div>
 <div id="l-verger"><p class="chargement">Chargement…</p></div>
 <div class="note">
-  <span class="etiquette">Ce que ce calcul ne sait pas</span>
+  <span class="etiquette">Limites du modèle de débourrement</span>
   <p>Le débourrement n'est pas observé, il est <strong>estimé</strong> par un cumul de températures, avec des seuils calés pour que les dates médianes tombent au bon moment pour un pommier à cette altitude. Le modèle décrit donc une année moyenne mieux qu'une année particulière.</p>
-  <p>Et la maille de la réanalyse fait neuf kilomètres&nbsp;: elle <strong>lisse les minimales</strong>. Les gelées réelles sont plus sévères que celles comptées ici, surtout dans les parcelles basses. Les chiffres se lisent en écart entre périodes, pas en valeur absolue.</p>
+  <p>Et la maille de la réanalyse fait 9&nbsp;km&nbsp;: elle <strong>lisse les minimales</strong>. Les gelées réelles sont plus sévères que celles comptées ici, surtout dans les parcelles basses. Les chiffres se lisent en écart entre périodes, pas en valeur absolue.</p>
   <p>La première saison d'observation réelle — date de débourrement notée sur l'arbre, minimale relevée sous abri — permettra de recaler les seuils. C'est le genre de mesure que deux capteurs et un carnet suffisent à produire.</p>
 </div>
 
@@ -248,13 +248,13 @@
 <table class="donnees">
   <thead><tr><th>Indicateur</th><th>Définition retenue</th></tr></thead>
   <tbody>
-    <tr><td>Degrés-jours de chauffage</td><td>Somme des <span class="nb">18 °C −</span> température moyenne du jour, quand cet écart est positif. Saison du 1<sup>er</sup> juillet au 30 juin, nommée par son année de fin.</td></tr>
-    <tr><td>Débourrement</td><td>Premier jour où le cumul des températures moyennes au-dessus de 5 °C, depuis le 1<sup>er</sup> février, atteint 80 °C·j. Floraison au seuil de 150 °C·j.</td></tr>
-    <tr><td>Gelée dommageable</td><td>Minimale ≤ 0 °C après le débourrement ; ≤ −2 °C détruit la pousse ; ≤ −1 °C sur fleur ouverte supprime la récolte. Fenêtre close au 31 mai.</td></tr>
-    <tr><td>Fenêtre de fenaison</td><td>Suite d'au moins 3 jours consécutifs à moins de 1 mm de pluie, entre le 1<sup>er</sup> mai et le 31 juillet.</td></tr>
+    <tr><td>Degrés-jours de chauffage</td><td>Somme des <span class="nb">18&nbsp;°C −</span> température moyenne du jour, quand cet écart est positif. Saison du 1<sup>er</sup> juillet au 30 juin, nommée par son année de fin.</td></tr>
+    <tr><td>Débourrement</td><td>Premier jour où le cumul des températures moyennes au-dessus de 5&nbsp;°C, depuis le 1<sup>er</sup> février, atteint 80&nbsp;°C·j. Floraison au seuil de 150&nbsp;°C·j.</td></tr>
+    <tr><td>Gelée dommageable</td><td>Minimale ≤ 0&nbsp;°C après le débourrement&nbsp;; ≤ −2&nbsp;°C détruit la pousse&nbsp;; ≤ −1&nbsp;°C sur fleur ouverte supprime la récolte. Fenêtre close au 31 mai.</td></tr>
+    <tr><td>Fenêtre de fenaison</td><td>Suite d'au moins 3&nbsp;jours consécutifs à moins de 1&nbsp;mm de pluie, entre le 1<sup>er</sup> mai et le 31 juillet.</td></tr>
   </tbody>
 </table>
-<p>Tendances par test de Mann-Kendall et pente de Sen, comme sur la page climat : quand l'intervalle de confiance contient zéro, il est écrit qu'aucune tendance n'est détectable.</p>
+<p>Tendances par test de Mann-Kendall et pente de Sen, comme sur la page climat&nbsp;: quand l'intervalle de confiance contient zéro, il est écrit qu'aucune tendance n'est détectable.</p>
 <p>Données téléchargeables — <a href="data/analyses.json">JSON</a> — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>. Le calcul tient dans <a href="https://github.com/CedricMabilotte/domainedumons-site/blob/main/scripts/analyses.py">un script lisible</a>.</p>
 <p class="horodatage" id="horodatage"></p>
 </main>
@@ -378,8 +378,8 @@ function jourDeLAnnee(doy) {
     (pires.length ? " — " + pires.join(", ") : "") + ". Sur des effectifs aussi petits, le test statistique reste " +
     "au bord du seuil (p = " + nf(tr.gel_floraison.p, 3) + ") : <strong>la hausse est nette mais pas encore démontrée</strong>, et c'est ce qu'il faut en dire.</p>" +
     "<p>Ce que ça commande : <strong>des variétés à floraison tardive</strong>, et surtout le choix de l'emplacement. " +
-    "Le replat du lieu vide son air froid vers le bas ; les quinze mètres les plus bas de la pente le reçoivent. Entre deux parcelles distantes de " +
-    "cent mètres, l'écart de risque dépasse l'effet de soixante-dix ans de réchauffement.</p>";
+    "Le replat du lieu vide son air froid vers le bas ; les 15&nbsp;m les plus bas de la pente le reçoivent. Entre deux parcelles distantes de " +
+    "100&nbsp;m, l'écart de risque dépasse l'effet de 69&nbsp;ans de réchauffement.</p>";
 
   /* --- fenaison --- */
   const zf = document.getElementById("g-fenaison");

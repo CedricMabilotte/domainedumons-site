@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Climat — Domaine du Mons</title>
+<title>Le climat, 1950-2025 — Domaine du Mons</title>
 <meta name="description" content="Le climat de Vitrac-sur-Montane de 1950 à 2025 : température, jours de gel, chaleur, pluie, déficit hydrique estival. Tendances testées, incertitude affichée.">
 <link rel="stylesheet" href="style.css?v=27">
 </head>
@@ -35,17 +35,17 @@
             <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
             <li><a href="tdb-annee.html">L'année</a></li>
             <li class="groupe">La longue durée</li>
-            <li><a href="tdb-climat.html">Climat depuis 1950</a></li>
+            <li><a href="tdb-climat.html">Le climat, 1950-2025</a></li>
             <li><a href="tdb-eau.html">L'eau depuis 1957</a></li>
             <li><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></li>
             <li class="groupe">Le lieu</li>
-            <li><a href="tdb-terrain.html">Le terrain, le gel, le soleil</a></li>
+            <li><a href="tdb-terrain.html">Le terrain, le gel, l'eau</a></li>
             <li><a href="tdb-construire.html">Construire ici</a></li>
             <li class="groupe">Le collectif</li>
             <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
             <li><hr></li>
             <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
-            <li><a href="rapport-2025.html">Rapport 2025</a></li>
+            <li><a href="rapport-2025.html">Rapport annuel 2025</a></li>
           </ul>
         </li>
         <li><a href="nous-joindre.html">Nous joindre</a></li>
@@ -58,16 +58,16 @@
 
 <p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
 
-<h1>Le climat d'ici, 1950-2025</h1>
+<h1>Le climat, 1950-2025</h1>
 <div class="condense" id="condense"><p class="chargement">…</p></div>
 
-<p>76 années de relevés quotidiens au point du lieu, résumées année par année. Chaque tendance est testée : quand l'intervalle de confiance contient zéro, nous écrivons qu'il n'y a <em>pas de tendance détectable</em>, et non que c'est stable.</p>
+<p>76 années de relevés quotidiens au point du lieu, résumées année par année. Chaque tendance est testée&nbsp;: quand l'intervalle de confiance contient zéro, nous écrivons qu'il n'y a <em>pas de tendance détectable</em>, et non que c'est stable.</p>
 
 <div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
 
 <div id="graphiques"></div>
 
-<h2 id="ce-qu-on-y-lit">Lecture</h2>
+<h2 id="lire-les-courbes">Lecture</h2>
 <div id="lecture"><p class="chargement">Chargement…</p></div>
 
 <h2>Méthode</h2>
@@ -78,8 +78,8 @@
 
 <div class="note">
   <span class="etiquette">La série, ici</span>
-  <p>Le lieu est à <strong>588 mètres, sur un replat</strong> — pas en fond de vallée : sur les 2,4&nbsp;km de terrain analysés autour, 84&nbsp;% est plus bas que lui. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de deux mètres de l'altitude réelle</strong>. C'est une situation inhabituellement favorable : la donnée est ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
-  <p>Deux réserves subsistent. La maille fait environ neuf kilomètres&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — ce qui compte pour les parcelles situées en contrebas.</p>
+  <p>Le lieu est à <strong>588 mètres, sur un replat</strong> — pas en fond de vallée&nbsp;: sur les 2,4&nbsp;km de terrain analysés autour, 84&nbsp;% est plus bas que lui. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de 2&nbsp;m de l'altitude réelle</strong>. C'est une situation inhabituellement favorable&nbsp;: la donnée est ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
+  <p>Deux réserves subsistent. La maille fait environ 9&nbsp;km&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — ce qui compte pour les parcelles situées en contrebas.</p>
 </div>
 
 <p><strong>Ces courbes sont justes en tendance.</strong> Elles disent dans quel sens va le climat d'ici, pas s'il gèlera jeudi.</p>
@@ -212,7 +212,7 @@ function phraseTendance(cle, t, unite) {
     "Les fleurs sortent au moins aussi vite que le gel ne recule, et le nombre de gelées survenant après le débourrement " +
     "<strong>ne baisse pas</strong>. Le calcul est détaillé sur la page " +
     "<a href=\"tdb-saisons.html#verger\">chauffage, verger, fenaison</a>, avec ce qu'il commande : " +
-    "des variétés à floraison tardive, et jamais les quinze mètres les plus bas de la pente, là où l'air froid s'accumule.</p>" : "");
+    "des variétés à floraison tardive, et jamais les 15&nbsp;m les plus bas de la pente, là où l'air froid s'accumule.</p>" : "");
 
   document.getElementById("horodatage").textContent =
     "Série calculée le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +

@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Analyses longue duree derivees de la reanalyse ERA5 (Open-Meteo archive).
+"""Analyses longue duree derivees de la reanalyse servie par Open-Meteo.
+L'API d'archive combine par defaut ERA5-Land (9 km) et ERA5 (25 km) selon la
+variable : on n'interroge aucun modele nomme, et on ne doit donc pas en
+annoncer un. Corrige le 19/09/2026 — « ERA5 » etait ecrit a cote d'une maille
+de 9 km, qui est celle d'ERA5-Land.
 
 Produit data/analyses.json : trois series annuelles 1950-2025 que le tableau
 de bord climat n'exposait pas encore.
@@ -227,7 +231,7 @@ def part_risque(a, b):
 
 out = {
     "lieu": "Vitrac-sur-Montane (19287), chemin du Mons",
-    "source": "Open-Meteo archive (reanalyse ERA5)",
+    "source": "Open-Meteo archive — ERA5-Land (9 km) et ERA5 (25 km) combines par defaut",
     "periode": [Y0, Y1],
     "calcule_le": datetime.date.today().isoformat(),
     "methode": {
