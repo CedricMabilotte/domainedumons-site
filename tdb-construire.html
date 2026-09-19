@@ -143,7 +143,7 @@
 <div class="note">
   <span class="etiquette">Limites d'usage</span>
   <p>Un classement de potentiel radon est une probabilité géologique à l'échelle de la commune, pas une mesure&nbsp;: <strong>seul un dosimètre posé deux mois en hiver dans une pièce de vie dit ce qu'il en est</strong>. Une exposition aux argiles est une carte au 1/50&nbsp;000, pas une étude de sol&nbsp;: c'est un G2 qui engage un constructeur. Et les valeurs de sol viennent d'un point situé à 5&nbsp;km.</p>
-  <p>Ces chiffres servent à poser les bonnes questions à un artisan, un bureau d'étude ou un notaire — pas à s'en passer.</p>
+  <p>Ces chiffres préparent l'entretien avec un artisan, un bureau d'étude ou un notaire&nbsp;; ils ne s'y substituent pas.</p>
 </div>
 <p>Données téléchargeables — <a href="data/terrain.json">JSON</a> — sous Licence Ouverte 2.0.</p>
 <p class="horodatage" id="horodatage"></p>
@@ -201,7 +201,7 @@
     (u.rnu
       ? "<p><strong>La commune n'a ni plan local d'urbanisme ni carte communale.</strong> Elle relève du règlement national d'urbanisme&nbsp;: " +
         "hors des parties actuellement urbanisées, la construction est en principe interdite, et chaque autorisation passe par " +
-        "<strong>l'avis conforme du préfet</strong>. C'est la contrainte qui structure tout projet d'habitat ici — elle se prépare, elle ne se contourne pas, " +
+        "<strong>l'avis conforme du préfet</strong>. C'est la contrainte principale de tout projet d'habitat ici, et elle s'anticipe au stade de l'esquisse, " +
         "et elle rend décisive la question de savoir ce qui est considéré comme partie actuellement urbanisée au hameau.</p>"
       : "<p>Un document d'urbanisme local est en vigueur&nbsp;: le zonage est à consulter au Géoportail de l'urbanisme.</p>") +
     "<p>La commune est classée <strong>" + z.frr + "</strong> — France ruralités revitalisation, niveau renforcé — depuis le " + z.frr_date +
@@ -220,7 +220,7 @@
     "les granites du socle en émettent, et le gaz s'accumule dans les volumes clos mal ventilés. Ce que ça commande, concrètement&nbsp;: " +
     "<strong>soubassement ventilé ou vide sanitaire, dalle étanche, ventilation mécanique</strong>, et pas de pièce de vie en cave ou en sous-sol. " +
     "C'est décisif pour une construction en terre-paille, où l'étanchéité au sol se traite au moment des fondations, jamais après.</p>" +
-    "<p>Un classement n'est pas une mesure. Un dosimètre passif coûte environ 20&nbsp;€, se pose deux mois en hiver, et tranche.</p>" +
+    "<p>Un classement est une probabilité géologique, pas une mesure. Un dosimètre passif, environ 20&nbsp;€, posé deux mois en hiver donne la valeur réelle de la pièce.</p>" +
     "<p><strong>Les argiles sont en " + ((r.argiles || {}).exposition || "—").toLowerCase() + ".</strong> " +
     "Le retrait-gonflement fissure les maisons mal fondées après les étés secs — et les étés secs se multiplient. " +
     "Semelles descendues à 0,80 m au moins, chaînage horizontal et vertical, trottoir périphérique, et surtout " +
@@ -228,7 +228,7 @@
     "<p>La sismicité est " + ((r.sismicite || "").split(" - ")[1] || "").toLowerCase() + " — aucune règle parasismique particulière. " +
     "Aucune cavité ni mouvement de terrain recensé dans un rayon de deux kilomètres.</p>" +
     (g.sonde_200m === "vert"
-      ? "<p><strong>Et une bonne nouvelle.</strong> Les sondes géothermiques verticales sont en vert sur cette maille, sans aucun critère d'exclusion&nbsp;: " +
+      ? "<p>Les sondes géothermiques verticales sont en vert sur cette maille, sans aucun critère d'exclusion&nbsp;: " +
         "ni évaporite, ni cavité, ni artésianisme, ni communication d'aquifères. Elles relèvent donc de la simple télédéclaration, " +
         "sans étude hydrogéologique préalable. C'est la solution de chauffage la moins contrainte du site.</p>"
       : "");
@@ -268,7 +268,7 @@
     "et les légumineuses, les brassicacées et les fruitiers à pépins y végètent. Le phosphore est sous le seuil de détection, " +
     "le magnésium très bas.</p>" +
     "<p>Dans l'autre sens, " + s.matiere_organique_g_kg + " g/kg de matière organique est une valeur remarquable&nbsp;: réserve en eau, structure, " +
-    "vie du sol. <strong>Ce sol ne se laboure pas</strong>, il se couvre.</p>" +
+    "vie du sol. Le labour dissiperait cette matière&nbsp;: la conduite adaptée est la couverture permanente.</p>" +
     "<div class='note'><span class='etiquette'>L'ordre des opérations</span>" +
     "<p>Ces valeurs viennent d'un point situé à 5&nbsp;km. Elles justifient <strong>une analyse de terre</strong> — 40 à 80 € le point, " +
     "trois points suffisent pour commencer — <strong>pas un camion d'amendement</strong>. Si l'analyse locale confirme un pH sous 5,0 avec l'aluminium dominant, " +
@@ -290,7 +290,7 @@
         "c'est ce qui décide de la potabilité d'une eau captée à l'aval.</p>"
       : "") +
     "<p class='nb'>Une précision qui évite un contresens&nbsp;: une entreprise de la zone d'activité voisine porte le mot « Seveso » dans sa raison sociale, " +
-    "et le registre national la classe pourtant <em>non Seveso</em>. Le nom trompe, le régime fait foi.</p>" +
+    "et le registre national la classe pourtant <em>non Seveso</em>. Ce sont les obligations attachées au régime déclaré qui s'appliquent, pas la raison sociale.</p>" +
     ((r.sites_pollues || []).length
       ? "<p>Côté sols, l'inventaire <strong>CASIAS</strong> des anciens sites industriels et d'activité de service en recense " + r.sites_pollues_total + " dans un rayon de 5&nbsp;km&nbsp;; " +
         "le plus proche est à " + nf(r.sites_pollues[0].distance_km, 1) + " km (" + (r.sites_pollues[0].nom || "").toLowerCase() + "). " +

@@ -65,7 +65,7 @@
 <div id="l-bois"><p class="chargement">Chargement…</p></div>
 
 <h2 id="verger">Le verger</h2>
-<p>Le point qui décide d'un verger n'est pas la date de la dernière gelée, ni celle du débourrement&nbsp;: c'est l'écart entre les deux. Le verdict est habituellement importé de la littérature nationale. Il est ici calculé sur place.</p>
+<p>Ce qui décide d'un verger, c'est l'écart entre le débourrement et la dernière gelée. Cet écart est calculé ici sur la série locale, et non repris de la littérature nationale.</p>
 <figure>
 <svg viewBox="0 0 640 262" role="img" aria-labelledby="t-cou d-cou" class="croquis">
   <title id="t-cou">La course entre la gelée et la floraison</title>
@@ -349,7 +349,7 @@ function jourDeLAnnee(doy) {
     nf0(maxi) + " DJU ; le plus doux, " + anMin + ", " + nf0(mini) + " — un écart de " + nf(100 * (maxi / mini - 1), 0) + " %. " +
     "Même sur les dix dernières saisons, la plus rude (" + nf0(pire10) + " DJU) a demandé <strong>" +
     nf(100 * (pire10 / med10 - 1), 0) + " % de plus que la médiane</strong> de la période. " +
-    "<strong>Le stock se cale sur ce chiffre-là</strong>, pas sur la moyenne&nbsp;: le bois qui reste ne se perd pas, il sèche, " +
+    "<strong>Le stock se cale sur ce chiffre-là</strong>, pas sur la moyenne&nbsp;: un excédent de bois sèche d'une saison à l'autre, " +
     "tandis qu'une réserve calculée au plus juste tombe en défaut une année sur dix.</p>";
 
   /* --- verger --- */
@@ -376,7 +376,7 @@ function jourDeLAnnee(doy) {
     "<p><strong>Et sur la fleur ouverte, le risque a changé de niveau.</strong> Une gelée à −1 °C ou moins après floraison touchait " +
     ancien.part_gelee_en_floraison + " % des années en 1961-1990. Sur 1996-2025, " + recent.part_gelee_en_floraison + " %" +
     (pires.length ? " — " + pires.join(", ") : "") + ". Sur des effectifs aussi petits, le test statistique reste " +
-    "au bord du seuil (p = " + nf(tr.gel_floraison.p, 3) + ") : <strong>la hausse est nette mais pas encore démontrée</strong>, et c'est ce qu'il faut en dire.</p>" +
+    "au bord du seuil (p = " + nf(tr.gel_floraison.p, 3) + ") : <strong>la hausse est nette mais pas encore démontrée</strong>.</p>" +
     "<p>Ce que ça commande : <strong>des variétés à floraison tardive</strong>, et surtout le choix de l'emplacement. " +
     "Le replat du lieu vide son air froid vers le bas ; les 15&nbsp;m les plus bas de la pente le reçoivent. Entre deux parcelles distantes de " +
     "100&nbsp;m, l'écart de risque dépasse l'effet de 69&nbsp;ans de réchauffement.</p>";
@@ -395,7 +395,7 @@ function jourDeLAnnee(doy) {
     "Le foin n'est pas plus difficile à faire qu'en 1950 — la difficulté s'est déplacée sur la pousse de l'herbe, que le déficit d'été commande.</p>" +
     "<p>La marge reste mince quand même : " + mauvaises.length + " années sur " + fen.length +
     " n'ont offert que quatre fenêtres ou moins entre mai et juillet, soit une année sur " + nf(fen.length / Math.max(1, mauvaises.length), 0) +
-    ". Une organisation qui suppose de pouvoir faucher au jour choisi tombe en défaut ces années-là ; une organisation qui sait faucher " +
+    ". Ces années-là, il faut pouvoir faucher " +
     "dans les 48 heures qui suivent une prévision passe partout.</p>";
 
   document.getElementById("horodatage").textContent =

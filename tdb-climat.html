@@ -82,7 +82,7 @@
   <p>Deux réserves subsistent. La maille fait environ 9&nbsp;km&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — ce qui compte pour les parcelles situées en contrebas.</p>
 </div>
 
-<p><strong>Ces courbes sont justes en tendance.</strong> Elles disent dans quel sens va le climat d'ici, pas s'il gèlera jeudi.</p>
+<p><strong>Ces courbes valent pour la tendance de longue durée.</strong> Elles ne prévoient pas le temps d'un jour donné&nbsp;: voir <a href="tdb-eau-meteo.html">Le jour et la semaine</a>.</p>
 
 <p>Les données de cette page sont téléchargeables — <a href="data/climat-annuel.csv">CSV</a>, <a href="data/climat.json">JSON</a> — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>.</p>
 
@@ -187,17 +187,17 @@ function phraseTendance(cle, t, unite) {
   const allongement = (gelAut && gelPrint) ? (gelAut.pente_par_decennie - gelPrint.pente_par_decennie) : null;
 
   document.getElementById("lecture").innerHTML =
-    "<p><strong>Il fait plus chaud, et ce n'est pas discutable.</strong> " + nf(tr.tmoy.pente_par_decennie, 2) +
+    "<p><strong>La température moyenne monte.</strong> " + nf(tr.tmoy.pente_par_decennie, 2) +
     " °C par décennie, soit près de " + nf(tr.tmoy.pente_par_decennie * 7.6, 1) + " °C sur la période. " +
     "Le nombre de jours de gel a reculé de " + nf(Math.abs(tr.gel.pente_par_decennie), 1) +
     " par décennie, celui des jours à 30 °C progresse de " + nf(tr.chaud.pente_par_decennie, 2) + ".</p>" +
 
-    "<p><strong>Il ne pleut pas moins — il pleut moins souvent.</strong> Le cumul annuel " +
+    "<p><strong>Même cumul annuel, moins de jours de pluie.</strong> Le cumul annuel " +
     (tr.pluie.significative ? "montre une tendance." : "n'a <em>aucune tendance détectable</em> : l'intervalle de confiance contient zéro.") +
     " En revanche le nombre de jours de pluie recule de " + nf(Math.abs(tr.jp.pente_par_decennie), 1) +
     " par décennie. Même quantité d'eau, moins de jours pour la recevoir : donc des pluies plus intenses, " +
     "qui ruissellent davantage et s'infiltrent moins. C'est l'un des effets les plus constants du réchauffement en France, " +
-    "et regarder le seul cumul annuel est la meilleure façon de ne pas le voir.</p>" +
+    "et le cumul annuel seul ne laisse pas voir ce déplacement.</p>" +
 
     "<p><strong>L'été se dessèche.</strong> Le déficit d'avril à septembre se creuse de " +
     nf(tr.defic.pente_par_decennie, 0) + " mm par décennie. C'est la conséquence directe du point précédent, " +

@@ -102,7 +102,7 @@
 <figcaption>Deux échelles&nbsp;: 43&nbsp;km² mesurés à la station, quelques hectares qui ne le sont pas.</figcaption>
 </figure>
 <h2 id="le-sol">Le sol, depuis 1958</h2>
-<p>La rivière dit ce qui est parti. Le sol dit ce qui reste. Météo-France fait tourner depuis 1958 un modèle de bilan hydrique sur une grille de 8&nbsp;km&nbsp;; la maille qui contient le chemin du Mons a son centre à 4,2&nbsp;km d'ici. On en tire l'<strong>humidité du sol ramenée à sa réserve utile</strong> — 1, le sol est à sa capacité au champ&nbsp;; 0, il est au point de flétrissement — et l'écart de cette humidité <strong>à la normale du même jour</strong>, qui dit si le sol est sec <em>pour la saison</em> plutôt que sec dans l'absolu.</p>
+<p>L'humidité du sol est l'autre moitié du bilan&nbsp;: le débit mesure l'eau sortie du bassin, elle mesure l'eau restée dans le profil. Météo-France fait tourner depuis 1958 un modèle de bilan hydrique sur une grille de 8&nbsp;km&nbsp;; la maille qui contient le chemin du Mons a son centre à 4,2&nbsp;km d'ici. On en tire l'<strong>humidité du sol ramenée à sa réserve utile</strong> — 1, le sol est à sa capacité au champ&nbsp;; 0, il est au point de flétrissement — et l'écart de cette humidité <strong>à la normale du même jour</strong>, qui dit si le sol est sec <em>pour la saison</em> plutôt que sec dans l'absolu.</p>
 <div class="tuiles" id="synthese-sol"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
 <div id="g-sol-annee"></div>
 <p class="legende-axe">Humidité du sol depuis le 1<sup>er</sup> janvier. La bande grise couvre les quantiles 10&nbsp;% à 90&nbsp;% du même jour sur 1958-2020&nbsp;; la ligne intérieure est la médiane.</p>
@@ -219,7 +219,7 @@ function nomPropre(n) {
     "<p><strong>Les étiages sévères ne sont plus répartis au hasard dans la série.</strong> Sur les dix plus bas depuis " + d.periode[0] +
     ", <strong>" + recents + " sont postérieurs à 2000</strong> — " + pires.slice(0, 6).join(", ") + " en tête. " +
     "Avant 2000, le pire de la série est 1990, et il reste plus haut que six étés du XXI<sup>e</sup> siècle.</p>" +
-    (zeroAn.length ? "<p><strong>Et la rivière s'est déjà arrêtée.</strong> En " + zeroAn.join(" et en ") +
+    (zeroAn.length ? "<p><strong>Le débit est déjà descendu à zéro.</strong> En " + zeroAn.join(" et en ") +
       ", le débit journalier est descendu à zéro à la station. Ce n'est pas un défaut de mesure&nbsp;: c'est un cours d'eau de 43 km² de bassin qui cesse de couler. " +
       "Un stockage d'eau ne se dimensionne donc pas sur l'étiage habituel mais sur <strong>30 à 60&nbsp;jours sans ressource mobilisable</strong>.</p>" : "") +
     "<p>Le repère de conduite&nbsp;: <strong>si le débit passe sous 20 l/s avant le 15 juillet, l'été sera long</strong>. En " + an + ", c'est arrivé le " +
@@ -268,7 +268,7 @@ function nomPropre(n) {
       "<p><strong>Deux de ces ouvrages portent le nom du lieu</strong>, et une prise en rivière capte la Montane à 1,2 km d'ici. " +
       "Autrement dit, l'eau d'ici part déjà dans le réseau public. Tout projet de prélèvement du collectif se discutera donc " +
       "en concurrence avec un captage d'eau potable — mieux vaut le savoir avant l'instruction d'un dossier qu'à ce moment-là. " +
-      "C'est aussi la raison de publier ce tableau&nbsp;: un collectif qui demandera de l'eau doit commencer par dire qui en prend déjà, lui compris.</p>";
+      "</p>";
   }
 
   document.getElementById("horodatage").textContent =
@@ -339,9 +339,9 @@ function nomPropre(n) {
     "Sur les huit étés les plus secs depuis " + d.periode[0] + ", <strong>" + recents + " sont postérieurs à 2000</strong> — " +
     pires.filter((y) => +y >= 2000).join(", ") + " — et les anciens se réduisent à " +
     pires.filter((y) => +y < 2000).join(" et ") + ".</p>" +
-    "<p>Ce classement ne recoupe pas celui des étiages de la Montane, et c'est ce qui le rend utile&nbsp;: " +
+    "<p>Ce classement ne recoupe pas celui des étiages de la Montane&nbsp;: " +
     "un sol peut rester sec des mois après que la rivière est remontée, parce que la pluie d'automne repart au ruissellement " +
-    "avant d'avoir rechargé la réserve. <strong>Pour un jardin, un verger ou une prairie, c'est cette ligne-là qui compte</strong>, pas le débit.</p>" +
+    "avant d'avoir rechargé la réserve. <strong>Pour un jardin, un verger ou une prairie, c'est cette courbe qu'il faut suivre.</strong></p>" +
     "<h3>Les épisodes les plus longs</h3>" +
     "<p>Suites d'au moins 20&nbsp;jours consécutifs sous le seuil de sécheresse marquée.</p>" +
     "<div class='defilant'><table class='donnees'><thead><tr><th>Début</th><th>Fin</th><th>Durée</th><th>Plus bas atteint</th></tr></thead><tbody>" +
