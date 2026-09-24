@@ -50,6 +50,9 @@
   /* mesures */
   --mesure-texte: 34rem;   /* ~64 signes en Georgia 16 px */
   --mesure-large: 52rem;   /* cartes, tableaux larges, graphes */
+  --rail:         12rem;   /* colonne de gauche : sommaire, titres de section */
+  --marge:        14rem;   /* colonne de droite : notes en marge */
+  --gouttiere:    2.5rem;
 
 }
 @media (prefers-color-scheme: dark) {
@@ -88,7 +91,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.bandeau-contenu, main, footer > div { max-width: var(--mesure-texte); margin-inline: auto; }
+/* La largeur de page dépend du gabarit (body[data-gabarit], plus bas) : un
+   texte long se lit sur 34 rem, un tableau de bord a besoin de 66. Le bandeau
+   et le pied suivent la page, pour que les bords s'alignent. */
+body { --largeur-page: var(--mesure-texte); }
+.bandeau-contenu, main, footer > div { max-width: var(--largeur-page); margin-inline: auto; }
 main { padding: 0 var(--e-4) var(--e-4); }
 
 /* ---------------------------------------------------- bandeau rétractable */
@@ -341,7 +348,8 @@ details.tableau-brut summary { cursor: pointer; font-size: var(--t-s); color: va
 
 /* ----------------------------------------------------------------- le pied */
 
-footer { border-top: 1px solid var(--filet); margin-top: 2.4rem; padding: var(--e-4) var(--e-4) 2.4rem; font-size: var(--t-s); color: var(--douce); }
+footer > div { padding-inline: var(--e-4); }
+footer { border-top: 1px solid var(--filet); margin-top: 2.4rem; padding: var(--e-4) 0 2.4rem; font-size: var(--t-s); color: var(--douce); }
 footer p { margin: 0 0 var(--e-1); }
 footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap;
             gap: var(--e-1) var(--e-4); }
@@ -560,6 +568,275 @@ button.suite:hover { background: var(--grille); }
 .source dd { display: inline; margin: 0 var(--e-4) 0 var(--e-1); }
 .source dd::after { content: ""; display: block; }
 
+/* ================================================================ gabarits
+   Ajouté le 24/09/2026. Chaque page déclare un gabarit (body[data-gabarit]) ;
+   le contenu ne dit rien de sa mise en page. Au téléphone, tous les gabarits
+   reviennent à la même colonne de lecture : les structures ne s'ouvrent
+   qu'au-delà de 64 rem, là où il y a la place de les lire.
+
+     accueil    portail en mosaïque, dessin en regard du texte
+     recit      sommaire à gauche, texte, notes en marge à droite
+     planche    titres de section dans un rail, contenu à 52 rem
+     registre   pleine largeur pour les tableaux, texte tenu à 34 rem
+     portail    cartes en mosaïque
+     fiche      cartouche, points numérotés en marge, à emporter dans le rail
+   ======================================================================== */
+
+.evitement {
+  position: absolute; left: var(--e-2); top: -3rem; z-index: 50;
+  background: var(--papier); padding: var(--e-2) var(--e-3); border: 1px solid var(--bord);
+}
+.evitement:focus { top: var(--e-2); }
+
+/* ------------------------------------------------------ fil d'Ariane */
+.ariane { font-size: var(--t-xs); color: var(--douce); margin: 0 0 var(--e-3); }
+.ariane ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 var(--e-2); }
+.ariane li { margin: 0; display: inline-flex; align-items: center; min-height: 1.5rem; }
+.ariane li + li::before { content: "/"; margin-right: var(--e-2); opacity: .6; }
+.ariane a { color: inherit; }
+.ariane [aria-current] { max-width: 28ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+nav .rubrique-courante > .menu-deroulant > a,
+nav .rubrique-courante > a { border-bottom: 1.5px solid var(--accent); }
+
+/* ------------------------------------------------------------ le rail */
+.rail { font-size: var(--t-s); margin: 0 0 var(--e-5); }
+.sommaire { border-top: 1px solid var(--filet); padding-top: var(--e-2); }
+.sommaire-titre { font-size: var(--t-xs); color: var(--douce); margin: 0 0 var(--e-1); font-style: italic; }
+.sommaire ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 var(--e-4); }
+.sommaire li { margin: 0; }
+.sommaire a { display: inline-flex; align-items: center; min-height: 1.5rem; text-decoration: none;
+              border-bottom: 1px solid var(--filet); }
+.sommaire a:hover, .sommaire a[aria-current="true"] { border-bottom-color: var(--accent); color: var(--accent-fort); }
+
+.a-emporter { margin-top: var(--e-4); padding: var(--e-3); background: var(--surface); }
+.a-emporter-titre { font-size: var(--t-xs); font-style: italic; color: var(--douce); margin: 0 0 var(--e-1); }
+.a-emporter ul { list-style: none; padding: 0; margin: 0 0 var(--e-2); }
+.a-emporter li { margin: 0; }
+.a-emporter li a { display: inline-flex; min-height: 1.5rem; align-items: center; }
+.a-emporter .citer { font-size: var(--t-xs); color: var(--douce); margin: 0; }
+
+/* -------------------------------------------------- relayer, en pied */
+.relayer { margin: var(--e-7) 0 0; padding-top: var(--e-3); border-top: 1px solid var(--filet); }
+.relayer h2 { font-size: var(--t-s); font-weight: 600; margin: 0 0 var(--e-2); }
+.relais { list-style: none; padding: 0; margin: 0 0 var(--e-2); display: flex; flex-wrap: wrap; gap: var(--e-2); }
+.relais li { margin: 0; }
+.relais a, .relais button {
+  display: inline-flex; align-items: center; min-height: 2.25rem; padding: 0 var(--e-3);
+  font: inherit; font-size: var(--t-s); color: var(--encre); text-decoration: none;
+  background: var(--papier); border: 1px solid var(--bord); border-radius: 2px; cursor: pointer;
+}
+.relais a:hover, .relais button:hover { background: var(--surface); }
+.relais-note { font-size: var(--t-xs); color: var(--douce); margin: 0; }
+.mastodon-form { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2); margin: var(--e-2) 0; font-size: var(--t-s); }
+.mastodon-form input { font: inherit; padding: var(--e-1) var(--e-2); min-height: 2.25rem;
+                       border: 1px solid var(--bord); background: var(--papier); color: var(--encre); }
+
+.bouton {
+  display: inline-flex; align-items: center; min-height: 2.25rem; padding: 0 var(--e-3);
+  font: inherit; font-size: var(--t-s); color: var(--encre); text-decoration: none;
+  background: var(--surface); border: 1px solid var(--bord); border-radius: 2px; cursor: pointer;
+}
+.bouton:hover { background: var(--grille); }
+.bouton[data-fait] { border-color: var(--calme); color: var(--calme); }
+
+/* ----------------------------------------------------- l'accueil */
+.portes { list-style: none; padding: 0; margin: var(--e-5) 0; display: grid; gap: 1px;
+          grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); background: var(--filet);
+          box-shadow: 0 0 0 1px var(--filet); }
+.portes li { margin: 0; background: var(--papier); }
+.portes a { display: flex; flex-direction: column; gap: var(--e-1); height: 100%;
+            padding: var(--e-4); text-decoration: none; }
+.portes a:hover { background: var(--surface); }
+.portes a:hover strong { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .14em; }
+.porte-sur { font-size: var(--t-xs); font-style: italic; color: var(--douce); }
+.portes strong { font-size: var(--t-l); font-weight: 600; }
+.porte-dit { font-size: var(--t-s); color: var(--douce); line-height: 1.45; }
+
+.nouvelles { list-style: none; padding: 0; margin: var(--e-3) 0; }
+.nouvelles li { display: grid; grid-template-columns: 4.2rem 1fr; gap: 0 var(--e-3);
+                padding: var(--e-2) 0; margin: 0; border-top: 1px solid var(--filet); }
+.nouvelles li:last-child { border-bottom: 1px solid var(--filet); }
+.nouvelles time { grid-row: span 2; font-size: var(--t-s); color: var(--douce); font-variant-numeric: tabular-nums; padding-top: .1rem; }
+.nouvelles span { font-size: var(--t-s); color: var(--douce); }
+
+/* --------------------------------------------------- le portail */
+.vedette { margin: var(--e-5) 0; padding: var(--e-4) var(--e-5); background: var(--surface);
+           box-shadow: inset 3px 0 0 var(--accent); }
+.vedette-sur { font-size: var(--t-xs); font-style: italic; color: var(--douce); margin: 0 0 var(--e-1); }
+.vedette h2 { margin: 0 0 var(--e-2); }
+.vedette h2 a { text-decoration: none; }
+.vedette p:last-child { margin-bottom: 0; }
+.carte-code { font-size: var(--t-xs); color: var(--douce); margin: 0 0 var(--e-1) !important; font-variant-numeric: tabular-nums; }
+.code { font-variant-numeric: tabular-nums; color: var(--accent-fort); white-space: nowrap; }
+h1 .code { display: block; font-size: var(--t-m); font-weight: 600; margin-bottom: var(--e-1); }
+
+/* ----------------------------------------------------- la fiche */
+.cartouche { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+             margin: 0 0 var(--e-5); border-top: 1px solid var(--filet); border-left: 1px solid var(--filet); }
+.cartouche div { padding: var(--e-2) var(--e-3); border-right: 1px solid var(--filet); border-bottom: 1px solid var(--filet); }
+.cartouche dt { font-size: var(--t-xs); font-style: italic; color: var(--douce); }
+.cartouche dd { margin: 0; font-size: var(--t-s); }
+[data-gabarit="fiche"] .corps-page blockquote {
+  margin: var(--e-4) 0; padding: var(--e-3) var(--e-4); font-size: var(--t-l); line-height: 1.4;
+  background: var(--surface); box-shadow: inset 3px 0 0 var(--accent);
+}
+[data-gabarit="fiche"] .corps-page blockquote p { margin: 0; }
+.point { position: relative; }
+.point::before { content: attr(data-n); font-weight: 600; color: var(--accent-fort);
+                 font-variant-numeric: tabular-nums; margin-right: var(--e-2); }
+.sec:has(> .h-contreindications) { margin: var(--e-6) 0; padding: var(--e-1) var(--e-4) var(--e-2);
+                                   box-shadow: inset 3px 0 0 var(--vigilance); background: var(--surface); }
+.sec:has(> .h-contreindications) h2 { margin-top: var(--e-3); }
+.sec:has(> .h-verification) { padding: var(--e-1) var(--e-4) var(--e-2); box-shadow: inset 3px 0 0 var(--calme); }
+.gabarit-texte { font-family: ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: .8rem;
+                 line-height: 1.5; background: var(--surface); padding: var(--e-3); overflow-x: auto;
+                 box-shadow: 0 0 0 1px var(--filet); }
+.renvoi-absent { color: var(--douce); }
+code { font-family: ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: .86em; }
+
+/* ------------------------------------------------ la page Relayer */
+.extrait { display: grid; grid-template-columns: 1fr; gap: var(--e-3); padding: var(--e-4) 0;
+           border-top: 1px solid var(--filet); }
+.extrait h3 { margin: 0 0 var(--e-2); }
+.extrait-vignette img { display: block; width: 100%; max-width: 10rem; height: auto; box-shadow: 0 0 0 1px var(--filet); }
+.extrait-texte { font-size: var(--t-s); }
+.extrait-meta { font-size: var(--t-xs); color: var(--douce); }
+.canal { border-top: 1px solid var(--filet); }
+.canal summary { display: flex; justify-content: space-between; gap: var(--e-3); min-height: 2.25rem;
+                 align-items: center; margin: 0; color: var(--encre); }
+.canal .compte { font-size: var(--t-xs); color: var(--douce); font-variant-numeric: tabular-nums; }
+.canal textarea { width: 100%; font: inherit; font-size: var(--t-s); line-height: 1.45; padding: var(--e-2);
+                  color: var(--encre); background: var(--surface); border: 1px solid var(--filet); resize: vertical; }
+.canal .actions { display: flex; flex-wrap: wrap; gap: var(--e-2); margin: var(--e-2) 0 var(--e-3); }
+.serie { display: flex; flex-wrap: wrap; gap: var(--e-2); }
+.serie img { display: block; width: 7.5rem; height: auto; box-shadow: 0 0 0 1px var(--filet); }
+@media (min-width: 44rem) { .extrait { grid-template-columns: 10rem minmax(0, 1fr); gap: var(--e-5); } }
+
+/* ------------------------------------------------ les éditions */
+.editions { list-style: none; padding: 0; margin: var(--e-4) 0; display: grid; gap: var(--e-4);
+            grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.editions li { margin: 0; display: grid; grid-template-rows: auto 1fr; gap: var(--e-2); }
+.editions .apercu { display: block; aspect-ratio: 148 / 210; background: var(--surface);
+                    box-shadow: 0 0 0 1px var(--filet), 3px 3px 0 var(--filet); overflow: hidden; }
+.editions .apercu.a4 { aspect-ratio: 210 / 297; }
+.editions .apercu.paysage { aspect-ratio: 297 / 210; }
+.editions .apercu img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.editions h3 { margin: 0; font-size: var(--t-m); }
+.editions p { margin: 0; font-size: var(--t-s); color: var(--douce); }
+
+/* ===================================================== grands écrans */
+@media (min-width: 64rem) {
+
+  /* -------- récit : sommaire | texte | marge */
+  [data-gabarit="recit"],
+  [data-gabarit="fiche"] {
+    --largeur-page: calc(var(--rail) + var(--mesure-texte) + var(--marge) + 2 * var(--gouttiere) + 2rem);
+  }
+  [data-gabarit="recit"] main,
+  [data-gabarit="fiche"] main {
+    display: grid; column-gap: var(--gouttiere);
+    grid-template-columns: var(--rail) minmax(0, var(--mesure-texte)) var(--marge);
+    grid-template-areas: "ariane ariane ariane" "rail tete tete" "rail corps corps" ". relayer relayer";
+    align-items: start;
+  }
+  [data-gabarit="recit"] .ariane, [data-gabarit="fiche"] .ariane { grid-area: ariane; }
+  [data-gabarit="recit"] .tete-page, [data-gabarit="fiche"] .tete-page { grid-area: tete; max-width: var(--mesure-texte); }
+  [data-gabarit="recit"] .rail, [data-gabarit="fiche"] .rail {
+    grid-area: rail; grid-row: 2 / 4; position: sticky; top: 4.5rem; margin: 0;
+    max-height: calc(100vh - 6rem); overflow-y: auto;
+  }
+  [data-gabarit="recit"] .sommaire ol, [data-gabarit="fiche"] .sommaire ol,
+  [data-gabarit="planche"] .sommaire ol { display: block; }
+  [data-gabarit="recit"] .corps-page, [data-gabarit="fiche"] .corps-page { grid-area: corps; }
+  [data-gabarit="recit"] .relayer, [data-gabarit="fiche"] .relayer { grid-area: relayer; max-width: var(--mesure-texte); }
+
+  /* les notes passent en marge : le texte garde sa mesure, la note se lit
+     en regard du paragraphe qui la suit. Une figure ne se glisse jamais
+     sous une note. */
+  [data-gabarit="recit"] .corps-page > .sec > *:not(.note):not(figure),
+  [data-gabarit="fiche"] .corps-page > .sec > *:not(figure):not(.defilant) { max-width: var(--mesure-texte); }
+  [data-gabarit="recit"] .corps-page .note {
+    float: right; clear: right; width: var(--marge); margin: .3rem 0 var(--e-4) var(--gouttiere);
+    font-size: var(--t-s);
+  }
+  [data-gabarit="recit"] .corps-page figure { clear: right; }
+  [data-gabarit="recit"] .corps-page figure .croquis { max-width: calc(var(--mesure-texte) + var(--marge)); }
+  [data-gabarit="fiche"] .corps-page .defilant { max-width: calc(var(--mesure-texte) + var(--marge)); }
+  [data-gabarit="fiche"] .corps-page { max-width: calc(var(--mesure-texte) + var(--marge)); }
+
+  /* dans une fiche, les points numérotés sortent dans la gouttière */
+  [data-gabarit="fiche"] .point::before { position: absolute; right: calc(100% + .8rem); top: 0; margin: 0;
+                                          font-size: var(--t-xl); line-height: 1.2; }
+
+  /* -------- planche : rail des titres | contenu */
+  [data-gabarit="planche"] {
+    --largeur-page: calc(var(--rail) + var(--gouttiere) + var(--mesure-large) + 2rem);
+  }
+  [data-gabarit="planche"] .tete-page {
+    display: grid; grid-template-columns: var(--rail) minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--gouttiere); grid-auto-flow: row dense; align-items: start;
+  }
+  [data-gabarit="planche"] .tete-page > * { grid-column: 2 / 4; }
+  [data-gabarit="planche"] .tete-page > h1 { grid-column: 1 / 4; }
+  [data-gabarit="planche"] .tete-page > .condense { grid-column: 2; }
+  [data-gabarit="planche"] .tete-page > .tuiles { grid-column: 3; margin-top: 0; }
+  [data-gabarit="planche"] .rail { margin-left: calc(var(--rail) + var(--gouttiere)); }
+  [data-gabarit="planche"] .rail .sommaire ol { display: flex; }
+  [data-gabarit="planche"] .sec {
+    display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); column-gap: var(--gouttiere);
+    border-top: 1px solid var(--filet); margin-top: var(--e-6); padding-top: var(--e-3);
+  }
+  [data-gabarit="planche"] .sec > * { grid-column: 2; }
+  [data-gabarit="planche"] .sec > h2 {
+    grid-column: 1; grid-row: 1 / span 60; align-self: start; position: sticky; top: 4.5rem;
+    margin: 0; font-size: var(--t-l); line-height: 1.3;
+  }
+  [data-gabarit="planche"] .sec > h2 + * { margin-top: 0; }
+  [data-gabarit="planche"] .sec-annexe > * { font-size: var(--t-s); }
+  [data-gabarit="planche"] .relayer { margin-left: calc(var(--rail) + var(--gouttiere)); }
+
+  /* -------- registre : pleine largeur */
+  [data-gabarit="registre"] { --largeur-page: 70rem; }
+  [data-gabarit="registre"] .tete-page > *:not(.tuiles):not(.condense),
+  [data-gabarit="registre"] .corps-page .sec > p,
+  [data-gabarit="registre"] .corps-page .sec > ul:not(.cartes),
+  [data-gabarit="registre"] .corps-page .sec > .note { max-width: var(--mesure-texte); }
+  [data-gabarit="registre"] .carto-zone, [data-gabarit="registre"] .carto-liste,
+  [data-gabarit="registre"] .defilant.large { width: auto; max-width: none; margin-inline: 0; }
+  [data-gabarit="registre"] .sec { border-top: 1px solid var(--filet); margin-top: var(--e-6); }
+
+  /* -------- portail et accueil : mosaïque */
+  [data-gabarit="portail"], [data-gabarit="accueil"] { --largeur-page: 66rem; }
+  [data-gabarit="portail"] .tete-page > *, [data-gabarit="portail"] .sec > p,
+  [data-gabarit="portail"] .sec > .note, [data-gabarit="accueil"] .sec > * { max-width: var(--mesure-texte); }
+  [data-gabarit="portail"] .cartes {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: var(--e-4);
+  }
+  [data-gabarit="portail"] .cartes li { border: 0; padding: var(--e-3) 0 0; box-shadow: inset 0 1px 0 var(--encre); }
+  [data-gabarit="portail"] .cartes li:last-child { border: 0; }
+  [data-gabarit="portail"] .cartes li:first-child { grid-column: span 2; }
+  [data-gabarit="portail"] .cartes li:first-child h3 { font-size: var(--t-xl); }
+  [data-gabarit="portail"] .vedette { max-width: none; display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--e-6); }
+  [data-gabarit="portail"] .vedette > .vedette-sur, [data-gabarit="portail"] .vedette > h2 { grid-column: 1 / -1; }
+
+  [data-gabarit="accueil"] .tete-page {
+    display: grid; grid-template-columns: minmax(0, var(--mesure-texte)) minmax(0, 1fr);
+    column-gap: var(--e-6); align-items: start;
+  }
+  [data-gabarit="accueil"] .tete-page > * { grid-column: 1; }
+  [data-gabarit="accueil"] .tete-page > figure { grid-column: 2; grid-row: 1 / span 5; align-self: center; margin: 0; }
+  [data-gabarit="accueil"] .tete-page > .portes { grid-column: 1 / -1; }
+  [data-gabarit="accueil"] .corps-page { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--e-6); }
+  [data-gabarit="accueil"] .corps-page > .sec:last-child { grid-column: 1 / -1; }
+  [data-gabarit="accueil"] .corps-page > .sec:last-child > * { max-width: none; }
+  [data-gabarit="accueil"] .nouvelles { columns: 2; column-gap: var(--e-6); }
+  [data-gabarit="accueil"] .nouvelles li { break-inside: avoid; }
+}
+@media (min-width: 64rem) and (max-width: 72rem) {
+  [data-gabarit="portail"] .cartes li:first-child { grid-column: auto; }
+}
+
 /* ------------------------------------------------------------- impression
    Un tableau de bord dont l'argument est la traçabilité finit imprimé, ne
    serait-ce que pour une réunion. Sans cette feuille, il sortait avec son
@@ -570,6 +847,7 @@ button.suite:hover { background: var(--grille); }
     --filet: #bbb; --bord: #666; --grille: #ddd;
   }
   .bandeau, footer, .carto-evitement, .filtres, .epoques, .recherche,
+  .rail, .relayer, .ariane, .evitement, .a-emporter,
   button.suite, details.tableau-brut summary { display: none !important; }
   body { background: #fff; color: #000; }
   main { max-width: none; padding: 0; }

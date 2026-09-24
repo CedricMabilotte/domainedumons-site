@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le correctif était d&amp;#x27;attendre, pas de changer de code — édition paginée — Domaine du Mons</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../edition.css?v=29">
+<script>
+window.PagedConfig = {
+  auto: true,
+  after: function () {
+    var b = document.createElement("div");
+    b.className = "barre-edition";
+    b.innerHTML = '<a href="../editions.html">← Éditions</a> <span>Le correctif était d&amp;#x27;attendre, pas de changer de code</span> ' +
+      '<button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button>';
+    document.body.appendChild(b);
+    document.body.setAttribute("data-pret", String(document.querySelectorAll(".pagedjs_page").length));
+  }
+};
+</script>
+<script src="../vendor/paged.polyfill.min.js?v=29"></script>
+</head>
+<body class="a5">
+<article class="chapitre seul" id="grain-rx-05-la-patience-comme-correctif">
+<h1><span class="code-fiche">RX-05</span><span class="titre-courant">Le correctif était d&#x27;attendre, pas de changer de code</span></h1>
+
+<p class="chapeau">Retour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>17 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Ajouter l'eau — rivières, plans d'eau — au fond de la carte du réseau, en l'extrayant d'OpenStreetMap par l'API Overpass au moment de la publication. Le code était écrit et testé sur les couches précédentes, routes et toponymes, qui étaient passées sans incident.</p>
+<h2>Le déroulé</h2>
+<p>L'extraction a rendu <code>504 Gateway Timeout</code>. Réessai immédiat&nbsp;: <code>504</code>. Découpage en seize morceaux au lieu d'un&nbsp;: <code>504</code>.</p>
+<p>J'ai arrêté là, et j'ai consigné&nbsp;: <em>«&nbsp;l'extraction a échoué sur un délai dépassé d'Overpass&nbsp;»</em>, en ajoutant que c'était une ressource bénévole et que j'y avais déjà beaucoup puisé ce jour-là. La formulation était courtoise et le diagnostic était faux. J'avais rangé l'échec du côté de <em>la requête ne passe pas ici</em> — d'où l'idée, pour la reprise, de chercher une autre instance ou d'alléger encore la requête.</p>
+<p>Le lendemain, la même requête a abouti. Sur les trente-six morceaux&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">premier essai</th><th scope="col">deuxième</th><th scope="col">troisième</th></tr></thead><tbody><tr><th scope="row">morceaux aboutis</th><td>24 sur 36</td><td>34 sur 36</td><td><strong>36 sur 36</strong></td></tr></tbody></table></div>
+<p>Un tiers ont échoué d'abord, <strong>aucun au troisième essai</strong>. Le seul changement de fond&nbsp;: l'attente entre deux tentatives, portée de 8 secondes fixes à 15, puis 30, puis 60, puis 120.</p>
+<p>Entre-temps, une mesure qui aurait dû être la première&nbsp;: <code>ping</code> vers l'instance, <strong>100 ms aller-retour, 0&nbsp;% de perte</strong>. La liaison depuis ici était effectivement mauvaise ces jours-là — elle n'était pour rien dans cet échec.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un <code>504</code> ne décrit pas votre requête, il décrit l'état du serveur.</strong> C'est une information sur l'autre, pas sur soi. Les codes qui parlent de la requête — 400, 404, 422 — appellent une correction&nbsp;; ceux qui parlent de la charge — 429, 502, 503, 504 — appellent une attente. Les traiter pareil conduit à modifier du code qui marche.</p>
+<p class="point" data-n="2"><strong>Réessayer vite est la seule réaction qui aggrave la panne qu'on constate.</strong> Une instance saturée l'est par la somme des demandes qu'elle reçoit. Trois essais en dix secondes ajoutent à ce qui bloque. L'attente qui double n'est pas de la résignation, c'est la seule contribution utile qu'un client puisse apporter à sa propre réussite.</p>
+<p class="point" data-n="3"><strong>Mesurer la liaison avant de l'accuser.</strong> «&nbsp;Le réseau est mauvais&nbsp;» était vrai de la maison et faux de cette panne. Deux commandes auraient tranché avant qu'une journée ne soit perdue à imaginer des contournements.</p>
+<p class="point" data-n="4"><strong>Un travail long sur une ressource distante doit être reprenable.</strong> Chaque morceau obtenu est désormais gardé sur disque. Reprendre repart du morceau qui a échoué, et surtout <strong>ne redemande pas à l'instance ce qu'elle a déjà rendu</strong> — la politesse et l'efficacité vont ici dans le même sens. Sans ce cache, la reconstruction du fichier, refaite trois fois ce jour-là pour en ajuster le contenu, aurait coûté trois extractions complètes&nbsp;; elle n'a coûté aucun appel.</p>
+<p class="point" data-n="5"><strong>L'abandon documenté est meilleur que l'abandon silencieux, et moins bon que le diagnostic.</strong> Avoir écrit ce qui manquait a permis de reprendre proprement. Mais la note portait une cause supposée, présentée sans marque de doute, et cette cause a orienté la reprise dans la mauvaise direction. <strong>Consigner ce qu'on a observé — le code d'erreur, le nombre d'essais, l'état de la liaison — plutôt que ce qu'on en déduit.</strong></p>
+<h2>Les changements</h2>
+<ul><li>Distinguer, dans tout appel à un service distant, les codes qui disent <em>votre demande</em> de ceux qui disent <em>ma charge</em>. Les seconds déclenchent une attente qui double, jamais une modification de la demande.</li><li>Cinq essais au moins, espacés de 15, 30, 60 et 120 secondes, avant de conclure qu'une ressource distante est indisponible.</li><li>Toute extraction en plusieurs morceaux garde chaque réponse obtenue, hors du dépôt, et reprend là où elle s'est arrêtée.</li><li>Avant d'incriminer la liaison&nbsp;: la mesurer, et noter le chiffre.</li><li>Une note d'abandon consigne les faits observés. La cause supposée, si elle est écrite, l'est comme hypothèse.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique. Vaut pour toute API publique ou bénévole — Overpass, Hub'Eau, les services de la Géoplateforme, les points d'accès d'open data —, et plus largement pour tout travail long mené à travers une liaison qu'on ne maîtrise pas. Le motif se reconnaît à ceci&nbsp;: <strong>l'échec est intermittent et l'erreur ne parle pas de vous.</strong> Dans ce cas, le correctif est du temps, pas du code.</p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · RX-04 · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-05, Le correctif était d&#x27;attendre, pas de changer de code. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html</p>
+</article>
+</body>
+</html>

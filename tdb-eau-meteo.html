@@ -5,34 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le jour et la semaine — Domaine du Mons</title>
 <meta name="description" content="Gelée, pluie, vent, sol, fenêtres de travail, débit de la Montane et restrictions : tout ce qui décide du travail des prochains jours à Vitrac-sur-Montane.">
+<link rel="canonical" href="https://domainedumons.actitude.org/tdb-eau-meteo.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Domaine du Mons">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Le jour et la semaine">
+<meta property="og:description" content="Gelée, pluie, vent, sol, fenêtres de travail, débit de la Montane et restrictions : tout ce qui décide du travail des prochains jours à Vitrac-sur-Montane.">
+<meta property="og:url" content="https://domainedumons.actitude.org/tdb-eau-meteo.html">
+<meta property="og:image" content="https://domainedumons.actitude.org/visuels/og/tdb-eau-meteo.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Le jour et la semaine — Domaine du Mons">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/atom+xml" title="Domaine du Mons — nouvelles" href="flux.xml">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=28">
+<link rel="stylesheet" href="style.css?v=29">
 </head>
-<body>
+<body data-gabarit="planche">
+<a class="evitement" href="#contenu">Aller au contenu</a>
 <div class="bandeau">
   <div class="bandeau-contenu">
     <p class="titre"><a href="index.html">Domaine du Mons</a></p>
     <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
     <nav aria-label="Navigation principale">
       <ul>
-                <li><a href="index.html">Le lieu</a></li>
-        <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
-        <li><a href="marcher-libre.html">Marcher libre</a></li>
         <li>
-          <span class="menu-deroulant"><a href="reseau.html">Le réseau</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-res" aria-label="Ouvrir le menu du réseau">⌄</button></span>
-          <ul class="sous-menu" id="m-res" hidden>
-            <li><a href="reseau-carte.html">La cartographie des lieux</a></li>
-            <li><a href="reseau-fil.html">Le fil commun</a></li>
-            <li><a href="reseau-associations.html">Les associations d'intérêt général</a></li>
-            <li><hr></li>
-            <li><a href="reseau.html">Vue d'ensemble</a></li>
+          <span class="menu-deroulant"><a href="index.html">Le projet</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-projet" aria-label="Ouvrir le menu « Le projet »">⌄</button></span>
+          <ul class="sous-menu" id="m-projet" hidden>
+            <li><a href="index.html">Le lieu</a></li>
+            <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
+            <li><a href="marcher-libre.html">Marcher libre</a></li>
           </ul>
         </li>
         <li>
-          <span class="menu-deroulant"><a href="tableaux-de-bord.html" aria-current="page">Tableaux de bord</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-tdb" aria-label="Ouvrir le menu des tableaux de bord">⌄</button></span>
+          <span class="menu-deroulant"><a href="ressources.html">Ressources</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-ressources" aria-label="Ouvrir le menu « Ressources »">⌄</button></span>
+          <ul class="sous-menu" id="m-ressources" hidden>
+            <li class="groupe">Le Grain</li>
+            <li><a href="ressources.html#retex">Retours d'expérience</a></li>
+            <li><a href="ressources.html#patterns">Patterns</a></li>
+            <li><a href="ressources.html#gabarits">Gabarits</a></li>
+            <li class="groupe">À emporter</li>
+            <li><a href="editions.html">Éditions à imprimer</a></li>
+            <li><a href="relayer.html">Relayer, partager</a></li>
+            <li><hr></li>
+            <li><a href="ressources.html">Vue d'ensemble</a></li>
+          </ul>
+        </li>
+        <li class="rubrique-courante">
+          <span class="menu-deroulant"><a href="tableaux-de-bord.html">Tableaux de bord</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-tdb" aria-label="Ouvrir le menu « Tableaux de bord »">⌄</button></span>
           <ul class="sous-menu" id="m-tdb" hidden>
             <li class="groupe">La semaine</li>
-            <li><a href="tdb-eau-meteo.html">Le jour et la semaine</a></li>
+            <li><a href="tdb-eau-meteo.html" aria-current="page">Le jour et la semaine</a></li>
             <li><a href="tdb-annee.html">L'année</a></li>
             <li class="groupe">La longue durée</li>
             <li><a href="tdb-climat.html">Le climat, 1950-2025</a></li>
@@ -43,9 +66,19 @@
             <li><a href="tdb-construire.html">Construire ici</a></li>
             <li class="groupe">Le collectif</li>
             <li><a href="tdb-registre.html">Registre d'intérêt général</a></li>
+            <li><a href="rapport-2025.html">Rapport annuel 2025</a></li>
             <li><hr></li>
             <li><a href="tableaux-de-bord.html">Vue d'ensemble</a></li>
-            <li><a href="rapport-2025.html">Rapport annuel 2025</a></li>
+          </ul>
+        </li>
+        <li>
+          <span class="menu-deroulant"><a href="reseau.html">Le réseau</a><button type="button" class="chevron" aria-expanded="false" aria-controls="m-reseau" aria-label="Ouvrir le menu « Le réseau »">⌄</button></span>
+          <ul class="sous-menu" id="m-reseau" hidden>
+            <li><a href="reseau-carte.html">La cartographie des lieux</a></li>
+            <li><a href="reseau-fil.html">Le fil commun</a></li>
+            <li><a href="reseau-associations.html">Les associations d'intérêt général</a></li>
+            <li><hr></li>
+            <li><a href="reseau.html">Vue d'ensemble</a></li>
           </ul>
         </li>
         <li><a href="nous-joindre.html">Nous joindre</a></li>
@@ -53,30 +86,52 @@
     </nav>
   </div>
 </div>
-<main class="tdb">
-<p class="retour"><a href="tableaux-de-bord.html">← Tableaux de bord</a></p>
+
+<main id="contenu" class="tdb">
+<nav class="ariane" aria-label="Fil d'Ariane"><ol><li><a href="index.html">Accueil</a></li><li><a href="tableaux-de-bord.html">Tableaux de bord</a></li><li><span aria-current="page">Le jour et la semaine</span></li></ol></nav>
+<header class="tete-page">
 <h1>Le jour et la semaine</h1>
 <noscript>
   <div class="note">
   <span class="etiquette">Sans JavaScript</span>
   <p>Les chiffres de cette page sont calculés dans votre navigateur à partir de fichiers ouverts. Sans JavaScript ils ne s'affichent pas, mais <strong>les données restent lisibles et téléchargeables</strong>&nbsp;:</p>
   <ul>
-    <li><a href="data/secheresse-historique.json">data/secheresse-historique.json</a> — relevé du 2026-09-18</li>
+    <li><a href="data/secheresse-historique.json">data/secheresse-historique.json</a> — mis à jour chaque matin</li>
   </ul>
   <p>Publiées en Licence Ouverte 2.0. Les sources et la méthode sont décrites plus bas, dans du texte qui ne dépend d'aucun script.</p>
   </div>
 </noscript>
 <div class="condense" id="condense"><p class="chargement">Relevé en cours…</p></div>
-
+</header>
+<div class="rail">
+<nav class="sommaire" aria-labelledby="sommaire-t">
+  <p class="sommaire-titre" id="sommaire-t">Sur cette page</p>
+  <ol>
+    <li><a href="#maintenant">Maintenant</a></li>
+    <li><a href="#travaux">Les fenêtres de travail</a></li>
+    <li><a href="#48h">Les 48 heures</a></li>
+    <li><a href="#semaine">La semaine passée et celle qui vient</a></li>
+    <li><a href="#la-terre">Le sol</a></li>
+    <li><a href="#riviere-montane">La Montane</a></li>
+    <li><a href="#restrictions">Sécheresse</a></li>
+    <li><a href="#les-seuils-et-pourquoi-ceux-la">Les seuils, et pourquoi ceux-là</a></li>
+    <li><a href="#lecture">Lecture</a></li>
+  </ol>
+</nav>
+</div>
+<div class="corps-page">
+<section class="sec" aria-labelledby="maintenant">
 <h2 id="maintenant">Maintenant</h2>
 <div class="tuiles" id="tuiles">
   <div class="tuile"><p class="libelle">Relevé</p><p class="valeur chargement">…</p><p class="detail">interrogation des sources</p></div>
 </div>
-
+</section>
+<section class="sec" aria-labelledby="travaux">
 <h2 id="travaux">Les fenêtres de travail</h2>
 <p>Chaque ligne s'allume ou non selon une règle écrite d'avance. Les seuils sont donnés sous le tableau.</p>
 <div id="fenetres"><p class="chargement">Chargement…</p></div>
-
+</section>
+<section class="sec" aria-labelledby="48h">
 <h2 id="48h">Les 48&nbsp;heures</h2>
 <div class="graphe">
   <h3>Température et point de rosée</h3>
@@ -88,7 +143,8 @@
   <p class="legende-axe">Millimètres par heure.</p>
   <div id="g-pluie-h"><p class="chargement">Chargement…</p></div>
 </div>
-
+</section>
+<section class="sec" aria-labelledby="semaine">
 <h2 id="semaine">La semaine passée et celle qui vient</h2>
 <div class="graphe">
   <h3>Températures</h3>
@@ -107,21 +163,25 @@
     <tbody></tbody>
   </table></div>
 </details>
-
+</section>
+<section class="sec" aria-labelledby="la-terre">
 <h2 id="la-terre">Le sol</h2>
 <div id="sol"><p class="chargement">Chargement…</p></div>
-
+</section>
+<section class="sec" aria-labelledby="riviere-montane">
 <h2 id="riviere-montane">La Montane</h2>
 <div id="riviere"><p class="chargement">Chargement…</p></div>
-
+</section>
+<section class="sec" aria-labelledby="restrictions">
 <h2 id="restrictions">Sécheresse</h2>
 <div id="secheresse"><p class="chargement">Chargement…</p></div>
 
 <h3>L'archive des restrictions</h3>
 <p>VigiEau publie l'état du jour et ne conserve pas d'historique ouvert à cette maille&nbsp;: sa requête par date renvoie l'arrêté courant, et aucun jeu national ne rejoue la série pour la Corrèze (vérifié le 14 septembre 2026). Chaque journée non relevée est perdue pour toujours, d'où le relevé automatique quotidien.</p>
 <div id="archive-secheresse"><p class="chargement">Chargement…</p></div>
-
-<h2>Les seuils, et pourquoi ceux-là</h2>
+</section>
+<section class="sec" aria-labelledby="les-seuils-et-pourquoi-ceux-la">
+<h2 id="les-seuils-et-pourquoi-ceux-la">Les seuils, et pourquoi ceux-là</h2>
 <div class="defilant"><table class="donnees">
   <thead><tr><th>Fenêtre</th><th>Condition</th><th>Pourquoi</th></tr></thead>
   <tbody>
@@ -135,9 +195,13 @@
     <tr><td>Veille mildiou</td><td>minimale ≥ 10&nbsp;°C et humidité ≥ 75&nbsp;% pendant 11 h, deux jours de suite</td><td>Règle de Beaumont. Elle signale un <em>risque climatique</em>, pas une maladie&nbsp;: elle déclenche une observation, pas un traitement.</td></tr>
   </tbody>
 </table></div>
-
-<h2>Lecture</h2>
-<div class="note">
+</section>
+<section class="sec" aria-labelledby="lecture">
+<h2 id="lecture">Lecture</h2>
+<!-- Module partagé : la représentativité de la réanalyse au point du lieu.
+     Utilisé par tdb-eau-meteo et tdb-climat. Une seule rédaction, deux pages :
+     avant le 24/09 les deux copies avaient déjà divergé. -->
+<div class="note" id="representativite">
   <span class="etiquette">La donnée modélisée, ici</span>
   <p>Le lieu est à <strong>588 mètres, sur un replat</strong> — pas en fond de vallée&nbsp;: sur les 2,4&nbsp;km de terrain analysés autour, 84&nbsp;% est plus bas que lui. Le modèle place son point de grille à 589 mètres, soit à <strong>moins de 2&nbsp;m de l'altitude réelle</strong>. La donnée est donc ici représentative, là où elle serait fausse de plusieurs degrés dans un fond de vallée voisin.</p>
   <p>Deux réserves. La maille fait environ 9&nbsp;km&nbsp;: elle lisse les extrêmes et voit mal les orages d'été. Et l'air froid drainant vers les bas-fonds alentour, <strong>les gelées y seront plus sévères qu'ici</strong> — la <a href="tdb-terrain.html#air-froid">carte de l'air froid</a> dit où.</p>
@@ -145,7 +209,22 @@
 <p>Le <strong>bilan hydrique</strong> est la différence entre ce qui est tombé et ce que l'atmosphère a évaporé sur sept jours. Négatif, le sol se vide&nbsp;; positif, il se recharge. C'est une approximation&nbsp;: la réserve réelle dépend de la profondeur du sol et de sa charge en cailloux, qui se mesurent à la bêche et pas au modèle.</p>
 <p>Toutes les valeurs sont appelées par votre navigateur, directement auprès de leurs fournisseurs&nbsp;: <strong>Hub'Eau et VigiEau</strong>, services publics français, et <strong>Open-Meteo</strong>, entreprise privée allemande qui redistribue les réanalyses sous licence ouverte. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
 <p class="horodatage" id="horodatage"></p>
+</section>
+</div>
+<aside class="relayer" aria-labelledby="relayer-t" data-url="https://domainedumons.actitude.org/tdb-eau-meteo.html" data-titre="Le jour et la semaine — Domaine du Mons">
+  <h2 id="relayer-t">Relayer cette page</h2>
+  <ul class="relais">
+    <li><a href="https://t.me/share/url?url=https%3A%2F%2Fdomainedumons.actitude.org%2Ftdb-eau-meteo.html&amp;text=Le%20jour%20et%20la%20semaine%20%E2%80%94%20Domaine%20du%20Mons" rel="noopener">Telegram</a></li>
+    <li><a href="relayer.html#mastodon" class="relais-mastodon">Mastodon</a></li>
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdomainedumons.actitude.org%2Ftdb-eau-meteo.html" rel="noopener">Facebook</a></li>
+    <li><a href="mailto:?subject=Le%20jour%20et%20la%20semaine%20%E2%80%94%20Domaine%20du%20Mons&amp;body=https%3A%2F%2Fdomainedumons.actitude.org%2Ftdb-eau-meteo.html">Courriel</a></li>
+    <li><a href="visuels/og/tdb-eau-meteo.png">Visuel</a></li>
+    
+  </ul>
+  <p class="relais-note">Des liens ordinaires&nbsp;: ces services ne reçoivent rien tant que vous ne cliquez pas.</p>
+</aside>
 </main>
+
 <footer>
   <div>
     <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
@@ -153,13 +232,21 @@
       <li><a href="index.html">Le lieu</a></li>
       <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
       <li><a href="marcher-libre.html">Marcher libre</a></li>
-      <li><a href="reseau.html">Le réseau</a></li>
+      <li><a href="ressources.html">Ressources</a></li>
       <li><a href="tableaux-de-bord.html">Tableaux de bord</a></li>
+      <li><a href="reseau.html">Le réseau</a></li>
       <li><a href="nous-joindre.html">Nous joindre</a></li>
+    </ul>
+    <ul class="pied-second">
+      <li><a href="editions.html">Éditions à imprimer</a></li>
+      <li><a href="relayer.html">Relayer</a></li>
+      <li><a href="flux.xml">Flux des nouvelles</a></li>
+      <li><a href="mentions.html">Mentions et licences</a></li>
     </ul>
   </div>
 </footer>
-<script src="tdb.js?v=28"></script>
+
+<script src="tdb.js?v=29"></script>
 <script>
 const LAT = 45.351433, LON = 1.931875, STATION = "P361401001";  /* chemin du Mons, 588 m */
 const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
@@ -419,6 +506,7 @@ async function archive() {
     ". Sources : Open-Meteo, Hub'Eau, VigiEau.";
 })();
 </script>
-<script src="site.js?v=28"></script>
+<script src="site.js?v=29"></script>
+<script src="partage.js?v=29"></script>
 </body>
 </html>

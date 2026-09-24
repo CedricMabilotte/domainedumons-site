@@ -1,0 +1,95 @@
+<!--meta
+{
+ "titre": "Tableaux de bord",
+ "description": "Les tableaux de bord du Domaine du Mons : eau et météo en direct, climat sur trois quarts de siècle, registre d'intérêt général. Données publiques ouvertes.",
+ "classe": "tdb"
+}
+-->
+<p class="chapeau">Le temps qu'il fera demain, l'état de la rivière depuis 1957, la forme du terrain à 50&nbsp;cm près&nbsp;: plusieurs échelles, et ce que chacune commande.</p>
+
+<h1>Tableaux de bord</h1>
+
+<ul class="cartes">
+  <li>
+    <h3><a href="tdb-eau-meteo.html">Le jour et la semaine</a></h3>
+    <p>Le temps qu'il fait à l'instant, les 48&nbsp;heures heure par heure, la semaine passée et celle qui vient, la température du sol, le débit de la Montane, les restrictions en vigueur — et les fenêtres de travail ouvertes ou fermées, chacune sur une règle écrite d'avance.</p>
+    <p class="source">Open-Meteo · Hub'Eau, station de la Montane à Eyrein · VigiEau. Mise à jour à chaque visite.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-annee.html">L'année</a></h3>
+    <p>Cumuls depuis le 1<sup>er</sup> janvier et sur douze mois glissants, comparés jour pour jour aux 30&nbsp;années de la normale. Le cumul est rapporté à ce qu'une année reçoit d'habitude à la même date. Et les rapports annuels archivés.</p>
+    <p class="source">Réanalyse Open-Meteo, recalculé chaque matin.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-climat.html">Le climat, 1950-2025</a></h3>
+    <p>Température, jours de gel, jours de forte chaleur, pluie et déficit hydrique estival, année après année depuis 1950. Avec les tendances, et l'honnêteté statistique de dire quand il n'y en a pas.</p>
+    <p class="source">Réanalyse Open-Meteo au point du lieu, 1950-2025. Recalculé une fois par an.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-eau.html">L'eau, depuis 1957</a></h3>
+    <p>Les étiages de la Montane depuis 1957, les assecs observés à 6&nbsp;km, et le détail de ce qui est prélevé sur la commune. La question n'est pas de savoir s'il y a de l'eau aujourd'hui, mais jusqu'où elle descend et combien de temps.</p>
+    <p class="source">Hub'Eau — hydrométrie, ONDE, BNPE. Recalculé chaque matin.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-saisons.html">Chauffage, verger, fenaison</a></h3>
+    <p>Trois décisions que la longue série tranche&nbsp;: le bois à mettre sous abri, la chance qu'a un fruitier de passer le printemps, et le nombre de fenêtres où le foin peut sécher. Les mêmes 76 années, lues du côté du travail.</p>
+    <p class="source">Réanalyse Open-Meteo, 1950-2025. Recalculé une fois par an.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-terrain.html">Le terrain, le gel, l'eau</a></h3>
+    <p>Où l'air froid s'accumule la nuit, où l'eau se rassemble, et ce que le parcellaire a perdu depuis 1959. Calculé sur le relevé laser de l'IGN, un point tous les 50&nbsp;cm — à l'échelle où le gel de printemps se décide réellement.</p>
+    <p class="source">IGN LiDAR HD, vol du 24 août 2022, et photographies aériennes depuis 1959.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-construire.html">Construire ici</a></h3>
+    <p>Radon, argiles, règle d'urbanisme, profondeur des forages voisins, acidité du sol, installations classées alentour. Ce qu'il faut savoir avant de poser une fondation ou de planter un arbre, rassemblé une fois pour toutes.</p>
+    <p class="source">Géorisques, Géoportail de l'urbanisme, BRGM, RMQS. Recalculé sur demande.</p>
+  </li>
+  <li>
+    <h3><a href="tdb-registre.html">Registre d'intérêt général</a></h3>
+    <p>Ce que le lieu fait au-delà de ceux qui l'habitent&nbsp;: personnes accueillies, chantiers ouverts, transmissions, partenariats, documentation reprise ailleurs. Compté au fil de l'eau.</p>
+    <p class="source">Tenu par le collectif. Publié en données ouvertes.</p>
+  </li>
+</ul>
+
+<h2 id="admission">La règle d'admission des indicateurs</h2>
+
+
+<div class="note">
+  <span class="etiquette">Règle d'admission</span>
+  <p>Un indicateur n'entre dans une de ces pages que si l'on sait écrire la phrase&nbsp;: <strong>«&nbsp;si X franchit S, alors on fait Y avant Z&nbsp;»</strong>. Si la phrase ne s'écrit pas, l'indicateur est décoratif et il reste dehors.</p>
+</div>
+
+<p>D'où les absences&nbsp;: pas de pression atmosphérique, pas de «&nbsp;ressenti&nbsp;», pas d'indice UV, pas de cumul depuis le 1<sup>er</sup> janvier. Aucun de ces chiffres ne déclenche jamais rien.</p>
+
+<h2>Les sources</h2>
+
+<p>Trois sources en accès libre, interrogées directement par votre navigateur&nbsp;: deux services publics français et <strong>un service privé allemand</strong>. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
+
+<table class="donnees">
+  <thead><tr><th>Source</th><th>Ce qu'elle donne ici</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau</a></td><td>Débit de la Montane, station d'Eyrein, à 1,2&nbsp;km, relevé toutes les 5&nbsp;minutes</td></tr>
+    <tr><td><a href="https://vigieau.gouv.fr">VigiEau</a></td><td>Arrêtés sécheresse applicables, zone Corrèze amont</td></tr>
+    <tr><td><a href="https://open-meteo.com/">Open-Meteo</a><br><span class="nb">entreprise privée allemande</span></td><td>Prévision à 16&nbsp;jours, et réanalyse quotidienne depuis 1950, redistribuées sous licence ouverte</td></tr>
+  </tbody>
+</table>
+
+<p>Ces trois sources sont gratuites et en accès libre&nbsp;: Hub'Eau et VigiEau sont des services publics français, Open-Meteo est une entreprise allemande qui redistribue des réanalyses sous licence ouverte. Ce que nous en tirons, et nos propres relevés, sont republiés en données ouvertes&nbsp;: sur une commune de <strong>222&nbsp;habitants</strong>, personne d'autre ne produira la donnée fine.</p>
+
+<h2>Plus tard, et sous condition</h2>
+
+<ul class="cartes">
+  <li class="bientot">
+    <h3>Sols et sources</h3>
+    <p>Humidité du sol, tarissement des sources, hauteur de nappe. Aucune donnée publique ne descend à cette finesse&nbsp;: il faut mesurer nous-mêmes. Un seau gradué et un chronomètre suffisent pour le débit d'une source — c'est la mesure la plus stratégique et la plus absente.</p>
+    <p class="source">Condition&nbsp;: un relevé hebdomadaire tenu.</p>
+  </li>
+  <li class="bientot">
+    <h3>Récoltes et autonomie</h3>
+    <p>Couverture calorique, part autoconsommée, rendement par heure de travail — ce dernier étant, en polyactivité, le seul chiffre qui fasse vraiment abandonner ou étendre une culture.</p>
+    <p class="source">Condition&nbsp;: une pesée tenue à la récolte.</p>
+  </li>
+</ul>
+
+<p>Chacune attend un déclencheur d'usage, non une échéance&nbsp;: le relevé ou la pesée doivent exister avant l'outil qui les affiche.</p>

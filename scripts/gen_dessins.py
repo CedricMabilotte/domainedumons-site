@@ -62,7 +62,7 @@ for a in ((548, 60, 536, 58), (566, 38, 562, 26), (596, 36, 604, 24), (612, 62, 
 
 coupe = f'''<svg viewBox="0 0 640 280" role="img" aria-labelledby="t-coupe d-coupe" class="croquis">
   <title id="t-coupe">Coupe du terrain</title>
-  <desc id="d-coupe">Le Domaine du Mons occupe un replat à 588 mètres, exposé au sud. Le terrain descend vers la vallée de la Montane. L'air froid des nuits claires s'écoule du replat vers les bas-fonds, qui gèlent donc plus fort que le lieu lui-même.</desc>
+  <desc id="d-coupe">Le Domaine du Mons occupe un replat à 588 mètres. Le terrain descend vers la vallée de la Montane. L'air froid des nuits claires s'écoule du replat vers les bas-fonds, qui gèlent donc plus fort que le lieu lui-même.</desc>
   {chemin(q, "trait-croquis")}
   <g class="texte-croquis">
     <text x="392" y="86" class="fort" text-anchor="middle">le replat, 588 m</text>

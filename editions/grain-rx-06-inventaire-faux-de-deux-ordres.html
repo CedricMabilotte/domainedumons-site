@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un inventaire automatique dont le total brut était faux de deux ordres de grandeur — édition paginée — Domaine du Mons</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../edition.css?v=29">
+<script>
+window.PagedConfig = {
+  auto: true,
+  after: function () {
+    var b = document.createElement("div");
+    b.className = "barre-edition";
+    b.innerHTML = '<a href="../editions.html">← Éditions</a> <span>Un inventaire automatique dont le total brut était faux de deux ordres de grandeur</span> ' +
+      '<button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button>';
+    document.body.appendChild(b);
+    document.body.setAttribute("data-pret", String(document.querySelectorAll(".pagedjs_page").length));
+  }
+};
+</script>
+<script src="../vendor/paged.polyfill.min.js?v=29"></script>
+</head>
+<body class="a5">
+<article class="chapitre seul" id="grain-rx-06-inventaire-faux-de-deux-ordres">
+<h1><span class="code-fiche">RX-06</span><span class="titre-courant">Un inventaire automatique dont le total brut était faux de deux ordres de grandeur</span></h1>
+
+<p class="chapeau">Retour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66&nbsp;% du volume était un artefact d'infrastructure.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>17 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Inventorier les dépressions fermées du secteur — mares, fosses, micro-cuvettes — à partir du modèle numérique de terrain LiDAR HD de l'IGN, pour pré-localiser les habitats humides à prospecter. Méthode standard&nbsp;: remplir les dépressions par inondation prioritaire, soustraire la surface remplie du terrain d'origine, et compter ce qui reste.</p>
+<h2>Le déroulé</h2>
+<p>L'algorithme a rendu <strong>180 dépressions totalisant 3,5 millions de mètres cubes</strong> sur 576 hectares. Soit, rapporté à la surface concernée, une profondeur moyenne de près de quatre mètres sur soixante-dix-neuf hectares de plateau granitique. Le chiffre est absurde, mais il fallait le rapporter à quelque chose pour le voir&nbsp;: pris seul, «&nbsp;180 dépressions&nbsp;» ne choque pas.</p>
+<p>Deux contrôles ont suffi.</p>
+<p><strong>La forme.</strong> La plus grande dépression couvre 45 hectares dans une boîte englobante de 1 180 × 1 972 mètres qu'elle n'occupe qu'à 19&nbsp;% — un ruban sinueux, logé entre 540 et 552 mètres, c'est-à-dire au point le plus bas de l'emprise. À elle seule, elle porte 58&nbsp;% du volume. Une dépression fermée est compacte&nbsp;; un ruban de deux kilomètres est un fond de vallée.</p>
+<p><strong>Le recoupement.</strong> Rastérisation des ponts, de la voie ferrée et des plans d'eau cartographiés dans OpenStreetMap, puis test de contact avec chaque dépression&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">part du volume total</th></tr></thead><tbody><tr><th scope="row">jouxte un pont ou la voie ferrée</th><td><strong>66&nbsp;%</strong></td></tr><tr><th scope="row">recouvre un plan d'eau cartographié</th><td>15&nbsp;%</td></tr></tbody></table></div>
+<p>Le mécanisme est connu et il est structurel&nbsp;: <strong>un modèle numérique de terrain restitue les remblais mais pas les ouvrages qui les traversent.</strong> Tout busage, tout pont, toute digue ferroviaire barre la vallée dans le modèle. L'eau, dans le calcul, ne passe pas — elle s'accumule jusqu'à déborder par-dessus le remblai, et l'algorithme enregistre une retenue de plusieurs centaines de milliers de mètres cubes là où il y a une buse de quatre-vingts centimètres.</p>
+<p>Après filtrage sur la compacité, la population de véritables dépressions fermées est de <strong>59 objets, 2,7 hectares, 24 000&nbsp;m³</strong> — deux ordres de grandeur sous le chiffre brut.</p>
+<h2>Pourquoi rien ne l'a signalé</h2>
+<p><strong>L'algorithme est correct.</strong> L'inondation prioritaire fait exactement ce qu'elle promet&nbsp;: elle trouve toute cuvette d'où l'eau ne peut sortir sans monter. Un fond de vallée barré par un remblai <em>est</em> une telle cuvette, dans le modèle.</p>
+<p><strong>La donnée est correcte.</strong> Le MNT LiDAR HD est complet sur l'emprise — vérifié, aucun pixel manquant — et restitue fidèlement la surface du sol, remblai compris. Il ne lui est pas demandé de connaître les buses.</p>
+<p><strong>L'erreur est dans la correspondance entre le modèle et le monde</strong>, et cette correspondance n'est écrite nulle part dans la chaîne. Personne ne la déclare, donc personne ne la vérifie.</p>
+<p><strong>Et le format de sortie masque le problème.</strong> Un total en mètres cubes n'a pas d'échelle intuitive. Ce qui a alerté, c'est de le ramener à une profondeur moyenne par hectare — une grandeur dont on sait à quoi elle ressemble.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un total agrégé ne se publie pas sans sa distribution.</strong> Ici, un seul objet portait 58&nbsp;% du volume. Toute somme dominée par un ou deux éléments décrit ces éléments, pas la population. <strong>Regarder qui pèse, avant de publier combien.</strong></p>
+<p class="point" data-n="2"><strong>Ramener tout agrégat à une grandeur dont on connaît l'ordre de grandeur.</strong> «&nbsp;3,5 millions de m³&nbsp;» ne dit rien&nbsp;; «&nbsp;quatre mètres de profondeur moyenne sur un plateau&nbsp;» se réfute en une seconde. Le contrôle de vraisemblance ne marche que sur des grandeurs familières, et la conversion est presque toujours possible.</p>
+<p class="point" data-n="3"><strong>La forme d'un objet trahit sa nature avant toute mesure.</strong> Compacité, allongement, taux de remplissage de la boîte englobante&nbsp;: trois nombres qui distinguent une mare d'un fond de vallée sans rien savoir d'hydrologie. Quand un inventaire mélange des natures, la géométrie sépare souvent mieux que le seuil.</p>
+<p class="point" data-n="4"><strong>Croiser avec une source indépendante, même approximative.</strong> OpenStreetMap n'est pas une référence topographique, et le test de contact est un test de coïncidence, non une preuve. Il a suffi&nbsp;: quand 66&nbsp;% d'un volume touche des ouvrages qui couvrent une fraction infime de la surface, la coïncidence n'en est pas une. <strong>Un croisement imparfait vaut mieux qu'un contrôle absent.</strong></p>
+<p class="point" data-n="5"><strong>Un modèle physique a des hypothèses tacites sur le monde.</strong> L'inondation prioritaire suppose que l'eau ne circule que par la surface. Tout ouvrage souterrain — buse, drain, karst, canalisation — viole cette hypothèse sans que rien ne le signale. <strong>Écrire les hypothèses tacites du modèle est la seule façon de les tester.</strong></p>
+<h2>Les changements</h2>
+<ul><li>Tout inventaire automatique publie, avec son total, la <strong>part portée par ses trois plus gros éléments</strong>.</li><li>Tout agrégat est <strong>converti en une grandeur familière</strong> avant publication, et le contrôle de vraisemblance porte sur cette conversion.</li><li>Les objets d'un inventaire sont <strong>caractérisés par leur forme</strong> — compacité, allongement — et les classes de forme sont examinées séparément.</li><li>Tout résultat issu d'un modèle physique s'accompagne de la liste de ses <strong>hypothèses tacites sur le monde</strong>, et d'au moins un test de la plus fragile.</li><li>Un croisement avec une source indépendante précède la publication, même quand cette source est moins précise que la donnée principale.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique. Le même piège guette tout inventaire produit par un algorithme correct sur une donnée correcte&nbsp;: le comptage de bâtiments sur un modèle qui confond hangar et couvert d'arbres, la détection de haies qui compte les alignements de pylônes, la mesure de surfaces imperméabilisées qui range l'ombre avec l'asphalte, l'extraction de réseaux hydrographiques qui prend un fossé de route pour un ruisseau.</p>
+<p><strong>Un algorithme juste, sur une donnée juste, peut rendre un résultat faux — quand le modèle et le monde ne se correspondent pas là où personne ne l'a écrit.</strong></p>
+<h2>Fiches liées</h2>
+<p>RX-03 · RX-04 · RX-05 · PA-02 · <span class="renvoi-absent" title="fiche non publiée">ANALYSE-LIDAR</span></p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-06, Un inventaire automatique dont le total brut était faux de deux ordres de grandeur. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html</p>
+</article>
+</body>
+</html>

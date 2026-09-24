@@ -24,8 +24,8 @@ de 1950 à 2025.
 9 km, point de grille à 589 m. Les tendances du fichier JSON sont calculées par test de
 Mann-Kendall et pente de Sen, avec intervalle de confiance à 95 %.
 
-**Représentativité.** Le lieu est à 587,5 m sur un replat exposé au sud (pente ~1°), et non en
-fond de vallée : dans un rayon de 800 m, 89 % du terrain est plus bas. L'écart entre l'altitude
+**Représentativité.** Le lieu est à 587,5 m sur un replat, et non en fond de vallée : sur les
+2,4 km de terrain analysés autour (LiDAR HD, fenêtre de `relief.json`), 84 % est plus bas que lui. L'écart entre l'altitude
 réelle et celle du point de modèle est inférieur à 2 m, ce qui rend la réanalyse inhabituellement
 représentative pour ce site.
 
@@ -263,3 +263,7 @@ versées aux bases publiques.
 
 Le format est réutilisable tel quel par d'autres collectifs : la liste `indicateurs` porte
 les définitions, la liste `mois` porte les comptages.
+
+## `../partage/extraits.json`
+
+Les extraits du site prêts à relayer, un texte par canal (Mastodon, Telegram, Instagram, Facebook, Substack). Les chiffres y sont relus dans les fichiers de ce dossier à chaque construction du site ; `scripts/partage.py` refuse de construire si un fichier ne porte plus ce que l'extrait affirme. Textes sous CC BY-SA 4.0, chiffres sous Licence Ouverte 2.0.

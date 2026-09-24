@@ -1,6 +1,6 @@
 <svg viewBox="0 0 640 280" role="img" aria-labelledby="t-coupe d-coupe" class="croquis">
   <title id="t-coupe">Coupe du terrain</title>
-  <desc id="d-coupe">Le Domaine du Mons occupe un replat à 588 mètres, exposé au sud. Le terrain descend vers la vallée de la Montane. L'air froid des nuits claires s'écoule du replat vers les bas-fonds, qui gèlent donc plus fort que le lieu lui-même.</desc>
+  <desc id="d-coupe">Le Domaine du Mons occupe un replat à 588 mètres. Le terrain descend vers la vallée de la Montane. L'air froid des nuits claires s'écoule du replat vers les bas-fonds, qui gèlent donc plus fort que le lieu lui-même.</desc>
   <path class="trait-croquis" d="M8.8 251.8C28.5 246.9 50.3 238.5 70.9 235.8"/>
   <path class="trait-croquis" d="M6.3 250.0C26.9 244.2 49.4 240.9 69.6 234.0"/>
   <path class="trait-croquis" d="M67.7 237.3C88.5 233.4 110.8 223.5 131.7 214.2"/>

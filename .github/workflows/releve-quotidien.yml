@@ -24,6 +24,12 @@ jobs:
         run: python3 scripts/annee.py
       - name: Mettre à jour l'archive des restrictions sécheresse
         run: python3 scripts/secheresse.py
+      # Ajouté le 24/09/2026 : la page « L'eau, depuis 1957 » annonçait un
+      # recalcul chaque matin, et data/eau.json n'avait pas bougé depuis le 15.
+      # Quinze secondes. Les débits validés arrivent avec quelques jours de
+      # retard sur le temps réel : c'est normal que la courbe s'arrête avant hier.
+      - name: Recalculer l'eau depuis 1957 (débits validés, assecs, prélèvements)
+        run: python3 scripts/eau.py || echo "Hub'Eau muet aujourd'hui, on continue"
       - name: Compléter l'humidité des sols (SIM2, soixante derniers jours)
         run: python3 scripts/sim2.py || echo "SIM2 muet aujourd'hui, on continue"
 

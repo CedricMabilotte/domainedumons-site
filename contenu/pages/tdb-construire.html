@@ -1,0 +1,243 @@
+<!--meta
+{
+ "titre": "Construire ici",
+ "description": "Radon, argiles, règles d'urbanisme, forages, sol : ce qui commande la construction et la plantation au Domaine du Mons, à partir des données publiques.",
+ "classe": "tdb"
+}
+-->
+<h1>Construire ici</h1>
+<!--#sans-js data/terrain.json-->
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+<p>Ce que les données publiques disent du terrain avant qu'on y pose quoi que ce soit&nbsp;: le règlement qui s'applique, ce que le sous-sol impose, ce que le sol contient, et ce qui se trouve autour. Rassemblé une fois, pour ne pas le redécouvrir au moment du devis.</p>
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Lecture</p><p class="valeur chargement">…</p><p class="detail">chargement de la fiche</p></div></div>
+
+<h2 id="urbanisme">Les règles qui s'appliquent</h2>
+<div id="regles"><p class="chargement">Chargement…</p></div>
+
+<h2 id="sous-sol">Radon, argiles, sismicité</h2>
+<div id="batir"><p class="chargement">Chargement…</p></div>
+
+<figure>
+<svg viewBox="0 0 640 364" role="img" aria-labelledby="t-bat d-bat" class="croquis">
+  <title id="t-bat">Coupe de principe d&#39;une construction ici</title>
+  <desc id="d-bat">Le radon remonte du granite. Un vide sanitaire ventilé de part en part et une dalle étanche l&#39;évacuent avant qu&#39;il n&#39;entre dans le logement. Les semelles descendent à quatre-vingts centimètres au moins à cause du retrait-gonflement des argiles.</desc>
+  <path class="trait-croquis" d="M40.5 198.4C219.7 197.6 421.3 196.1 600.4 199.6"/>
+  <path class="trait-croquis" d="M40.4 200.2C220.0 197.8 422.1 196.5 601.8 199.8"/>
+  <path class="trait-croquis" d="M171.5 96.5C217.2 82.8 265.7 66.5 311.8 48.2"/>
+  <path class="trait-croquis" d="M171.1 94.6C214.6 81.1 265.4 63.5 310.2 45.8"/>
+  <path class="trait-croquis" d="M309.5 46.5C354.2 62.0 403.3 79.6 449.2 98.6"/>
+  <path class="trait-croquis" d="M307.2 47.4C352.9 64.3 403.3 83.2 449.6 98.6"/>
+  <path class="trait-croquis" d="M190.3 94.3C267.3 97.2 353.9 99.0 430.9 95.6"/>
+  <path class="trait-croquis" d="M189.7 95.1C267.6 94.1 355.4 94.0 433.3 96.8"/>
+  <path class="trait-croquis" d="M428.6 94.5C432.2 129.3 434.5 168.6 431.7 203.4"/>
+  <path class="trait-croquis" d="M429.0 93.7C431.8 128.7 428.2 168.0 430.7 203.0"/>
+  <path class="trait-croquis" d="M430.1 201.7C353.0 204.1 266.2 200.6 189.1 201.2"/>
+  <path class="trait-croquis" d="M431.3 201.1C353.2 203.1 265.2 202.2 187.1 198.8"/>
+  <path class="trait-croquis" d="M190.5 201.7C188.2 167.3 191.9 128.6 191.1 94.2"/>
+  <path class="trait-croquis" d="M191.2 201.3C187.3 166.5 186.4 127.3 189.6 92.5"/>
+  <path class="trait-croquis" d="M190.4 199.1C267.0 196.9 353.1 202.1 429.7 201.8"/>
+  <path class="trait-croquis" d="M190.1 199.6C267.8 199.1 355.2 201.6 432.9 198.7"/>
+  <path class="trait-croquis" d="M429.6 200.3C431.5 217.2 428.0 236.1 429.7 253.0"/>
+  <path class="trait-croquis" d="M428.3 199.6C426.9 216.3 433.7 235.0 431.4 251.7"/>
+  <path class="trait-croquis" d="M432.0 252.5C353.2 254.8 264.5 254.8 185.7 251.0"/>
+  <path class="trait-croquis" d="M429.5 253.2C351.8 255.0 264.4 250.8 186.8 252.8"/>
+  <path class="trait-croquis" d="M190.0 251.1C186.4 234.4 189.2 215.7 189.6 199.0"/>
+  <path class="trait-croquis" d="M189.1 250.6C189.7 233.8 188.3 214.9 190.8 198.1"/>
+  <path class="trait-croquis" d="M190.7 251.7C188.7 265.6 188.3 281.2 190.6 295.1"/>
+  <path class="trait-croquis" d="M189.4 253.3C190.9 266.1 188.9 280.5 189.3 293.3"/>
+  <path class="trait-croquis" d="M431.5 250.8C427.6 264.9 428.9 280.7 430.0 294.8"/>
+  <path class="trait-croquis" d="M431.2 251.2C429.9 264.4 431.5 279.2 431.2 292.4"/>
+  <path class="trait-croquis" d="M182.4 292.7C263.8 294.6 355.3 288.3 436.7 291.6"/>
+  <path class="trait-croquis" d="M134.4 226.6C150.9 227.1 169.4 225.4 185.9 225.5"/>
+  <path class="trait-croquis" d="M133.8 224.6C151.0 222.8 170.4 224.2 187.6 226.9"/>
+  <path class="trait-croquis" d="M186.6 226.4C182.6 225.1 177.9 222.8 174.3 220.5"/>
+  <path class="trait-croquis" d="M186.7 226.3C183.1 228.7 179.0 230.4 175.0 231.5"/>
+  <path class="trait-croquis" d="M434.2 226.3C450.3 224.8 468.5 227.1 484.6 225.0"/>
+  <path class="trait-croquis" d="M433.0 226.1C449.6 223.0 468.2 222.6 484.8 226.1"/>
+  <path class="trait-croquis" d="M485.3 225.9C480.6 224.5 475.9 221.2 472.0 220.1"/>
+  <path class="trait-croquis" d="M484.9 225.6C480.7 227.2 477.1 228.6 473.3 231.4"/>
+  <path class="trait-croquis" d="M148.0 270.5C160.8 267.7 175.1 274.7 187.9 271.5"/>
+  <path class="trait-croquis" d="M280.5 348.9C284.0 334.7 283.1 318.8 281.7 304.6"/>
+  <path class="trait-croquis" d="M281.6 349.7C279.3 335.8 276.5 320.2 279.7 306.3"/>
+  <path class="trait-croquis" d="M280.4 305.8C278.0 309.1 275.8 313.7 274.5 317.2"/>
+  <path class="trait-croquis" d="M280.0 305.6C280.8 309.5 283.1 313.7 284.7 317.4"/>
+  <path class="trait-croquis" d="M319.8 350.6C321.1 335.0 318.8 317.5 320.6 301.9"/>
+  <path class="trait-croquis" d="M318.4 350.1C319.8 336.2 315.6 320.5 319.9 306.6"/>
+  <path class="trait-croquis" d="M320.5 305.3C319.0 309.5 315.8 313.6 314.2 317.4"/>
+  <path class="trait-croquis" d="M319.3 305.5C321.7 309.5 322.9 313.6 324.4 317.4"/>
+  <path class="trait-croquis" d="M361.7 349.9C359.8 335.8 357.2 319.9 358.1 305.8"/>
+  <path class="trait-croquis" d="M358.6 346.9C361.0 333.4 359.9 318.1 361.7 304.6"/>
+  <path class="trait-croquis" d="M360.2 305.2C358.1 308.9 357.0 313.2 355.6 316.5"/>
+  <path class="trait-croquis" d="M360.1 305.7C361.6 309.0 364.2 313.1 365.2 316.7"/>
+  <g class="texte-croquis">
+    <text x="208" y="134" class="fort">l&#39;habitation</text>
+    <text x="208" y="158">pas de pièce de vie en dessous</text>
+    <text x="208" y="232" class="fort">vide sanitaire ventilé</text>
+    <text x="30" y="220">l&#39;air entre</text>
+    <text x="492" y="220">et ressort</text>
+    <text x="16" y="278">semelles à 0,80 m</text>
+    <text x="392" y="336">le radon remonte du granite</text>
+  </g>
+</svg>
+<figcaption>Coupe de principe&nbsp;: vide sanitaire ventilé et semelles à 0,80&nbsp;m.</figcaption>
+</figure>
+<h2 id="eau-souterraine">Forer, et à quelle profondeur</h2>
+<div id="forages"><p class="chargement">Chargement…</p></div>
+
+<h2 id="la-terre">Le sol, et l'analyse qui reste à faire</h2>
+<div id="sol"><p class="chargement">Chargement…</p></div>
+
+<h2 id="autour">Le voisinage industriel et agricole</h2>
+<div id="voisinage"><p class="chargement">Chargement…</p></div>
+
+<h2>Méthode et réserves</h2>
+<p>Tout ce qui précède vient d'interrogations faites sur les coordonnées exactes du lieu ou sur le code de la commune, auprès de <a href="https://www.georisques.gouv.fr/">Géorisques</a>, du <a href="https://www.geoportail-urbanisme.gouv.fr/">Géoportail de l'urbanisme</a> et du <a href="https://infoterre.brgm.fr/">BRGM</a>. Le fichier est recalculé sur demande, pas tous les jours&nbsp;: ces données bougent d'une année à l'autre, pas d'une semaine à l'autre.</p>
+<div class="note">
+  <span class="etiquette">Limites d'usage</span>
+  <p>Un classement de potentiel radon est une probabilité géologique à l'échelle de la commune, pas une mesure&nbsp;: <strong>seul un dosimètre posé deux mois en hiver dans une pièce de vie dit ce qu'il en est</strong>. Une exposition aux argiles est une carte au 1/50&nbsp;000, pas une étude de sol&nbsp;: c'est un G2 qui engage un constructeur. Et les valeurs de sol viennent d'un point situé à 5&nbsp;km.</p>
+  <p>Ces chiffres préparent l'entretien avec un artisan, un bureau d'étude ou un notaire&nbsp;; ils ne s'y substituent pas.</p>
+</div>
+<p>Données téléchargeables — <a href="data/terrain.json">JSON</a> — sous Licence Ouverte 2.0.</p>
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+(async () => {
+  let d;
+  try { d = await json("data/terrain.json"); }
+  catch (e) {
+    echec("synthese", "Fiche de terrain indisponible.");
+    ["regles", "batir", "forages", "sol", "voisinage"].forEach((i) => echec(i, ""));
+    return;
+  }
+  const r = d.risques, u = d.urbanisme || {}, g = d.geothermie || {}, s = d.sol, z = d.zonages;
+  const radon = String(r.radon);
+  /* les piézomètres de la zone d'activité voisine ne renseignent pas la nappe d'ici */
+  const forages = (d.forages || []).filter((f) => f.profondeur_m && f.distance_km < 1 && f.nature === "Forage");
+
+  document.getElementById("synthese").innerHTML =
+    tuile("Urbanisme", u.rnu ? "RNU" : "document local", "", u.rnu ? "aucun PLU, avis du préfet" : "à consulter au GPU", u.rnu ? "vigilance" : null) +
+    tuile("Radon", "classe " + radon, "sur 3", radon === "3" ? "potentiel significatif" : "potentiel faible", radon === "3" ? "alerte" : null) +
+    tuile("Argiles", (r.argiles || {}).exposition || "—", "", "retrait-gonflement") +
+    tuile("Séisme", (r.sismicite || "").split(" - ")[1] ? (r.sismicite || "").split(" - ")[1].toLowerCase() : r.sismicite, "", "zone " + (r.sismicite || "").split(" ")[0]) +
+    tuile("Sondes géothermiques", g.sonde_200m === "vert" ? "possibles" : (g.sonde_200m || "—"), "", g.profondeur ? g.profondeur.toLowerCase() : "");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>" + (u.rnu ? "<strong>Commune au RNU</strong>&nbsp;: aucun plan local d'urbanisme, avis conforme du préfet pour toute construction."
+                    : "Un document d'urbanisme local s'applique.") + "</li>" +
+    "<li><strong>Radon en classe " + radon + "</strong> et argiles en " + ((r.argiles || {}).exposition || "—").toLowerCase() +
+      "&nbsp;: soubassement ventilé, dalle étanche, semelles profondes.</li>" +
+    (forages.length ? "<li>Les forages voisins descendent à <strong>" + forages.map((x) => nf0(x.profondeur_m)).join(" et ") +
+      " mètres</strong>. Sondes géothermiques verticales " + (g.sonde_200m === "vert" ? "possibles en télédéclaration" : "à vérifier") + ".</li>" : "") +
+    "<li>Sol à <strong>pH " + nf(s.ph_eau, 1) + "</strong> avec l'aluminium à " +
+      nf0(100 * s.aluminium_echangeable_cmol_kg / s.cec_cmol_kg) + " % du complexe, mesuré à " + nf(s.site_distance_km, 1) +
+      " km&nbsp;: <strong>faire une analyse de terre</strong> avant tout amendement.</li>" +
+    "<li>Classée <strong>" + z.frr + "</strong>&nbsp;: exonérations ouvertes pour une activité créée ici.</li>" +
+    "</ul>";
+
+  /* --- règles --- */
+  document.getElementById("regles").innerHTML =
+    (u.rnu
+      ? "<p><strong>La commune n'a ni plan local d'urbanisme ni carte communale.</strong> Elle relève du règlement national d'urbanisme&nbsp;: " +
+        "hors des parties actuellement urbanisées, la construction est en principe interdite, et chaque autorisation passe par " +
+        "<strong>l'avis conforme du préfet</strong>. C'est la contrainte principale de tout projet d'habitat ici, et elle s'anticipe au stade de l'esquisse, " +
+        "et elle rend décisive la question de savoir ce qui est considéré comme partie actuellement urbanisée au hameau.</p>"
+      : "<p>Un document d'urbanisme local est en vigueur&nbsp;: le zonage est à consulter au Géoportail de l'urbanisme.</p>") +
+    "<p>La commune est classée <strong>" + z.frr + "</strong> — France ruralités revitalisation, niveau renforcé — depuis le " + z.frr_date +
+    ". Une activité créée ici ouvre droit à des exonérations d'impôt sur les bénéfices et de cotisation foncière des entreprises, sous conditions. " +
+    "Elle appartient aussi au périmètre du <strong>" + z.pnr + "</strong>, ce qui donne un interlocuteur et une charte, pas une servitude.</p>" +
+    (r.risques_gaspar === 0 ? "<p><strong>Aucun plan de prévention des risques ne s'applique</strong> à la commune. Cela ne veut pas dire qu'il ne s'y passe rien.</p>" : "") +
+    (r.catnat && r.catnat.length
+      ? "<p>" + nf0(r.catnat.length) + " arrêté" + (r.catnat.length > 1 ? "s" : "") + " de catastrophe naturelle " + (r.catnat.length > 1 ? "ont" : "a") + " visé la commune depuis 1982&nbsp;: " +
+        r.catnat.map((c) => c.risque.toLowerCase() + " (" + c.debut.slice(6) + ")").join(", ") +
+        ". Le mouvement de terrain de décembre 1999 est le seul qui engage vraiment une précaution — <strong>attention aux talus lors des terrassements</strong>.</p>"
+      : "");
+
+  /* --- bâtir --- */
+  document.getElementById("batir").innerHTML =
+    "<p><strong>Le radon est le point dur.</strong> La commune est en classe " + radon + ", le niveau le plus élevé du classement&nbsp;: " +
+    "les granites du socle en émettent, et le gaz s'accumule dans les volumes clos mal ventilés. Ce que ça commande, concrètement&nbsp;: " +
+    "<strong>soubassement ventilé ou vide sanitaire, dalle étanche, ventilation mécanique</strong>, et pas de pièce de vie en cave ou en sous-sol. " +
+    "C'est décisif pour une construction en terre-paille, où l'étanchéité au sol se traite au moment des fondations, jamais après.</p>" +
+    "<p>Un classement est une probabilité géologique, pas une mesure. Un dosimètre passif, environ 20&nbsp;€, posé deux mois en hiver donne la valeur réelle de la pièce.</p>" +
+    "<p><strong>Les argiles sont en " + ((r.argiles || {}).exposition || "—").toLowerCase() + ".</strong> " +
+    "Le retrait-gonflement fissure les maisons mal fondées après les étés secs — et les étés secs se multiplient. " +
+    "Semelles descendues à 0,80 m au moins, chaînage horizontal et vertical, trottoir périphérique, et surtout " +
+    "<strong>pas de plantation d'arbre à moins de sa hauteur adulte du bâti</strong>.</p>" +
+    "<p>La sismicité est " + ((r.sismicite || "").split(" - ")[1] || "").toLowerCase() + " — aucune règle parasismique particulière. " +
+    "Aucune cavité ni mouvement de terrain recensé dans un rayon de deux kilomètres.</p>" +
+    (g.sonde_200m === "vert"
+      ? "<p>Les sondes géothermiques verticales sont en vert sur cette maille, sans aucun critère d'exclusion&nbsp;: " +
+        "ni évaporite, ni cavité, ni artésianisme, ni communication d'aquifères. Elles relèvent donc de la simple télédéclaration, " +
+        "sans étude hydrogéologique préalable. C'est la solution de chauffage la moins contrainte du site.</p>"
+      : "");
+
+  /* --- forages --- */
+  document.getElementById("forages").innerHTML =
+    (forages.length
+      ? "<p>" + nf0(forages.length) + " forage" + (forages.length > 1 ? "s déclarés" : " déclaré") + " à moins de 800&nbsp;m " + (forages.length > 1 ? "donnent" : "donne") + " la réponse locale à la question de la profondeur.</p>" +
+        "<div class='defilant'><table class='donnees'><thead><tr><th>Ouvrage</th><th>Nature</th><th>Lieu-dit</th><th>Distance</th><th>Profondeur</th></tr></thead><tbody>" +
+        (d.forages || []).map((f) => "<tr><td>" + f.code + "</td><td>" + (f.nature || "—") + "</td><td>" + (f.lieu || "—") +
+          "</td><td>" + nf(f.distance_km, 2) + " km</td><td>" + (f.profondeur_m ? nf0(f.profondeur_m) + " m" : "—") + "</td></tr>").join("") +
+        "</tbody></table></div>" +
+        "<p>Sur ce socle, l'eau n'est pas dans une nappe continue mais dans les fissures du granite et dans l'arène qui le recouvre. " +
+        "Les deux forages du voisinage immédiat descendent à <strong>" + forages.map((f) => nf0(f.profondeur_m)).join(" et ") + " mètres</strong>&nbsp;: " +
+        "c'est l'ordre de grandeur à inscrire dans un devis, et la raison de ne pas espérer un puits à 15&nbsp;m. " +
+        "Les ouvrages à 10&nbsp;m de la liste portent des codes en «&nbsp;PZ&nbsp;» et une adresse de zone d'activité&nbsp;: ce sont vraisemblablement des piézomètres de surveillance, qui ne disent rien de la nappe utile. La donnée les déclare seulement comme forages. " +
+        "Les coupes détaillées n'existent qu'en fiches papier, à demander au BRGM.</p>"
+      : "<p>Aucun ouvrage déclaré à proximité.</p>") +
+    "<p class='nb'>Un forage domestique se déclare en mairie&nbsp;; au-delà de 1 000 m³ par an, le régime change. Et la commune prélève déjà de l'eau potable ici même — voir <a href='tdb-eau.html#qui-preleve'>la page eau</a>.</p>";
+
+  /* --- sol --- */
+  document.getElementById("sol").innerHTML =
+    "<p>Le point de mesure public le plus proche est à <strong>" + nf(s.site_distance_km, 1) + " km</strong>, sur le même socle, prélevé en " + s.annee +
+    ". Sur l'horizon " + s.horizon + "&nbsp;:</p>" +
+    "<div class='defilant'><table class='donnees'><tbody>" +
+    "<tr><td>Texture</td><td>" + s.texture + ", " + s.argile_g_kg + " g/kg d'argile</td></tr>" +
+    "<tr><td>pH (eau)</td><td><strong>" + nf(s.ph_eau, 1) + "</strong></td></tr>" +
+    "<tr><td>Matière organique</td><td><strong>" + s.matiere_organique_g_kg + " g/kg</strong></td></tr>" +
+    "<tr><td>Capacité d'échange</td><td>" + nf(s.cec_cmol_kg, 2) + " cmol/kg</td></tr>" +
+    "<tr><td>Aluminium échangeable</td><td><strong>" + nf(s.aluminium_echangeable_cmol_kg, 2) + " cmol/kg</strong>, soit " +
+      nf0(100 * s.aluminium_echangeable_cmol_kg / s.cec_cmol_kg) + " % du complexe</td></tr>" +
+    "<tr><td>Calcium, magnésium, potassium</td><td>" + nf(s.calcium_cmol_kg, 2) + " · " + nf(s.magnesium_cmol_kg, 2) + " · " + nf(s.potassium_cmol_kg, 2) + " cmol/kg</td></tr>" +
+    "<tr><td>Phosphore assimilable</td><td>" + s.phosphore_assimilable + "</td></tr>" +
+    "</tbody></table></div>" +
+    "<p><strong>Un sol acide, riche en matière organique, et probablement en toxicité aluminique.</strong> " +
+    "À pH " + nf(s.ph_eau, 1) + ", l'aluminium occupe " + nf0(100 * s.aluminium_echangeable_cmol_kg / s.cec_cmol_kg) + "&nbsp;% du complexe absorbant&nbsp;: il brûle les jeunes racines, " +
+    "et les légumineuses, les brassicacées et les fruitiers à pépins y végètent. Le phosphore est sous le seuil de détection, " +
+    "le magnésium très bas.</p>" +
+    "<p>Dans l'autre sens, " + s.matiere_organique_g_kg + " g/kg de matière organique est une valeur remarquable&nbsp;: réserve en eau, structure, " +
+    "vie du sol. Le labour dissiperait cette matière&nbsp;: la conduite adaptée est la couverture permanente.</p>" +
+    "<div class='note'><span class='etiquette'>L'ordre des opérations</span>" +
+    "<p>Ces valeurs viennent d'un point situé à 5&nbsp;km. Elles justifient <strong>une analyse de terre</strong> — 40 à 80 € le point, " +
+    "trois points suffisent pour commencer — <strong>pas un camion d'amendement</strong>. Si l'analyse locale confirme un pH sous 5,0 avec l'aluminium dominant, " +
+    "alors chaulage calcaro-magnésien avant toute plantation de fruitiers, et apport de phosphore.</p>" +
+    "<p>Toujours le même laboratoire et la même méthode d'une campagne à l'autre, sinon les séries ne se comparent pas.</p></div>";
+
+  /* --- voisinage --- */
+  const icpe = (r.icpe || []).slice(0, 6);
+  const elevages = icpe.filter((i) => i.porcs || i.bovins || i.volailles);
+  document.getElementById("voisinage").innerHTML =
+    "<p>Les installations classées pour la protection de l'environnement les plus proches&nbsp;:</p>" +
+    "<div class='defilant'><table class='donnees'><thead><tr><th>Établissement</th><th>Commune</th><th>Régime</th><th>Distance</th></tr></thead><tbody>" +
+    icpe.map((i) => "<tr><td>" + (i.nom || "—") + (i.porcs ? " <span class='nb'>(porcs)</span>" : i.bovins ? " <span class='nb'>(bovins)</span>" : "") +
+      "</td><td>" + (i.commune || "") + "</td><td>" + (i.regime || "") + "</td><td>" + nf(i.distance_km, 2) + " km</td></tr>").join("") +
+    "</tbody></table></div>" +
+    (elevages.length
+      ? "<p>Un élevage porcin sous régime d'enregistrement est à " + nf(elevages[0].distance_km, 2) + " km. " +
+        "À cette distance, aucune règle de recul réciproque ne s'applique, mais <strong>son plan d'épandage se vérifie avant tout forage</strong>&nbsp;: " +
+        "c'est ce qui décide de la potabilité d'une eau captée à l'aval.</p>"
+      : "") +
+    "<p class='nb'>Une précision qui évite un contresens&nbsp;: une entreprise de la zone d'activité voisine porte le mot « Seveso » dans sa raison sociale, " +
+    "et le registre national la classe pourtant <em>non Seveso</em>. Ce sont les obligations attachées au régime déclaré qui s'appliquent, pas la raison sociale.</p>" +
+    ((r.sites_pollues || []).length
+      ? "<p>Côté sols, l'inventaire <strong>CASIAS</strong> des anciens sites industriels et d'activité de service en recense " + r.sites_pollues_total + " dans un rayon de 5&nbsp;km&nbsp;; " +
+        "le plus proche est à " + nf(r.sites_pollues[0].distance_km, 1) + " km (" + (r.sites_pollues[0].nom || "").toLowerCase() + "). " +
+        "<strong>C'est un inventaire de mémoire, pas un constat de pollution.</strong> L'inventaire BASOL, qui recense les sites appelant une action des pouvoirs publics, en compte deux, le plus proche à 2,9&nbsp;km.</p>"
+      : "");
+
+  document.getElementById("horodatage").textContent =
+    "Fiche établie le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · Géorisques, Géoportail de l'urbanisme, BRGM, RMQS · Licence Ouverte 2.0.";
+})();
+</script>

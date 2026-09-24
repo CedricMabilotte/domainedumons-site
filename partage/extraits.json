@@ -1,0 +1,602 @@
+{
+ "licence": "textes CC BY-SA 4.0, chiffres Licence Ouverte 2.0",
+ "explication": "Extraits du site prêts à relayer, un texte par canal. Recalculé à chaque construction.",
+ "extraits": [
+  {
+   "id": "jours-de-pluie",
+   "page": "tdb-climat.html",
+   "forme": "chiffre",
+   "titre": "Moins de jours de pluie, un cumul sans tendance",
+   "chiffre": "−2,5",
+   "unite": "jour de pluie par décennie",
+   "texte": "Au Domaine du Mons, de 1950 à 2025, le cumul annuel de pluie n'a pas de tendance détectable. Le nombre de jours de pluie recule de 2,5 par décennie.",
+   "source": "Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen",
+   "mots": [
+    "Corrèze",
+    "climat",
+    "DonnéesOuvertes"
+   ],
+   "formats": [
+    "carre",
+    "portrait",
+    "story"
+   ],
+   "url": "https://domainedumons.actitude.org/tdb-climat.html",
+   "textes": {
+    "mastodon": "Moins de jours de pluie, un cumul sans tendance\n\n−2,5 jour de pluie par décennie.\n\nAu Domaine du Mons, de 1950 à 2025, le cumul annuel de pluie n'a pas de tendance détectable. Le nombre de jours de pluie recule de 2,5 par décennie.\n\nhttps://domainedumons.actitude.org/tdb-climat.html\n\n#Corrèze #climat #DonnéesOuvertes",
+    "telegram": "**Moins de jours de pluie, un cumul sans tendance**\n\n−2,5 jour de pluie par décennie.\n\nAu Domaine du Mons, de 1950 à 2025, le cumul annuel de pluie n'a pas de tendance détectable. Le nombre de jours de pluie recule de 2,5 par décennie.\n\nSource : Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen.\n\nhttps://domainedumons.actitude.org/tdb-climat.html",
+    "instagram": "Moins de jours de pluie, un cumul sans tendance\n\n−2,5 jour de pluie par décennie.\n\nAu Domaine du Mons, de 1950 à 2025, le cumul annuel de pluie n'a pas de tendance détectable. Le nombre de jours de pluie recule de 2,5 par décennie.\n\nSource : Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen.\n\nPage complète : domainedumons.actitude.org/tdb-climat.html\n\n#Corrèze #climat #DonnéesOuvertes",
+    "facebook": "Moins de jours de pluie, un cumul sans tendance\n\n−2,5 jour de pluie par décennie.\n\nAu Domaine du Mons, de 1950 à 2025, le cumul annuel de pluie n'a pas de tendance détectable. Le nombre de jours de pluie recule de 2,5 par décennie.\n\nhttps://domainedumons.actitude.org/tdb-climat.html",
+    "substack": "<h3>Moins de jours de pluie, un cumul sans tendance</h3><p>−2,5 jour de pluie par décennie.</p><p>Au Domaine du Mons, de 1950 à 2025, le cumul annuel de pluie n&#x27;a pas de tendance détectable. Le nombre de jours de pluie recule de 2,5 par décennie.</p><p><em>Source : Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen.</em> <a href=\"https://domainedumons.actitude.org/tdb-climat.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "gel-et-chaleur",
+   "page": "tdb-climat.html",
+   "forme": "chiffre",
+   "titre": "Température, gel et chaleur depuis 1950",
+   "chiffre": "−4,1",
+   "unite": "jours de gel par décennie",
+   "texte": "Au point du lieu depuis 1950 : +0,25 °C par décennie en moyenne annuelle, −4,1 jours de gel par décennie, +0,6 jour à 30 °C ou plus par décennie.",
+   "source": "Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen",
+   "mots": [
+    "Corrèze",
+    "climat"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/tdb-climat.html",
+   "textes": {
+    "mastodon": "Température, gel et chaleur depuis 1950\n\n−4,1 jours de gel par décennie.\n\nAu point du lieu depuis 1950 : +0,25 °C par décennie en moyenne annuelle, −4,1 jours de gel par décennie, +0,6 jour à 30 °C ou plus par décennie.\n\nhttps://domainedumons.actitude.org/tdb-climat.html\n\n#Corrèze #climat",
+    "telegram": "**Température, gel et chaleur depuis 1950**\n\n−4,1 jours de gel par décennie.\n\nAu point du lieu depuis 1950 : +0,25 °C par décennie en moyenne annuelle, −4,1 jours de gel par décennie, +0,6 jour à 30 °C ou plus par décennie.\n\nSource : Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen.\n\nhttps://domainedumons.actitude.org/tdb-climat.html",
+    "instagram": "Température, gel et chaleur depuis 1950\n\n−4,1 jours de gel par décennie.\n\nAu point du lieu depuis 1950 : +0,25 °C par décennie en moyenne annuelle, −4,1 jours de gel par décennie, +0,6 jour à 30 °C ou plus par décennie.\n\nSource : Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen.\n\nPage complète : domainedumons.actitude.org/tdb-climat.html\n\n#Corrèze #climat",
+    "facebook": "Température, gel et chaleur depuis 1950\n\n−4,1 jours de gel par décennie.\n\nAu point du lieu depuis 1950 : +0,25 °C par décennie en moyenne annuelle, −4,1 jours de gel par décennie, +0,6 jour à 30 °C ou plus par décennie.\n\nhttps://domainedumons.actitude.org/tdb-climat.html",
+    "substack": "<h3>Température, gel et chaleur depuis 1950</h3><p>−4,1 jours de gel par décennie.</p><p>Au point du lieu depuis 1950 : +0,25 °C par décennie en moyenne annuelle, −4,1 jours de gel par décennie, +0,6 jour à 30 °C ou plus par décennie.</p><p><em>Source : Réanalyse Open-Meteo au point du lieu, 1950-2025 ; test de Mann-Kendall et pente de Sen.</em> <a href=\"https://domainedumons.actitude.org/tdb-climat.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "gel-sur-fleur",
+   "page": "tdb-saisons.html",
+   "forme": "chiffre",
+   "titre": "La floraison avance, les gelées de printemps restent",
+   "chiffre": "3 % → 17 %",
+   "unite": "des années avec une gelée sur fleur ouverte",
+   "texte": "La floraison des fruitiers avance de 2,5 jours par décennie depuis 1950 au Domaine du Mons. Les années avec une gelée sur fleur ouverte passent de 3 % (1961-1990) à 17 % (1996-2025) ; l'écart reste sous le seuil de significativité habituel (p = 0,054).",
+   "source": "Réanalyse Open-Meteo 1950-2025 ; floraison à 150 °C·j base 5 depuis le 1er février",
+   "mots": [
+    "verger",
+    "climat",
+    "Corrèze"
+   ],
+   "formats": [
+    "carre",
+    "portrait",
+    "story"
+   ],
+   "url": "https://domainedumons.actitude.org/tdb-saisons.html",
+   "textes": {
+    "mastodon": "La floraison avance, les gelées de printemps restent\n\n3 % → 17 % des années avec une gelée sur fleur ouverte.\n\nLa floraison des fruitiers avance de 2,5 jours par décennie depuis 1950 au Domaine du Mons. Les années avec une gelée sur fleur ouverte passent de 3 % (1961-1990) à 17 % (1996-2025) ; l'écart reste sous le seuil de significativité habituel (p = 0,054).\n\nhttps://domainedumons.actitude.org/tdb-saisons.html\n\n#verger #climat #Corrèze",
+    "telegram": "**La floraison avance, les gelées de printemps restent**\n\n3 % → 17 % des années avec une gelée sur fleur ouverte.\n\nLa floraison des fruitiers avance de 2,5 jours par décennie depuis 1950 au Domaine du Mons. Les années avec une gelée sur fleur ouverte passent de 3 % (1961-1990) à 17 % (1996-2025) ; l'écart reste sous le seuil de significativité habituel (p = 0,054).\n\nSource : Réanalyse Open-Meteo 1950-2025 ; floraison à 150 °C·j base 5 depuis le 1er février.\n\nhttps://domainedumons.actitude.org/tdb-saisons.html",
+    "instagram": "La floraison avance, les gelées de printemps restent\n\n3 % → 17 % des années avec une gelée sur fleur ouverte.\n\nLa floraison des fruitiers avance de 2,5 jours par décennie depuis 1950 au Domaine du Mons. Les années avec une gelée sur fleur ouverte passent de 3 % (1961-1990) à 17 % (1996-2025) ; l'écart reste sous le seuil de significativité habituel (p = 0,054).\n\nSource : Réanalyse Open-Meteo 1950-2025 ; floraison à 150 °C·j base 5 depuis le 1er février.\n\nPage complète : domainedumons.actitude.org/tdb-saisons.html\n\n#verger #climat #Corrèze",
+    "facebook": "La floraison avance, les gelées de printemps restent\n\n3 % → 17 % des années avec une gelée sur fleur ouverte.\n\nLa floraison des fruitiers avance de 2,5 jours par décennie depuis 1950 au Domaine du Mons. Les années avec une gelée sur fleur ouverte passent de 3 % (1961-1990) à 17 % (1996-2025) ; l'écart reste sous le seuil de significativité habituel (p = 0,054).\n\nhttps://domainedumons.actitude.org/tdb-saisons.html",
+    "substack": "<h3>La floraison avance, les gelées de printemps restent</h3><p>3 % → 17 % des années avec une gelée sur fleur ouverte.</p><p>La floraison des fruitiers avance de 2,5 jours par décennie depuis 1950 au Domaine du Mons. Les années avec une gelée sur fleur ouverte passent de 3 % (1961-1990) à 17 % (1996-2025) ; l&#x27;écart reste sous le seuil de significativité habituel (p = 0,054).</p><p><em>Source : Réanalyse Open-Meteo 1950-2025 ; floraison à 150 °C·j base 5 depuis le 1er février.</em> <a href=\"https://domainedumons.actitude.org/tdb-saisons.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "sol-ete",
+   "page": "tdb-eau.html",
+   "forme": "chiffre",
+   "titre": "Le sol, cet été",
+   "chiffre": "1er",
+   "unite": "été le plus sec pour le sol, sur 68 depuis 1958",
+   "texte": "Au relevé du 23 septembre 2026, l'été 2026 se classe au premier rang des plus secs pour l'humidité du sol sur les 68 étés calculés depuis 1958 dans la maille qui contient le lieu.",
+   "source": "Météo-France, réanalyse SIM2, maille de 8 km ; humidité ramenée à la réserve utile",
+   "mots": [
+    "sécheresse",
+    "eau",
+    "Corrèze"
+   ],
+   "formats": [
+    "carre",
+    "portrait",
+    "story"
+   ],
+   "date": "2026-09-23",
+   "url": "https://domainedumons.actitude.org/tdb-eau.html",
+   "textes": {
+    "mastodon": "Le sol, cet été\n\n1er été le plus sec pour le sol, sur 68 depuis 1958.\n\nAu relevé du 23 septembre 2026, l'été 2026 se classe au premier rang des plus secs pour l'humidité du sol sur les 68 étés calculés depuis 1958 dans la maille qui contient le lieu.\n\nhttps://domainedumons.actitude.org/tdb-eau.html\n\n#sécheresse #eau #Corrèze",
+    "telegram": "**Le sol, cet été**\n\n1er été le plus sec pour le sol, sur 68 depuis 1958.\n\nAu relevé du 23 septembre 2026, l'été 2026 se classe au premier rang des plus secs pour l'humidité du sol sur les 68 étés calculés depuis 1958 dans la maille qui contient le lieu.\n\nSource : Météo-France, réanalyse SIM2, maille de 8 km ; humidité ramenée à la réserve utile.\n\nhttps://domainedumons.actitude.org/tdb-eau.html",
+    "instagram": "Le sol, cet été\n\n1er été le plus sec pour le sol, sur 68 depuis 1958.\n\nAu relevé du 23 septembre 2026, l'été 2026 se classe au premier rang des plus secs pour l'humidité du sol sur les 68 étés calculés depuis 1958 dans la maille qui contient le lieu.\n\nSource : Météo-France, réanalyse SIM2, maille de 8 km ; humidité ramenée à la réserve utile.\n\nPage complète : domainedumons.actitude.org/tdb-eau.html\n\n#sécheresse #eau #Corrèze",
+    "facebook": "Le sol, cet été\n\n1er été le plus sec pour le sol, sur 68 depuis 1958.\n\nAu relevé du 23 septembre 2026, l'été 2026 se classe au premier rang des plus secs pour l'humidité du sol sur les 68 étés calculés depuis 1958 dans la maille qui contient le lieu.\n\nhttps://domainedumons.actitude.org/tdb-eau.html",
+    "substack": "<h3>Le sol, cet été</h3><p>1er été le plus sec pour le sol, sur 68 depuis 1958.</p><p>Au relevé du 23 septembre 2026, l&#x27;été 2026 se classe au premier rang des plus secs pour l&#x27;humidité du sol sur les 68 étés calculés depuis 1958 dans la maille qui contient le lieu.</p><p><em>Source : Météo-France, réanalyse SIM2, maille de 8 km ; humidité ramenée à la réserve utile.</em> <a href=\"https://domainedumons.actitude.org/tdb-eau.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "associations",
+   "page": "reseau-associations.html",
+   "forme": "chiffre",
+   "titre": "Les associations à une heure de route",
+   "chiffre": "8 340",
+   "unite": "associations actives dans 284 communes",
+   "texte": "À moins d'une heure du lieu, le Répertoire national des associations compte 8 340 associations actives, au sens de celles qui n'ont pas déclaré leur dissolution. Nous avons lu 3 303 objets déclarés contre une grille écrite d'avance : 989 engagent l'association envers des non-membres, 917 laissent un doute, publié lui aussi.",
+   "source": "Répertoire national des associations, ministère de l'Intérieur, dump du 1er septembre 2026",
+   "mots": [
+    "associations",
+    "Corrèze",
+    "InteretGeneral"
+   ],
+   "formats": [
+    "carre",
+    "portrait",
+    "story"
+   ],
+   "url": "https://domainedumons.actitude.org/reseau-associations.html",
+   "textes": {
+    "mastodon": "Les associations à une heure de route\n\n8 340 associations actives dans 284 communes.\n\nÀ moins d'une heure du lieu, le Répertoire national des associations compte 8 340 associations actives, au sens de celles qui n'ont pas déclaré leur dissolution. Nous avons lu 3 303 objets déclarés contre une grille écrite d'avance : 989 engagent l'association envers des non-membres, 917 laissent un doute, publié lui aussi.\n\nhttps://domainedumons.actitude.org/reseau-associations.html\n\n#associations #Corrèze #InteretGeneral",
+    "telegram": "**Les associations à une heure de route**\n\n8 340 associations actives dans 284 communes.\n\nÀ moins d'une heure du lieu, le Répertoire national des associations compte 8 340 associations actives, au sens de celles qui n'ont pas déclaré leur dissolution. Nous avons lu 3 303 objets déclarés contre une grille écrite d'avance : 989 engagent l'association envers des non-membres, 917 laissent un doute, publié lui aussi.\n\nSource : Répertoire national des associations, ministère de l'Intérieur, dump du 1er septembre 2026.\n\nhttps://domainedumons.actitude.org/reseau-associations.html",
+    "instagram": "Les associations à une heure de route\n\n8 340 associations actives dans 284 communes.\n\nÀ moins d'une heure du lieu, le Répertoire national des associations compte 8 340 associations actives, au sens de celles qui n'ont pas déclaré leur dissolution. Nous avons lu 3 303 objets déclarés contre une grille écrite d'avance : 989 engagent l'association envers des non-membres, 917 laissent un doute, publié lui aussi.\n\nSource : Répertoire national des associations, ministère de l'Intérieur, dump du 1er septembre 2026.\n\nPage complète : domainedumons.actitude.org/reseau-associations.html\n\n#associations #Corrèze #InteretGeneral",
+    "facebook": "Les associations à une heure de route\n\n8 340 associations actives dans 284 communes.\n\nÀ moins d'une heure du lieu, le Répertoire national des associations compte 8 340 associations actives, au sens de celles qui n'ont pas déclaré leur dissolution. Nous avons lu 3 303 objets déclarés contre une grille écrite d'avance : 989 engagent l'association envers des non-membres, 917 laissent un doute, publié lui aussi.\n\nhttps://domainedumons.actitude.org/reseau-associations.html",
+    "substack": "<h3>Les associations à une heure de route</h3><p>8 340 associations actives dans 284 communes.</p><p>À moins d&#x27;une heure du lieu, le Répertoire national des associations compte 8 340 associations actives, au sens de celles qui n&#x27;ont pas déclaré leur dissolution. Nous avons lu 3 303 objets déclarés contre une grille écrite d&#x27;avance : 989 engagent l&#x27;association envers des non-membres, 917 laissent un doute, publié lui aussi.</p><p><em>Source : Répertoire national des associations, ministère de l&#x27;Intérieur, dump du 1er septembre 2026.</em> <a href=\"https://domainedumons.actitude.org/reseau-associations.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "faisceau",
+   "page": "liberer-la-terre.html",
+   "forme": "croquis",
+   "croquis": "dessins/montage.svg",
+   "titre": "Libérer la terre",
+   "citation": "La propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires.",
+   "texte": "Au Domaine du Mons, la nue-propriété du foncier va à un fonds de dotation dont les statuts doivent rendre la vente impossible ; l'usage va à une association d'intérêt général autogérée par ses membres. Le montage est en cours de constitution.",
+   "mots": [
+    "communs",
+    "foncier",
+    "Corrèze"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/liberer-la-terre.html",
+   "textes": {
+    "mastodon": "Libérer la terre\n\nLa propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires.\n\nAu Domaine du Mons, la nue-propriété du foncier va à un fonds de dotation dont les statuts doivent rendre la vente impossible ; l'usage va à une association d'intérêt général autogérée par ses membres. Le montage est en cours de constitution.\n\nhttps://domainedumons.actitude.org/liberer-la-terre.html\n\n#communs #foncier #Corrèze",
+    "telegram": "**Libérer la terre**\n\nLa propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires.\n\nAu Domaine du Mons, la nue-propriété du foncier va à un fonds de dotation dont les statuts doivent rendre la vente impossible ; l'usage va à une association d'intérêt général autogérée par ses membres. Le montage est en cours de constitution.\n\nhttps://domainedumons.actitude.org/liberer-la-terre.html",
+    "instagram": "Libérer la terre\n\nLa propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires.\n\nAu Domaine du Mons, la nue-propriété du foncier va à un fonds de dotation dont les statuts doivent rendre la vente impossible ; l'usage va à une association d'intérêt général autogérée par ses membres. Le montage est en cours de constitution.\n\nPage complète : domainedumons.actitude.org/liberer-la-terre.html\n\n#communs #foncier #Corrèze",
+    "facebook": "Libérer la terre\n\nLa propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires.\n\nAu Domaine du Mons, la nue-propriété du foncier va à un fonds de dotation dont les statuts doivent rendre la vente impossible ; l'usage va à une association d'intérêt général autogérée par ses membres. Le montage est en cours de constitution.\n\nhttps://domainedumons.actitude.org/liberer-la-terre.html",
+    "substack": "<h3>Libérer la terre</h3><p>La propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires.</p><p>Au Domaine du Mons, la nue-propriété du foncier va à un fonds de dotation dont les statuts doivent rendre la vente impossible ; l&#x27;usage va à une association d&#x27;intérêt général autogérée par ses membres. Le montage est en cours de constitution.</p><p><a href=\"https://domainedumons.actitude.org/liberer-la-terre.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "verrou",
+   "page": "liberer-la-terre.html",
+   "forme": "citation",
+   "titre": "Le fonds de dotation",
+   "citation": "Le verrou doit tenir dans les statuts eux-mêmes. Une clause qui dépendrait de la volonté des dirigeants futurs ne protégerait rien.",
+   "texte": "Les fondateurs se font confiance, leurs successeurs ne se connaissent pas. C'est pourquoi l'interdiction de vendre doit être écrite dans les statuts du fonds, et non laissée à ceux qui le dirigeront dans trente ans.",
+   "mots": [
+    "communs",
+    "foncier"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/liberer-la-terre.html",
+   "textes": {
+    "mastodon": "Le fonds de dotation\n\nLe verrou doit tenir dans les statuts eux-mêmes. Une clause qui dépendrait de la volonté des dirigeants futurs ne protégerait rien.\n\nLes fondateurs se font confiance, leurs successeurs ne se connaissent pas. C'est pourquoi l'interdiction de vendre doit être écrite dans les statuts du fonds, et non laissée à ceux qui le dirigeront dans trente ans.\n\nhttps://domainedumons.actitude.org/liberer-la-terre.html\n\n#communs #foncier",
+    "telegram": "**Le fonds de dotation**\n\nLe verrou doit tenir dans les statuts eux-mêmes. Une clause qui dépendrait de la volonté des dirigeants futurs ne protégerait rien.\n\nLes fondateurs se font confiance, leurs successeurs ne se connaissent pas. C'est pourquoi l'interdiction de vendre doit être écrite dans les statuts du fonds, et non laissée à ceux qui le dirigeront dans trente ans.\n\nhttps://domainedumons.actitude.org/liberer-la-terre.html",
+    "instagram": "Le fonds de dotation\n\nLe verrou doit tenir dans les statuts eux-mêmes. Une clause qui dépendrait de la volonté des dirigeants futurs ne protégerait rien.\n\nLes fondateurs se font confiance, leurs successeurs ne se connaissent pas. C'est pourquoi l'interdiction de vendre doit être écrite dans les statuts du fonds, et non laissée à ceux qui le dirigeront dans trente ans.\n\nPage complète : domainedumons.actitude.org/liberer-la-terre.html\n\n#communs #foncier",
+    "facebook": "Le fonds de dotation\n\nLe verrou doit tenir dans les statuts eux-mêmes. Une clause qui dépendrait de la volonté des dirigeants futurs ne protégerait rien.\n\nLes fondateurs se font confiance, leurs successeurs ne se connaissent pas. C'est pourquoi l'interdiction de vendre doit être écrite dans les statuts du fonds, et non laissée à ceux qui le dirigeront dans trente ans.\n\nhttps://domainedumons.actitude.org/liberer-la-terre.html",
+    "substack": "<h3>Le fonds de dotation</h3><p>Le verrou doit tenir dans les statuts eux-mêmes. Une clause qui dépendrait de la volonté des dirigeants futurs ne protégerait rien.</p><p>Les fondateurs se font confiance, leurs successeurs ne se connaissent pas. C&#x27;est pourquoi l&#x27;interdiction de vendre doit être écrite dans les statuts du fonds, et non laissée à ceux qui le dirigeront dans trente ans.</p><p><a href=\"https://domainedumons.actitude.org/liberer-la-terre.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "droits-acquis",
+   "page": "marcher-libre.html",
+   "forme": "liste",
+   "titre": "Ce qui reste acquis en toute circonstance",
+   "liste": [
+    "le droit de partir",
+    "le droit de dire non",
+    "le droit d'être informé avant qu'une décision soit prise",
+    "le droit de demander qu'une règle soit réexaminée"
+   ],
+   "texte": "Ce qui reste acquis en toute circonstance : le droit de partir, le droit de dire non, le droit d'être informé avant qu'une décision soit prise, et le droit de demander qu'une règle soit réexaminée.",
+   "mots": [
+    "autogestion",
+    "communs"
+   ],
+   "formats": [
+    "carre",
+    "portrait",
+    "story"
+   ],
+   "url": "https://domainedumons.actitude.org/marcher-libre.html",
+   "textes": {
+    "mastodon": "Ce qui reste acquis en toute circonstance\n\nCe qui reste acquis en toute circonstance : le droit de partir, le droit de dire non, le droit d'être informé avant qu'une décision soit prise, et le droit de demander qu'une règle soit réexaminée.\n\nhttps://domainedumons.actitude.org/marcher-libre.html\n\n#autogestion #communs",
+    "telegram": "**Ce qui reste acquis en toute circonstance**\n\nCe qui reste acquis en toute circonstance : le droit de partir, le droit de dire non, le droit d'être informé avant qu'une décision soit prise, et le droit de demander qu'une règle soit réexaminée.\n\nhttps://domainedumons.actitude.org/marcher-libre.html",
+    "instagram": "Ce qui reste acquis en toute circonstance\n\nCe qui reste acquis en toute circonstance : le droit de partir, le droit de dire non, le droit d'être informé avant qu'une décision soit prise, et le droit de demander qu'une règle soit réexaminée.\n\nPage complète : domainedumons.actitude.org/marcher-libre.html\n\n#autogestion #communs",
+    "facebook": "Ce qui reste acquis en toute circonstance\n\nCe qui reste acquis en toute circonstance : le droit de partir, le droit de dire non, le droit d'être informé avant qu'une décision soit prise, et le droit de demander qu'une règle soit réexaminée.\n\nhttps://domainedumons.actitude.org/marcher-libre.html",
+    "substack": "<h3>Ce qui reste acquis en toute circonstance</h3><p>Ce qui reste acquis en toute circonstance : le droit de partir, le droit de dire non, le droit d&#x27;être informé avant qu&#x27;une décision soit prise, et le droit de demander qu&#x27;une règle soit réexaminée.</p><p><a href=\"https://domainedumons.actitude.org/marcher-libre.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "trois-cercles",
+   "page": "marcher-libre.html",
+   "forme": "croquis",
+   "croquis": "dessins/cercles.svg",
+   "titre": "Le périmètre du commun",
+   "citation": "Mettre en commun la terre et le travail ne veut pas dire tout mettre en commun.",
+   "texte": "Une chambre qui ferme, un revenu qui n'appartient qu'à soi, des amitiés en dehors, du temps sans personne. Et vers l'extérieur, un lieu qui accueille : sans quoi il devient un entre-soi.",
+   "mots": [
+    "autogestion",
+    "communs"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/marcher-libre.html",
+   "textes": {
+    "mastodon": "Le périmètre du commun\n\nMettre en commun la terre et le travail ne veut pas dire tout mettre en commun.\n\nUne chambre qui ferme, un revenu qui n'appartient qu'à soi, des amitiés en dehors, du temps sans personne. Et vers l'extérieur, un lieu qui accueille : sans quoi il devient un entre-soi.\n\nhttps://domainedumons.actitude.org/marcher-libre.html\n\n#autogestion #communs",
+    "telegram": "**Le périmètre du commun**\n\nMettre en commun la terre et le travail ne veut pas dire tout mettre en commun.\n\nUne chambre qui ferme, un revenu qui n'appartient qu'à soi, des amitiés en dehors, du temps sans personne. Et vers l'extérieur, un lieu qui accueille : sans quoi il devient un entre-soi.\n\nhttps://domainedumons.actitude.org/marcher-libre.html",
+    "instagram": "Le périmètre du commun\n\nMettre en commun la terre et le travail ne veut pas dire tout mettre en commun.\n\nUne chambre qui ferme, un revenu qui n'appartient qu'à soi, des amitiés en dehors, du temps sans personne. Et vers l'extérieur, un lieu qui accueille : sans quoi il devient un entre-soi.\n\nPage complète : domainedumons.actitude.org/marcher-libre.html\n\n#autogestion #communs",
+    "facebook": "Le périmètre du commun\n\nMettre en commun la terre et le travail ne veut pas dire tout mettre en commun.\n\nUne chambre qui ferme, un revenu qui n'appartient qu'à soi, des amitiés en dehors, du temps sans personne. Et vers l'extérieur, un lieu qui accueille : sans quoi il devient un entre-soi.\n\nhttps://domainedumons.actitude.org/marcher-libre.html",
+    "substack": "<h3>Le périmètre du commun</h3><p>Mettre en commun la terre et le travail ne veut pas dire tout mettre en commun.</p><p>Une chambre qui ferme, un revenu qui n&#x27;appartient qu&#x27;à soi, des amitiés en dehors, du temps sans personne. Et vers l&#x27;extérieur, un lieu qui accueille : sans quoi il devient un entre-soi.</p><p><a href=\"https://domainedumons.actitude.org/marcher-libre.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "decider",
+   "page": "marcher-libre.html",
+   "forme": "tableau",
+   "titre": "Décider sans chef",
+   "lignes": [
+    [
+     "Ce qui n'engage que soi",
+     "la personne, qui informe si ça touche les autres"
+    ],
+    [
+     "Le courant d'un domaine confié",
+     "celui ou celle qui le porte, par mandat écrit"
+    ],
+    [
+     "Ce qui engage le collectif",
+     "tout le monde : proposition écrite, objections, décision consignée"
+    ],
+    [
+     "Ce qui engage l'avenir du lieu",
+     "tout le monde, plus la structure porteuse, avec un délai long"
+    ]
+   ],
+   "texte": "Écrire qui décide de quoi, et à quel niveau d'engagement : tout ne se décide pas de la même façon. Une décision se consigne avec son motif et sa date de réexamen.",
+   "mots": [
+    "autogestion",
+    "gouvernance"
+   ],
+   "formats": [
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/marcher-libre.html",
+   "textes": {
+    "mastodon": "Décider sans chef\n\nÉcrire qui décide de quoi, et à quel niveau d'engagement : tout ne se décide pas de la même façon. Une décision se consigne avec son motif et sa date de réexamen.\n\nhttps://domainedumons.actitude.org/marcher-libre.html\n\n#autogestion #gouvernance",
+    "telegram": "**Décider sans chef**\n\nÉcrire qui décide de quoi, et à quel niveau d'engagement : tout ne se décide pas de la même façon. Une décision se consigne avec son motif et sa date de réexamen.\n\nhttps://domainedumons.actitude.org/marcher-libre.html",
+    "instagram": "Décider sans chef\n\nÉcrire qui décide de quoi, et à quel niveau d'engagement : tout ne se décide pas de la même façon. Une décision se consigne avec son motif et sa date de réexamen.\n\nPage complète : domainedumons.actitude.org/marcher-libre.html\n\n#autogestion #gouvernance",
+    "facebook": "Décider sans chef\n\nÉcrire qui décide de quoi, et à quel niveau d'engagement : tout ne se décide pas de la même façon. Une décision se consigne avec son motif et sa date de réexamen.\n\nhttps://domainedumons.actitude.org/marcher-libre.html",
+    "substack": "<h3>Décider sans chef</h3><p>Écrire qui décide de quoi, et à quel niveau d&#x27;engagement : tout ne se décide pas de la même façon. Une décision se consigne avec son motif et sa date de réexamen.</p><p><a href=\"https://domainedumons.actitude.org/marcher-libre.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "fil-commun",
+   "page": "reseau-fil.html",
+   "forme": "appel",
+   "titre": "Le fil commun",
+   "citation": "Une lettre mensuelle que chaque lieu écrit dans ses mots, envoyée à date fixe.",
+   "texte": "Un chantier ouvert, un coup de main cherché, un surplus, une assemblée ouverte, un départ : chaque lieu de la zone produit des nouvelles qui se perdent. Le fil commun démarrera quand trois lieux auront dit qu'ils y participeraient. Aucun traceur, aucune plateforme, désinscription en un mot.",
+   "appel": "Pour en être : contact@actitude.org",
+   "mots": [
+    "Corrèze",
+    "collectifs",
+    "entraide"
+   ],
+   "formats": [
+    "carre",
+    "portrait",
+    "story"
+   ],
+   "url": "https://domainedumons.actitude.org/reseau-fil.html",
+   "textes": {
+    "mastodon": "Le fil commun\n\nUne lettre mensuelle que chaque lieu écrit dans ses mots, envoyée à date fixe.\n\nUn chantier ouvert, un coup de main cherché, un surplus, une assemblée ouverte, un départ : chaque lieu de la zone produit des nouvelles qui se perdent. Le fil commun démarrera quand trois lieux auront dit qu'ils y participeraient. Aucun traceur, aucune plateforme, désinscription en un mot.\n\nhttps://domainedumons.actitude.org/reseau-fil.html\n\n#Corrèze #collectifs #entraide",
+    "telegram": "**Le fil commun**\n\nUne lettre mensuelle que chaque lieu écrit dans ses mots, envoyée à date fixe.\n\nUn chantier ouvert, un coup de main cherché, un surplus, une assemblée ouverte, un départ : chaque lieu de la zone produit des nouvelles qui se perdent. Le fil commun démarrera quand trois lieux auront dit qu'ils y participeraient. Aucun traceur, aucune plateforme, désinscription en un mot.\n\nhttps://domainedumons.actitude.org/reseau-fil.html",
+    "instagram": "Le fil commun\n\nUne lettre mensuelle que chaque lieu écrit dans ses mots, envoyée à date fixe.\n\nUn chantier ouvert, un coup de main cherché, un surplus, une assemblée ouverte, un départ : chaque lieu de la zone produit des nouvelles qui se perdent. Le fil commun démarrera quand trois lieux auront dit qu'ils y participeraient. Aucun traceur, aucune plateforme, désinscription en un mot.\n\nPage complète : domainedumons.actitude.org/reseau-fil.html\n\n#Corrèze #collectifs #entraide",
+    "facebook": "Le fil commun\n\nUne lettre mensuelle que chaque lieu écrit dans ses mots, envoyée à date fixe.\n\nUn chantier ouvert, un coup de main cherché, un surplus, une assemblée ouverte, un départ : chaque lieu de la zone produit des nouvelles qui se perdent. Le fil commun démarrera quand trois lieux auront dit qu'ils y participeraient. Aucun traceur, aucune plateforme, désinscription en un mot.\n\nhttps://domainedumons.actitude.org/reseau-fil.html",
+    "substack": "<h3>Le fil commun</h3><p>Une lettre mensuelle que chaque lieu écrit dans ses mots, envoyée à date fixe.</p><p>Un chantier ouvert, un coup de main cherché, un surplus, une assemblée ouverte, un départ : chaque lieu de la zone produit des nouvelles qui se perdent. Le fil commun démarrera quand trois lieux auront dit qu&#x27;ils y participeraient. Aucun traceur, aucune plateforme, désinscription en un mot.</p><p><a href=\"https://domainedumons.actitude.org/reseau-fil.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-digest",
+   "page": "grain-digest.html",
+   "forme": "fiche",
+   "code": "DG",
+   "titre": "Un motif, huit contrôles — le digest portable",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "digest",
+   "texte": "Extrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.",
+   "citation": "",
+   "mots": [
+    "communs"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-digest.html",
+   "textes": {
+    "mastodon": "DG — Un motif, huit contrôles — le digest portable\n\nExtrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.\n\nhttps://domainedumons.actitude.org/grain-digest.html\n\n#communs",
+    "telegram": "**DG — Un motif, huit contrôles — le digest portable**\n\nExtrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.\n\nhttps://domainedumons.actitude.org/grain-digest.html",
+    "instagram": "DG — Un motif, huit contrôles — le digest portable\n\nExtrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.\n\nPage complète : domainedumons.actitude.org/grain-digest.html\n\n#communs",
+    "facebook": "DG — Un motif, huit contrôles — le digest portable\n\nExtrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.\n\nhttps://domainedumons.actitude.org/grain-digest.html",
+    "substack": "<h3>DG — Un motif, huit contrôles — le digest portable</h3><p>Extrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.</p><p><a href=\"https://domainedumons.actitude.org/grain-digest.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-ga-01-faisceau-de-droits",
+   "page": "grain-ga-01-faisceau-de-droits.html",
+   "forme": "fiche",
+   "code": "GA-01",
+   "titre": "Le faisceau de droits, un gabarit vierge",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "gabarits",
+   "texte": "Décrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.",
+   "citation": "",
+   "mots": [
+    "communs"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html",
+   "textes": {
+    "mastodon": "GA-01 — Le faisceau de droits, un gabarit vierge\n\nDécrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.\n\nhttps://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html\n\n#communs",
+    "telegram": "**GA-01 — Le faisceau de droits, un gabarit vierge**\n\nDécrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.\n\nhttps://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html",
+    "instagram": "GA-01 — Le faisceau de droits, un gabarit vierge\n\nDécrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.\n\nPage complète : domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html\n\n#communs",
+    "facebook": "GA-01 — Le faisceau de droits, un gabarit vierge\n\nDécrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.\n\nhttps://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html",
+    "substack": "<h3>GA-01 — Le faisceau de droits, un gabarit vierge</h3><p>Décrire le rapport d&#x27;un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu&#x27;il évite.</p><p><a href=\"https://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-pa-01-verrou-structurel",
+   "page": "grain-pa-01-verrou-structurel.html",
+   "forme": "fiche",
+   "code": "PA-01",
+   "titre": "Le verrou doit être structurel, pas contractuel",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "patterns",
+   "texte": "Répartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.",
+   "citation": "",
+   "mots": [
+    "communs"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html",
+   "textes": {
+    "mastodon": "PA-01 — Le verrou doit être structurel, pas contractuel\n\nRépartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.\n\nhttps://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html\n\n#communs",
+    "telegram": "**PA-01 — Le verrou doit être structurel, pas contractuel**\n\nRépartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.\n\nhttps://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html",
+    "instagram": "PA-01 — Le verrou doit être structurel, pas contractuel\n\nRépartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.\n\nPage complète : domainedumons.actitude.org/grain-pa-01-verrou-structurel.html\n\n#communs",
+    "facebook": "PA-01 — Le verrou doit être structurel, pas contractuel\n\nRépartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.\n\nhttps://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html",
+    "substack": "<h3>PA-01 — Le verrou doit être structurel, pas contractuel</h3><p>Répartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d&#x27;un commun accord, et faire de cet accord une impossibilité pratique.</p><p><a href=\"https://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-pa-02-preuve-par-les-faits",
+   "page": "grain-pa-02-preuve-par-les-faits.html",
+   "forme": "fiche",
+   "code": "PA-02",
+   "titre": "L'intérêt général se prouve par les faits, pas par les statuts",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "patterns",
+   "texte": "Faire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.",
+   "citation": "",
+   "mots": [
+    "communs"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html",
+   "textes": {
+    "mastodon": "PA-02 — L'intérêt général se prouve par les faits, pas par les statuts\n\nFaire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.\n\nhttps://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html\n\n#communs",
+    "telegram": "**PA-02 — L'intérêt général se prouve par les faits, pas par les statuts**\n\nFaire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.\n\nhttps://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html",
+    "instagram": "PA-02 — L'intérêt général se prouve par les faits, pas par les statuts\n\nFaire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.\n\nPage complète : domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html\n\n#communs",
+    "facebook": "PA-02 — L'intérêt général se prouve par les faits, pas par les statuts\n\nFaire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.\n\nhttps://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html",
+    "substack": "<h3>PA-02 — L&#x27;intérêt général se prouve par les faits, pas par les statuts</h3><p>Faire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l&#x27;eau, dès le premier jour.</p><p><a href=\"https://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-rx-02-seuil-recale",
+   "page": "grain-rx-02-seuil-recale.html",
+   "forme": "fiche",
+   "code": "RX-02",
+   "titre": "Un seuil repris de la littérature a produit un résultat nul, qu'on a failli prendre pour une bonne nouvelle",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "retex",
+   "texte": "Retour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.",
+   "citation": "",
+   "mots": [
+    "communs",
+    "RetourDExpérience"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-rx-02-seuil-recale.html",
+   "textes": {
+    "mastodon": "RX-02 — Un seuil repris de la littérature a produit un résultat nul, qu'on a failli prendre pour une bonne nouvelle\n\nRetour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.\n\nhttps://domainedumons.actitude.org/grain-rx-02-seuil-recale.html\n\n#communs #RetourDExpérience",
+    "telegram": "**RX-02 — Un seuil repris de la littérature a produit un résultat nul, qu'on a failli prendre pour une bonne nouvelle**\n\nRetour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.\n\nhttps://domainedumons.actitude.org/grain-rx-02-seuil-recale.html",
+    "instagram": "RX-02 — Un seuil repris de la littérature a produit un résultat nul, qu'on a failli prendre pour une bonne nouvelle\n\nRetour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.\n\nPage complète : domainedumons.actitude.org/grain-rx-02-seuil-recale.html\n\n#communs #RetourDExpérience",
+    "facebook": "RX-02 — Un seuil repris de la littérature a produit un résultat nul, qu'on a failli prendre pour une bonne nouvelle\n\nRetour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.\n\nhttps://domainedumons.actitude.org/grain-rx-02-seuil-recale.html",
+    "substack": "<h3>RX-02 — Un seuil repris de la littérature a produit un résultat nul, qu&#x27;on a failli prendre pour une bonne nouvelle</h3><p>Retour d&#x27;expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.</p><p><a href=\"https://domainedumons.actitude.org/grain-rx-02-seuil-recale.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-rx-03-indicateur-en-butee",
+   "page": "grain-rx-03-indicateur-en-butee.html",
+   "forme": "fiche",
+   "code": "RX-03",
+   "titre": "Un indicateur officiel donnait la même valeur à deux situations différentes",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "retex",
+   "texte": "Retour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.",
+   "citation": "",
+   "mots": [
+    "communs",
+    "RetourDExpérience"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html",
+   "textes": {
+    "mastodon": "RX-03 — Un indicateur officiel donnait la même valeur à deux situations différentes\n\nRetour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.\n\nhttps://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html\n\n#communs #RetourDExpérience",
+    "telegram": "**RX-03 — Un indicateur officiel donnait la même valeur à deux situations différentes**\n\nRetour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.\n\nhttps://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html",
+    "instagram": "RX-03 — Un indicateur officiel donnait la même valeur à deux situations différentes\n\nRetour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.\n\nPage complète : domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html\n\n#communs #RetourDExpérience",
+    "facebook": "RX-03 — Un indicateur officiel donnait la même valeur à deux situations différentes\n\nRetour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.\n\nhttps://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html",
+    "substack": "<h3>RX-03 — Un indicateur officiel donnait la même valeur à deux situations différentes</h3><p>Retour d&#x27;expérience. Une colonne d&#x27;un fichier public, reprise telle quelle, portait une butée invisible.</p><p><a href=\"https://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-rx-04-source-hors-de-son-domaine",
+   "page": "grain-rx-04-source-hors-de-son-domaine.html",
+   "forme": "fiche",
+   "code": "RX-04",
+   "titre": "Nous avons compté les associations d'un territoire dans un fichier qui n'en voit qu'un quart",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "retex",
+   "texte": "Retour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.",
+   "citation": "",
+   "mots": [
+    "communs",
+    "RetourDExpérience"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html",
+   "textes": {
+    "mastodon": "RX-04 — Nous avons compté les associations d'un territoire dans un fichier qui n'en voit qu'un quart\n\nRetour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.\n\nhttps://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html\n\n#communs #RetourDExpérience",
+    "telegram": "**RX-04 — Nous avons compté les associations d'un territoire dans un fichier qui n'en voit qu'un quart**\n\nRetour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.\n\nhttps://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html",
+    "instagram": "RX-04 — Nous avons compté les associations d'un territoire dans un fichier qui n'en voit qu'un quart\n\nRetour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.\n\nPage complète : domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html\n\n#communs #RetourDExpérience",
+    "facebook": "RX-04 — Nous avons compté les associations d'un territoire dans un fichier qui n'en voit qu'un quart\n\nRetour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.\n\nhttps://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html",
+    "substack": "<h3>RX-04 — Nous avons compté les associations d&#x27;un territoire dans un fichier qui n&#x27;en voit qu&#x27;un quart</h3><p>Retour d&#x27;expérience. Un chiffre publié, faux d&#x27;un facteur quatre, et rien dans la donnée ne le signalait.</p><p><a href=\"https://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-rx-05-la-patience-comme-correctif",
+   "page": "grain-rx-05-la-patience-comme-correctif.html",
+   "forme": "fiche",
+   "code": "RX-05",
+   "titre": "Le correctif était d'attendre, pas de changer de code",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "retex",
+   "texte": "Retour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.",
+   "citation": "",
+   "mots": [
+    "communs",
+    "RetourDExpérience"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html",
+   "textes": {
+    "mastodon": "RX-05 — Le correctif était d'attendre, pas de changer de code\n\nRetour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.\n\nhttps://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html\n\n#communs #RetourDExpérience",
+    "telegram": "**RX-05 — Le correctif était d'attendre, pas de changer de code**\n\nRetour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.\n\nhttps://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html",
+    "instagram": "RX-05 — Le correctif était d'attendre, pas de changer de code\n\nRetour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.\n\nPage complète : domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html\n\n#communs #RetourDExpérience",
+    "facebook": "RX-05 — Le correctif était d'attendre, pas de changer de code\n\nRetour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.\n\nhttps://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html",
+    "substack": "<h3>RX-05 — Le correctif était d&#x27;attendre, pas de changer de code</h3><p>Retour d&#x27;expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu&#x27;une ligne de la requête ait changé.</p><p><a href=\"https://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  },
+  {
+   "id": "grain-rx-06-inventaire-faux-de-deux-ordres",
+   "page": "grain-rx-06-inventaire-faux-de-deux-ordres.html",
+   "forme": "fiche",
+   "code": "RX-06",
+   "titre": "Un inventaire automatique dont le total brut était faux de deux ordres de grandeur",
+   "niveau": "GÉNÉRIQUE",
+   "famille": "retex",
+   "texte": "Retour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d'infrastructure.",
+   "citation": "",
+   "mots": [
+    "communs",
+    "RetourDExpérience"
+   ],
+   "formats": [
+    "carre",
+    "portrait"
+   ],
+   "url": "https://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html",
+   "textes": {
+    "mastodon": "RX-06 — Un inventaire automatique dont le total brut était faux de deux ordres de grandeur\n\nRetour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d'infrastructure.\n\nhttps://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html\n\n#communs #RetourDExpérience",
+    "telegram": "**RX-06 — Un inventaire automatique dont le total brut était faux de deux ordres de grandeur**\n\nRetour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d'infrastructure.\n\nhttps://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html",
+    "instagram": "RX-06 — Un inventaire automatique dont le total brut était faux de deux ordres de grandeur\n\nRetour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d'infrastructure.\n\nPage complète : domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html\n\n#communs #RetourDExpérience",
+    "facebook": "RX-06 — Un inventaire automatique dont le total brut était faux de deux ordres de grandeur\n\nRetour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d'infrastructure.\n\nhttps://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html",
+    "substack": "<h3>RX-06 — Un inventaire automatique dont le total brut était faux de deux ordres de grandeur</h3><p>Retour d&#x27;expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d&#x27;infrastructure.</p><p><a href=\"https://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html\">Lire sur le site du Domaine du Mons</a></p>"
+   }
+  }
+ ],
+ "series": [
+  {
+   "id": "liberer-planches",
+   "page": "liberer-la-terre.html",
+   "titre": "Libérer la terre, en cinq planches",
+   "mots": [
+    "communs",
+    "foncier",
+    "Corrèze"
+   ],
+   "texte": "Le montage du Domaine du Mons en cinq planches : le faisceau de droits, le fonds de dotation, l'association, et ce qui reste à trancher.",
+   "planches": [
+    {
+     "forme": "couverture",
+     "titre": "Libérer la terre",
+     "citation": "Sortir une terre du marché, durablement, sans sortir du droit."
+    },
+    {
+     "forme": "croquis",
+     "croquis": "dessins/montage.svg",
+     "titre": "Le titre d'un côté, l'usage de l'autre",
+     "citation": "La propriété est un faisceau de droits, qui peuvent être répartis entre plusieurs titulaires."
+    },
+    {
+     "forme": "citation",
+     "titre": "Le fonds de dotation",
+     "citation": "Il détient la nue-propriété du foncier, et ses statuts ont une fonction : rendre la vente impossible, y compris à ceux qui le dirigeront dans 30 ans."
+    },
+    {
+     "forme": "citation",
+     "titre": "L'association",
+     "citation": "Une association loi 1901, d'intérêt général, autogérée par ses membres, reçoit l'usage du lieu. Ce qui se fait ici doit profiter au-delà de ceux qui y habitent."
+    },
+    {
+     "forme": "liste",
+     "titre": "Où nous en sommes",
+     "liste": [
+      "à l'étude — l'instrument de mise à disposition",
+      "à l'étude — la garantie de l'intérêt général",
+      "à l'étude — le statut des personnes qui vivent ici",
+      "en cours — la constitution des structures"
+     ]
+    }
+   ]
+  }
+ ]
+}

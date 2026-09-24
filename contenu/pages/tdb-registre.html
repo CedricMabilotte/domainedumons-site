@@ -1,0 +1,97 @@
+<!--meta
+{
+ "titre": "Registre d'intérêt général",
+ "description": "Ce que le Domaine du Mons fait au-delà de ceux qui l'habitent : accueil, chantiers ouverts, transmissions, partenariats, documentation. Compté mois par mois.",
+ "classe": "tdb"
+}
+-->
+<h1>Registre d'intérêt général</h1>
+<!--#sans-js data/registre-interet-general.json-->
+
+<p>Une association d'intérêt général doit servir au-delà de ses membres. Quand ces membres habitent et vivent du lieu qu'ils gèrent, l'affirmer ne suffit pas&nbsp;: il faut pouvoir le montrer, chiffres à l'appui, sur plusieurs années.</p>
+
+<p>Ce registre est cette preuve. Il se remplit mois par mois, comme un relevé de pluviomètre. Personne ne compte rétrospectivement&nbsp;: on s'en aperçoit toujours trop tard.</p>
+
+<div id="etat"><p class="chargement">Chargement…</p></div>
+
+<h2>Les indicateurs</h2>
+<div id="definitions"></div>
+
+<h2>Pourquoi le publier</h2>
+
+<p>Trois raisons, dans cet ordre d'importance.</p>
+
+<p><strong>Pour nous.</strong> Il permet de vérifier l'écart entre ce qui est annoncé et ce qui est fait. Les mois sans activité y figurent&nbsp;: un registre lissé ne montrerait pas où le lieu décroche.</p>
+
+<p><strong>Pour l'administration.</strong> Le critère qui écarte les organismes fonctionnant «&nbsp;au profit d'un cercle restreint de personnes&nbsp;» ne se gagne pas sur une rédaction de statuts. Il se gagne sur des faits datés, sur dix-huit à trente-six mois. Une demande déposée tardivement mais accompagnée d'un historique daté a de meilleures chances qu'une demande précoce sans pièces.</p>
+
+<p><strong>Pour les autres collectifs.</strong> Le format de ce registre est réutilisable tel quel. Il est documenté et publié en données ouvertes&nbsp;; s'il vous sert, prenez-le.</p>
+
+<div class="note">
+  <span class="etiquette">Données exclues du registre</span>
+  <p>Aucun nom, aucune adresse, aucune coordonnée. Uniquement des totaux mensuels. Ce fichier est public, et une fiche de présence ne l'est pas.</p>
+</div>
+
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+const moisLong = (m) => new Date(m + "-01T12:00:00").toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+const moisCourt = (m) => new Date(m + "-01T12:00:00").toLocaleDateString("fr-FR", { month: "short", year: "2-digit" });
+
+(async () => {
+  let d;
+  try { d = await json("data/registre-interet-general.json"); }
+  catch (e) { echec("etat", "Registre indisponible."); return; }
+
+  document.getElementById("definitions").innerHTML =
+    '<div class="defilant"><table class="donnees"><thead><tr><th>Indicateur</th><th>Unité</th><th>Ce qu\'on compte</th></tr></thead><tbody>' +
+    d.indicateurs.map((i) => "<tr><td>" + i.libelle + "</td><td>" + i.unite + "</td><td>" + i.aide + "</td></tr>").join("") +
+    "</tbody></table></div>";
+
+  const mois = (d.mois || []).slice().sort((a, b) => a.mois.localeCompare(b.mois));
+
+  if (!mois.length) {
+    document.getElementById("etat").innerHTML =
+      '<div class="note"><span class="etiquette">Registre ouvert, pas encore rempli</span>' +
+      "<p>Aucun mois n'a encore été saisi. C'est normal&nbsp;: le registre vient d'être ouvert, et il n'a de valeur que par son ancienneté. " +
+      "Le premier mois compté sera le mois en cours.</p></div>" +
+      "<p>Le fichier est ici&nbsp;: <a href=\"data/registre-interet-general.json\">registre-interet-general.json</a>. " +
+      "Pour ajouter un mois, on y ajoute un objet dans <code>mois</code>, de la forme " +
+      "<code>{\"mois\": \"2026-09\", \"accueil\": 0, \"chantiers\": 0, …}</code>, avec au besoin une clé <code>note</code> " +
+      "pour ce qui ne se compte pas.</p>";
+    document.getElementById("horodatage").textContent =
+      "Registre créé le " + new Date(d.mis_a_jour).toLocaleDateString("fr-FR", { dateStyle: "long" }) + " · " + d.licence + ".";
+    return;
+  }
+
+  const an = new Date().getFullYear();
+  const cetteAnnee = mois.filter((m) => m.mois.startsWith(String(an)));
+  const total = (cle, liste) => liste.reduce((a, m) => a + (Number(m[cle]) || 0), 0);
+
+  document.getElementById("etat").innerHTML =
+    "<h3>" + an + "</h3><div class=\"tuiles\">" +
+    d.indicateurs.slice(0, 5).map((i) =>
+      tuile(i.libelle, nf0(total(i.cle, cetteAnnee)), "", i.unite)).join("") +
+    "</div>" +
+    "<div id=\"g-registre\"></div>" +
+    '<details class="tableau-brut"><summary>Voir tous les mois</summary><div class="defilant">' +
+    '<table class="donnees"><thead><tr><th>Mois</th>' + d.indicateurs.map((i) => "<th>" + i.libelle + "</th>").join("") + "</tr></thead><tbody>" +
+    mois.slice().reverse().map((m) => "<tr><td>" + moisLong(m.mois) + "</td>" +
+      d.indicateurs.map((i) => "<td>" + (m[i.cle] ?? "—") + "</td>").join("") + "</tr>").join("") +
+    "</tbody></table></div></details>";
+
+  const bloc = document.createElement("div");
+  bloc.className = "graphe";
+  bloc.innerHTML = "<h3>Personnes accueillies, mois par mois</h3><p class='legende-axe'>Visites, séjours et passages de personnes extérieures.</p><div></div>";
+  document.getElementById("g-registre").appendChild(bloc);
+  graphe({
+    conteneur: bloc.lastElementChild,
+    points: mois.map((m) => ({ cle: moisLong(m.mois), libelle: moisCourt(m.mois), y: Number(m.accueil) || 0 })),
+    type: "barres", unite: "personnes", hauteur: 160
+  });
+
+  document.getElementById("horodatage").textContent =
+    "Mis à jour le " + new Date(d.mis_a_jour).toLocaleDateString("fr-FR", { dateStyle: "long" }) + " · " + d.licence + ".";
+})();
+</script>

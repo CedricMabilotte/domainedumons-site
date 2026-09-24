@@ -1,0 +1,110 @@
+/* Domaine du Mons — visuels pour les réseaux, composés avec Paged.js.
+   Une page par visuel, une planche par format de réseau. Chaque planche
+   s'imprime en un seul PDF ; scripts/editions.py --rendre la découpe en PNG.
+   Les couleurs sont celles du site, sans ses variantes sombres : un visuel
+   exporté n'a pas de thème. */
+
+/* Une planche par format (visuels/carre.html, portrait.html…) : Paged.js 0.4
+   dessine une page nommée à sa taille, mais toutes les pages d'un même
+   document prennent la taille de la règle @page par défaut. La taille est
+   donc posée par chaque planche, dans un <style>. Constaté au premier rendu,
+   le 24/09/2026 : 82 visuels sortaient en format lettre. */
+
+:root {
+  --papier: #ffffff; --surface: #f6f5f0; --encre: #1a1915; --douce: #5b5749;
+  --filet: #d8d4c7; --accent: #5c6b4a; --accent-fort: #4a5a3a; --ici: #b23a0c;
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+           "Noto Serif", "Liberation Serif", "Times New Roman", serif;
+}
+html, body { margin: 0; font-family: var(--serif); color: var(--encre); }
+
+.v { box-sizing: border-box; width: 100%; height: 100%; display: flex; flex-direction: column;
+     background: var(--papier); padding: 84px 84px 72px; position: relative; overflow: hidden;
+     break-after: page; }
+.v:last-child { break-after: auto; }
+.v-carre { height: 1080px; }
+.v-portrait { height: 1350px; }
+.v-story { height: 1920px; padding: 160px 96px 150px; }
+.v-og { height: 630px; padding: 56px 64px 48px; }
+.v-serie { height: 1350px; }
+
+/* filet d'accent à gauche, comme le condensé du site */
+.v::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: var(--accent); }
+
+.v-tete { display: flex; justify-content: space-between; align-items: baseline; font-size: 27px; color: var(--douce);
+          border-bottom: 2px solid var(--filet); padding-bottom: 18px; margin-bottom: 48px; }
+.v-tete strong { color: var(--encre); font-weight: 600; font-size: 31px; }
+.v-titre { font-size: 58px; line-height: 1.12; font-weight: 600; margin: 0 0 32px; }
+.v-chiffre { font-size: 190px; line-height: .95; font-weight: 600; color: var(--accent-fort); margin: 0 0 18px;
+             font-variant-numeric: lining-nums; letter-spacing: -.02em; white-space: nowrap; }
+.v-unite { font-size: 44px; line-height: 1.2; color: var(--encre); margin: 0 0 44px; max-width: 18em; }
+.v-texte { font-size: 34px; line-height: 1.42; margin: 0; color: var(--encre); }
+.v-citation { font-size: 60px; line-height: 1.22; margin: 0 0 40px; font-weight: 400; }
+.v-citation::before { content: "« "; color: var(--accent); }
+.v-citation::after { content: " »"; color: var(--accent); }
+.v-pied { margin-top: auto; padding-top: 32px; display: flex; justify-content: space-between; align-items: flex-end;
+          gap: 32px; font-size: 24px; line-height: 1.35; color: var(--douce); border-top: 2px solid var(--filet); }
+.v-pied .url { color: var(--encre); font-size: 27px; white-space: nowrap; }
+.v-source { max-width: 62%; }
+
+.v-croquis svg { width: 100%; height: auto; display: block; margin: 0 0 32px; }
+.trait-croquis { fill: none; stroke: var(--encre); stroke-width: 1.3; stroke-linecap: round; opacity: .85; }
+.texte-croquis text { fill: var(--encre); font-family: var(--serif); font-size: 19px; }
+.texte-croquis .fort { font-size: 24px; font-weight: 600; }
+.texte-croquis .petit, .texte-croquis .sur { font-size: 17px; font-style: italic; opacity: .7; }
+
+.v-liste { list-style: none; padding: 0; margin: 0; }
+.v-liste li { font-size: 44px; line-height: 1.25; padding: 26px 0; border-top: 2px solid var(--filet); }
+.v-liste li:last-child { border-bottom: 2px solid var(--filet); }
+
+.v-tableau { width: 100%; border-collapse: collapse; }
+.v-tableau th, .v-tableau td { text-align: left; vertical-align: top; padding: 22px 20px 22px 0;
+                               border-top: 2px solid var(--filet); font-size: 31px; line-height: 1.3; }
+.v-tableau th { font-weight: 600; width: 44%; }
+.v-tableau tr:last-child th, .v-tableau tr:last-child td { border-bottom: 2px solid var(--filet); }
+
+/* l'appel : aplat d'accent, texte clair — contraste 6,9:1 */
+.v-appel { background: var(--accent-fort); color: #fff; }
+.v-appel::before { background: #fff; opacity: .25; }
+.v-appel .v-tete, .v-appel .v-pied { color: #e4e8dc; border-color: #ffffff44; }
+.v-appel .v-tete strong, .v-appel .v-pied .url, .v-appel .v-texte { color: #fff; }
+.v-appel .v-citation::before, .v-appel .v-citation::after { color: #d6dfc9; }
+.v-appel .v-action { font-size: 40px; font-weight: 600; margin: 40px 0 0; padding: 22px 30px;
+                     border: 2px solid #fff; align-self: flex-start; }
+
+/* la fiche du Grain */
+.v-fiche { background: var(--surface); }
+.v-code { font-size: 96px; font-weight: 600; color: var(--accent-fort); margin: 0 0 12px; letter-spacing: -.01em; }
+.v-famille { font-size: 30px; font-style: italic; color: var(--douce); margin: 0 0 36px; }
+
+/* la couverture de série */
+.v-couverture { background: var(--surface); justify-content: center; }
+.v-couverture .v-titre { font-size: 104px; }
+.v-numero { position: absolute; right: 84px; top: 84px; font-size: 30px; color: var(--douce); }
+
+/* la vignette de lien : titre à gauche, marque à droite */
+.v-og .v-tete { font-size: 22px; margin-bottom: 30px; padding-bottom: 14px; }
+.v-og .v-tete strong { font-size: 25px; }
+.v-og .v-titre { font-size: 54px; margin-bottom: 20px; }
+.v-og .v-texte { font-size: 26px; line-height: 1.4; color: var(--douce); }
+.v-og .v-pied { font-size: 20px; padding-top: 18px; }
+.v-og .v-pied .url { font-size: 22px; }
+
+/* formats étroits : on resserre */
+.v-carre .v-chiffre { font-size: 168px; }
+.v-carre .v-citation { font-size: 52px; }
+.v-carre .v-texte { font-size: 31px; }
+.v-story .v-chiffre { font-size: 230px; }
+.v-story .v-citation { font-size: 72px; }
+.v-story .v-texte { font-size: 40px; }
+.v-story .v-titre { font-size: 70px; }
+.v-story .v-liste li { font-size: 52px; }
+
+@media screen {
+  body { background: #d9d6cc; }
+  .pagedjs_pages { display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; zoom: .35; }
+  .pagedjs_page { box-shadow: 0 2px 10px rgba(0,0,0,.3); }
+}
+
+.v .v-chiffre-long { font-size: 120px; }
+.v-story .v-chiffre-long { font-size: 140px; }

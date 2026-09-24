@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Grain, cahier complet — édition paginée — Domaine du Mons</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../edition.css?v=29">
+<script>
+window.PagedConfig = {
+  auto: true,
+  after: function () {
+    var b = document.createElement("div");
+    b.className = "barre-edition";
+    b.innerHTML = '<a href="../editions.html">← Éditions</a> <span>Le Grain, cahier complet</span> ' +
+      '<button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button>';
+    document.body.appendChild(b);
+    document.body.setAttribute("data-pret", String(document.querySelectorAll(".pagedjs_page").length));
+  }
+};
+</script>
+<script src="../vendor/paged.polyfill.min.js?v=29"></script>
+</head>
+<body class="a5">
+<section class="couverture">
+  <p class="sur-titre">Le Grain — cahier</p>
+  <h1>Ce qui se transporte</h1>
+  <p class="chapeau">Retours d'expérience, patterns et gabarits génériques, écrits pour être repris tels quels par d'autres collectifs.</p>
+  <svg viewBox="0 0 640 306" role="img" aria-labelledby="t-bou d-bou" class="croquis">
+  <title id="t-bou">La boucle d'une décision</title>
+  <desc id="d-bou">Une proposition est écrite, les objections sont recueillies et intégrées, la décision est tranchée puis consignée, et une date de réexamen est fixée dès le départ.</desc>
+  <path class="trait-croquis" d="M20.1 18.0C76.6 23.2 140.3 23.9 196.8 22.0"/>
+  <path class="trait-croquis" d="M20.7 20.1C77.2 21.2 140.7 21.2 197.1 19.5"/>
+  <path class="trait-croquis" d="M197.3 19.7C196.5 44.3 195.9 71.8 196.3 96.4"/>
+  <path class="trait-croquis" d="M196.4 18.5C192.3 43.7 197.0 72.0 196.1 97.2"/>
+  <path class="trait-croquis" d="M197.2 95.8C140.6 95.1 76.8 94.9 20.2 94.1"/>
+  <path class="trait-croquis" d="M196.0 98.1C138.8 99.2 74.6 99.1 17.5 95.5"/>
+  <path class="trait-croquis" d="M20.8 95.4C19.4 70.7 20.9 42.9 18.6 18.2"/>
+  <path class="trait-croquis" d="M18.1 96.3C16.8 71.5 16.1 43.5 20.7 18.6"/>
+  <path class="trait-croquis" d="M430.3 20.9C491.2 20.7 559.6 20.4 620.5 21.7"/>
+  <path class="trait-croquis" d="M431.3 21.2C491.9 18.0 560.0 19.0 620.7 21.3"/>
+  <path class="trait-croquis" d="M621.6 20.7C624.7 45.6 620.4 73.6 621.6 98.5"/>
+  <path class="trait-croquis" d="M619.4 18.5C622.1 44.0 620.6 72.7 619.6 98.2"/>
+  <path class="trait-croquis" d="M620.9 97.9C560.5 100.9 492.5 100.8 432.0 96.1"/>
+  <path class="trait-croquis" d="M620.5 93.9C560.0 93.4 491.9 95.3 431.3 97.6"/>
+  <path class="trait-croquis" d="M430.1 97.3C433.0 72.8 428.1 45.2 433.1 20.7"/>
+  <path class="trait-croquis" d="M432.7 95.5C436.4 71.4 432.6 44.4 432.8 20.3"/>
+  <path class="trait-croquis" d="M429.6 211.9C490.5 211.3 558.9 213.5 619.7 211.1"/>
+  <path class="trait-croquis" d="M432.7 211.3C493.0 212.5 560.8 213.6 621.1 210.2"/>
+  <path class="trait-croquis" d="M618.4 210.0C617.4 234.2 621.6 261.5 618.7 285.8"/>
+  <path class="trait-croquis" d="M619.4 210.1C616.2 234.4 621.4 261.7 620.2 286.0"/>
+  <path class="trait-croquis" d="M621.7 284.9C559.9 287.9 490.3 286.2 428.5 286.8"/>
+  <path class="trait-croquis" d="M622.2 285.1C561.4 286.2 493.1 288.6 432.4 285.4"/>
+  <path class="trait-croquis" d="M431.6 285.5C428.7 261.6 431.1 234.6 432.9 210.6"/>
+  <path class="trait-croquis" d="M433.0 285.7C429.1 260.5 433.0 232.0 430.8 206.8"/>
+  <path class="trait-croquis" d="M18.5 211.0C76.1 212.8 140.8 206.8 198.4 210.5"/>
+  <path class="trait-croquis" d="M17.9 211.2C75.8 211.6 141.0 211.0 199.0 210.4"/>
+  <path class="trait-croquis" d="M195.4 208.5C196.8 233.1 192.4 260.8 196.8 285.3"/>
+  <path class="trait-croquis" d="M196.9 209.8C197.9 234.5 197.8 262.4 194.1 287.1"/>
+  <path class="trait-croquis" d="M196.3 284.6C139.3 289.0 75.2 285.3 18.2 287.8"/>
+  <path class="trait-croquis" d="M196.1 287.5C139.6 287.7 76.0 288.2 19.4 285.5"/>
+  <path class="trait-croquis" d="M18.3 284.7C18.5 260.1 21.3 232.4 18.0 207.7"/>
+  <path class="trait-croquis" d="M20.0 285.8C19.6 261.5 23.1 234.3 20.8 210.1"/>
+  <path class="trait-croquis" d="M199.6 56.4C273.4 56.9 356.4 61.5 430.2 59.4"/>
+  <path class="trait-croquis" d="M200.4 57.4C273.5 59.9 355.8 55.5 428.9 56.6"/>
+  <path class="trait-croquis" d="M426.6 59.0C422.2 55.9 417.2 54.7 413.0 52.5"/>
+  <path class="trait-croquis" d="M426.7 57.5C422.9 59.2 418.6 61.5 414.4 62.9"/>
+  <path class="trait-croquis" d="M527.7 97.4C529.9 132.3 521.4 171.5 524.5 206.4"/>
+  <path class="trait-croquis" d="M527.6 101.5C528.3 135.8 524.2 174.3 527.1 208.5"/>
+  <path class="trait-croquis" d="M525.6 205.8C527.7 202.6 529.1 198.0 530.9 195.0"/>
+  <path class="trait-croquis" d="M526.9 206.8C525.6 203.0 523.7 198.3 521.0 194.2"/>
+  <path class="trait-croquis" d="M427.3 249.4C354.6 253.2 272.9 252.4 200.3 248.6"/>
+  <path class="trait-croquis" d="M428.5 248.4C355.2 245.7 272.7 247.1 199.4 247.7"/>
+  <path class="trait-croquis" d="M201.1 247.2C204.8 248.4 209.8 250.9 213.5 253.5"/>
+  <path class="trait-croquis" d="M201.7 248.0C205.9 246.9 209.6 244.8 213.7 242.5"/>
+  <path class="trait-croquis" d="M109.7 207.9C105.7 173.0 108.1 133.8 110.1 98.9"/>
+  <path class="trait-croquis" d="M109.0 207.2C111.6 173.1 112.7 134.7 108.6 100.5"/>
+  <path class="trait-croquis" d="M108.1 102.2C107.4 106.2 105.3 109.7 103.7 113.2"/>
+  <path class="trait-croquis" d="M107.8 101.3C109.9 105.4 111.0 109.5 112.5 113.0"/>
+  <g class="texte-croquis">
+    <text x="38" y="50" class="fort">une proposition</text>
+    <text x="38" y="74">écrite, datée, signée</text>
+    <text x="450" y="50" class="fort">les objections</text>
+    <text x="450" y="74">recueillies, puis intégrées</text>
+    <text x="450" y="240" class="fort">on tranche</text>
+    <text x="450" y="264">et on consigne le motif</text>
+    <text x="38" y="240" class="fort">on revoit à date</text>
+    <text x="38" y="264">fixée dès le départ</text>
+  </g>
+</svg>
+  <div class="pied"><p><strong>Domaine du Mons</strong> — collectif expérimental, Vitrac-sur-Montane (Corrèze)</p><p>9 fiches · septembre 2026 · CC BY-SA 4.0</p><p>domainedumons.actitude.org</p></div>
+</section><section class="verso"><p>Ce cahier rassemble les fiches publiées du Grain du Domaine du Mons. Chacune existe aussi en ligne, en version A5 séparée et en Markdown. Textes sous licence CC BY-SA 4.0 : copiez, adaptez, republiez, en citant la source et sous la même licence.</p><p>Composé avec Paged.js. Aucune fiche n'est un avis juridique ; celles qui touchent au droit disent leurs sources et leurs limites.</p></section><nav class="sommaire-edition"><h2>Sommaire</h2><ol><li class="famille">Pour commencer</li><li><span class="code"></span><a href="#grain-digest">Un motif, huit contrôles — le digest portable</a></li><li class="famille">Retours d'expérience</li><li><span class="code">RX-02</span><a href="#grain-rx-02-seuil-recale">Un seuil repris de la littérature a produit un résultat nul, qu&#x27;on a failli prendre pour une bonne nouvelle</a></li><li><span class="code">RX-03</span><a href="#grain-rx-03-indicateur-en-butee">Un indicateur officiel donnait la même valeur à deux situations différentes</a></li><li><span class="code">RX-04</span><a href="#grain-rx-04-source-hors-de-son-domaine">Nous avons compté les associations d&#x27;un territoire dans un fichier qui n&#x27;en voit qu&#x27;un quart</a></li><li><span class="code">RX-05</span><a href="#grain-rx-05-la-patience-comme-correctif">Le correctif était d&#x27;attendre, pas de changer de code</a></li><li><span class="code">RX-06</span><a href="#grain-rx-06-inventaire-faux-de-deux-ordres">Un inventaire automatique dont le total brut était faux de deux ordres de grandeur</a></li><li class="famille">Patterns</li><li><span class="code">PA-01</span><a href="#grain-pa-01-verrou-structurel">Le verrou doit être structurel, pas contractuel</a></li><li><span class="code">PA-02</span><a href="#grain-pa-02-preuve-par-les-faits">L&#x27;intérêt général se prouve par les faits, pas par les statuts</a></li><li class="famille">Gabarits</li><li><span class="code">GA-01</span><a href="#grain-ga-01-faisceau-de-droits">Le faisceau de droits, un gabarit vierge</a></li></ol></nav><article class="chapitre" id="grain-digest">
+<h1><span class="titre-courant">Un motif, huit contrôles — le digest portable</span></h1>
+
+<p class="chapeau">Extrait du projet «&nbsp;Domaine du Mons&nbsp;» pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Le digest</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>18 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0 (documentation) / MIT (code)</dd></div>
+</dl>
+<h2>Un seul motif de défaillance, six fois</h2>
+<p>Six enquêtes indépendantes — juridique, climatique, hydrologique, associative, cartographique, topographique — ont produit six erreurs qui n'ont qu'une forme&nbsp;:</p>
+<blockquote><p><strong>Un résultat propre, plausible, et faux — sans que rien dans la sortie ne le signale.</strong></p></blockquote>
+<p>Le mode de défaillance ne se voit pas parce qu'il ne casse rien. La requête est juste, le code tourne, le chiffre s'affiche, et il ressemble à un chiffre qu'on connaît. C'est précisément cette ressemblance qui le fait passer.</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">l'erreur</th><th scope="col">ce qui l'a révélée</th></tr></thead><tbody><tr><th scope="row"><strong>Le panorama</strong></th><td>Une recherche par les cas trouve les solutions adoptées, pas les solutions disponibles. La recommandation juridique s'est inversée entre deux passes.</td><td>Une seconde passe d'un autre angle</td></tr><tr><th scope="row"><strong>Le seuil emprunté</strong></th><td>Un seuil repris d'une source sans recalage sur la donnée locale décalait un stade phénologique d'un mois.</td><td>Le résultat était inexplicable sur le terrain</td></tr><tr><th scope="row"><strong>L'indicateur en butée</strong></th><td>Une colonne officielle donnait la <strong>même valeur à deux états différents</strong>. Deux faux épisodes dans un tableau publié.</td><td>Une valeur impossible&nbsp;: huit écarts-types</td></tr><tr><th scope="row"><strong>Le registre trop étroit</strong></th><td>Compter des associations dans un fichier qui n'immatricule que celles ayant une existence financière&nbsp;: 1 952 au lieu de 8 340.</td><td>La recherche d'un autre champ</td></tr><tr><th scope="row"><strong>Le code d'erreur mal lu</strong></th><td>Un 504 pris pour «&nbsp;votre requête est mauvaise&nbsp;» alors qu'il dit «&nbsp;l'instance est chargée&nbsp;». Une journée perdue à chercher un contournement.</td><td>La patience, le lendemain</td></tr><tr><th scope="row"><strong>L'inventaire aberrant</strong></th><td>Un algorithme correct sur une donnée correcte&nbsp;: 66&nbsp;% du volume inventorié était un artefact d'ouvrage d'art.</td><td>Ramener le total à une grandeur familière</td></tr></tbody></table></div>
+<h2>Les huit contrôles qui les attrapent</h2>
+<p>Ils coûtent des minutes. Chacun a été écrit après avoir manqué.</p>
+<p class="point" data-n="1"><strong>Demander au registre son critère d'entrée — et sa date.</strong> La question n'est pas «&nbsp;cette source est-elle à jour&nbsp;?&nbsp;» mais <strong>«&nbsp;qu'est-ce qui fait entrer une ligne dans ce fichier&nbsp;?&nbsp;»</strong>, avant la première requête. Un registre ne se trompe jamais sur ce qu'il contient&nbsp;; il se tait sur ce qu'il ne contient pas. Une source renvoie une liste complète — complète de ce qu'elle contient.</p>
+<p>Préférer le registre dont l'<strong>objet même est de dénombrer</strong> la population cherchée, même s'il est plus pénible d'accès qu'une API commode portant une population voisine.</p>
+<p>Et <strong>un catalogue de sources se date, sinon il ment</strong> : trois services publics ou parapublics sur lesquels ce corpus s'appuyait ont fermé ou changé d'adresse dans la même année.</p>
+<p class="point" data-n="2"><strong>Deux sources sur tout dénombrement.</strong> Un chiffre unique n'est pas un chiffre vérifié, aussi propre soit sa provenance. Quand l'écart est notable, <strong>il est lui-même une information</strong> : le rapport entre deux comptages mesure quelque chose, et cette mesure n'existait pas avant de trouver l'erreur.</p>
+<p class="point" data-n="3"><strong>Le test de saturation.</strong> Trier la colonne et chercher des <strong>valeurs identiques, à la précision publiée, sur des entrées différentes</strong>. La question n'est pas «&nbsp;la valeur est-elle grande&nbsp;?&nbsp;» mais «&nbsp;deux entrées différentes donnent-elles la même sortie&nbsp;?&nbsp;». Une valeur impossible est un cadeau&nbsp;; une butée discrète ne se signale pas.</p>
+<p>Et contrôler toute grandeur dérivée <strong>contre la grandeur brute dont elle dérive</strong>.</p>
+<p class="point" data-n="4"><strong>La conversion en grandeur familière.</strong> «&nbsp;3,5 millions de m³&nbsp;» ne dit rien&nbsp;; «&nbsp;quatre mètres de profondeur moyenne sur un plateau&nbsp;» se réfute en une seconde. Publier avec le total <strong>la part portée par ses trois plus gros éléments</strong> : une somme dominée par deux objets décrit ces objets, pas la population.</p>
+<p class="point" data-n="5"><strong>Vérifier qu'un total égale la somme de ses parties.</strong> Le contrôle le plus bête est celui qui trouve. Il a ramené un parc de logements de 292 à 146.</p>
+<p class="point" data-n="6"><strong>Écrire les hypothèses tacites du modèle sur le monde.</strong> Un calcul d'écoulement de surface suppose que l'eau ne circule que par la surface&nbsp;; toute buse viole cette hypothèse sans que rien ne le signale. Les hypothèses non écrites ne sont jamais testées. Croiser avec une source indépendante, <strong>même approximative</strong>.</p>
+<p class="point" data-n="7"><strong>Distinguer les codes d'erreur qui parlent de vous de ceux qui parlent de l'autre.</strong> 400, 404, 422 appellent une correction. 429, 502, 503, 504 appellent une attente qui double. Réessayer vite est la seule réaction qui aggrave la panne qu'on constate. Et mesurer la liaison avant de l'accuser. <strong>Un quota n'est pas une panne</strong> : c'est une information sur le volume demandé, souvent corrigible par le cadrage plutôt que par le code.</p>
+<p class="point" data-n="8"><strong>Éprouver les deux chemins.</strong> Un dossier écrit puis relu n'est pas le même objet&nbsp;: en mémoire une année est un entier, relue depuis un fichier c'est une chaîne. Le défaut n'apparaît que sur l'un des deux chemins, et une relecture ne le voit jamais — seul un essai de bout en bout, dans les deux sens, l'attrape.</p>
+<p><strong>Et, avant tout cela&nbsp;: vérifier la mesure avant de croire ce qu'elle dit.</strong> Quand un contrôle annonce qu'une chose ne marche pas, suspecter d'abord le contrôle. Deux correctifs ont été déployés sur un faux diagnostic parce qu'un harnais réutilisait la même adresse et mesurait l'état précédent. Une sonde de surveillance a signalé une source morte qui allait très bien, parce qu'elle lisait mal une réponse. <strong>Un outil qui crie au loup finit par ne plus être lu</strong> : lui déclarer les réponses attendues, et le faire réessayer avant de conclure.</p>
+<h2>Rendre les corrections cumulatives</h2>
+<p>Les huit contrôles ci-dessus trouvent des erreurs. Sans ce qui suit, ils les trouvent <strong>à chaque fois</strong>, sur chaque nouveau territoire, chaque nouveau jeu de données. Quatre gestes, le jour même, transforment un travail répété en travail qui progresse.</p>
+<p><strong>Une correction sans test n'est pas une correction.</strong> Elle est corrigée pour ce cas-là. Extraire du brut fautif le fragment minimal qui portait l'erreur, l'enregistrer tel quel, écrire l'essai avec sa date, son objet, ce que la sortie affichait et ce qui l'a démasquée. Ces essais-là valent plus que les autres&nbsp;: <strong>ils décrivent des erreurs qui se sont produites, pas des erreurs imaginées.</strong></p>
+<p><strong>Ce qui ne se rejoue pas n'est pas reproductible.</strong> Garder chaque réponse brute telle quelle, avec son empreinte, et une ligne de provenance — adresse, producteur, licence, date. L'épreuve tient en une commande&nbsp;: refaire tout le travail hors ligne, depuis le cache. La première collecte prend des minutes, le rejeu quelques secondes. C'est ce qui distingue un travail vérifiable d'un travail à croire sur parole — et ce qui permet à une source fermée de ne pas emporter l'analyse avec elle.</p>
+<p><strong>Sonder les sources, et comparer au sondage précédent.</strong> Un état daté qui distingue trois choses que rien d'autre ne distingue&nbsp;: un refus temporaire (quota), un refus durable (la source a changé), un injoignable (souvent la liaison). La comparaison est ce qui a de la valeur&nbsp;: elle affiche d'elle-même ce qui a bougé depuis la dernière fois.</p>
+<p><strong>Tenir un journal de ce sur quoi l'outil a réellement tourné.</strong> Une ligne par cas&nbsp;: date, échelle, ce qui a été collecté, ce qui a manqué, ce qui a été signalé. C'est la seule façon de savoir ce que «&nbsp;ça marche&nbsp;» veut dire — sur combien de cas <em>réellement différents</em>, et non sur combien de fois sur le même.</p>
+<p><strong>Ce qui se mesure d'une fois à l'autre</strong> : part de ce qui se collecte sans intervention (doit monter) · manques par cas (doit baisser) · corrections trouvées après coup (doit baisser, et chacune a son test) · délai entre collecte et livraison (doit baisser sans que les corrections montent). Un cinquième compte davantage et ne se mesure pas&nbsp;: <strong>le résultat a-t-il servi à décider quelque chose.</strong></p>
+<h2>Quatre règles d'écriture</h2>
+<p><strong>Séparer la matière du commentaire.</strong> Tant que les deux sont mêlés, le commentaire précède le contrôle. Une fois séparés, le texte ne peut citer qu'un chiffre déjà contrôlé, et la matière n'a plus à être jolie.</p>
+<p><strong>Ne rien imputer.</strong> Une valeur absente vaut «&nbsp;nd&nbsp;» jusque dans le texte final. Une tendance ne s'annonce que si l'intervalle de confiance exclut zéro — sinon on écrit «&nbsp;pas de tendance détectable&nbsp;». Une source qui échoue se déclare, elle ne se comble pas en silence.</p>
+<p><strong>Publier l'incertitude coûte moins cher que publier une certitude fausse.</strong> Une page qui dit «&nbsp;à l'étude&nbsp;» n'a jamais à être rétractée. Marquer dans le texte ce qui est vérifié et ce qui ne l'est pas, et conserver ces marques&nbsp;: sans elles, une information de seconde main devient indiscernable d'un texte contrôlé au bout de trois mois.</p>
+<p><strong>Publier le doute plutôt que de trancher en silence.</strong> Un tri silencieux n'est pas contestable&nbsp;; un doute affiché l'est. C'est la différence entre un travail qu'on peut vous reprendre et un travail qu'il faut vous croire.</p>
+<hr>
+<h2>Trois outils prêts à l'emploi</h2>
+<h3>La grille d'intérêt général</h3>
+<p>Trier un tissu associatif sur ce que les organisations <strong>disent faire</strong>, et non sur leur statut, leur code d'activité ou leur nom.</p>
+<p><strong>Cinq faits font entrer</strong> — un seul suffit, s'il est net&nbsp;: <em>ouverture</em> (mettre un lieu ou une ressource à disposition de non-membres), <em>transmission</em> (former, accompagner des personnes extérieures), <em>commun</em> (prendre soin d'un bien qui n'appartient à personne en particulier), <em>solidarité</em> (aider des personnes en difficulté qui ne sont pas les membres), <em>territoire</em> (soutenir une activité non marchande ou coopérative).</p>
+<p><strong>Trois motifs font sortir</strong>, et l'emportent sauf action déclarée vers l'extérieur <em>en plus</em> : <em>cercle</em>, <em>économique</em>, <em>politique</em>.</p>
+<p><strong>Trois verdicts</strong> : retenu, douteux, hors — et les douteux sont publiés.</p>
+<p>Trois extensions, nées de l'application à un corpus de nature différente&nbsp;: qualifier <strong>la nature de l'acteur</strong> avant d'appliquer les faits, car pour un acteur marchand la transaction ne compte pas et il faut un fait en plus de la vente&nbsp;; publier <strong>la base de preuve</strong> avec chaque verdict — objet déclaré, réseau tiers qui atteste une pratique, ou rien, une fiche sans objet et sans réseau ne pouvant jamais être retenue&nbsp;; distinguer <strong>hors périmètre</strong> de hors intérêt général.</p>
+<p>Écrire la grille <strong>avant</strong> la première lecture, et ne pas l'ajuster après coup. Sa valeur est dans les cas limites&nbsp;: sans eux, ce n'est qu'une déclaration d'intention.</p>
+<h3>Le diagnostic de territoire</h3>
+<p>Produire, à partir des données publiques françaises, un dossier de données daté, sourcé, contrôlé et rejouable — puis le rapport qui s'écrit dessus, puis la boucle qui fait que le territoire suivant coûtera moins cher.</p>
+<p>Deux échelles, qui ne se confondent pas&nbsp;: un lieu (ferme collective, site habité) et une commune rurale. Une étude tient dans un fichier de configuration&nbsp;; changer de territoire, c'est changer ce fichier. Le brut n'est jamais modifié. Les contrôles tournent à chaque collecte. Rien n'est imputé.</p>
+<p>Contre-indication majeure&nbsp;: la chaîne <strong>pré-localise, elle ne qualifie pas</strong>. Zones humides, périmètres de captage, débroussaillement — le critère réglementaire reste pédologique, floristique ou administratif, et le terrain reste à faire.</p>
+<h3>La cartographie honnête</h3>
+<p>Cartes web sans requête sortante, à partir des données publiques françaises. Quatre modes de rendu, trente-cinq règles opposables, et trois refus codés en dur&nbsp;: une choroplèthe d'effectifs bruts, un rayon proportionnel à la valeur, des zones sans donnée coloriées dans la palette. Ils se contournent, en l'écrivant dans la fiche de la carte — donc à un endroit où le lecteur le verra aussi.</p>
+<hr>
+<p><em>CC BY-SA 4.0 pour la documentation, MIT pour le code.</em></p>
+
+<p class="colophon">Collectif du Domaine du Mons — Un motif, huit contrôles — le digest portable. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-digest.html</p>
+</article><article class="chapitre" id="grain-rx-02-seuil-recale">
+<h1><span class="code-fiche">RX-02</span><span class="titre-courant">Un seuil repris de la littérature a produit un résultat nul, qu&#x27;on a failli prendre pour une bonne nouvelle</span></h1>
+
+<p class="chapeau">Retour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>14 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Vérifier localement une affirmation bien établie&nbsp;: le débourrement des arbres fruitiers avance plus vite que la dernière gelée de printemps ne recule, donc l'exposition au gel augmente alors même qu'il gèle moins souvent. Le chiffre national — 3 à 6&nbsp;jours d'avance par décennie — circule partout&nbsp;; personne ne l'avait recalculé sur ce point de la Corrèze.</p>
+<p>La méthode était écrite d'avance dans le document de travail&nbsp;: croiser une <strong>somme de températures</strong> (proxy du débourrement&nbsp;: ~250&nbsp;°C·j base 5 depuis le 1ᵉʳ février pour un pommier) avec les gelées postérieures, année par année depuis 1950.</p>
+<h2>Le déroulé</h2>
+<p>Le calcul a tourné et a donné&nbsp;: <strong>débourrement médian au 12 mai</strong>, et <strong>3&nbsp;% des années</strong> comptant une gelée après ce stade, sans tendance, sur les trois périodes de trente ans comparées.</p>
+<p>Résultat parfaitement présentable. Il aurait tenu dans une page du site&nbsp;: <em>«&nbsp;contrairement à ce qu'on lit, l'exposition au gel de printemps n'augmente pas ici.&nbsp;»</em></p>
+<p>Il était faux. Un débourrement médian au 12 mai est absurde pour un pommier à 590&nbsp;m en Corrèze — le stade réel se situe fin mars ou début avril. Le seuil plaçait le stade <strong>après</strong> la fenêtre où il gèle encore. L'analyse comptait donc des gelées dans une période où il n'y en a plus, et ne pouvait produire qu'un résultat nul.</p>
+<p>Recalage&nbsp;: le seuil qui place la médiane au 4 avril est <strong>80&nbsp;°C·j</strong>, et non 250. Le seuil qui place la floraison au 24 avril est 150.</p>
+<p>Avec les bons seuils, la conclusion s'inverse&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">Seuil 250&nbsp;°C·j</th><th scope="col">Seuils 80 / 150&nbsp;°C·j</th></tr></thead><tbody><tr><th scope="row">Débourrement médian</th><td>12 mai</td><td>4 avril</td></tr><tr><th scope="row">Années avec gelée après débourrement</th><td>3&nbsp;%</td><td><strong>47 à 60&nbsp;%</strong></td></tr><tr><th scope="row">Années avec gelée sur fleur ouverte, 1961-1990</th><td>—</td><td>3&nbsp;%</td></tr><tr><th scope="row">Années avec gelée sur fleur ouverte, 1996-2025</th><td>—</td><td><strong>17&nbsp;%</strong></td></tr></tbody></table></div>
+<h2>Pourquoi l'écart</h2>
+<p>Une somme de températures n'est pas une grandeur physique unique&nbsp;: elle dépend de <strong>la base</strong> (0, 5, 10&nbsp;°C), de <strong>la date de départ</strong> (1ᵉʳ janvier, 1ᵉʳ février, date de fin de dormance), et de <strong>la méthode de cumul</strong> (moyenne simple, méthode sinusoïdale, troncature des minimales sous la base). Deux publications sérieuses peuvent citer 250 et 80 pour le même stade sans qu'aucune ne se trompe — elles ne comptent pas la même chose.</p>
+<p>Le chiffre repris avait perdu ses conventions en route. C'est le sort ordinaire d'un seuil qui voyage de source en source.</p>
+<p><strong>Et le mode de défaillance est le pire possible.</strong> Un seuil trop haut ne provoque ni erreur, ni valeur aberrante, ni série vide. Il produit un résultat propre, calculé sur 76&nbsp;ans, avec son test statistique et son intervalle de confiance — et ce résultat est <em>rassurant</em>. Rien dans la sortie ne signale le problème. Seule la confrontation de la date médiane au bon sens agronomique l'a fait apparaître.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un seuil repris d'ailleurs se recale sur la série locale avant d'en tirer quoi que ce soit.</strong> Le recalage le plus économique&nbsp;: vérifier que la grandeur intermédiaire — ici la date médiane du stade — tombe où un praticien du lieu l'attend. Cinq minutes, et c'est ce qui a sauvé l'analyse.</p>
+<p class="point" data-n="2"><strong>Toujours sortir les grandeurs intermédiaires, pas seulement le résultat.</strong> Si le script n'avait affiché que «&nbsp;3&nbsp;% des années&nbsp;», l'erreur passait. Il affichait aussi la date médiane, et c'est elle qui a alerté.</p>
+<p class="point" data-n="3"><strong>Se méfier particulièrement des résultats nuls et rassurants.</strong> Une analyse qui ne trouve rien mérite la même vérification qu'une analyse qui trouve un effet spectaculaire — et elle la reçoit rarement, parce qu'elle ne surprend personne. C'est l'asymétrie qui laisse passer les erreurs.</p>
+<p class="point" data-n="4"><strong>Un paramètre sans ses conventions n'est pas un paramètre.</strong> Toute somme de températures citée dans le corpus porte désormais sa base, sa date de départ et sa méthode de cumul, ou n'est pas citée.</p>
+<h2>Les changements</h2>
+<ul><li>Tout seuil biologique ou agronomique importé est <strong>recalé</strong> sur la série locale, et le recalage est écrit dans la méthode publiée.</li><li>Les scripts d'analyse <strong>affichent les grandeurs intermédiaires</strong> en plus du résultat.</li><li>Le corpus ne cite pas de somme de températures sans base, date de départ et méthode de cumul.</li><li>Une conclusion négative («&nbsp;pas de tendance&nbsp;», «&nbsp;pas d'effet&nbsp;») déclenche une vérification de la chaîne de calcul, au même titre qu'une conclusion positive forte.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique, et pas limitée au climat. Le même mode de défaillance guette tout indicateur à seuil repris d'une source extérieure&nbsp;: seuils de tension d'un sol, périodes de retour hydrologiques, ratios financiers, critères d'éligibilité. <strong>Un seuil mal calé ne casse rien — il rend l'instrument aveugle.</strong></p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-02, Un seuil repris de la littérature a produit un résultat nul, qu&#x27;on a failli prendre pour une bonne nouvelle. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-02-seuil-recale.html</p>
+</article><article class="chapitre" id="grain-rx-03-indicateur-en-butee">
+<h1><span class="code-fiche">RX-03</span><span class="titre-courant">Un indicateur officiel donnait la même valeur à deux situations différentes</span></h1>
+
+<p class="chapeau">Retour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>15 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Publier l'humidité des sols au Domaine du Mons depuis 1958, à partir de la réanalyse SIM2 de Météo-France. Le fichier fournit deux colonnes&nbsp;: <code>SWI</code>, l'humidité du sol ramenée à sa réserve utile, et <code>SSWI_10J</code>, cette même humidité ramenée à la normale du jour, en écarts-types. La seconde est précisément l'indicateur sur lequel les services de l'État constatent une sécheresse des sols, au seuil de −1,5. Il n'y avait qu'à la lire.</p>
+<h2>Le déroulé</h2>
+<p>Le tableau des épisodes de sécheresse les plus longs, une fois affiché, portait une ligne étrange&nbsp;: décembre 1985, <strong>−8,2 écarts-types</strong>.</p>
+<p>Un écart de huit sigmas n'existe pas dans une série de soixante-dix ans. Sous hypothèse normale, c'est une chance sur 10¹⁵. Vérification dans la série brute&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col">Date</th><th scope="col">SWI</th><th scope="col">SSWI_10J</th></tr></thead><tbody><tr><th scope="row">16 décembre 1978</th><td>0,73</td><td><strong>−8,169</strong></td></tr><tr><th scope="row">16 décembre 1985</th><td>0,569</td><td><strong>−8,169</strong></td></tr></tbody></table></div>
+<p>Deux états de sol nettement différents, <strong>le même chiffre à la troisième décimale</strong>. Ce n'est pas une valeur extrême, c'est une butée&nbsp;: l'indicateur sature, et au-delà d'un certain point il cesse de distinguer quoi que ce soit.</p>
+<p>La raison est structurelle. En décembre, sur ce point, le sol est presque toujours à sa capacité au champ. La distribution de référence du jour y est étroite et bornée d'un côté. Toute standardisation appliquée à une distribution qui n'a presque pas de largeur produit des écarts-types énormes, puis butte sur la limite numérique de l'ajustement.</p>
+<h2>L'effet sur les résultats publiés</h2>
+<p>L'indicateur alimentait trois choses&nbsp;: le compte annuel de jours de sécheresse, la plus longue suite de l'année, et la liste des épisodes. Deux des six épisodes les plus longs étaient des épisodes d'hiver fabriqués par la butée. Le classement des étés, lui, reposait sur le SWI brut et n'était pas touché — c'est ce qui a sauvé la conclusion principale.</p>
+<p>Remplacement&nbsp;: l'écart est recalculé par <strong>rang normalisé</strong>. La valeur du jour est située dans l'échantillon de toutes les journées de 1958 à 2020 situées à moins de dix jours de la même date dans l'année — environ 1 300 valeurs — et ce rang est converti en écart-type. L'indicateur est alors <strong>borné par l'échantillon lui-même</strong> : avec 1 300 valeurs, il ne peut pas dépasser ±3,4.</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col"><code>SSWI_10J</code> repris</th><th scope="col">Rang normalisé</th></tr></thead><tbody><tr><th scope="row">Valeur extrême de la série</th><td>−8,17</td><td>−3,37</td></tr><tr><th scope="row">Valeurs identiques pour des sols différents</th><td>oui</td><td>non</td></tr><tr><th scope="row">Épisodes d'hiver aberrants</th><td>2 sur 6</td><td>0</td></tr><tr><th scope="row">Classement des étés les plus secs</th><td>inchangé</td><td>inchangé</td></tr></tbody></table></div>
+<p>Et la valeur devient vérifiable. «&nbsp;−3,4 σ le 14 septembre 2026&nbsp;» se traduit en une phrase qu'on peut contrôler à la main&nbsp;: <em>aucune des 1 323 journées de référence de la mi-septembre n'a été plus sèche</em>. C'est exact&nbsp;; la plus sèche jusqu'ici était le 21 septembre 2019, à 0,193 contre 0,167.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Une valeur impossible est un cadeau&nbsp;; une valeur presque plausible ne l'est pas.</strong> −8,2 sautait aux yeux. Si la butée avait été à −3,5, rien ne l'aurait signalée, et deux faux épisodes seraient restés dans le tableau. Le test qui a tranché n'est pas «&nbsp;la valeur est-elle grande&nbsp;?&nbsp;» mais <strong>«&nbsp;deux entrées différentes donnent-elles la même sortie&nbsp;?&nbsp;»</strong> — une question qu'on peut poser à n'importe quel indicateur, en triant la colonne et en cherchant les doublons exacts.</p>
+<p class="point" data-n="2"><strong>Un indicateur dérivé se vérifie contre la grandeur dont il dérive.</strong> Le SSWI se contrôle contre le SWI&nbsp;; c'est en les affichant côte à côte que l'anomalie est apparue. Un indicateur publié sans la grandeur brute qui le nourrit n'est pas contrôlable.</p>
+<p class="point" data-n="3"><strong>Officiel ne veut pas dire sans butée.</strong> La colonne vient de Météo-France, elle est juste pour l'usage auquel elle est destinée — le suivi de la sécheresse en saison végétative, où la distribution a de la largeur. Elle est reprise ici hors de cet usage, sur l'année entière. <strong>Le défaut n'est pas dans la source, il est dans la reprise.</strong></p>
+<p class="point" data-n="4"><strong>Préférer une statistique bornée par les données à une statistique bornée par un modèle.</strong> Un rang ne peut pas sortir de l'échantillon. Un ajustement paramétrique, si. À qualité d'information égale, la première est plus sûre en bout de distribution — et elle s'explique en une phrase à quelqu'un qui n'est pas statisticien.</p>
+<h2>Les changements</h2>
+<ul><li>Toute colonne dérivée reprise d'une source extérieure est <strong>testée pour la saturation</strong> avant usage&nbsp;: tri de la colonne, recherche de valeurs identiques à la précision publiée sur des entrées différentes, et examen des extrêmes au regard de la taille de la série.</li><li>Les indicateurs standardisés sont <strong>recalculés à partir de la grandeur brute</strong> quand la série de référence le permet, par une méthode bornée par l'échantillon, et la méthode est publiée avec la donnée.</li><li>Une grandeur publiée s'accompagne de la grandeur brute dont elle dérive, dans le même fichier.</li><li>Toute valeur en écarts-types affichée sur le site est traduisible en une phrase de rang vérifiable à la main.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique. La butée guette tout indice standardisé appliqué hors de sa saison ou de son domaine&nbsp;: SPI de précipitations sur un mois sec, z-scores de séries bornées, indices de forme sur des distributions à queue courte, scores normalisés d'un petit échantillon. Elle guette aussi, hors du climat, tout score composite plafonné en amont sans que le plafond soit documenté.</p>
+<p><strong>Une valeur en butée ne se signale pas comme erreur. Elle se signale comme record.</strong></p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · RX-02 · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-03, Un indicateur officiel donnait la même valeur à deux situations différentes. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html</p>
+</article><article class="chapitre" id="grain-rx-04-source-hors-de-son-domaine">
+<h1><span class="code-fiche">RX-04</span><span class="titre-courant">Nous avons compté les associations d&#x27;un territoire dans un fichier qui n&#x27;en voit qu&#x27;un quart</span></h1>
+
+<p class="chapeau">Retour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>15 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Dénombrer les associations actives dans un rayon de 45&nbsp;km, pour pouvoir dire ce que contient le milieu associatif qu'on prétend soutenir. Source retenue&nbsp;: l'<strong>annuaire des entreprises et associations</strong> (<code>recherche-entreprises.api.gouv.fr</code>), en filtrant sur le code d'activité 94.99Z, «&nbsp;autres organisations fonctionnant par adhésion volontaire&nbsp;». API publique, à jour, requête géographique native, CORS ouvert. Le choix allait de soi.</p>
+<p>Résultat publié&nbsp;: <strong>1 952 associations actives</strong>, soit une pour 122&nbsp;habitants, avec le commentaire «&nbsp;le tissu associatif est dense&nbsp;».</p>
+<h2>Le déroulé</h2>
+<p>En cherchant à obtenir l'<strong>objet déclaré</strong> de chaque association — que cet annuaire ne fournit pas — il a fallu descendre jusqu'au Répertoire national des associations, tenu par le ministère de l'Intérieur. Le même périmètre, les mêmes 284 communes, le même filtre «&nbsp;active&nbsp;» y donne&nbsp;:</p>
+<p><strong>8 340 associations.</strong></p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">annuaire des entreprises</th><th scope="col">Répertoire national des associations</th></tr></thead><tbody><tr><th scope="row">Associations comptées dans la zone</th><td>1 952</td><td><strong>8 340</strong></td></tr><tr><th scope="row">Une association pour</th><td>122&nbsp;habitants</td><td><strong>29&nbsp;habitants</strong></td></tr><tr><th scope="row">Objet déclaré disponible</th><td>non</td><td>oui, renseigné à 100&nbsp;%</td></tr></tbody></table></div>
+<p>L'écart n'est pas une erreur de requête. Il est structurel, et il a un nom&nbsp;: <strong>une association n'a de numéro SIREN que si elle emploie, perçoit des subventions publiques, ou exerce une activité assujettie.</strong> Dans le dump du RNA pour la Corrèze, <strong>197 lignes sur 9 434 portent un SIRET — 2&nbsp;%</strong>. L'annuaire des entreprises ne voit que la minorité immatriculée.</p>
+<p>Autrement dit&nbsp;: nous avions publié le nombre d'associations <strong>qui ont une existence financière</strong>, en l'appelant le nombre d'associations. Ce n'est pas la même population, et la différence est exactement celle qui compte pour un projet rural — les associations sans salarié, sans subvention, sans comptabilité, qui sont l'immense majorité du tissu qu'on voulait décrire.</p>
+<h2>Pourquoi rien ne l'a signalé</h2>
+<p><strong>La requête était juste.</strong> Le filtre était le bon, la géolocalisation fonctionnait, le dédoublonnage était fait, les établissements fermés étaient exclus, et le siège hors zone était correctement remplacé par l'établissement local. Techniquement, le comptage était propre.</p>
+<p><strong>Le résultat était plausible.</strong> Une association pour 122&nbsp;habitants est un chiffre crédible — c'est à peu près la moyenne nationale telle qu'elle circule. Rien n'appelait la vérification. Un chiffre faux d'un facteur quatre a passé le contrôle de vraisemblance parce qu'il ressemblait à un chiffre connu.</p>
+<p><strong>Le champ manquant n'était pas vide, il était absent.</strong> Si l'annuaire avait renvoyé une liste avec des trous, on l'aurait vu. Il renvoie une liste complète — complète de ce qu'il contient. Une source ne dit jamais ce qu'elle ne contient pas.</p>
+<p><strong>C'est la recherche d'un autre champ qui a révélé le problème.</strong> Nous ne cherchions pas à vérifier le total&nbsp;; nous cherchions l'objet déclaré. La correction est un effet de bord. Sans ce besoin, le chiffre serait encore en ligne.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un registre a un critère d'entrée, et ce critère est une définition cachée.</strong> SIRENE n'immatricule pas les associations&nbsp;: il immatricule celles qui font quelque chose d'économiquement visible. Compter dans SIRENE, c'est donc compter <em>cette</em> population-là. La question à poser à toute source de dénombrement n'est pas «&nbsp;est-elle à jour&nbsp;?&nbsp;» mais <strong>«&nbsp;qu'est-ce qui fait entrer une ligne dans ce fichier&nbsp;?&nbsp;»</strong> — et cette question se pose avant la première requête.</p>
+<p class="point" data-n="2"><strong>Pour un dénombrement, chercher le registre dont l'objet <em>est</em> de dénombrer.</strong> Le RNA existe pour recenser les associations&nbsp;; SIRENE existe pour immatriculer des unités économiques. Les deux contiennent des associations&nbsp;; un seul les compte. À chaque fois, préférer le registre dont la population cible est exactement la population cherchée, même s'il est plus pénible d'accès — ici, 408 Mo à télécharger contre une API avec CORS.</p>
+<p class="point" data-n="3"><strong>Croiser deux sources sur le même comptage, avant de publier.</strong> Le contrôle qui aurait tout révélé tient en une comparaison de deux totaux, et prend une heure. Il n'a pas été fait parce que la première source semblait suffire. <strong>Un chiffre unique n'est pas un chiffre vérifié</strong>, aussi propre soit sa provenance.</p>
+<p class="point" data-n="4"><strong>Le rapport entre les deux sources est lui-même une information.</strong> 1 952 sur 8 340, soit 23&nbsp;%, est une mesure de la part du tissu associatif qui a une existence financière. Elle vaut d'être publiée, et elle n'existait qu'une fois l'erreur trouvée. Une erreur corrigée laisse souvent un indicateur derrière elle.</p>
+<h2>Les changements</h2>
+<ul><li>Tout dénombrement publié nomme, dans la méthode, <strong>le critère d'entrée du registre utilisé</strong> — pas seulement sa source et sa date.</li><li>Tout dénombrement est <strong>confronté à une seconde source</strong> de population avant publication, et l'écart est publié quand il est notable.</li><li>Quand un registre dédié existe pour la population cherchée, il l'emporte sur une API plus commode portant une population voisine.</li><li>Les chiffres déjà publiés sur le site sont repassés à ce filtre, par ordre d'exposition.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique, et fréquent. Le même piège guette&nbsp;: compter les exploitations agricoles dans le registre parcellaire graphique (il ne voit que les déclarants PAC), les entreprises dans les greffes (pas les auto-entrepreneurs), les logements dans la taxe d'habitation, les habitants dans les listes électorales, les cours d'eau dans les stations hydrométriques (voir <code>tdb-eau</code> : 43&nbsp;km² mesurés, le chevelu invisible). À chaque fois, la source est officielle, la requête est juste, et le résultat décrit une population plus étroite que celle qu'on nomme.</p>
+<p><strong>Un registre ne se trompe jamais sur ce qu'il contient. Il se tait sur ce qu'il ne contient pas.</strong></p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · RX-02 · RX-03 · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-04, Nous avons compté les associations d&#x27;un territoire dans un fichier qui n&#x27;en voit qu&#x27;un quart. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html</p>
+</article><article class="chapitre" id="grain-rx-05-la-patience-comme-correctif">
+<h1><span class="code-fiche">RX-05</span><span class="titre-courant">Le correctif était d&#x27;attendre, pas de changer de code</span></h1>
+
+<p class="chapeau">Retour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>17 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Ajouter l'eau — rivières, plans d'eau — au fond de la carte du réseau, en l'extrayant d'OpenStreetMap par l'API Overpass au moment de la publication. Le code était écrit et testé sur les couches précédentes, routes et toponymes, qui étaient passées sans incident.</p>
+<h2>Le déroulé</h2>
+<p>L'extraction a rendu <code>504 Gateway Timeout</code>. Réessai immédiat&nbsp;: <code>504</code>. Découpage en seize morceaux au lieu d'un&nbsp;: <code>504</code>.</p>
+<p>J'ai arrêté là, et j'ai consigné&nbsp;: <em>«&nbsp;l'extraction a échoué sur un délai dépassé d'Overpass&nbsp;»</em>, en ajoutant que c'était une ressource bénévole et que j'y avais déjà beaucoup puisé ce jour-là. La formulation était courtoise et le diagnostic était faux. J'avais rangé l'échec du côté de <em>la requête ne passe pas ici</em> — d'où l'idée, pour la reprise, de chercher une autre instance ou d'alléger encore la requête.</p>
+<p>Le lendemain, la même requête a abouti. Sur les trente-six morceaux&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">premier essai</th><th scope="col">deuxième</th><th scope="col">troisième</th></tr></thead><tbody><tr><th scope="row">morceaux aboutis</th><td>24 sur 36</td><td>34 sur 36</td><td><strong>36 sur 36</strong></td></tr></tbody></table></div>
+<p>Un tiers ont échoué d'abord, <strong>aucun au troisième essai</strong>. Le seul changement de fond&nbsp;: l'attente entre deux tentatives, portée de 8 secondes fixes à 15, puis 30, puis 60, puis 120.</p>
+<p>Entre-temps, une mesure qui aurait dû être la première&nbsp;: <code>ping</code> vers l'instance, <strong>100 ms aller-retour, 0&nbsp;% de perte</strong>. La liaison depuis ici était effectivement mauvaise ces jours-là — elle n'était pour rien dans cet échec.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un <code>504</code> ne décrit pas votre requête, il décrit l'état du serveur.</strong> C'est une information sur l'autre, pas sur soi. Les codes qui parlent de la requête — 400, 404, 422 — appellent une correction&nbsp;; ceux qui parlent de la charge — 429, 502, 503, 504 — appellent une attente. Les traiter pareil conduit à modifier du code qui marche.</p>
+<p class="point" data-n="2"><strong>Réessayer vite est la seule réaction qui aggrave la panne qu'on constate.</strong> Une instance saturée l'est par la somme des demandes qu'elle reçoit. Trois essais en dix secondes ajoutent à ce qui bloque. L'attente qui double n'est pas de la résignation, c'est la seule contribution utile qu'un client puisse apporter à sa propre réussite.</p>
+<p class="point" data-n="3"><strong>Mesurer la liaison avant de l'accuser.</strong> «&nbsp;Le réseau est mauvais&nbsp;» était vrai de la maison et faux de cette panne. Deux commandes auraient tranché avant qu'une journée ne soit perdue à imaginer des contournements.</p>
+<p class="point" data-n="4"><strong>Un travail long sur une ressource distante doit être reprenable.</strong> Chaque morceau obtenu est désormais gardé sur disque. Reprendre repart du morceau qui a échoué, et surtout <strong>ne redemande pas à l'instance ce qu'elle a déjà rendu</strong> — la politesse et l'efficacité vont ici dans le même sens. Sans ce cache, la reconstruction du fichier, refaite trois fois ce jour-là pour en ajuster le contenu, aurait coûté trois extractions complètes&nbsp;; elle n'a coûté aucun appel.</p>
+<p class="point" data-n="5"><strong>L'abandon documenté est meilleur que l'abandon silencieux, et moins bon que le diagnostic.</strong> Avoir écrit ce qui manquait a permis de reprendre proprement. Mais la note portait une cause supposée, présentée sans marque de doute, et cette cause a orienté la reprise dans la mauvaise direction. <strong>Consigner ce qu'on a observé — le code d'erreur, le nombre d'essais, l'état de la liaison — plutôt que ce qu'on en déduit.</strong></p>
+<h2>Les changements</h2>
+<ul><li>Distinguer, dans tout appel à un service distant, les codes qui disent <em>votre demande</em> de ceux qui disent <em>ma charge</em>. Les seconds déclenchent une attente qui double, jamais une modification de la demande.</li><li>Cinq essais au moins, espacés de 15, 30, 60 et 120 secondes, avant de conclure qu'une ressource distante est indisponible.</li><li>Toute extraction en plusieurs morceaux garde chaque réponse obtenue, hors du dépôt, et reprend là où elle s'est arrêtée.</li><li>Avant d'incriminer la liaison&nbsp;: la mesurer, et noter le chiffre.</li><li>Une note d'abandon consigne les faits observés. La cause supposée, si elle est écrite, l'est comme hypothèse.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique. Vaut pour toute API publique ou bénévole — Overpass, Hub'Eau, les services de la Géoplateforme, les points d'accès d'open data —, et plus largement pour tout travail long mené à travers une liaison qu'on ne maîtrise pas. Le motif se reconnaît à ceci&nbsp;: <strong>l'échec est intermittent et l'erreur ne parle pas de vous.</strong> Dans ce cas, le correctif est du temps, pas du code.</p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · RX-04 · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-05, Le correctif était d&#x27;attendre, pas de changer de code. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html</p>
+</article><article class="chapitre" id="grain-rx-06-inventaire-faux-de-deux-ordres">
+<h1><span class="code-fiche">RX-06</span><span class="titre-courant">Un inventaire automatique dont le total brut était faux de deux ordres de grandeur</span></h1>
+
+<p class="chapeau">Retour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66&nbsp;% du volume était un artefact d'infrastructure.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>17 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Inventorier les dépressions fermées du secteur — mares, fosses, micro-cuvettes — à partir du modèle numérique de terrain LiDAR HD de l'IGN, pour pré-localiser les habitats humides à prospecter. Méthode standard&nbsp;: remplir les dépressions par inondation prioritaire, soustraire la surface remplie du terrain d'origine, et compter ce qui reste.</p>
+<h2>Le déroulé</h2>
+<p>L'algorithme a rendu <strong>180 dépressions totalisant 3,5 millions de mètres cubes</strong> sur 576 hectares. Soit, rapporté à la surface concernée, une profondeur moyenne de près de quatre mètres sur soixante-dix-neuf hectares de plateau granitique. Le chiffre est absurde, mais il fallait le rapporter à quelque chose pour le voir&nbsp;: pris seul, «&nbsp;180 dépressions&nbsp;» ne choque pas.</p>
+<p>Deux contrôles ont suffi.</p>
+<p><strong>La forme.</strong> La plus grande dépression couvre 45 hectares dans une boîte englobante de 1 180 × 1 972 mètres qu'elle n'occupe qu'à 19&nbsp;% — un ruban sinueux, logé entre 540 et 552 mètres, c'est-à-dire au point le plus bas de l'emprise. À elle seule, elle porte 58&nbsp;% du volume. Une dépression fermée est compacte&nbsp;; un ruban de deux kilomètres est un fond de vallée.</p>
+<p><strong>Le recoupement.</strong> Rastérisation des ponts, de la voie ferrée et des plans d'eau cartographiés dans OpenStreetMap, puis test de contact avec chaque dépression&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">part du volume total</th></tr></thead><tbody><tr><th scope="row">jouxte un pont ou la voie ferrée</th><td><strong>66&nbsp;%</strong></td></tr><tr><th scope="row">recouvre un plan d'eau cartographié</th><td>15&nbsp;%</td></tr></tbody></table></div>
+<p>Le mécanisme est connu et il est structurel&nbsp;: <strong>un modèle numérique de terrain restitue les remblais mais pas les ouvrages qui les traversent.</strong> Tout busage, tout pont, toute digue ferroviaire barre la vallée dans le modèle. L'eau, dans le calcul, ne passe pas — elle s'accumule jusqu'à déborder par-dessus le remblai, et l'algorithme enregistre une retenue de plusieurs centaines de milliers de mètres cubes là où il y a une buse de quatre-vingts centimètres.</p>
+<p>Après filtrage sur la compacité, la population de véritables dépressions fermées est de <strong>59 objets, 2,7 hectares, 24 000&nbsp;m³</strong> — deux ordres de grandeur sous le chiffre brut.</p>
+<h2>Pourquoi rien ne l'a signalé</h2>
+<p><strong>L'algorithme est correct.</strong> L'inondation prioritaire fait exactement ce qu'elle promet&nbsp;: elle trouve toute cuvette d'où l'eau ne peut sortir sans monter. Un fond de vallée barré par un remblai <em>est</em> une telle cuvette, dans le modèle.</p>
+<p><strong>La donnée est correcte.</strong> Le MNT LiDAR HD est complet sur l'emprise — vérifié, aucun pixel manquant — et restitue fidèlement la surface du sol, remblai compris. Il ne lui est pas demandé de connaître les buses.</p>
+<p><strong>L'erreur est dans la correspondance entre le modèle et le monde</strong>, et cette correspondance n'est écrite nulle part dans la chaîne. Personne ne la déclare, donc personne ne la vérifie.</p>
+<p><strong>Et le format de sortie masque le problème.</strong> Un total en mètres cubes n'a pas d'échelle intuitive. Ce qui a alerté, c'est de le ramener à une profondeur moyenne par hectare — une grandeur dont on sait à quoi elle ressemble.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un total agrégé ne se publie pas sans sa distribution.</strong> Ici, un seul objet portait 58&nbsp;% du volume. Toute somme dominée par un ou deux éléments décrit ces éléments, pas la population. <strong>Regarder qui pèse, avant de publier combien.</strong></p>
+<p class="point" data-n="2"><strong>Ramener tout agrégat à une grandeur dont on connaît l'ordre de grandeur.</strong> «&nbsp;3,5 millions de m³&nbsp;» ne dit rien&nbsp;; «&nbsp;quatre mètres de profondeur moyenne sur un plateau&nbsp;» se réfute en une seconde. Le contrôle de vraisemblance ne marche que sur des grandeurs familières, et la conversion est presque toujours possible.</p>
+<p class="point" data-n="3"><strong>La forme d'un objet trahit sa nature avant toute mesure.</strong> Compacité, allongement, taux de remplissage de la boîte englobante&nbsp;: trois nombres qui distinguent une mare d'un fond de vallée sans rien savoir d'hydrologie. Quand un inventaire mélange des natures, la géométrie sépare souvent mieux que le seuil.</p>
+<p class="point" data-n="4"><strong>Croiser avec une source indépendante, même approximative.</strong> OpenStreetMap n'est pas une référence topographique, et le test de contact est un test de coïncidence, non une preuve. Il a suffi&nbsp;: quand 66&nbsp;% d'un volume touche des ouvrages qui couvrent une fraction infime de la surface, la coïncidence n'en est pas une. <strong>Un croisement imparfait vaut mieux qu'un contrôle absent.</strong></p>
+<p class="point" data-n="5"><strong>Un modèle physique a des hypothèses tacites sur le monde.</strong> L'inondation prioritaire suppose que l'eau ne circule que par la surface. Tout ouvrage souterrain — buse, drain, karst, canalisation — viole cette hypothèse sans que rien ne le signale. <strong>Écrire les hypothèses tacites du modèle est la seule façon de les tester.</strong></p>
+<h2>Les changements</h2>
+<ul><li>Tout inventaire automatique publie, avec son total, la <strong>part portée par ses trois plus gros éléments</strong>.</li><li>Tout agrégat est <strong>converti en une grandeur familière</strong> avant publication, et le contrôle de vraisemblance porte sur cette conversion.</li><li>Les objets d'un inventaire sont <strong>caractérisés par leur forme</strong> — compacité, allongement — et les classes de forme sont examinées séparément.</li><li>Tout résultat issu d'un modèle physique s'accompagne de la liste de ses <strong>hypothèses tacites sur le monde</strong>, et d'au moins un test de la plus fragile.</li><li>Un croisement avec une source indépendante précède la publication, même quand cette source est moins précise que la donnée principale.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique. Le même piège guette tout inventaire produit par un algorithme correct sur une donnée correcte&nbsp;: le comptage de bâtiments sur un modèle qui confond hangar et couvert d'arbres, la détection de haies qui compte les alignements de pylônes, la mesure de surfaces imperméabilisées qui range l'ombre avec l'asphalte, l'extraction de réseaux hydrographiques qui prend un fossé de route pour un ruisseau.</p>
+<p><strong>Un algorithme juste, sur une donnée juste, peut rendre un résultat faux — quand le modèle et le monde ne se correspondent pas là où personne ne l'a écrit.</strong></p>
+<h2>Fiches liées</h2>
+<p>RX-03 · RX-04 · RX-05 · PA-02 · <span class="renvoi-absent" title="fiche non publiée">ANALYSE-LIDAR</span></p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-06, Un inventaire automatique dont le total brut était faux de deux ordres de grandeur. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html</p>
+</article><article class="chapitre" id="grain-pa-01-verrou-structurel">
+<h1><span class="code-fiche">PA-01</span><span class="titre-courant">Le verrou doit être structurel, pas contractuel</span></h1>
+
+<p class="chapeau">Répartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Patterns</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Confiance</dt><dd>★★ éprouvé ailleurs, pas encore ici</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>14 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>Contexte</h2>
+<p>Un collectif veut soustraire durablement un bien commun — une terre, un bâtiment, un outil — au marché. Il dispose d'une structure porteuse (fondation, fonds de dotation, coopérative, association) et d'un collectif d'usagers. La question qui se pose à tous&nbsp;: <strong>qu'est-ce qui empêchera la vente dans trente ans, quand plus aucune des personnes présentes ne sera là&nbsp;?</strong></p>
+<h2>Forces en tension</h2>
+<ul><li><strong>La confiance ne se transmet pas.</strong> Les fondateurs se font confiance&nbsp;; leurs successeurs ne se connaissent pas. Tout dispositif qui repose sur la bonne foi future repose sur rien.</li><li><strong>Un contrat se renégocie&nbsp;; une structure se modifie aussi.</strong> Statuts, conventions, baux&nbsp;: tout peut être défait par ceux qui détiennent le pouvoir de le défaire.</li><li><strong>Le droit protège la propriété, pas l'intention.</strong> Un juge appliquera l'acte, pas l'esprit du projet.</li><li><strong>Plus le verrou est serré, moins le collectif est souple.</strong> Un dispositif inaltérable est aussi un dispositif qui ne peut pas s'adapter.</li></ul>
+<h2>Solution</h2>
+<p><strong>Répartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.</strong></p>
+<p>Trois mises en œuvre observées&nbsp;:</p>
+<ul><li><strong>Mietshäuser Syndikat (Allemagne, 167 projets).</strong> Chaque immeuble est logé dans une société à <strong>deux associés seulement</strong> — l'association des habitants et le Syndikat — avec <strong>une voix chacun</strong>. L'association décide seule des admissions, des loyers, des travaux, des financements&nbsp;; le Syndikat détient un <strong>droit de veto exclusif sur la vente et sur toute conversion en copropriété</strong>. Personne n'a besoin de faire confiance à personne.</li><li><strong>La Terre en Commun (Notre-Dame-des-Landes).</strong> Les administrateurs du fonds sont bénévoles et <strong>ne peuvent être bénéficiaires directs</strong> ; le conseil mêle occupants et personnalités extérieures, renouvelé par tiers tous les trois ans&nbsp;; un <strong>comité consultatif de neuf personnalités extérieures</strong> valide annuellement les orientations.</li><li><strong>Stiftung trias (Allemagne).</strong> La fondation garde le sol et ne cède qu'un droit de superficie&nbsp;; la redevance annuelle est réinvestie dans de nouvelles acquisitions. Le foncier ne ressort jamais.</li></ul>
+<h2>Conséquences et coûts</h2>
+<p><strong>Ce qu'on gagne.</strong> Un verrou qui survit aux personnes. Une crédibilité immédiate auprès des donateurs, des notaires et de l'administration. Et, au passage, une protection contre la capture interne&nbsp;: personne ne peut s'approprier le commun, pas même une majorité du collectif.</p>
+<p><strong>Ce qu'on paie.</strong> Deux structures à faire vivre — deux comptabilités, deux assemblées, deux registres, deux jeux d'obligations déclaratives. Une lourdeur réelle pour un petit collectif. Et un risque symétrique&nbsp;: <strong>un veto peut aussi bloquer une décision légitime</strong>. Il faut donc écrire à l'avance les cas où le veto s'applique, et ceux où il ne s'applique pas.</p>
+<div class="bloc-contre"><h2 class="h-contreindications">Contre-indications</h2>
+<ul><li><strong>Ne pas appliquer si le bien peut être perdu sans drame.</strong> Un verrou structurel sur du matériel ou un bail de courte durée est une bureaucratie sans objet.</li><li><strong>Ne pas appliquer si le collectif compte moins de cinq personnes actives.</strong> Deux structures pour trois personnes produisent des assemblées fictives, et des assemblées fictives fragilisent juridiquement plus qu'elles ne protègent.</li><li><strong>Ne pas appliquer si les mêmes personnes siègent des deux côtés.</strong> Le verrou devient décoratif, et le cumul détruit la gestion désintéressée de la structure porteuse — donc son intérêt général.</li><li><strong>Attention au verrou qui protège contre tout, y compris contre l'adaptation.</strong> Prévoir explicitement une procédure de révision, avec un seuil élevé mais franchissable.</li></ul>
+</div><div class="bloc-verif"><h2 class="h-verification">Vérification</h2>
+<p>Le test&nbsp;: <strong>écrire le scénario de la vente.</strong> Qui devrait signer&nbsp;? Combien de personnes, dans combien de structures, avec quelles majorités&nbsp;? Si le scénario tient en une signature, le verrou n'existe pas. S'il exige l'accord de deux organes dont l'un a intérêt à refuser, il existe.</p>
+</div><h2>Patterns liés</h2>
+<p>PA-02 — l'autre condition de survie du montage. <span class="renvoi-absent" title="fiche non publiée">RE-01</span> — comment choisir l'outil juridique qui porte l'usage.</p>
+<h2>Sources</h2>
+<p>Mietshäuser Syndikat — les briques du réseau<span class="note-lien">https:/​/​www.syndikat.org/​en/​the-building-blocks-of-the-network/​</span> · La Terre en Commun — gouvernance<span class="note-lien">https:/​/​encommun.eco/​fonds-de-dotation/​gouvernance-et-fonctionnement</span> · Stiftung trias<span class="note-lien">https:/​/​www.stiftung-trias.de/​stiftung/​</span> · Ostrom, <em>Governing the Commons</em> (1990), principes 3 et 7</p>
+
+<p class="colophon">Collectif du Domaine du Mons — PA-01, Le verrou doit être structurel, pas contractuel. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-pa-01-verrou-structurel.html</p>
+</article><article class="chapitre" id="grain-pa-02-preuve-par-les-faits">
+<h1><span class="code-fiche">PA-02</span><span class="titre-courant">L&#x27;intérêt général se prouve par les faits, pas par les statuts</span></h1>
+
+<p class="chapeau">Faire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Patterns</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Confiance</dt><dd>★★ éprouvé ailleurs, pas encore ici</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>14 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>Contexte</h2>
+<p>Un collectif dont les membres vivent du lieu qu'ils gèrent veut être reconnu d'intérêt général — pour recevoir des dons ouvrant droit à reçu fiscal, pour accéder à des financements, ou simplement pour être défendable. Il se heurte au critère qui écarte les organismes fonctionnant <strong>au profit d'un cercle restreint de personnes</strong>.</p>
+<h2>Forces en tension</h2>
+<ul><li><strong>Les bénéficiaires immédiats sont les membres.</strong> C'est la définition même d'un collectif autogéré, et c'est exactement ce que le critère vise.</li><li><strong>La tentation est de résoudre le problème par la formulation</strong> : élargir l'objet statutaire jusqu'à ce qu'il paraisse ouvert. Cela ne trompe personne et fragilise l'ensemble.</li><li><strong>La preuve demande du temps</strong> — deux à trois ans d'activité documentée — alors que le besoin de financement est immédiat.</li><li><strong>Personne ne compte rétrospectivement.</strong> On s'aperçoit du manque au moment de constituer le dossier, trois ans trop tard.</li></ul>
+<h2>Solution</h2>
+<p><strong>Faire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.</strong></p>
+<p>Deux volets indissociables.</p>
+<p class="point" data-n="1"><strong>La rédaction.</strong> L'objet associatif nomme des bénéficiaires qui excèdent clairement les membres&nbsp;: le public accueilli, les personnes formées, les collectifs essaimés, la collectivité au titre de la protection du milieu. Les membres y figurent comme ceux qui font, pas comme ceux qui reçoivent. Complété par une <strong>ouverture réelle de l'adhésion</strong> (critères publiés, pas de cooptation discrétionnaire, recours possible contre un refus) et par la <strong>non-appropriation</strong> (aucun lot privatif attribué, redevance couvrant au moins les charges, dévolution désintéressée).</p>
+<p class="point" data-n="2"><strong>Le registre.</strong> Un comptage daté et chiffré, tenu comme un relevé de pluviomètre&nbsp;:</p>
+<ul><li>personnes accueillies dans l'année — chantiers, visites, séjours</li><li>journées de chantier ouvertes au public</li><li>formations et transmissions&nbsp;: nombre, participants, thèmes</li><li>partenariats avec des structures extérieures, publiques comprises</li><li>documentation publiée, et reprises constatées par des tiers</li><li>surfaces sous gestion écologique, observations naturalistes versées aux bases publiques</li><li>décisions et comptes publiés</li></ul>
+<h2>Conséquences et coûts</h2>
+<p><strong>Ce qu'on gagne.</strong> Un dossier de preuve constitué le jour où il faut le produire. Une position défendable devant l'administration, et — ce qui compte davantage — une raison d'être vérifiable par le collectif lui-même. Le registre répond à la question qui décide de l'avenir d'un lieu&nbsp;: <em>est-ce qu'on fait réellement ce qu'on dit qu'on fait&nbsp;?</em></p>
+<p><strong>Ce qu'on paie.</strong> Une discipline de comptage, tous les mois, y compris les mois où rien ne se passe — et surtout ceux-là, parce qu'un registre qui montre des creux est plus crédible qu'un registre lisse. Et une contrainte de fond&nbsp;: <strong>s'ouvrir réellement</strong>. Le pattern ne consiste pas à décrire une ouverture, il consiste à la produire. Un collectif qui ne veut pas recevoir de public ne doit pas prétendre à l'intérêt général.</p>
+<div class="bloc-contre"><h2 class="h-contreindications">Contre-indications</h2>
+<ul><li><strong>Ne pas appliquer si le collectif ne souhaite pas s'ouvrir.</strong> Il existe d'autres formes juridiques — société civile, coopérative, indivision — qui n'exigent pas l'intérêt général. Mieux vaut une structure honnête qu'un intérêt général simulé.</li><li><strong>Ne pas déposer de rescrit avant d'avoir la matière.</strong> Les praticiens conseillent 18 à 36&nbsp;mois d'activité documentée. Une réponse négative explicite est opposable et peut déclencher des obligations rétroactives lourdes.</li><li><strong>Ne pas confondre élargir l'objet et élargir l'action.</strong> Un objet large avec une action fermée est plus fragile qu'un objet étroit assumé&nbsp;: il donne prise au reproche de façade.</li><li><strong>Attention aux bénéficiaires définis cumulativement par la profession et le territoire.</strong> Le tribunal administratif de Pau a refusé le rescrit mécénat sur ce seul motif le 16 juin 2025. «&nbsp;Les habitants de tel village qui exercent telle activité&nbsp;» est exactement la combinaison sanctionnée.</li></ul>
+</div><div class="bloc-verif"><h2 class="h-verification">Vérification</h2>
+<p>Le test&nbsp;: <strong>décrire l'année écoulée sans nommer aucun membre.</strong> Que reste-t-il&nbsp;? Si la description est vide, l'intérêt général n'existe pas encore — quels que soient les statuts.</p>
+</div><h2>Patterns liés</h2>
+<p>PA-01 — l'autre condition de survie du montage.</p>
+<h2>Sources</h2>
+<p>BOFiP BOI-IR-RICI-250-10-10<span class="note-lien">https:/​/​bofip.impots.gouv.fr/​bofip/​5825-PGP.html/​identifiant=BOI-IR-RICI-250-10-10-20170510</span>, § 90 et 130-210 · TA Pau, 16 juin 2025, n° 2301412 — France générosités<span class="note-lien">https:/​/​www.francegenerosites.org/​actualites/​jurisprudence-la-notion-de-cercle-restreint-de-personnes/​</span> · Associathèque — le cercle restreint<span class="note-lien">https:/​/​www.associatheque.fr/​fr/​focus-cercle-restreint.html</span> · La Terre en Commun — statuts et objet<span class="note-lien">https:/​/​encommun.eco/​fonds-de-dotation/​statuts-et-objet-du-fonds</span> · rapport Yves Blein (2016)</p>
+
+<p class="colophon">Collectif du Domaine du Mons — PA-02, L&#x27;intérêt général se prouve par les faits, pas par les statuts. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html</p>
+</article><article class="chapitre" id="grain-ga-01-faisceau-de-droits">
+<h1><span class="code-fiche">GA-01</span><span class="titre-courant">Le faisceau de droits, un gabarit vierge</span></h1>
+
+<p class="chapeau">Décrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Gabarits</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ</dd></div>
+  <div><dt>Écrit le</dt><dd>24 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>Pourquoi un faisceau plutôt qu'un schéma de propriété</h2>
+<p>Dire «&nbsp;le fonds est nu-propriétaire, l'association a l'usage&nbsp;» décrit un montage juridique. Ça ne dit pas qui peut entrer, qui peut couper un arbre, qui décide d'ouvrir une parcelle au public, ni ce qui se passe quand quelqu'un part. <strong>Ces questions-là ne se lisent pas dans un régime de propriété&nbsp;; elles se lisent dans un faisceau.</strong></p>
+<p>Elinor Ostrom et Edella Schlager ont montré en 1992 qu'un rapport à une ressource commune se décrit par <strong>cinq droits distincts</strong>, qui ne vont pas ensemble et se répartissent entre des mains différentes. C'est ce qui permet de dire, sans contradiction, qu'une terre n'appartient à personne et que tout le monde n'y fait pas n'importe quoi.</p>
+<h2>Les cinq droits, définis</h2>
+<p>Les définitions comptent&nbsp;: deux personnes qui n'appellent pas «&nbsp;gestion&nbsp;» la même chose ne peuvent pas se mettre d'accord sur qui l'exerce.</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col">Droit</th><th scope="col">Ce qu'il permet</th><th scope="col">La question qui le révèle</th></tr></thead><tbody><tr><th scope="row"><strong>Accès</strong></th><td>Entrer, être là, jouir de ce qui ne se consomme pas — traverser, regarder, se reposer</td><td><em>Qui peut venir sans demander&nbsp;?</em></td></tr><tr><th scope="row"><strong>Prélèvement</strong></th><td>Prendre des unités de la ressource — récolter, couper, puiser, pâturer</td><td><em>Qui peut emporter quelque chose&nbsp;?</em></td></tr><tr><th scope="row"><strong>Gestion</strong></th><td>Transformer la ressource et régler son usage interne — planter, construire, drainer, fixer les règles de prélèvement</td><td><em>Qui décide de ce qu'on fait du lieu&nbsp;?</em></td></tr><tr><th scope="row"><strong>Exclusion</strong></th><td>Décider qui détient l'accès et le prélèvement, et comment ces droits se transmettent</td><td><em>Qui décide qui entre&nbsp;?</em></td></tr><tr><th scope="row"><strong>Aliénation</strong></th><td>Vendre ou céder les droits de gestion et d'exclusion</td><td><em>Qui peut faire sortir la ressource du dispositif&nbsp;?</em></td></tr></tbody></table></div>
+<p><strong>Les quatre positions qui en découlent</strong>, dans l'ordre croissant&nbsp;:</p>
+<ul><li><strong>Utilisateur autorisé</strong> — accès + prélèvement</li><li><strong>Revendicateur</strong> — + gestion</li><li><strong>Détenteur</strong> — + exclusion</li><li><strong>Propriétaire</strong> — + aliénation</li></ul>
+<p>Un projet de sortie du marché tient en une phrase&nbsp;: faire que <strong>personne n'occupe la position de propriétaire</strong>, et que le droit d'aliénation soit non pas détenu mais <strong>structurellement empêché</strong> — voir PA-01.</p>
+<h2>Le gabarit vierge</h2>
+<p>À copier tel quel. Une ressource par tableau&nbsp;; une colonne par ayant droit&nbsp;; un statut par cellule, jamais une case vide — <strong>«&nbsp;on n'y a pas pensé&nbsp;» est une réponse, et elle se distingue de «&nbsp;pas encore tranché&nbsp;»</strong>.</p>
+<pre class="gabarit-texte">RESSOURCE&nbsp;: ...........................
+
+| Droit        | ..... | ..... | ..... | ..... | Statut | Par quel acte&nbsp;? |
+|--------------|-------|-------|-------|-------|--------|-----------------|
+| Accès        |       |       |       |       |        |                 |
+| Prélèvement  |       |       |       |       |        |                 |
+| Gestion      |       |       |       |       |        |                 |
+| Exclusion    |       |       |       |       |        |                 |
+| Aliénation   |       |       |       |       |        |                 |
+
+Statuts&nbsp;: ACTÉ (acte signé, décision datée) · PROPOSÉ (soumis, en attente)
+          EXPLORÉ (piste) · NON TRANCHÉ (identifié, pas instruit)
+          NON POSÉ (personne n&#x27;y a encore pensé)</pre>
+<p><strong>La colonne «&nbsp;par quel acte&nbsp;?&nbsp;» est celle qui fait le travail.</strong> Un droit sans instrument est une intention. Si la colonne est vide, la cellule n'est pas <code>ACTÉ</code>, quoi qu'en dise la première.</p>
+<p><strong>Trois questions à se poser avant de remplir</strong>, dans cet ordre&nbsp;:</p>
+<ol><li><strong>Qui exerce ce droit aujourd'hui, en fait&nbsp;?</strong> Pas qui devrait. Le tableau des faits avant le tableau des titres.</li><li><strong>Que se passe-t-il quand cette personne part&nbsp;?</strong> C'est le test qui sépare un droit personnel d'un droit réel.</li><li><strong>Qui peut retirer ce droit, et comment&nbsp;?</strong> S'il n'y a pas de réponse, le droit n'est pas encadré — il est seulement toléré.</li></ol>
+<p><strong>Ressources à ne pas oublier</strong>, parce qu'elles reviennent partout et qu'on ne les liste presque jamais&nbsp;: les outils apportés par les personnes · l'eau · le nom et l'image · les données · et <strong>le travail lui-même</strong> — qui décide de ce qui doit être fait, et qui décide que c'est fait.</p>
+<h2>Trois pièges</h2>
+<p><strong>Confondre gestion et prélèvement.</strong> Ramasser du bois mort et abattre une haie ne sont pas le même droit, même s'ils produisent tous deux du bois. Le second modifie la ressource pour les suivants. Un collectif qui délègue les deux au même niveau se réveille avec un versant ouvert.</p>
+<p><strong>Croire que l'aliénation se supprime.</strong> Elle ne se supprime pas, elle se répartit et se verrouille. Un droit que personne ne détient est un droit que le premier juge saisi réattribuera. Le verrou doit être <strong>structurel</strong>, pas contractuel.</p>
+<p><strong>Remplir le tableau au présent quand on décrit un projet.</strong> La tentation est d'écrire ce que le montage fera, et de le lire six mois plus tard comme ce qu'il fait. D'où le statut par cellule.</p>
+<h2>Fiches liées</h2>
+<p>PA-01 · PA-02</p>
+<h2>Sources</h2>
+<p>Schlager &amp; Ostrom, <em>Property-Rights Regimes and Natural Resources: A Conceptual Analysis</em>, Land Economics, 1992 — les cinq droits et les quatre positions · Ostrom, <em>Governing the Commons</em>, 1990.</p>
+
+<p class="colophon">Collectif du Domaine du Mons — GA-01, Le faisceau de droits, un gabarit vierge. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html</p>
+</article>
+</body>
+</html>

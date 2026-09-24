@@ -1,0 +1,206 @@
+<!--meta
+{
+ "titre": "Le terrain, le gel, l'eau",
+ "description": "Où l'air froid s'accumule, où l'eau se rassemble, et ce que le parcellaire a perdu depuis 1959. Calculé sur le relevé LiDAR de l'IGN à 50 cm.",
+ "classe": "tdb"
+}
+-->
+<h1>Le terrain, le gel, l'eau</h1>
+<!--#sans-js data/ortho.json data/relief.json-->
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+<p>La page <a href="tdb-saisons.html#verger">chauffage, verger, fenaison</a> laisse une question ouverte&nbsp;: le modèle climatique voit une maille de 9&nbsp;km, alors que le gel de printemps se joue sur 100&nbsp;m et 3&nbsp;m de dénivelé. Cette page-ci descend à cette échelle, avec le relevé laser de l'IGN — un point tous les 50&nbsp;cm, volé le 24 août 2022.</p>
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement du relief</p></div></div>
+
+<h2 id="air-froid">Où l'air froid s'accumule</h2>
+<p>La nuit, par ciel clair et sans vent, l'air refroidi par le sol devient plus dense que l'air au-dessus. Il se met à couler comme de l'eau&nbsp;: il descend la pente, contourne les obstacles, s'arrête dans les creux. C'est pourquoi deux parcelles distantes de 100&nbsp;m peuvent avoir trois degrés d'écart au petit matin, et pourquoi l'une perd ses fleurs quand l'autre les garde.</p>
+<figure>
+<svg viewBox="0 0 640 300" role="img" aria-labelledby="t-air d-air" class="croquis">
+  <title id="t-air">Comment l&#39;air froid s&#39;écoule</title>
+  <desc id="d-air">La nuit, l&#39;air refroidi devient plus dense et descend la pente. Il quitte le replat où se trouve le bâti, s&#39;accumule dans la cuvette en contrebas, et une haie plantée en travers de la pente le retient en amont.</desc>
+  <path class="trait-croquis" d="M21.2 120.9C55.5 122.4 94.4 116.1 128.8 116.2"/>
+  <path class="trait-croquis" d="M19.2 119.2C55.2 121.6 95.7 113.0 131.6 115.5"/>
+  <path class="trait-croquis" d="M131.3 117.0C160.1 117.4 192.9 121.8 221.8 126.7"/>
+  <path class="trait-croquis" d="M130.3 114.1C158.6 116.6 190.8 125.5 219.7 127.0"/>
+  <path class="trait-croquis" d="M221.3 124.5C251.1 137.3 281.1 146.2 310.8 160.7"/>
+  <path class="trait-croquis" d="M220.0 126.2C249.9 141.3 280.5 152.6 309.8 163.3"/>
+  <path class="trait-croquis" d="M308.1 160.3C333.3 179.8 365.2 196.5 392.7 214.9"/>
+  <path class="trait-croquis" d="M309.8 163.0C335.8 177.1 367.3 198.9 393.0 213.2"/>
+  <path class="trait-croquis" d="M387.3 210.5C411.6 220.7 436.4 233.2 461.6 245.2"/>
+  <path class="trait-croquis" d="M391.2 211.0C412.5 223.7 439.9 233.9 461.5 243.3"/>
+  <path class="trait-croquis" d="M460.9 243.9C486.3 248.3 514.4 250.5 540.3 256.0"/>
+  <path class="trait-croquis" d="M461.0 243.3C486.8 247.6 516.4 251.0 543.0 254.7"/>
+  <path class="trait-croquis" d="M538.9 254.0C565.3 250.8 595.1 252.6 621.6 249.8"/>
+  <path class="trait-croquis" d="M537.4 253.1C564.6 252.7 595.2 250.9 622.7 249.8"/>
+  <path class="trait-croquis" d="M84.4 82.6C112.8 81.2 144.9 80.6 173.4 84.4"/>
+  <path class="trait-croquis" d="M84.7 85.4C113.4 82.2 145.6 82.5 174.2 84.9"/>
+  <path class="trait-croquis" d="M169.7 82.9C172.6 93.4 166.6 105.3 169.3 115.8"/>
+  <path class="trait-croquis" d="M170.5 83.6C170.0 95.0 170.1 107.7 171.2 119.1"/>
+  <path class="trait-croquis" d="M170.3 116.0C142.7 119.3 111.6 115.6 84.0 115.8"/>
+  <path class="trait-croquis" d="M169.1 115.2C141.3 115.9 110.1 117.3 82.3 117.5"/>
+  <path class="trait-croquis" d="M87.7 115.4C85.3 104.7 87.4 92.7 86.6 82.0"/>
+  <path class="trait-croquis" d="M85.7 116.3C85.4 105.1 85.1 92.5 85.8 81.3"/>
+  <path class="trait-croquis" d="M185.5 97.1C221.2 113.4 263.0 132.0 301.4 144.2"/>
+  <path class="trait-croquis" d="M185.7 97.0C223.1 113.3 265.0 128.4 302.4 143.3"/>
+  <path class="trait-croquis" d="M300.7 144.7C297.7 142.2 294.3 138.2 291.0 134.5"/>
+  <path class="trait-croquis" d="M300.3 144.0C295.9 143.6 291.1 144.1 286.7 144.4"/>
+  <path class="trait-croquis" d="M331.1 163.0C360.5 179.0 393.3 199.6 421.1 211.7"/>
+  <path class="trait-croquis" d="M331.3 160.2C358.3 175.6 389.5 193.4 419.6 212.9"/>
+  <path class="trait-croquis" d="M421.2 213.1C417.8 210.0 415.3 204.8 412.0 201.3"/>
+  <path class="trait-croquis" d="M420.4 211.6C416.1 211.0 411.5 212.4 407.2 211.2"/>
+  <path class="trait-croquis" d="M469.4 236.8C484.4 241.6 501.4 249.6 517.5 250.2"/>
+  <path class="trait-croquis" d="M468.4 237.0C484.0 241.6 503.8 249.0 519.8 251.1"/>
+  <path class="trait-croquis" d="M519.1 250.8C515.6 247.7 510.6 244.7 507.2 241.8"/>
+  <path class="trait-croquis" d="M518.4 250.0C514.3 250.5 509.6 251.3 505.7 252.8"/>
+  <path class="trait-croquis" d="M485.1 252.2C484.5 244.9 482.6 236.3 482.7 228.6"/>
+  <path class="trait-croquis" d="M498.6 252.0C496.5 246.4 495.3 240.0 496.0 234.1"/>
+  <path class="trait-croquis" d="M510.7 252.5C509.7 246.1 509.8 238.9 507.7 232.3"/>
+  <path class="trait-croquis" d="M520.3 251.6C518.4 245.7 519.8 239.7 517.4 233.9"/>
+  <g class="texte-croquis">
+    <text x="86" y="72" class="fort">le replat — il se vide</text>
+    <text x="232" y="110">l&#39;air froid coule</text>
+    <text x="318" y="150">la cuvette se remplit</text>
+    <text x="626" y="212" text-anchor="end">une haie en travers le retient</text>
+  </g>
+</svg>
+<figcaption>La nuit, l'air froid se comporte comme de l'eau.</figcaption>
+</figure>
+<div class="carte" id="c-froid"><p class="chargement">Chargement…</p></div>
+<div id="l-froid"></div>
+
+<h2 id="eau">Où l'eau se rassemble</h2>
+<p>Le même relevé dit où l'eau arrive et où elle stagne. L'indice d'humidité topographique compare, pour chaque point, la surface qui s'écoule vers lui et la pente qui l'en évacue. Il ne voit ni le sol ni la roche — mais il désigne les endroits où chercher une source, creuser une mare, ou éviter de bâtir.</p>
+<div class="carte" id="c-eau"><p class="chargement">Chargement…</p></div>
+<div id="l-eau"></div>
+
+<h2 id="1959">Le même carré de terrain, en 1959</h2>
+<p>L'IGN met en ligne ses campagnes photographiques depuis les années cinquante. Sur cette emprise, le plus ancien vol exploitable date du <strong>30 juillet 1959</strong>, avant le remembrement. Comparer les deux images dit ce qui a été perdu — et où le remettre.</p>
+<div class="carte" id="c-ortho"><p class="chargement">Chargement…</p></div>
+<p>Deux choses se voient sans loupe. <strong>Le parcellaire était plus fin</strong>, et ses limites étaient soulignées par des lignes d'arbres — la grande prairie d'un seul tenant qu'on voit aujourd'hui au sud du hameau en réunit plusieurs, et les alignements qui les séparaient ont disparu. <strong>Le bois, lui, n'a pas reculé&nbsp;: il a changé de nature.</strong> Les masses sombres de 1959 ont la texture irrégulière du taillis&nbsp;; celles d'aujourd'hui sont des blocs réguliers de résineux, et le relevé laser leur donne jusqu'à <span id="h-arbres">49,5</span> mètres de haut.</p>
+<p>Cela commande le tracé des plantations. Une haie en travers de pente freine l'écoulement de l'air froid autant que le ruissellement&nbsp;; une haie dans le sens de la pente le canalise. <strong>Replanter au mauvais endroit peut aggraver le gel au lieu de l'atténuer</strong> — la carte du dessus dit lequel.</p>
+
+<h2>Méthode</h2>
+<p>Le modèle numérique de terrain provient du programme <strong>LiDAR HD de l'IGN</strong>, qui couvre désormais toute la Corrèze. Le modèle de terrain est <strong>servi à 50&nbsp;cm</strong>&nbsp;; nous l'agrégeons à 2&nbsp;m pour le calcul, sur une fenêtre de 2,4&nbsp;km de côté. Le <strong>modèle de hauteur de végétation</strong>, issu du même relevé, donne les boisements et les haies à la même résolution. Les cellules du bord de la fenêtre sont calculées sans ceinture d'alimentation amont&nbsp;: leur bassin versant y est tronqué, et elles sont à lire avec réserve.</p>
+<p>Cette carte ne livre pas un indice unique. Elle croise <strong>trois grandeurs, chacune dans son unité</strong>&nbsp;: la position topographique par rapport au voisinage de 400&nbsp;m, la pente locale, et la profondeur de cuvette après remplissage des dépressions. Une poche est un endroit qui réunit les trois — plus de 3&nbsp;m sous son voisinage, moins de 2° de pente, plus de 0,30&nbsp;m de creux. <strong>Aucune température n'est mesurée sur cette emprise</strong>&nbsp;: un indice agrégé y aurait la forme d'une mesure sans en être une, et nous n'en construisons pas. C'est un modèle d'écoulement gravitaire, pas une simulation atmosphérique.</p>
+<div class="note">
+  <span class="etiquette">Limites de la carte</span>
+  <p>Elle décrit la <strong>forme du terrain</strong>, pas des températures mesurées. Elle ignore le vent, la couverture nuageuse, l'humidité du sol et la chaleur que restitue un bâtiment ou un bois. Une nuit ventée efface complètement le phénomène qu'elle décrit.</p>
+  <p>Ce qu'elle vaut&nbsp;: elle classe des endroits les uns par rapport aux autres, et cette hiérarchie est robuste. <strong>Deux thermomètres enregistreurs à environ 30&nbsp;€ pièce</strong>, l'un au point haut, l'autre dans la poche la plus proche, la vérifient en une saison. Cette mesure n'a pas été faite.</p>
+</div>
+<p>Données et images sous Licence Ouverte 2.0 — <a href="data/relief.json">JSON du relief</a>. Le calcul tient dans <a href="https://github.com/CedricMabilotte/domainedumons-site/blob/main/scripts/relief.py">un script lisible</a>. Fonds&nbsp;: <a href="https://geoservices.ign.fr/lidarhd">IGN LiDAR HD</a> et photographies aériennes de la Géoplateforme.</p>
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+const CARDINAUX = ["nord", "nord-est", "est", "sud-est", "sud", "sud-ouest", "ouest", "nord-ouest"];
+const cardinal = (deg) => CARDINAUX[Math.round(((deg % 360) + 360) % 360 / 45) % 8];
+function legende(items) {
+  return "<ul class='legende-carte'>" + items.map((i) =>
+    "<li><span class='pastille-carte' style='background:" + i[0] + "'></span>" + i[1] + "</li>").join("") + "</ul>";
+}
+(async () => {
+  let d, o;
+  try { d = await json("data/relief.json"); }
+  catch (e) { echec("synthese", "Analyse du relief indisponible."); return; }
+  try { o = await json("data/ortho.json"); } catch (e) { o = null; }
+  const p = d.point, f = d.fenetre, pp = d.poche_proche;
+
+  document.getElementById("synthese").innerHTML =
+    tuile("Altitude", nf(p.altitude_m, 1), "m", "relevé laser, ±20 cm") +
+    tuile("Pente au point", nf(p.pente_deg, 2), "degré", "un replat — sous un degré, l'exposition n'a pas d'effet mesurable") +
+    tuile("Position", "+" + nf(p.tpi_400m, 1), "m", "au-dessus du voisinage de 400 m", "calme") +
+    tuile("Le point est-il en poche", p.en_poche_froide ? "oui" : "non", "",
+          p.en_poche_froide ? "à vérifier au thermomètre" : "ni bas dans le versant, ni plat, ni en creux",
+          p.en_poche_froide ? "vigilance" : "calme") +
+    (pp ? tuile("Poche la plus proche", nf0(pp.distance_m), "m", nf(pp.denivele_m, 1) + " m plus bas, au " + cardinal(pp.direction_deg), "vigilance") : "");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li><strong>Le bâti n'est pas dans une poche de gel</strong>&nbsp;: il est " + nf(p.tpi_400m, 1) +
+      " m au-dessus de la moyenne de son voisinage, et " + nf(f.part_plus_bas_que_le_point, 0) + " % du terrain alentour est plus bas.</li>" +
+    (pp ? "<li>La poche d'air froid la plus proche est à <strong>" + nf0(pp.distance_m) + " m, " + nf(pp.denivele_m, 1) +
+      " m plus bas, au " + cardinal(pp.direction_deg) + "</strong>. C'est là qu'il ne faut pas planter.</li>" : "") +
+    "<li>" + nf(f.part_poche_froide, 1) + " % du terrain réunit les trois conditions de poche&nbsp;; " +
+      nf(f.part_ligneux_3m, 0) + " % est boisé, et une lisière en travers de pente retient l'air froid.</li>" +
+    "<li>Depuis 1959, le parcellaire s'est simplifié et <strong>les lignes d'arbres qui bordaient les parcelles ont disparu</strong>.</li>" +
+    "</ul>";
+
+  document.getElementById("c-froid").innerHTML =
+    "<figure><img src='dessins/relief-airfroid.png' width='860' height='860' loading='lazy'" +
+    " alt='Carte du relief autour du Domaine du Mons, avec les zones d’accumulation d’air froid en bleu et les boisements en vert'>" +
+    "<figcaption>2,4 km de côté, nord en haut. La croix marque le chemin du Mons. " +
+    legende([["#96b4cd", "bas dans le versant"], ["#5f91be", "bas et plat"], ["#285fa0", "bas, plat et en creux"],
+             ["#465c3a", "boisements et haies de plus de 3 m"]]) + "</figcaption></figure>";
+
+  document.getElementById("l-froid").innerHTML =
+    "<p><strong>Le bâti n'est pas dans une poche de gel.</strong> Le point est " + nf(p.tpi_400m, 1) +
+    " mètres au-dessus de la moyenne de son voisinage de 400&nbsp;m, sur une convexité — " +
+    nf(f.part_plus_bas_que_le_point, 0) + "&nbsp;% du terrain de la fenêtre est plus bas que lui. " +
+    "L'air froid qui s'y forme s'écoule vers l'aval.</p>" +
+    (pp ? "<p>La poche la plus proche est à <strong>" + nf0(pp.distance_m) +
+      " mètres</strong>, " + nf(pp.denivele_m, 1) + " mètre" + (pp.denivele_m >= 2 ? "s" : "") + " plus bas, au " + cardinal(pp.direction_deg) +
+      ". Dans les 400 mètres autour du lieu, le terrain descend jusqu'à <strong>" + nf(f.denivele_sous_le_point_400m, 0) +
+      " mètres sous le point</strong>. C'est là que les gelées tardives frapperont, et là qu'il ne faut pas planter un fruitier à floraison précoce.</p>" : "") +
+    "<p>Sur l'ensemble de la fenêtre, <strong>" + nf(f.part_poche_froide, 1) +
+    "&nbsp;% du terrain réunit les trois conditions</strong> — bas dans le versant, plat, et en creux. " +
+    nf(f.part_bas_et_plat, 1) + "&nbsp;% est bas et plat sans être en creux, et " + nf(f.part_bas_dans_le_versant, 0) +
+    "&nbsp;% est simplement bas. Le reste est en pente ou en position haute.</p>" +
+    "<p><strong>Les cuvettes brutes se comptent mal, et l'erreur est d'un ordre de grandeur.</strong> Le modèle de terrain " +
+    "restitue les remblais de route et de voie ferrée, mais pas les buses et les ponts qui les traversent&nbsp;: chaque ouvrage " +
+    "devient un barrage fictif de plusieurs milliers de mètres cubes. En lecture brute, " + nf(f.part_creux_brut, 1) +
+    "&nbsp;% de la fenêtre est en creux fermé&nbsp;; après avoir écarté les objets trop grands ou trop allongés pour être " +
+    "autre chose qu'une retenue d'ouvrage, il en reste <strong>" + nf(f.part_creux_avere, 1) + "&nbsp;%</strong>. " +
+    "Ce sont les mares, ornières et micro-cuvettes, et ce sont elles qui intéressent l'inventaire des habitats.</p>" +
+    "<p>Les boisements couvrent <strong>" + nf(f.part_ligneux_3m, 0) + "&nbsp;% de la fenêtre</strong> au-dessus de 3&nbsp;m, " +
+    nf(f.part_ligneux_10m, 0) + "&nbsp;% au-dessus de 10, et le relevé monte jusqu'à <strong>" + nf(f.hauteur_vegetation_extreme_m, 1) +
+    " mètres</strong> — des douglas de haute futaie, cohérents avec le plateau. Ils comptent ici pour une autre raison que l'ombre&nbsp;: " +
+    "<strong>une lisière en travers de pente retient l'air froid en amont</strong>, comme un barrage retient l'eau. " +
+    "C'est la première chose à regarder avant d'ouvrir ou de fermer une haie.</p>";
+
+  document.getElementById("c-eau").innerHTML =
+    "<figure><img src='dessins/relief-eau.png' width='860' height='860' loading='lazy'" +
+    " alt='Carte de l’indice d’humidité topographique autour du Domaine du Mons'>" +
+    "<figcaption>Même emprise. Plus le bleu est dense, plus le terrain rassemble d'eau au regard de sa pente. " +
+    legende([["#78a5c3", "convergence légère"], ["#3773a5", "marquée"], ["#19467d", "forte, saturation probable"]]) +
+    "</figcaption></figure>";
+
+  document.getElementById("l-eau").innerHTML =
+    "<p>Les lignes bleues continues sont les talwegs&nbsp;: c'est par là que l'eau descend, qu'il y ait un ruisseau visible ou non. " +
+    "Les taches sont les points de convergence — <strong>" + nf(f.part_twi_humide, 1) + "&nbsp;% de la fenêtre</strong> y est classée. " +
+    "Au chemin du Mons même, l'indice vaut " + nf(p.twi, 1) + " — presque le seuil de 10 au-delà duquel on va chercher l'eau. " +
+    "<strong>Ce n'est pourtant pas un terrain humide.</strong> Il ne reçoit que <strong>" + nf0(p.aire_amont_m2) +
+    "&nbsp;m² de bassin versant</strong>&nbsp;: le point est à quelques dizaines de mètres d'une ligne de partage. " +
+    "L'indice ne monte ici que parce que la pente, à son dénominateur, est quasi nulle. Sur un sommet plat il se lit " +
+    "toujours avec l'aire amont, et celle-ci dit qu'aucune eau ne se concentrera ici sans être construite.</p>" +
+    "<p>Deux usages immédiats. <strong>Chercher une source</strong>&nbsp;: les résurgences apparaissent là où une convergence marquée rencontre " +
+    "une rupture de pente. <strong>Placer une mare</strong>&nbsp;: sur une convergence, jamais sur un versant, et jamais en travers d'un talweg " +
+    "sans se demander ce qu'on fait de la crue. Il reste à vérifier sur place&nbsp;: le modèle ne voit pas l'argile sous l'arène, " +
+    "et c'est elle qui décide si l'eau reste.</p>";
+
+  if (o && o.vues && o.vues.length) {
+    const vues = o.vues;
+    document.getElementById("c-ortho").innerHTML =
+      "<div class='epoques' role='group' aria-label='Choisir l’époque'>" +
+      vues.map((v, i) => "<button type='button' data-i='" + i + "' aria-pressed='" + (i === 0) + "'>" +
+        (v.cle === "auj" ? "Aujourd'hui" : v.cle) + "</button>").join("") + "</div>" +
+      "<figure><img id='img-ortho' src='" + vues[0].fichier + "' width='900' height='900' loading='lazy' alt='Photographie aérienne du secteur du Mons'>" +
+      "<figcaption id='cap-ortho'></figcaption></figure>";
+    const img = document.getElementById("img-ortho"), cap = document.getElementById("cap-ortho");
+    const maj = (i) => {
+      img.src = vues[i].fichier;
+      cap.textContent = vues[i].libelle + " · " + o.emprise_m + " m de côté, nord en haut.";
+      document.querySelectorAll(".epoques button").forEach((b, k) => b.setAttribute("aria-pressed", String(k === i)));
+    };
+    document.querySelectorAll(".epoques button").forEach((b) =>
+      b.addEventListener("click", () => maj(+b.dataset.i)));
+    maj(0);
+  } else {
+    document.getElementById("c-ortho").innerHTML = "<p class='echec'>Photographies aériennes indisponibles.</p>";
+  }
+
+  const ha = document.getElementById("h-arbres");
+  if (ha) ha.textContent = nf(f.hauteur_vegetation_extreme_m, 1);
+
+  document.getElementById("horodatage").textContent =
+    "Relief calculé le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · " + d.source + " · Licence Ouverte 2.0.";
+})();
+</script>

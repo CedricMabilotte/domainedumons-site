@@ -1,0 +1,185 @@
+/* Domaine du Mons — éditions paginées (Paged.js).
+   Une feuille pour trois formats : A5 pour les fiches et le livret, A4 pour
+   le rapport, A4 paysage pour la feuille du faisceau de droits. Paged.js lit
+   les règles @page, découpe le flux en pages, calcule les folios, les titres
+   courants et les renvois du sommaire ; l'impression du navigateur en fait
+   un PDF. Rien ne sort vers un service tiers : la bibliothèque est servie
+   par le site (vendor/paged.polyfill.min.js).
+
+   Pièges déjà rencontrés sur la chaîne de diagnostic (RE-02) et évités ici :
+   une seule déclaration string-set par nom, sinon le titre courant se fige ;
+   pas de titre seul en bas de page ; pas de figure, de ligne de tableau ni
+   d'encadré coupés en deux. */
+
+:root {
+  --encre: #1a1915; --douce: #5b5749; --filet: #bdb8a8; --surface: #f3f1ea;
+  --accent: #4a5a3a; --vigilance: #7d6100; --calme: #0a6f45;
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+           "Noto Serif", "Liberation Serif", "Times New Roman", serif;
+}
+
+/* ------------------------------------------------------------ les pages */
+@page {
+  size: A5;
+  margin: 17mm 14mm 19mm 16mm;
+  @top-right { content: string(courant); font: italic 7.5pt var(--serif); color: #5b5749; }
+  @bottom-right { content: counter(page); font: 8.5pt var(--serif); color: #1a1915; }
+  @bottom-left { content: "Domaine du Mons"; font: 7.5pt var(--serif); color: #5b5749; }
+  @footnote { border-top: .4pt solid #bdb8a8; padding-top: 1.5mm; margin-top: 3mm; }
+}
+@page :left {
+  margin: 17mm 16mm 19mm 14mm;
+  @top-right { content: none; }
+  @top-left { content: string(courant); font: italic 7.5pt var(--serif); color: #5b5749; }
+  @bottom-right { content: "Domaine du Mons"; font: 7.5pt var(--serif); color: #5b5749; }
+  @bottom-left { content: counter(page); font: 8.5pt var(--serif); color: #1a1915; }
+}
+@page couverture {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+@page blanche {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+body.a4 { }
+/* A4 et A4 paysage : la taille se déclare dans la page elle-même (un <style>
+   posé par scripts/editions.py). Une page nommée de taille différente est
+   bien dessinée par Paged.js, mais l'impression de Chromium garde la taille
+   de la règle @page par défaut et coupe le contenu — constaté au premier
+   rendu, le 24/09/2026. Un document, un format. */
+
+/* ------------------------------------------------------------ le texte */
+html { font-family: var(--serif); color: var(--encre); }
+body { margin: 0; font-size: 9.6pt; line-height: 1.42; hyphens: auto; -webkit-hyphens: auto; }
+.a4 body, body.a4 { font-size: 10.5pt; }
+p { margin: 0 0 2.2mm; orphans: 2; widows: 2; }
+ul, ol { margin: 0 0 2.5mm; padding-left: 4.5mm; }
+li { margin-bottom: .8mm; }
+a { color: inherit; text-decoration: none; }
+strong { font-weight: 700; }
+h1, h2, h3, h4 { font-weight: 600; line-height: 1.2; break-after: avoid; hyphens: manual; }
+h1 { font-size: 16pt; margin: 0 0 3mm; }
+h2 { font-size: 11.5pt; margin: 5.5mm 0 2mm; }
+h3 { font-size: 10pt; margin: 4mm 0 1.5mm; }
+h4 { font-size: 9.6pt; margin: 3mm 0 1mm; }
+.chapeau { font-size: 11pt; line-height: 1.35; margin: 0 0 5mm; }
+code, pre { font-family: "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: .82em; }
+hr { border: 0; border-top: .4pt solid var(--filet); margin: 4mm 0; }
+sup { line-height: 0; }
+
+/* Un chapitre commence sur une belle page et donne son titre courant. */
+.chapitre { break-before: right; }
+.chapitre:first-of-type { break-before: auto; }
+.titre-courant { string-set: courant content(text); }
+.chapitre > h1 { margin-top: 12mm; }
+.code-fiche { display: block; font-size: 9pt; color: var(--accent); margin-bottom: 1.5mm; font-weight: 600; }
+
+/* ------------------------------------------------------ les éléments */
+figure { margin: 3mm 0 4mm; break-inside: avoid; }
+figcaption { font-size: 8pt; color: var(--douce); margin-top: 1mm; }
+.croquis { width: 100%; height: auto; display: block; }
+.trait-croquis { fill: none; stroke: var(--encre); stroke-width: 1.15; stroke-linecap: round; opacity: .85; }
+.texte-croquis text { fill: var(--encre); font-family: var(--serif); font-size: 17px; }
+.texte-croquis .fort { font-size: 22px; font-weight: 600; }
+.texte-croquis .petit, .texte-croquis .sur { font-size: 15px; font-style: italic; opacity: .7; }
+
+.note { break-inside: avoid; margin: 3mm 0 4mm; padding: 2mm 3mm; background: var(--surface);
+        border-left: 1.2pt solid var(--accent); font-size: 8.8pt; }
+.note .etiquette { display: block; font-style: italic; color: var(--douce); font-size: 7.8pt; margin-bottom: 1mm; }
+.note p:last-child { margin-bottom: 0; }
+blockquote { margin: 4mm 0; padding: 3mm 4mm; background: var(--surface); border-left: 1.5pt solid var(--accent);
+             font-size: 11pt; line-height: 1.35; break-inside: avoid; }
+blockquote p { margin: 0; }
+
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 8.2pt; }
+th, td { text-align: left; vertical-align: top; padding: 1mm 2mm 1mm 0; border-bottom: .4pt solid var(--filet); }
+thead th { font-weight: 600; color: var(--douce); border-bottom-width: .8pt; }
+tbody th { font-weight: 600; }
+tr { break-inside: avoid; }
+.defilant { overflow: visible; }
+
+.etats { list-style: none; padding: 0; }
+.etats li { display: grid; grid-template-columns: 17mm 1fr; gap: 3mm; border-top: .4pt solid var(--filet);
+            padding: 1.5mm 0; break-inside: avoid; }
+.etat { font-style: italic; color: var(--douce); font-size: 8pt; }
+
+.point::before { content: attr(data-n) "."; font-weight: 700; color: var(--accent); margin-right: 1.5mm; }
+.h-contreindications, .h-verification { break-before: auto; }
+.bloc-contre { break-inside: avoid-page; background: var(--surface); border-left: 1.5pt solid var(--vigilance);
+               padding: 1mm 3mm 1mm; margin: 4mm 0; }
+.bloc-verif { border-left: 1.5pt solid var(--calme); padding: 1mm 3mm; margin: 4mm 0; break-inside: avoid; }
+.gabarit-texte { white-space: pre; font-size: 6.4pt; line-height: 1.35; background: var(--surface); padding: 2.5mm; }
+
+/* Les adresses des liens externes descendent en note de bas de page. */
+.note-lien { float: footnote; font-size: 7pt; line-height: 1.3; color: var(--douce); word-break: break-all; }
+.note-lien::footnote-call { content: counter(footnote); font-size: 6.5pt; vertical-align: super; line-height: 0; color: var(--accent); }
+
+/* ------------------------------------------------ la page de titre */
+.couverture { page: couverture; height: 210mm; box-sizing: border-box; padding: 24mm 16mm 16mm;
+              display: flex; flex-direction: column; background: #f3f1ea; break-after: page; }
+.a4 .couverture { height: 297mm; padding: 34mm 24mm 22mm; }
+.flux-a4 { font-size: 10.5pt; }
+.couverture .sur-titre { font-size: 9pt; font-style: italic; color: var(--douce); margin: 0 0 6mm; }
+.couverture h1 { font-size: 24pt; line-height: 1.1; margin: 0 0 5mm; string-set: none; }
+.couverture .chapeau { font-size: 12pt; }
+.couverture .croquis { margin: auto 0 6mm; }
+.couverture .pied { margin-top: auto; font-size: 8pt; color: var(--douce); border-top: .5pt solid var(--filet); padding-top: 3mm; }
+.couverture .pied p { margin: 0 0 1mm; }
+
+.verso { page: blanche; break-after: page; font-size: 7.8pt; color: var(--douce);
+         display: flex; flex-direction: column; justify-content: flex-end; height: 170mm; }
+
+/* ------------------------------------------------------------ sommaire */
+.sommaire-edition { page: blanche; break-after: page; }
+.sommaire-edition h2 { font-size: 13pt; margin: 0 0 5mm; }
+.sommaire-edition ol { list-style: none; padding: 0; margin: 0; }
+.sommaire-edition li { display: flex; align-items: baseline; gap: 2mm; margin: 0 0 2mm; }
+.sommaire-edition li .code { flex: none; width: 12mm; color: var(--accent); font-weight: 600; font-size: 8.5pt; }
+.sommaire-edition li a { flex: 1; display: flex; align-items: baseline; }
+.sommaire-edition li a::after { content: target-counter(attr(href), page); margin-left: auto; padding-left: 3mm;
+                                font-variant-numeric: tabular-nums; }
+.sommaire-edition .famille { margin-top: 4mm; font-style: italic; color: var(--douce); font-size: 8.5pt; }
+
+/* ------------------------------------------ la fiche : cartouche */
+.cartouche { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: .5pt solid var(--filet);
+             border-left: .5pt solid var(--filet); margin: 0 0 5mm; font-size: 7.6pt; break-inside: avoid; }
+.cartouche div { padding: 1.2mm 2mm; border-right: .5pt solid var(--filet); border-bottom: .5pt solid var(--filet); }
+.cartouche dt { font-style: italic; color: var(--douce); }
+.cartouche dd { margin: 0; }
+.colophon { margin-top: 8mm; font-size: 7.6pt; color: var(--douce); border-top: .4pt solid var(--filet); padding-top: 2mm;
+            break-inside: avoid; }
+
+/* ------------------------------------------ la feuille du faisceau */
+.feuille { break-after: page; }
+.feuille:last-child { break-after: auto; }
+.feuille h2 { margin: 0 0 1mm; font-size: 13pt; }
+.feuille .consigne { font-size: 8pt; color: var(--douce); margin: 0 0 3mm; }
+.feuille table { font-size: 8.5pt; table-layout: fixed; }
+.feuille th, .feuille td { border: .5pt solid #8a8577; padding: 1.5mm; height: 23mm; }
+.feuille thead th { height: 9mm; color: var(--encre); background: var(--surface); }
+.feuille tbody th { background: var(--surface); }
+.feuille .col-droit { width: 30mm; }
+.feuille tbody th small { display: block; font-weight: 400; font-style: italic; color: var(--douce); font-size: 6.8pt; margin-top: .8mm; }
+.feuille .col-statut { width: 24mm; } .feuille .col-acte { width: 38mm; }
+.legende-statuts { font-size: 7.2pt; color: var(--douce); margin-top: 2mm; }
+
+/* ------------------------------------------ à l'écran, avant impression */
+@media screen {
+  body { background: #d9d6cc; }
+  .pagedjs_pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 8mm; padding: 10mm 0 20mm; }
+  .pagedjs_page { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+  .barre-edition { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; gap: 4mm; align-items: center;
+                   padding: 2mm 5mm; background: #1a1915; color: #fff; font: 10pt var(--serif); }
+  .barre-edition a, .barre-edition button { color: #fff; font: inherit; background: none; border: 1px solid #fff5; padding: 1mm 3mm; cursor: pointer; }
+}
+@media print { .barre-edition { display: none; } }
+
+/* les tuiles du rapport : quatre par ligne, jamais coupées */
+.tuiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin: 2mm 0 5mm; }
+.tuile { border: .4pt solid var(--filet); padding: 2mm; break-inside: avoid; }
+.tuile p { margin: 0; }
+.tuile .libelle { font-size: 7.5pt; font-style: italic; color: var(--douce); }
+.tuile .valeur { font-size: 14pt; line-height: 1.15; margin: 1mm 0; }
+.tuile .detail { font-size: 7.5pt; color: var(--douce); }

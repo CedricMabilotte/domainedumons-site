@@ -1,0 +1,149 @@
+<!--meta
+{
+ "titre": "Le climat, 1950-2025",
+ "description": "Le climat de Vitrac-sur-Montane de 1950 à 2025 : température, jours de gel, chaleur, pluie, déficit hydrique estival. Tendances testées, incertitude affichée.",
+ "classe": "tdb"
+}
+-->
+<h1>Le climat, 1950-2025</h1>
+<!--#sans-js data/climat.json-->
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+
+<p>76 années de relevés quotidiens au point du lieu, résumées année par année. Chaque tendance est testée&nbsp;: quand l'intervalle de confiance contient zéro, nous écrivons qu'il n'y a <em>pas de tendance détectable</em>, et non que c'est stable.</p>
+
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
+
+<div id="graphiques"></div>
+
+<h2 id="lire-les-courbes">Lecture</h2>
+<div id="lecture"><p class="chargement">Chargement…</p></div>
+
+<h2>Méthode</h2>
+
+<p>La source est une réanalyse atmosphérique — un modèle qui reconstitue le temps passé heure par heure en assimilant toutes les observations disponibles. Elle donne une série continue là où aucune station n'a jamais été installée, ce qui est le cas ici.</p>
+
+<p>Les tendances sont calculées par le <strong>test de Mann-Kendall</strong> et la <strong>pente de Sen</strong>, deux méthodes qui ne supposent ni distribution normale ni relation linéaire, et qui résistent aux valeurs extrêmes — contrairement à une droite de régression ordinaire, qu'une seule année exceptionnelle suffit à faire pivoter.</p>
+
+<!--#module representativite-->
+
+<p><strong>Ces courbes valent pour la tendance de longue durée.</strong> Elles ne prévoient pas le temps d'un jour donné&nbsp;: voir <a href="tdb-eau-meteo.html">Le jour et la semaine</a>.</p>
+
+<p>Les données de cette page sont téléchargeables — <a href="data/climat-annuel.csv">CSV</a>, <a href="data/climat.json">JSON</a> — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>.</p>
+
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+const SERIES = [
+  { cle: "tmoy",  titre: "Température moyenne annuelle", unite: "°C", legende: "Moyenne des températures moyennes quotidiennes.", dec: 1 },
+  { cle: "gel",   titre: "Jours de gel", unite: "jours", legende: "Nombre de jours dont la minimale descend sous 0 °C.", dec: 0 },
+  { cle: "chaud", titre: "Jours à 30 °C ou plus", unite: "jours", legende: "Nombre de jours dont la maximale atteint 30 °C.", dec: 0, type: "barres" },
+  { cle: "pluie", titre: "Cumul de pluie", unite: "mm", legende: "Précipitations totales sur l'année.", dec: 0 },
+  { cle: "jp",    titre: "Jours de pluie", unite: "jours", legende: "Nombre de jours recevant au moins 1 mm.", dec: 0 },
+  { cle: "defic", titre: "Déficit hydrique estival", unite: "mm", legende: "D'avril à septembre, évaporation moins pluie. Au-dessus de zéro, le sol perd plus qu'il ne reçoit.", dec: 0 }
+];
+
+const MOTS = {
+  tmoy: ["réchauffement", "refroidissement"],
+  gel: ["hausse", "baisse"],
+  chaud: ["hausse", "baisse"],
+  pluie: ["hausse", "baisse"],
+  jp: ["hausse", "baisse"],
+  defic: ["creusement", "réduction"]
+};
+
+function phraseTendance(cle, t, unite) {
+  if (!t) return "<strong>Tendance</strong> : série trop courte pour conclure.";
+  if (!t.significative) return "<strong>Tendance</strong> : aucune n'est détectable sur la période — l'intervalle de confiance contient zéro.";
+  const sens = t.pente_par_decennie > 0 ? MOTS[cle][0] : MOTS[cle][1];
+  const v = Math.abs(t.pente_par_decennie);
+  return "<strong>Tendance</strong> : " + sens + " de <strong>" + nf(v, v < 1 ? 2 : 1) + " " + unite +
+    " par décennie</strong> (intervalle de confiance à 95 % : " + nf(t.ic95[0], 2) + " à " + nf(t.ic95[1], 2) + ")."; 
+}
+
+(async () => {
+  let d;
+  try { d = await json("data/climat.json"); }
+  catch (e) { echec("synthese", "Série climatique indisponible."); echec("lecture", ""); return; }
+
+  const n = d.normale_1991_2020, tr = d.tendances;
+  document.getElementById("synthese").innerHTML =
+    tuile("Période", d.periode[0] + "–" + d.periode[1], "", (d.series.tmoy.length) + " années complètes") +
+    tuile("Température moyenne", nf(n.tmoy), "°C", "normale 1991-2020") +
+    tuile("Réchauffement", "+" + nf(tr.tmoy.pente_par_decennie, 2), "°C", 'par décennie · <span class="pastille alerte"></span>significatif', "alerte") +
+    tuile("Jours de gel", nf0(n.gel), "par an", nf(tr.gel.pente_par_decennie, 1) + " par décennie") +
+    tuile("Jours à 30 °C", nf(n.chaud), "par an", "+" + nf(tr.chaud.pente_par_decennie, 2) + " par décennie");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li><strong>+" + nf(tr.tmoy.pente_par_decennie, 2) + " °C par décennie</strong>, soit " +
+      nf(tr.tmoy.pente_par_decennie * 7.6, 1) + " °C sur la période.</li>" +
+    "<li>Jours de gel <strong>" + nf(tr.gel.pente_par_decennie, 1) + " par décennie</strong>, jours à 30 °C <strong>+" +
+      nf(tr.chaud.pente_par_decennie, 2) + "</strong>.</li>" +
+    "<li>Cumul de pluie&nbsp;: <strong>aucune tendance détectable</strong> — mais " +
+      nf(Math.abs(tr.jp.pente_par_decennie), 1) + " jours de pluie en moins par décennie.</li>" +
+    "<li>Déficit d'été <strong>+" + nf0(tr.defic.pente_par_decennie) + " mm par décennie</strong>.</li>" +
+    "</ul>";
+
+  const zone = document.getElementById("graphiques");
+  for (const s of SERIES) {
+    const pts = d.series[s.cle].map(([y, v]) => ({ cle: String(y), libelle: String(y), y: v }));
+    const bloc = document.createElement("div");
+    bloc.className = "graphe";
+    bloc.innerHTML = "<h3>" + s.titre + "</h3><p class='legende-axe'>" + s.legende +
+      " " + phraseTendance(s.cle, tr[s.cle], s.unite) + "</p><div></div>";
+    zone.appendChild(bloc);
+    const t = tr[s.cle];
+    let tendance = null;
+    if (t && t.significative) {
+      const xs = d.series[s.cle].map(([y]) => y);
+      const milieu = (t.y0 + t.y1) / 2, demi = (xs[xs.length - 1] - xs[0]) / 2;
+      const pente = t.pente_par_decennie / 10;
+      tendance = { y0: milieu - pente * demi, y1: milieu + pente * demi };
+    }
+    graphe({ conteneur: bloc.lastElementChild, points: pts, type: s.type || "ligne", unite: s.unite, tendance, hauteur: 170, zero: s.cle !== "tmoy" });
+
+    const det = document.createElement("details");
+    det.className = "tableau-brut";
+    det.innerHTML = "<summary>Voir les chiffres — " + s.titre.toLowerCase() + "</summary>" +
+      "<div class='defilant'><table class='donnees'><thead><tr><th>Année</th><th>" + s.unite + "</th></tr></thead><tbody>" +
+      d.series[s.cle].map(([y, v]) => "<tr><td>" + y + "</td><td>" + nf(v, s.dec) + "</td></tr>").join("") +
+      "</tbody></table></div>";
+    zone.appendChild(det);
+  }
+
+  const gelPrint = tr.dg, gelAut = tr.pg;
+  const allongement = (gelAut && gelPrint) ? (gelAut.pente_par_decennie - gelPrint.pente_par_decennie) : null;
+
+  document.getElementById("lecture").innerHTML =
+    "<p><strong>La température moyenne monte.</strong> " + nf(tr.tmoy.pente_par_decennie, 2) +
+    " °C par décennie, soit près de " + nf(tr.tmoy.pente_par_decennie * 7.6, 1) + " °C sur la période. " +
+    "Le nombre de jours de gel a reculé de " + nf(Math.abs(tr.gel.pente_par_decennie), 1) +
+    " par décennie, celui des jours à 30 °C progresse de " + nf(tr.chaud.pente_par_decennie, 2) + ".</p>" +
+
+    "<p><strong>Même cumul annuel, moins de jours de pluie.</strong> Le cumul annuel " +
+    (tr.pluie.significative ? "montre une tendance." : "n'a <em>aucune tendance détectable</em> : l'intervalle de confiance contient zéro.") +
+    " En revanche le nombre de jours de pluie recule de " + nf(Math.abs(tr.jp.pente_par_decennie), 1) +
+    " par décennie. Même quantité d'eau, moins de jours pour la recevoir : donc des pluies plus intenses, " +
+    "qui ruissellent davantage et s'infiltrent moins. C'est l'un des effets les plus constants du réchauffement en France, " +
+    "et le cumul annuel seul ne laisse pas voir ce déplacement.</p>" +
+
+    "<p><strong>L'été se dessèche.</strong> Le déficit d'avril à septembre se creuse de " +
+    nf(tr.defic.pente_par_decennie, 0) + " mm par décennie. C'est la conséquence directe du point précédent, " +
+    "combinée à une évaporation qui augmente avec la chaleur.</p>" +
+
+    (allongement !== null ?
+    "<p><strong>Et le point qui décide d'un verger.</strong> La dernière gelée de printemps recule de " +
+    nf(Math.abs(gelPrint.pente_par_decennie), 1) + " jour" + (Math.abs(gelPrint.pente_par_decennie) >= 2 ? "s" : "") +
+    " par décennie, la première gelée d'automne avance de " + nf(gelAut.pente_par_decennie, 1) +
+    " — la saison sans gel s'allonge donc d'environ " + nf(allongement, 1) + " jours par décennie. " +
+    "Mais la floraison, elle, avance de 2,5 jours par décennie sur cette même série. " +
+    "Les fleurs sortent au moins aussi vite que le gel ne recule, et le nombre de gelées survenant après le débourrement " +
+    "<strong>ne baisse pas</strong>. Le calcul est détaillé sur la page " +
+    "<a href=\"tdb-saisons.html#verger\">chauffage, verger, fenaison</a>, avec ce qu'il commande : " +
+    "des variétés à floraison tardive, et jamais les 15&nbsp;m les plus bas de la pente, là où l'air froid s'accumule.</p>" : "");
+
+  document.getElementById("horodatage").textContent =
+    "Série calculée le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · " + d.source + " · Licence Ouverte 2.0.";
+})();
+</script>

@@ -1,0 +1,137 @@
+<!--meta
+{
+ "titre": "L'année",
+ "description": "Où en est l'année au Domaine du Mons : cumuls à date, position dans la distribution 1991-2020, bilan des douze derniers mois.",
+ "classe": "tdb"
+}
+-->
+<h1 id="titre-annee">L'année</h1>
+<!--#sans-js data/annee.json-->
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+
+<p class="chapeau">Un cumul de pluie ne dit rien seul&nbsp;: il faut le rapporter à ce qu'une année reçoit d'habitude à la même date. Cette page compare l'année en cours, jour pour jour, aux 30 années de la normale 1991-2020, puis fait de même sur les 12 derniers mois glissants.</p>
+
+<div class="tuiles" id="tuiles"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement</p></div></div>
+
+<div id="lecture-ytd"></div>
+
+<div class="graphe">
+  <h3>Cumul de pluie depuis le 1<sup>er</sup> janvier</h3>
+  <p class="legende-axe">La courbe de l'année en cours, posée sur la zone où tombent huit années sur dix.</p>
+  <ul class="legende">
+    <li><span class="ech ligne"></span> année en cours</li>
+    <li><span class="ech bande"></span> zone normale 1991-2020 (8 années sur 10)</li>
+    <li><span class="ech mediane"></span> médiane</li>
+  </ul>
+  <div id="g-pluie"><p class="chargement">Chargement…</p></div>
+</div>
+
+<h2>Les douze derniers mois</h2>
+<div id="glissant"><p class="chargement">Chargement…</p></div>
+
+<h2>Mois par mois</h2>
+<div id="mensuel"><p class="chargement">Chargement…</p></div>
+
+<h2>Comment lire une position</h2>
+
+<p>Dire qu'une valeur est «&nbsp;au-dessus du dixième le plus haut&nbsp;» signifie que, sur les 30&nbsp;années de référence, moins de trois ont fait autant à la même date. C'est une façon de parler d'un écart sans prétendre à une précision que la donnée n'a pas.</p>
+
+<p>La comparaison <em>à date</em> évite le piège du bilan de fin d'année&nbsp;: en septembre, un cumul annuel ne se lit que rapporté à un mois de septembre ordinaire.</p>
+
+<p>L'année glissante répond à autre chose. Une sécheresse ne s'arrête pas au 31 décembre, un cycle fourrager non plus. Les 12 derniers mois disent l'état réel du milieu&nbsp;; l'année civile est une convention comptable.</p>
+
+<h2>Rapports annuels</h2>
+
+<p>Chaque année close donne lieu à un rapport archivé, non modifié ensuite. Dans 15&nbsp;ans, ce sont ces documents qui diront ce qu'on a vécu, pas un graphique recalculé entre-temps.</p>
+
+<ul class="cartes">
+  <li>
+    <h3><a href="rapport-2025.html">Rapport annuel 2025</a></h3>
+    <p>Première année archivée. Record de jours à 30&nbsp;°C&nbsp;: 24, contre 4,5 en normale, avec une pluviométrie pourtant supérieure à la moyenne.</p>
+    <p class="source">Arrêté au 31 décembre 2025. Document figé.</p>
+  </li>
+</ul>
+
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+const MOIS = ["", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const dateLongue = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { dateStyle: "long" });
+const jourVersDate = (d) => { const t = new Date(2001, 0, 1); t.setDate(d); return t.toLocaleDateString("fr-FR", { day: "numeric", month: "short" }); };
+
+function etatDe(pos) {
+  if (!pos) return null;
+  if (pos.indexOf("dixième le plus haut") >= 0 || pos.indexOf("dixième le plus bas") >= 0) return "alerte";
+  if (pos.indexOf("quart") >= 0) return "vigilance";
+  return "calme";
+}
+
+(async () => {
+  let d;
+  try { d = await json("data/annee.json"); }
+  catch (e) { echec("tuiles", "Analyses annuelles indisponibles."); return; }
+
+  document.getElementById("titre-annee").textContent = "L'année " + d.annee;
+  const a = d.a_date, p = d.position;
+  const det = (cle) => p[cle] ? '<span class="pastille ' + etatDe(p[cle].position) + '"></span>' + p[cle].position : "à date";
+
+  document.getElementById("tuiles").innerHTML =
+    tuile("Pluie depuis janvier", nf0(a.pluie), "mm", det("pluie"), p.pluie ? etatDe(p.pluie.position) : null) +
+    tuile("Température moyenne", nf(a.tmoy), "°C", det("tmoy"), p.tmoy ? etatDe(p.tmoy.position) : null) +
+    tuile("Déficit estival", (a.deficit > 0 ? "+" : "") + nf0(a.deficit), "mm", det("defic"), p.defic ? etatDe(p.defic.position) : null) +
+    tuile("Jours à 30 °C", nf0(a.chaud30), "jours", "depuis le 1ᵉʳ janvier") +
+    tuile("Jours de gel", nf0(a.gel), "jours", "depuis le 1ᵉʳ janvier") +
+    tuile("Somme de températures", nf0(a.sommeT), "°Cj", "base 0 depuis le 1ᵉʳ février");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>Arrêtée au " + dateLongue(d.arrete_au) + ", sur " + a.jours + " jours.</li>" +
+    "<li>Pluie <strong>" + nf0(a.pluie) + " mm</strong>" + (p.pluie ? " — " + p.pluie.position : "") + ".</li>" +
+    "<li>Température moyenne <strong>" + nf(a.tmoy) + " °C</strong>" + (p.tmoy ? " — " + p.tmoy.position : "") + ".</li>" +
+    "<li>Déficit d'été <strong>" + (a.deficit > 0 ? "+" : "") + nf0(a.deficit) + " mm</strong>" + (p.defic ? " — " + p.defic.position : "") + ".</li>" +
+    "<li><strong>" + nf0(a.chaud30) + " jours à 30 °C</strong> et " + nf0(a.gel) + " jours de gel depuis janvier.</li>" +
+    "</ul>";
+
+  const ecart = (cle) => p[cle] ? (p[cle].ecart_mediane > 0 ? "+" : "") + nf(p[cle].ecart_mediane, 1) : "—";
+  document.getElementById("lecture-ytd").innerHTML =
+    "<p>Arrêtée au <strong>" + dateLongue(d.arrete_au) + "</strong>, l'année " + d.annee + " compte " +
+    "<strong>" + nf0(a.pluie) + " mm</strong> de pluie (" + ecart("pluie") + " mm par rapport à la médiane à cette date), " +
+    "une température moyenne de <strong>" + nf(a.tmoy) + " °C</strong> (" + ecart("tmoy") + " °C), " +
+    "et un déficit hydrique estival de <strong>" + nf0(a.deficit) + " mm</strong> (" + ecart("defic") + " mm).</p>";
+
+  /* courbe de cumul contre la bande normale */
+  const bande = d.bande_pluie || {};
+  const pts = d.courbe_pluie.map(([j, v]) => {
+    const q = bande[j];
+    return { cle: jourVersDate(j), libelle: jourVersDate(j), y: v,
+             r0: q ? q[0] : undefined, r1: q ? q[4] : undefined, rm: q ? q[2] : undefined };
+  });
+  graphe({ conteneur: document.getElementById("g-pluie"), points: pts, unite: "mm", hauteur: 210, zero: true });
+
+  /* année glissante */
+  const g = d.glissant;
+  const etatG = (c) => g[c + "_position"] ? etatDe(g[c + "_position"]) : null;
+  document.getElementById("glissant").innerHTML =
+    "<p>Du " + dateLongue(g.debut) + " au " + dateLongue(g.fin) + ".</p>" +
+    '<div class="tuiles">' +
+    tuile("Pluie sur 12 mois", nf0(g.pluie), "mm",
+      g.pluie_position ? '<span class="pastille ' + etatG("pluie") + '"></span>' + g.pluie_position : "", etatG("pluie")) +
+    tuile("Température moyenne", nf(g.tmoy), "°C",
+      g.tmoy_position ? '<span class="pastille ' + etatG("tmoy") + '"></span>' + g.tmoy_position : "", etatG("tmoy")) +
+    "</div>" +
+    "<p>Comparé à toutes les fenêtres de douze mois de la période 1991-2020 — pas seulement aux années civiles.</p>";
+
+  /* mensuel */
+  const lignes = Object.keys(d.mois).map((m) => {
+    const v = d.mois[m];
+    return "<tr><td>" + MOIS[+m] + "</td><td>" + nf0(v.pluie) + "</td><td>" + nf(v.tmoy) + "</td><td>" + v.jours + "</td></tr>";
+  }).join("");
+  document.getElementById("mensuel").innerHTML =
+    '<div class="defilant"><table class="donnees"><thead><tr><th>Mois</th><th>Pluie (mm)</th><th>Temp. moyenne (°C)</th><th>Jours</th></tr></thead><tbody>' +
+    lignes + "</tbody></table></div>";
+
+  document.getElementById("horodatage").textContent =
+    "Calculé le " + dateLongue(d.calcule_le) + ", arrêté au " + dateLongue(d.arrete_au) +
+    " · normale " + d.normale + " · Licence Ouverte 2.0.";
+})();
+</script>

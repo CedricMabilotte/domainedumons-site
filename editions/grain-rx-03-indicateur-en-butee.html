@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un indicateur officiel donnait la même valeur à deux situations différentes — édition paginée — Domaine du Mons</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../edition.css?v=29">
+<script>
+window.PagedConfig = {
+  auto: true,
+  after: function () {
+    var b = document.createElement("div");
+    b.className = "barre-edition";
+    b.innerHTML = '<a href="../editions.html">← Éditions</a> <span>Un indicateur officiel donnait la même valeur à deux situations différentes</span> ' +
+      '<button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button>';
+    document.body.appendChild(b);
+    document.body.setAttribute("data-pret", String(document.querySelectorAll(".pagedjs_page").length));
+  }
+};
+</script>
+<script src="../vendor/paged.polyfill.min.js?v=29"></script>
+</head>
+<body class="a5">
+<article class="chapitre seul" id="grain-rx-03-indicateur-en-butee">
+<h1><span class="code-fiche">RX-03</span><span class="titre-courant">Un indicateur officiel donnait la même valeur à deux situations différentes</span></h1>
+
+<p class="chapeau">Retour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>15 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Publier l'humidité des sols au Domaine du Mons depuis 1958, à partir de la réanalyse SIM2 de Météo-France. Le fichier fournit deux colonnes&nbsp;: <code>SWI</code>, l'humidité du sol ramenée à sa réserve utile, et <code>SSWI_10J</code>, cette même humidité ramenée à la normale du jour, en écarts-types. La seconde est précisément l'indicateur sur lequel les services de l'État constatent une sécheresse des sols, au seuil de −1,5. Il n'y avait qu'à la lire.</p>
+<h2>Le déroulé</h2>
+<p>Le tableau des épisodes de sécheresse les plus longs, une fois affiché, portait une ligne étrange&nbsp;: décembre 1985, <strong>−8,2 écarts-types</strong>.</p>
+<p>Un écart de huit sigmas n'existe pas dans une série de soixante-dix ans. Sous hypothèse normale, c'est une chance sur 10¹⁵. Vérification dans la série brute&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col">Date</th><th scope="col">SWI</th><th scope="col">SSWI_10J</th></tr></thead><tbody><tr><th scope="row">16 décembre 1978</th><td>0,73</td><td><strong>−8,169</strong></td></tr><tr><th scope="row">16 décembre 1985</th><td>0,569</td><td><strong>−8,169</strong></td></tr></tbody></table></div>
+<p>Deux états de sol nettement différents, <strong>le même chiffre à la troisième décimale</strong>. Ce n'est pas une valeur extrême, c'est une butée&nbsp;: l'indicateur sature, et au-delà d'un certain point il cesse de distinguer quoi que ce soit.</p>
+<p>La raison est structurelle. En décembre, sur ce point, le sol est presque toujours à sa capacité au champ. La distribution de référence du jour y est étroite et bornée d'un côté. Toute standardisation appliquée à une distribution qui n'a presque pas de largeur produit des écarts-types énormes, puis butte sur la limite numérique de l'ajustement.</p>
+<h2>L'effet sur les résultats publiés</h2>
+<p>L'indicateur alimentait trois choses&nbsp;: le compte annuel de jours de sécheresse, la plus longue suite de l'année, et la liste des épisodes. Deux des six épisodes les plus longs étaient des épisodes d'hiver fabriqués par la butée. Le classement des étés, lui, reposait sur le SWI brut et n'était pas touché — c'est ce qui a sauvé la conclusion principale.</p>
+<p>Remplacement&nbsp;: l'écart est recalculé par <strong>rang normalisé</strong>. La valeur du jour est située dans l'échantillon de toutes les journées de 1958 à 2020 situées à moins de dix jours de la même date dans l'année — environ 1 300 valeurs — et ce rang est converti en écart-type. L'indicateur est alors <strong>borné par l'échantillon lui-même</strong> : avec 1 300 valeurs, il ne peut pas dépasser ±3,4.</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col"><code>SSWI_10J</code> repris</th><th scope="col">Rang normalisé</th></tr></thead><tbody><tr><th scope="row">Valeur extrême de la série</th><td>−8,17</td><td>−3,37</td></tr><tr><th scope="row">Valeurs identiques pour des sols différents</th><td>oui</td><td>non</td></tr><tr><th scope="row">Épisodes d'hiver aberrants</th><td>2 sur 6</td><td>0</td></tr><tr><th scope="row">Classement des étés les plus secs</th><td>inchangé</td><td>inchangé</td></tr></tbody></table></div>
+<p>Et la valeur devient vérifiable. «&nbsp;−3,4 σ le 14 septembre 2026&nbsp;» se traduit en une phrase qu'on peut contrôler à la main&nbsp;: <em>aucune des 1 323 journées de référence de la mi-septembre n'a été plus sèche</em>. C'est exact&nbsp;; la plus sèche jusqu'ici était le 21 septembre 2019, à 0,193 contre 0,167.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Une valeur impossible est un cadeau&nbsp;; une valeur presque plausible ne l'est pas.</strong> −8,2 sautait aux yeux. Si la butée avait été à −3,5, rien ne l'aurait signalée, et deux faux épisodes seraient restés dans le tableau. Le test qui a tranché n'est pas «&nbsp;la valeur est-elle grande&nbsp;?&nbsp;» mais <strong>«&nbsp;deux entrées différentes donnent-elles la même sortie&nbsp;?&nbsp;»</strong> — une question qu'on peut poser à n'importe quel indicateur, en triant la colonne et en cherchant les doublons exacts.</p>
+<p class="point" data-n="2"><strong>Un indicateur dérivé se vérifie contre la grandeur dont il dérive.</strong> Le SSWI se contrôle contre le SWI&nbsp;; c'est en les affichant côte à côte que l'anomalie est apparue. Un indicateur publié sans la grandeur brute qui le nourrit n'est pas contrôlable.</p>
+<p class="point" data-n="3"><strong>Officiel ne veut pas dire sans butée.</strong> La colonne vient de Météo-France, elle est juste pour l'usage auquel elle est destinée — le suivi de la sécheresse en saison végétative, où la distribution a de la largeur. Elle est reprise ici hors de cet usage, sur l'année entière. <strong>Le défaut n'est pas dans la source, il est dans la reprise.</strong></p>
+<p class="point" data-n="4"><strong>Préférer une statistique bornée par les données à une statistique bornée par un modèle.</strong> Un rang ne peut pas sortir de l'échantillon. Un ajustement paramétrique, si. À qualité d'information égale, la première est plus sûre en bout de distribution — et elle s'explique en une phrase à quelqu'un qui n'est pas statisticien.</p>
+<h2>Les changements</h2>
+<ul><li>Toute colonne dérivée reprise d'une source extérieure est <strong>testée pour la saturation</strong> avant usage&nbsp;: tri de la colonne, recherche de valeurs identiques à la précision publiée sur des entrées différentes, et examen des extrêmes au regard de la taille de la série.</li><li>Les indicateurs standardisés sont <strong>recalculés à partir de la grandeur brute</strong> quand la série de référence le permet, par une méthode bornée par l'échantillon, et la méthode est publiée avec la donnée.</li><li>Une grandeur publiée s'accompagne de la grandeur brute dont elle dérive, dans le même fichier.</li><li>Toute valeur en écarts-types affichée sur le site est traduisible en une phrase de rang vérifiable à la main.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique. La butée guette tout indice standardisé appliqué hors de sa saison ou de son domaine&nbsp;: SPI de précipitations sur un mois sec, z-scores de séries bornées, indices de forme sur des distributions à queue courte, scores normalisés d'un petit échantillon. Elle guette aussi, hors du climat, tout score composite plafonné en amont sans que le plafond soit documenté.</p>
+<p><strong>Une valeur en butée ne se signale pas comme erreur. Elle se signale comme record.</strong></p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · RX-02 · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-03, Un indicateur officiel donnait la même valeur à deux situations différentes. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html</p>
+</article>
+</body>
+</html>

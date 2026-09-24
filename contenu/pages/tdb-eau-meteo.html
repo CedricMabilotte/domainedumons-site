@@ -1,0 +1,345 @@
+<!--meta
+{
+ "titre": "Le jour et la semaine",
+ "description": "Gelée, pluie, vent, sol, fenêtres de travail, débit de la Montane et restrictions : tout ce qui décide du travail des prochains jours à Vitrac-sur-Montane.",
+ "classe": "tdb"
+}
+-->
+<h1>Le jour et la semaine</h1>
+<!--#sans-js data/secheresse-historique.json-->
+<div class="condense" id="condense"><p class="chargement">Relevé en cours…</p></div>
+
+<h2 id="maintenant">Maintenant</h2>
+<div class="tuiles" id="tuiles">
+  <div class="tuile"><p class="libelle">Relevé</p><p class="valeur chargement">…</p><p class="detail">interrogation des sources</p></div>
+</div>
+
+<h2 id="travaux">Les fenêtres de travail</h2>
+<p>Chaque ligne s'allume ou non selon une règle écrite d'avance. Les seuils sont donnés sous le tableau.</p>
+<div id="fenetres"><p class="chargement">Chargement…</p></div>
+
+<h2 id="48h">Les 48&nbsp;heures</h2>
+<div class="graphe">
+  <h3>Température et point de rosée</h3>
+  <p class="legende-axe">Heure par heure. Quand les deux courbes se rejoignent, l'air est saturé&nbsp;: rosée, brouillard, ou gelée blanche si le thermomètre est bas.</p>
+  <div id="g-heures"><p class="chargement">Chargement…</p></div>
+</div>
+<div class="graphe">
+  <h3>Pluie horaire</h3>
+  <p class="legende-axe">Millimètres par heure.</p>
+  <div id="g-pluie-h"><p class="chargement">Chargement…</p></div>
+</div>
+
+<h2 id="semaine">La semaine passée et celle qui vient</h2>
+<div class="graphe">
+  <h3>Températures</h3>
+  <p class="legende-axe">Minimale et maximale du jour, en degrés. La ligne pointillée marque le zéro.</p>
+  <div id="g-temp"><p class="chargement">Chargement…</p></div>
+</div>
+<div class="graphe">
+  <h3>Pluie quotidienne</h3>
+  <p class="legende-axe">Cumul par jour, en millimètres.</p>
+  <div id="g-pluie"><p class="chargement">Chargement…</p></div>
+</div>
+<details class="tableau-brut">
+  <summary>Voir les chiffres jour par jour</summary>
+  <div class="defilant"><table class="donnees" id="table-jours">
+    <thead><tr><th>Jour</th><th>Min</th><th>Max</th><th>Pluie</th><th>Probabilité</th><th>ETP</th><th>Rafale</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</details>
+
+<h2 id="la-terre">Le sol</h2>
+<div id="sol"><p class="chargement">Chargement…</p></div>
+
+<h2 id="riviere-montane">La Montane</h2>
+<div id="riviere"><p class="chargement">Chargement…</p></div>
+
+<h2 id="restrictions">Sécheresse</h2>
+<div id="secheresse"><p class="chargement">Chargement…</p></div>
+
+<h3>L'archive des restrictions</h3>
+<p>VigiEau publie l'état du jour et ne conserve pas d'historique ouvert à cette maille&nbsp;: sa requête par date renvoie l'arrêté courant, et aucun jeu national ne rejoue la série pour la Corrèze (vérifié le 14 septembre 2026). Chaque journée non relevée est perdue pour toujours, d'où le relevé automatique quotidien.</p>
+<div id="archive-secheresse"><p class="chargement">Chargement…</p></div>
+
+<h2>Les seuils, et pourquoi ceux-là</h2>
+<div class="defilant"><table class="donnees">
+  <thead><tr><th>Fenêtre</th><th>Condition</th><th>Pourquoi</th></tr></thead>
+  <tbody>
+    <tr><td>Gelée</td><td>minimale ≤ +2&nbsp;°C<br><span class="nb">nous ne testons ici que la température&nbsp;: une nuit ventée ou couverte annule le risque sans que cette ligne s'éteigne</span></td><td>La température au ras du sol est de 2 à 5&nbsp;°C sous celle mesurée sous abri. Une gelée blanche se produit couramment quand le thermomètre annonce encore +3.</td></tr>
+    <tr><td>Gelée destructrice</td><td>minimale ≤ 0&nbsp;°C</td><td>Report des semis et plants gélifs&nbsp;: haricot, courge, tomate.</td></tr>
+    <tr><td>Fenaison</td><td>3&nbsp;jours consécutifs à moins de 1&nbsp;mm, et plus de 10&nbsp;mm d'évaporation cumulée</td><td>Faucher engage trois jours. Sans pouvoir séchant, trois jours sans pluie ne suffisent pas.</td></tr>
+    <tr><td>Traitement</td><td>vent moyen ≤ 19&nbsp;km/h et pas plus de 5&nbsp;mm dans les 12 h</td><td>Le seuil de vent est réglementaire (arrêté du 4 mai 2017). La pluie lessive l'application.</td></tr>
+    <tr><td>Semis</td><td>sol à 6&nbsp;cm au-dessus de 8&nbsp;°C pendant 3&nbsp;jours</td><td>En dessous, la levée traîne et les graines pourrissent plus qu'elles ne germent.</td></tr>
+    <tr><td>Passage d'engin</td><td>moins de 15&nbsp;mm tombés sur 3&nbsp;jours</td><td>Approximation grossière de la portance, à confirmer à la bêche&nbsp;: un sol qui colle à la botte ne porte pas.</td></tr>
+    <tr><td>Travail en hauteur</td><td>rafales sous 60&nbsp;km/h<br><span class="nb">seuil volontairement plus bas que les 80&nbsp;km/h de notre note de cadrage&nbsp;: le travail en hauteur se fait ici à deux et sans nacelle</span></td><td>Au-delà, pas de travail sur échelle, ni pose de bâche ou de film de tunnel.</td></tr>
+    <tr><td>Veille mildiou</td><td>minimale ≥ 10&nbsp;°C et humidité ≥ 75&nbsp;% pendant 11 h, deux jours de suite</td><td>Règle de Beaumont. Elle signale un <em>risque climatique</em>, pas une maladie&nbsp;: elle déclenche une observation, pas un traitement.</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Lecture</h2>
+<!--#module representativite-->
+<p>Le <strong>bilan hydrique</strong> est la différence entre ce qui est tombé et ce que l'atmosphère a évaporé sur sept jours. Négatif, le sol se vide&nbsp;; positif, il se recharge. C'est une approximation&nbsp;: la réserve réelle dépend de la profondeur du sol et de sa charge en cailloux, qui se mesurent à la bêche et pas au modèle.</p>
+<p>Toutes les valeurs sont appelées par votre navigateur, directement auprès de leurs fournisseurs&nbsp;: <strong>Hub'Eau et VigiEau</strong>, services publics français, et <strong>Open-Meteo</strong>, entreprise privée allemande qui redistribue les réanalyses sous licence ouverte. Rien ne transite par nous, rien n'est stocké sur votre appareil.</p>
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+const LAT = 45.351433, LON = 1.931875, STATION = "P361401001";  /* chemin du Mons, 588 m */
+const jourCourt = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "short", day: "numeric" });
+const jourLong = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+const heure = (iso) => iso.slice(11, 13) + " h";
+const CARDINAUX = ["N", "NE", "E", "SE", "S", "SO", "O", "NO"];
+
+function ligneFenetre(nom, favorable, quand, detail, mots) {
+  const m = mots || ["ouverte", "fermée"];
+  return "<tr><td>" + nom + "</td><td><span class='pastille " + (favorable ? "calme" : "vigilance") + "'></span>" +
+    (favorable ? m[0] : m[1]) + "</td><td>" + (quand || "—") + "</td><td class='nb'>" + (detail || "") + "</td></tr>";
+}
+const pluriel = (n, mot) => nf0(n) + " " + mot + (Math.abs(n) >= 2 ? "s" : "");
+
+async function meteo() {
+  const u = "https://api.open-meteo.com/v1/forecast?latitude=" + LAT + "&longitude=" + LON +
+    "&timezone=Europe%2FParis&past_days=7&forecast_days=14" +
+    "&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,wind_gusts_10m,wind_direction_10m,cloud_cover" +
+    "&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,precipitation_probability,wind_speed_10m,wind_gusts_10m,soil_temperature_6cm,soil_moisture_3_9cm" +
+    "&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,wind_gusts_10m_max,sunrise,sunset";
+  const d = await json(u, 20000);
+  const j = d.daily, t = j.time, h = d.hourly, c = d.current;
+  const auj = t.indexOf(new Date().toLocaleDateString("sv-SE"));
+  const i0 = auj < 0 ? 7 : auj;
+  const somme = (a, i, n) => a.slice(i, i + n).reduce((x, y) => x + (y || 0), 0);
+
+  /* --- indicateurs du jour --- */
+  const min72 = Math.min(...j.temperature_2m_min.slice(i0, i0 + 3));
+  let etatGel = "calme", motGel = "aucun risque";
+  if (min72 <= 0) { etatGel = "alerte"; motGel = "gelée probable"; }
+  else if (min72 <= 2) { etatGel = "vigilance"; motGel = "gelée blanche possible"; }
+  const pluie7 = somme(j.precipitation_sum, i0 - 7, 7);
+  const etp7 = somme(j.et0_fao_evapotranspiration, i0 - 7, 7);
+  const bilan = pluie7 - etp7;
+  let etatBilan = "calme", motBilan = "le sol se recharge";
+  if (bilan < -25) { etatBilan = "alerte"; motBilan = "le sol se vide vite"; }
+  else if (bilan < 0) { etatBilan = "vigilance"; motBilan = "le sol se vide"; }
+  const pluie7av = somme(j.precipitation_sum, i0, 7);
+  let secs = 0;
+  for (let k = i0; k < t.length; k++) { if ((j.precipitation_sum[k] || 0) < 1) secs++; else break; }
+  const rafale = Math.max(...j.wind_gusts_10m_max.slice(i0, i0 + 3));
+  const dir = CARDINAUX[Math.round(((c.wind_direction_10m % 360) + 360) % 360 / 45) % 8];
+
+  document.getElementById("tuiles").innerHTML =
+    tuile("À l'instant", nf(c.temperature_2m), "°C", nf0(c.relative_humidity_2m) + " % d'humidité, ciel à " + nf0(c.cloud_cover) + " %") +
+    tuile("Vent", nf0(c.wind_speed_10m), "km/h", "de secteur " + dir + ", rafales " + nf0(c.wind_gusts_10m) + " km/h",
+          c.wind_gusts_10m > 60 ? "vigilance" : null) +
+    tuile("Gelée sous 72 h", nf(min72), "°C", '<span class="pastille ' + etatGel + '"></span>' + motGel, etatGel) +
+    tuile("Pluie, 7 jours passés", nf0(pluie7), "mm", "puis " + nf0(pluie7av) + " mm attendu" + (pluie7av >= 2 ? "s" : "")) +
+    tuile("Bilan hydrique, 7 j", (bilan > 0 ? "+" : "") + nf0(bilan), "mm", '<span class="pastille ' + etatBilan + '"></span>' + motBilan, etatBilan) +
+    tuile("Jours secs devant", secs, secs > 1 ? "jours" : "jour", secs >= 3 ? "fenêtre de fenaison ouverte" : "pas de fenêtre franche") +
+    tuile("Jour", (j.sunrise[i0] || "").slice(11, 16).replace(":", " h ") + " – " + (j.sunset[i0] || "").slice(11, 16).replace(":", " h "), "",
+          "lever et coucher du soleil");
+
+  /* --- fenêtres de travail --- */
+  const F = [];
+  /* fenaison : 3 jours consécutifs sous 1 mm avec assez de pouvoir séchant */
+  let fen = null;
+  for (let k = i0; k <= t.length - 3; k++) {
+    if (j.precipitation_sum.slice(k, k + 3).every((p) => (p || 0) < 1) &&
+        somme(j.et0_fao_evapotranspiration, k, 3) > 10) { fen = k; break; }
+  }
+  F.push(ligneFenetre("Fenaison", fen !== null, fen !== null ? "à partir du " + jourLong(t[fen]) : "rien d'ici 14 jours",
+    fen !== null ? nf(somme(j.et0_fao_evapotranspiration, fen, 3), 1) + " mm d'évaporation sur les 3 jours" : ""));
+  /* traitement : vent et pluie sur les 12 prochaines heures */
+  const hNow = h.time.findIndex((x) => x >= new Date().toISOString().slice(0, 13));
+  const h0 = hNow < 0 ? 0 : hNow;
+  const ventMax12 = Math.max(...h.wind_speed_10m.slice(h0, h0 + 12));
+  const pluie12 = somme(h.precipitation, h0, 12);
+  F.push(ligneFenetre("Traitement", ventMax12 <= 19 && pluie12 <= 5, ventMax12 <= 19 && pluie12 <= 5 ? "dans les 12 h" : "pas maintenant",
+    "vent jusqu'à " + nf0(ventMax12) + " km/h, " + nf(pluie12, 1) + " mm de pluie"));
+  /* semis : sol à 6 cm au-dessus de 8 °C sur 3 jours */
+  const solMin = Math.min(...h.soil_temperature_6cm.slice(h0, h0 + 72).filter((x) => x !== null));
+  F.push(ligneFenetre("Semis", solMin >= 8, solMin >= 8 ? "maintenant" : "sol trop froid",
+    "sol à 6 cm : " + nf(solMin, 1) + " °C au plus bas sur 3 jours"));
+  /* portance : pluie des 3 derniers jours */
+  const pluie3 = somme(j.precipitation_sum, i0 - 3, 3);
+  F.push(ligneFenetre("Passage d'engin", pluie3 < 15, pluie3 < 15 ? "sol sans doute portant" : "attendre",
+    nf0(pluie3) + " mm tombés sur 3 jours — à confirmer à la bêche"));
+  /* hauteur */
+  F.push(ligneFenetre("Travail en hauteur", rafale < 60, rafale < 60 ? "les 3 prochains jours" : "rafales trop fortes",
+    "rafales jusqu'à " + nf0(rafale) + " km/h"));
+  /* mildiou — règle de Beaumont sur les jours à venir */
+  let beaumont = null;
+  for (let k = 0; k + 47 < h.time.length - h0; k += 24) {
+    const a = h0 + k, b = a + 24;
+    const critere = (x, y) => {
+      const tm = Math.min(...h.temperature_2m.slice(x, y));
+      const hr = h.relative_humidity_2m.slice(x, y).filter((v) => v >= 75).length;
+      return tm >= 10 && hr >= 11;
+    };
+    if (critere(a, b) && critere(b, b + 24)) { beaumont = h.time[a]; break; }
+  }
+  F.push(ligneFenetre("Mildiou", beaumont === null, beaumont === null ? "rien de signalé" : "à partir du " + jourLong(beaumont.slice(0, 10)),
+    beaumont === null ? "conditions non réunies" : "aller observer, pas traiter d'emblée", ["rien à signaler", "aller observer"]));
+  document.getElementById("fenetres").innerHTML =
+    "<div class='defilant'><table class='donnees'><thead><tr><th>Travail</th><th>État</th><th>Quand</th><th>Détail</th></tr></thead><tbody>" +
+    F.join("") + "</tbody></table></div>";
+
+  /* --- 48 heures --- */
+  const fin = Math.min(h.time.length, h0 + 48);
+  const pth = [];
+  for (let k = h0; k < fin; k++)
+    pth.push({ cle: jourCourt(h.time[k].slice(0, 10)) + " " + heure(h.time[k]),
+               libelle: jourCourt(h.time[k].slice(0, 10)) + " " + heure(h.time[k]),
+               y: h.dew_point_2m[k], y2: h.temperature_2m[k] });
+  graphe({ conteneur: document.getElementById("g-heures"), points: pth, type: "bande", unite: "°C", hauteur: 170 });
+  graphe({
+    conteneur: document.getElementById("g-pluie-h"), type: "barres", unite: "mm", hauteur: 130,
+    points: h.time.slice(h0, fin).map((x, k) => ({ cle: jourCourt(x.slice(0, 10)) + " " + heure(x),
+      libelle: jourCourt(x.slice(0, 10)) + " " + heure(x), y: h.precipitation[h0 + k] || 0 }))
+  });
+
+  /* --- la semaine --- */
+  graphe({
+    conteneur: document.getElementById("g-temp"), type: "bande", unite: "°C",
+    points: t.map((d0, k) => ({ cle: jourLong(d0), libelle: jourCourt(d0), y: j.temperature_2m_min[k], y2: j.temperature_2m_max[k] }))
+  });
+  graphe({
+    conteneur: document.getElementById("g-pluie"), type: "barres", unite: "mm", hauteur: 150,
+    points: t.map((d0, k) => ({ cle: jourLong(d0), libelle: jourCourt(d0), y: j.precipitation_sum[k] || 0 }))
+  });
+  document.querySelector("#table-jours tbody").innerHTML = t.map((d0, k) =>
+    "<tr><td>" + jourCourt(d0) + "</td><td>" + nf(j.temperature_2m_min[k]) + "</td><td>" + nf(j.temperature_2m_max[k]) +
+    "</td><td>" + nf(j.precipitation_sum[k] || 0) + "</td><td>" + (j.precipitation_probability_max[k] === null ? "—" : nf0(j.precipitation_probability_max[k]) + " %") +
+    "</td><td>" + nf(j.et0_fao_evapotranspiration[k]) + "</td><td>" + nf0(j.wind_gusts_10m_max[k]) + "</td></tr>").join("");
+
+  /* --- le sol --- */
+  const solT = h.soil_temperature_6cm[h0], solH = h.soil_moisture_3_9cm[h0];
+  const solT7 = h.soil_temperature_6cm.slice(Math.max(0, h0 - 168), h0).filter((x) => x !== null);
+  const moy7 = solT7.length ? solT7.reduce((a, b) => a + b, 0) / solT7.length : null;
+  document.getElementById("sol").innerHTML =
+    "<div class='tuiles'>" +
+    tuile("Température du sol", nf(solT, 1), "°C", "à 6 cm" + (moy7 !== null ? ", " + nf(moy7, 1) + " °C en moyenne sur 7 jours" : "")) +
+    tuile("Humidité du sol", nf(solH, 2), "m³/m³", "entre 3 et 9 cm — modélisée, pas mesurée") +
+    "</div>" +
+    "<p>La température du sol commande la levée bien mieux que celle de l'air&nbsp;: en dessous de 8 °C à 6&nbsp;cm, " +
+    "la plupart des semis de printemps attendent, et beaucoup pourrissent. L'humidité, elle, est <strong>modélisée à partir d'un sol type</strong>, " +
+    "sans rapport avec la charge en cailloux d'ici&nbsp;: elle vaut pour suivre une tendance, pas pour décider d'un arrosage. " +
+    "Deux tensiomètres à 30&nbsp;€ trancheraient — voir <a href='tdb-construire.html#la-terre'>le sol</a>.</p>";
+
+  /* --- condensé --- */
+  const ouvertes = F.filter((x) => x.indexOf("calme") > 0).length;
+  document.getElementById("condense").innerHTML =
+    "<ul>" +
+    "<li><strong>" + nf(c.temperature_2m) + " °C</strong> à l'instant, vent de secteur " + dir + " à " + nf0(c.wind_speed_10m) + " km/h.</li>" +
+    "<li>Minimale des trois nuits&nbsp;: <strong>" + nf(min72) + " °C</strong> — " + motGel + ".</li>" +
+    "<li><strong>" + nf0(pluie7av) + " mm</strong> attendu" + (pluie7av >= 2 ? "s" : "") + " sur sept jours, après " + nf0(pluie7) + " mm tombé" + (pluie7 >= 2 ? "s" : "") + ". Bilan hydrique " +
+    (bilan > 0 ? "+" : "") + nf0(bilan) + " mm.</li>" +
+    "<li>Fenaison&nbsp;: " + (fen !== null ? "<strong>ouverte à partir du " + jourLong(t[fen]) + "</strong>" : "<strong>aucune fenêtre d'ici 14 jours</strong>") + ".</li>" +
+    "<li>" + ouvertes + " conditions de travail favorables sur " + F.length + ".</li>" +
+    "</ul>";
+}
+
+async function riviere() {
+  const d = await json("https://hubeau.eaufrance.fr/api/v2/hydrometrie/observations_tr?code_entite=" + STATION + "&grandeur_hydro=Q&size=1&sort=desc");
+  const o = d.data && d.data[0];
+  if (!o) throw new Error("aucune observation");
+  const q = o.resultat_obs;
+  let etat = "calme", mot = "débit courant";
+  if (q < 20) { etat = "alerte"; mot = "étiage sévère"; }
+  else if (q < 60) { etat = "vigilance"; mot = "étiage marqué"; }
+  const quand = new Date(o.date_obs).toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" });
+  document.getElementById("riviere").innerHTML =
+    '<div class="tuiles">' +
+    tuile("Débit à Eyrein", nf0(q), "l/s", '<span class="pastille ' + etat + '"></span>' + mot, etat) +
+    tuile("Soit", nf(q / 1000, 3), "m³/s", "relevé le " + quand) +
+    "</div>" +
+    "<p>Station <em>La Montane à Eyrein, pont du Geai</em>, à 1,2&nbsp;km, relevée toutes les cinq minutes. " +
+    "À titre de repère&nbsp;: sous 20 litres par seconde, la rivière est à l'étiage sévère et tout prélèvement se discute.</p>";
+}
+
+async function secheresse() {
+  const zones = await json("https://api.vigieau.beta.gouv.fr/api/zones?lon=" + LON + "&lat=" + LAT + "&profil=particulier");
+  if (!Array.isArray(zones) || !zones.length) {
+    document.getElementById("secheresse").innerHTML = "<p>Aucune restriction en vigueur sur la commune.</p>";
+    return;
+  }
+  const rang = { vigilance: 1, alerte: 2, alerte_renforcee: 3, crise: 4 };
+  const mots = { vigilance: "vigilance", alerte: "alerte", alerte_renforcee: "alerte renforcée", crise: "crise" };
+  const libZone = { SUP: "eaux de surface", SOU: "eaux souterraines", AEP: "eau potable" };
+  const pire = zones.reduce((a, b) => (rang[b.niveauGravite] || 0) > (rang[a.niveauGravite] || 0) ? b : a);
+  const etat = (rang[pire.niveauGravite] || 0) >= 2 ? "alerte" : "vigilance";
+  const lignes = zones.map((z) =>
+    "<tr><td>" + (libZone[z.type] || z.type) + "</td><td>" + (mots[z.niveauGravite] || z.niveauGravite) + "</td><td>" + z.nom + "</td></tr>").join("");
+  const arrete = pire.arrete && pire.arrete.cheminFichier
+    ? '<p><a href="' + pire.arrete.cheminFichier + '">Lire l\'arrêté préfectoral</a>' +
+      (pire.arrete.dateFinValidite ? " — en vigueur jusqu'au " + new Date(pire.arrete.dateFinValidite).toLocaleDateString("fr-FR", { dateStyle: "long" }) : "") + ".</p>"
+    : "";
+  document.getElementById("secheresse").innerHTML =
+    '<div class="tuiles">' +
+    tuile("Niveau le plus élevé", mots[pire.niveauGravite] || pire.niveauGravite, "",
+      '<span class="pastille ' + etat + '"></span>' + (libZone[pire.type] || pire.type), etat) +
+    "</div>" +
+    '<div class="defilant"><table class="donnees"><thead><tr><th>Ressource</th><th>Niveau</th><th>Zone</th></tr></thead><tbody>' +
+    lignes + "</tbody></table></div>" + arrete +
+    '<p>Les restrictions s\'imposent à tous. Le détail des usages autorisés et interdits est sur <a href="https://vigieau.gouv.fr">VigiEau</a>.</p>';
+}
+
+const LIB_NIVEAU = { aucune: "aucune restriction", vigilance: "vigilance", alerte: "alerte",
+                     alerte_renforcee: "alerte renforcée", crise: "crise" };
+async function archive() {
+  const a = await json("data/secheresse-historique.json");
+  const cible = document.getElementById("archive-secheresse");
+  if (!a.jours_releves) {
+    cible.innerHTML = "<p>L'archive commence dès le premier relevé.</p>";
+    return;
+  }
+  const act = a.actuel, an = new Date().getFullYear();
+  const cetteAnnee = a.par_annee[String(an)] || null;
+  const etat = ["alerte", "alerte_renforcee", "crise"].includes(act.niveau) ? "alerte" : "vigilance";
+  const jours = (v) => v + (v > 1 ? " jours" : " jour");
+  let html = '<div class="tuiles">' +
+    tuile("Niveau actuel", LIB_NIVEAU[act.niveau] || act.niveau, "",
+          '<span class="pastille ' + etat + '"></span>depuis le ' +
+          new Date(act.depuis).toLocaleDateString("fr-FR", { dateStyle: "long" }), etat) +
+    tuile("Sans interruption", act.jours, act.jours > 1 ? "jours" : "jour", "à ce niveau") +
+    tuile("Archive", a.jours_releves, a.jours_releves > 1 ? "jours" : "jour",
+          "relevés depuis le " + new Date(a.debut).toLocaleDateString("fr-FR", { dateStyle: "long" })) +
+    (cetteAnnee ? tuile("Sous restriction en " + an, cetteAnnee.jours_restreints, "sur " + cetteAnnee.jours_releves,
+          "jours en alerte ou au-delà") : "") +
+    "</div>";
+  const annees = Object.keys(a.par_annee).sort();
+  if (annees.length) {
+    html += '<div class="defilant"><table class="donnees"><thead><tr><th>Année</th>' +
+      a.niveaux.map((n) => "<th>" + (LIB_NIVEAU[n] || n) + "</th>").join("") +
+      "<th>relevés</th></tr></thead><tbody>" +
+      annees.map((y) => {
+        const v = a.par_annee[y];
+        return "<tr><td>" + y + (v.complete ? "" : " <span class=\"nb\">(partielle)</span>") + "</td>" +
+          a.niveaux.map((n) => "<td>" + (v[n] || 0) + "</td>").join("") + "<td>" + v.jours_releves + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  if (a.bascules && a.bascules.length > 1) {
+    html += "<h4>Les bascules</h4><div class=\"defilant\"><table class=\"donnees\"><thead><tr><th>Date</th><th>De</th><th>Vers</th></tr></thead><tbody>" +
+      a.bascules.slice().reverse().map((b) =>
+        "<tr><td>" + new Date(b.date).toLocaleDateString("fr-FR") + "</td><td>" +
+        (b.de ? (LIB_NIVEAU[b.de] || b.de) : "début de l'archive") + "</td><td>" +
+        (LIB_NIVEAU[b.vers] || b.vers) + "</td></tr>").join("") + "</tbody></table></div>";
+  }
+  html += "<p>Série publiée en données ouvertes — <a href=\"data/secheresse-historique.json\">JSON</a>, " +
+    "<a href=\"data/releve-quotidien.csv\">relevé quotidien brut</a>. " +
+    (a.jours_releves < 400 ? "Une année complète sera comparable à l'été 2027." : "") + "</p>";
+  cible.innerHTML = html;
+}
+
+(async () => {
+  const taches = [
+    [meteo, "tuiles", "Météo indisponible pour l'instant. Les services interrogés ont des interruptions ; réessayez plus tard."],
+    [riviere, "riviere", "Débit de la Montane indisponible pour l'instant."],
+    [secheresse, "secheresse", "État des restrictions indisponible pour l'instant."],
+    [archive, "archive-secheresse", "Archive des restrictions indisponible."]
+  ];
+  await Promise.all(taches.map(([f, id, msg]) => f().catch((e) => { console.warn(id, e); echec(id, msg); })));
+  document.getElementById("horodatage").textContent =
+    "Relevé le " + new Date().toLocaleString("fr-FR", { dateStyle: "long", timeStyle: "short" }) +
+    ". Sources : Open-Meteo, Hub'Eau, VigiEau.";
+})();
+</script>

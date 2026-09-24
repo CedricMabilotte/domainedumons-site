@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un seuil repris de la littérature a produit un résultat nul, qu&amp;#x27;on a failli prendre pour une bonne nouvelle — édition paginée — Domaine du Mons</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../edition.css?v=29">
+<script>
+window.PagedConfig = {
+  auto: true,
+  after: function () {
+    var b = document.createElement("div");
+    b.className = "barre-edition";
+    b.innerHTML = '<a href="../editions.html">← Éditions</a> <span>Un seuil repris de la littérature a produit un résultat nul, qu&amp;#x27;on a failli prendre pour une bonne nouvelle</span> ' +
+      '<button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button>';
+    document.body.appendChild(b);
+    document.body.setAttribute("data-pret", String(document.querySelectorAll(".pagedjs_page").length));
+  }
+};
+</script>
+<script src="../vendor/paged.polyfill.min.js?v=29"></script>
+</head>
+<body class="a5">
+<article class="chapitre seul" id="grain-rx-02-seuil-recale">
+<h1><span class="code-fiche">RX-02</span><span class="titre-courant">Un seuil repris de la littérature a produit un résultat nul, qu&#x27;on a failli prendre pour une bonne nouvelle</span></h1>
+
+<p class="chapeau">Retour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Retours d&#x27;expérience</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>14 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0</dd></div>
+</dl>
+<h2>L'attendu</h2>
+<p>Vérifier localement une affirmation bien établie&nbsp;: le débourrement des arbres fruitiers avance plus vite que la dernière gelée de printemps ne recule, donc l'exposition au gel augmente alors même qu'il gèle moins souvent. Le chiffre national — 3 à 6&nbsp;jours d'avance par décennie — circule partout&nbsp;; personne ne l'avait recalculé sur ce point de la Corrèze.</p>
+<p>La méthode était écrite d'avance dans le document de travail&nbsp;: croiser une <strong>somme de températures</strong> (proxy du débourrement&nbsp;: ~250&nbsp;°C·j base 5 depuis le 1ᵉʳ février pour un pommier) avec les gelées postérieures, année par année depuis 1950.</p>
+<h2>Le déroulé</h2>
+<p>Le calcul a tourné et a donné&nbsp;: <strong>débourrement médian au 12 mai</strong>, et <strong>3&nbsp;% des années</strong> comptant une gelée après ce stade, sans tendance, sur les trois périodes de trente ans comparées.</p>
+<p>Résultat parfaitement présentable. Il aurait tenu dans une page du site&nbsp;: <em>«&nbsp;contrairement à ce qu'on lit, l'exposition au gel de printemps n'augmente pas ici.&nbsp;»</em></p>
+<p>Il était faux. Un débourrement médian au 12 mai est absurde pour un pommier à 590&nbsp;m en Corrèze — le stade réel se situe fin mars ou début avril. Le seuil plaçait le stade <strong>après</strong> la fenêtre où il gèle encore. L'analyse comptait donc des gelées dans une période où il n'y en a plus, et ne pouvait produire qu'un résultat nul.</p>
+<p>Recalage&nbsp;: le seuil qui place la médiane au 4 avril est <strong>80&nbsp;°C·j</strong>, et non 250. Le seuil qui place la floraison au 24 avril est 150.</p>
+<p>Avec les bons seuils, la conclusion s'inverse&nbsp;:</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">Seuil 250&nbsp;°C·j</th><th scope="col">Seuils 80 / 150&nbsp;°C·j</th></tr></thead><tbody><tr><th scope="row">Débourrement médian</th><td>12 mai</td><td>4 avril</td></tr><tr><th scope="row">Années avec gelée après débourrement</th><td>3&nbsp;%</td><td><strong>47 à 60&nbsp;%</strong></td></tr><tr><th scope="row">Années avec gelée sur fleur ouverte, 1961-1990</th><td>—</td><td>3&nbsp;%</td></tr><tr><th scope="row">Années avec gelée sur fleur ouverte, 1996-2025</th><td>—</td><td><strong>17&nbsp;%</strong></td></tr></tbody></table></div>
+<h2>Pourquoi l'écart</h2>
+<p>Une somme de températures n'est pas une grandeur physique unique&nbsp;: elle dépend de <strong>la base</strong> (0, 5, 10&nbsp;°C), de <strong>la date de départ</strong> (1ᵉʳ janvier, 1ᵉʳ février, date de fin de dormance), et de <strong>la méthode de cumul</strong> (moyenne simple, méthode sinusoïdale, troncature des minimales sous la base). Deux publications sérieuses peuvent citer 250 et 80 pour le même stade sans qu'aucune ne se trompe — elles ne comptent pas la même chose.</p>
+<p>Le chiffre repris avait perdu ses conventions en route. C'est le sort ordinaire d'un seuil qui voyage de source en source.</p>
+<p><strong>Et le mode de défaillance est le pire possible.</strong> Un seuil trop haut ne provoque ni erreur, ni valeur aberrante, ni série vide. Il produit un résultat propre, calculé sur 76&nbsp;ans, avec son test statistique et son intervalle de confiance — et ce résultat est <em>rassurant</em>. Rien dans la sortie ne signale le problème. Seule la confrontation de la date médiane au bon sens agronomique l'a fait apparaître.</p>
+<h2>Les leçons</h2>
+<p class="point" data-n="1"><strong>Un seuil repris d'ailleurs se recale sur la série locale avant d'en tirer quoi que ce soit.</strong> Le recalage le plus économique&nbsp;: vérifier que la grandeur intermédiaire — ici la date médiane du stade — tombe où un praticien du lieu l'attend. Cinq minutes, et c'est ce qui a sauvé l'analyse.</p>
+<p class="point" data-n="2"><strong>Toujours sortir les grandeurs intermédiaires, pas seulement le résultat.</strong> Si le script n'avait affiché que «&nbsp;3&nbsp;% des années&nbsp;», l'erreur passait. Il affichait aussi la date médiane, et c'est elle qui a alerté.</p>
+<p class="point" data-n="3"><strong>Se méfier particulièrement des résultats nuls et rassurants.</strong> Une analyse qui ne trouve rien mérite la même vérification qu'une analyse qui trouve un effet spectaculaire — et elle la reçoit rarement, parce qu'elle ne surprend personne. C'est l'asymétrie qui laisse passer les erreurs.</p>
+<p class="point" data-n="4"><strong>Un paramètre sans ses conventions n'est pas un paramètre.</strong> Toute somme de températures citée dans le corpus porte désormais sa base, sa date de départ et sa méthode de cumul, ou n'est pas citée.</p>
+<h2>Les changements</h2>
+<ul><li>Tout seuil biologique ou agronomique importé est <strong>recalé</strong> sur la série locale, et le recalage est écrit dans la méthode publiée.</li><li>Les scripts d'analyse <strong>affichent les grandeurs intermédiaires</strong> en plus du résultat.</li><li>Le corpus ne cite pas de somme de températures sans base, date de départ et méthode de cumul.</li><li>Une conclusion négative («&nbsp;pas de tendance&nbsp;», «&nbsp;pas d'effet&nbsp;») déclenche une vérification de la chaîne de calcul, au même titre qu'une conclusion positive forte.</li></ul>
+<h2 class="h-portee">Portée</h2>
+<p>Générique, et pas limitée au climat. Le même mode de défaillance guette tout indicateur à seuil repris d'une source extérieure&nbsp;: seuils de tension d'un sol, périodes de retour hydrologiques, ratios financiers, critères d'éligibilité. <strong>Un seuil mal calé ne casse rien — il rend l'instrument aveugle.</strong></p>
+<h2>Fiches liées</h2>
+<p><span class="renvoi-absent" title="fiche non publiée">RX-01</span> · PA-02</p>
+
+<p class="colophon">Collectif du Domaine du Mons — RX-02, Un seuil repris de la littérature a produit un résultat nul, qu&#x27;on a failli prendre pour une bonne nouvelle. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-rx-02-seuil-recale.html</p>
+</article>
+</body>
+</html>

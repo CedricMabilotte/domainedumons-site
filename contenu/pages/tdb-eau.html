@@ -1,0 +1,317 @@
+<!--meta
+{
+ "titre": "L'eau depuis 1957",
+ "description": "Soixante-dix ans d'étiages de la Montane à Eyrein, les assecs observés et les prélèvements de la commune. Données publiques ouvertes.",
+ "classe": "tdb"
+}
+-->
+<h1>L'eau, depuis 1957</h1>
+<!--#sans-js data/eau.json data/humidite-sol.json-->
+<div class="condense" id="condense"><p class="chargement">…</p></div>
+<p>Le tableau de la semaine donne le débit de la Montane à l'instant où vous ouvrez la page. Celui-ci donne les 69 étés précédents, et mesure la profondeur des étiages successifs et leur durée.</p>
+<div class="tuiles" id="synthese"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
+
+<h2 id="etiages">Les étiages, année par année</h2>
+<div id="g-etiage"></div>
+<div id="l-etiage"><p class="chargement">Chargement…</p></div>
+
+<h2 id="cette-annee">L'été en cours</h2>
+<div id="g-annee"></div>
+<p class="legende-axe">Débit journalier depuis le 1<sup>er</sup> mai, échelle logarithmique. La bande grise couvre les quantiles 10&nbsp;% à 90&nbsp;% du même jour sur toute la série&nbsp;; la ligne intérieure est la médiane.</p>
+
+<figure>
+<svg viewBox="0 0 640 248" role="img" aria-labelledby="t-mes d-mes" class="croquis">
+  <title id="t-mes">Deux échelles d&#39;eau</title>
+  <desc id="d-mes">La station hydrométrique intègre un bassin de 43 km². Les sources et le ruisseau qui comptent pour le lieu ne représentent que quelques hectares à l&#39;intérieur de ce bassin, et aucun appareil ne les mesure.</desc>
+  <path class="trait-croquis" d="M38.4 44.7C218.0 46.9 419.9 47.9 599.5 45.7"/>
+  <path class="trait-croquis" d="M40.0 43.5C219.5 46.2 421.5 41.9 601.1 45.8"/>
+  <path class="trait-croquis" d="M599.8 43.1C596.1 100.6 597.6 165.3 599.2 222.8"/>
+  <path class="trait-croquis" d="M600.7 42.8C601.3 100.1 597.3 164.6 599.4 221.9"/>
+  <path class="trait-croquis" d="M598.7 221.7C419.0 223.3 216.9 220.7 37.2 219.6"/>
+  <path class="trait-croquis" d="M602.0 220.1C422.0 219.9 219.4 219.4 39.3 221.0"/>
+  <path class="trait-croquis" d="M41.5 221.8C41.2 164.7 42.6 100.4 41.7 43.3"/>
+  <path class="trait-croquis" d="M40.8 222.3C40.6 164.7 38.8 99.8 38.9 42.2"/>
+  <path class="trait-croquis" d="M80.6 148.7C120.7 150.3 165.9 148.9 206.1 150.4"/>
+  <path class="trait-croquis" d="M81.0 150.6C119.6 154.2 163.1 151.8 201.8 150.3"/>
+  <path class="trait-croquis" d="M203.5 148.2C206.2 166.4 200.4 186.8 203.4 205.0"/>
+  <path class="trait-croquis" d="M200.5 149.3C201.5 167.3 204.7 187.5 203.4 205.5"/>
+  <path class="trait-croquis" d="M203.4 204.6C163.0 207.8 117.5 200.8 77.1 204.2"/>
+  <path class="trait-croquis" d="M204.2 205.3C163.9 207.0 118.5 203.7 78.2 205.9"/>
+  <path class="trait-croquis" d="M79.8 205.4C77.5 187.2 83.1 166.7 80.8 148.5"/>
+  <path class="trait-croquis" d="M78.5 204.1C77.0 186.2 78.7 166.1 79.2 148.2"/>
+  <path class="trait-croquis" d="M209.8 176.6C238.6 177.9 271.1 179.6 299.9 178.7"/>
+  <path class="trait-croquis" d="M210.4 179.4C239.7 180.4 272.6 177.8 301.9 177.6"/>
+  <path class="trait-croquis" d="M301.2 178.6C296.9 175.8 292.5 174.0 287.8 173.0"/>
+  <path class="trait-croquis" d="M300.9 177.6C296.8 179.7 292.2 182.1 288.7 182.9"/>
+  <g class="texte-croquis">
+    <text x="58" y="76" class="fort">ce que la station mesure</text>
+    <text x="58" y="100">43 km², toutes les cinq minutes, depuis 1957</text>
+    <text x="92" y="176" class="sur">les sources d&#39;ici</text>
+    <text x="626" y="172" text-anchor="end">quelques hectares — rien ne les mesure,</text>
+    <text x="626" y="194" text-anchor="end">et elles s&#39;arrêtent avant la rivière</text>
+  </g>
+</svg>
+<figcaption>Deux échelles&nbsp;: 43&nbsp;km² mesurés à la station, quelques hectares qui ne le sont pas.</figcaption>
+</figure>
+<h2 id="le-sol">Le sol, depuis 1958</h2>
+<p>L'humidité du sol est l'autre moitié du bilan&nbsp;: le débit mesure l'eau sortie du bassin, elle mesure l'eau restée dans le profil. Météo-France fait tourner depuis 1958 un modèle de bilan hydrique sur une grille de 8&nbsp;km&nbsp;; la maille qui contient le chemin du Mons a son centre à 4,2&nbsp;km d'ici. On en tire l'<strong>humidité du sol ramenée à sa réserve utile</strong> — 1, le sol est à sa capacité au champ&nbsp;; 0, il est au point de flétrissement — et l'écart de cette humidité <strong>à la normale du même jour</strong>, qui dit si le sol est sec <em>pour la saison</em> plutôt que sec dans l'absolu.</p>
+<div class="tuiles" id="synthese-sol"><div class="tuile"><p class="libelle">Calcul</p><p class="valeur chargement">…</p><p class="detail">chargement de la série</p></div></div>
+<div id="g-sol-annee"></div>
+<p class="legende-axe">Humidité du sol depuis le 1<sup>er</sup> janvier. La bande grise couvre les quantiles 10&nbsp;% à 90&nbsp;% du même jour sur 1958-2020&nbsp;; la ligne intérieure est la médiane.</p>
+<div id="g-sol-etes"></div>
+<div id="l-sol"><p class="chargement">Chargement…</p></div>
+
+<h2 id="assecs">Les assecs observés</h2>
+<p>Un observateur passe plusieurs fois par an sur un ruisseau de tête de bassin, à <strong>6,7&nbsp;km</strong> d'ici, et note à l'œil si l'eau coule. C'est le seul relevé de ce type dans un rayon de 14&nbsp;km, et il dit ce qu'aucune station ne mesure&nbsp;: ce qui arrive au petit chevelu, celui qui alimente les mares et les sources.</p>
+<div id="onde"><p class="chargement">Chargement…</p></div>
+
+<h2 id="qui-preleve">Qui prélève l'eau ici</h2>
+<div id="prelevements"><p class="chargement">Chargement…</p></div>
+
+<h2>Méthode</h2>
+<p>La station <strong>La Montane à Eyrein, au pont du Geai</strong>, est à 1,2&nbsp;km du lieu et draine 43&nbsp;km². Elle enregistre depuis le 1<sup>er</sup> janvier 1957. Les débits utilisés ici sont les données <em>élaborées</em>, validées et expertisées — pas le flux temps réel du tableau hebdomadaire, qui ne conserve qu'un mois.</p>
+<p>Le <strong>VCN10</strong> est la plus faible moyenne sur 10&nbsp;jours consécutifs de l'année. C'est l'indicateur d'étiage retenu plutôt que le minimum d'un seul jour, qu'une panne de capteur ou un orage suffit à fausser.</p>
+<div class="note">
+  <span class="etiquette">Limites de la station</span>
+  <p>Elle mesure un bassin de 43&nbsp;km², pas la source du fond du pré. Un ruisseau de rang&nbsp;1 s'arrête bien avant que la Montane n'atteigne son étiage, et se remet à couler bien après. Les assecs relevés à Champagnac-la-Noaille en donnent une idée&nbsp;; seule une mesure au seau et au chronomètre sur les sources d'ici la remplacerait.</p>
+</div>
+<p>Données téléchargeables — <a href="data/eau.json">l'eau</a>, <a href="data/humidite-sol.json">le sol</a> (et sa <a href="data/humidite-sol.csv">série quotidienne</a>) — sous Licence Ouverte 2.0, avec leur <a href="data/LISEZMOI.md">documentation</a>. Sources&nbsp;: <a href="https://hubeau.eaufrance.fr/page/api-hydrometrie">Hub'Eau hydrométrie</a>, <a href="https://hubeau.eaufrance.fr/page/api-ecoulement">Hub'Eau ONDE</a>, <a href="https://hubeau.eaufrance.fr/page/api-prelevements-eau">Hub'Eau BNPE</a>, <a href="https://www.data.gouv.fr/fr/datasets/donnees-changement-climatique-sim-quotidienne/">Météo-France SIM2</a>.</p>
+<p class="horodatage" id="horodatage"></p>
+<!--scripts-->
+<script src="tdb.js"></script>
+<script>
+const JOUR = (t) => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
+/* Les noms d'ouvrages arrivent en capitales : on les repasse en bas de casse
+   sans écraser les noms de lieux. */
+const LIEUX = ["Montane", "Vitrac", "Mons", "Bouysse", "Eyrein", "Reix", "Graule", "Monteil", "Pont de Reix"];
+function nomPropre(n) {
+  let t = n.toLowerCase().replace(/\s+/g, " ").trim();
+  t = t.charAt(0).toUpperCase() + t.slice(1);
+  for (const l of LIEUX) t = t.replace(new RegExp("\\b" + l.toLowerCase() + "\\b", "g"), l);
+  /* la source ne porte pas les accents */
+  return t.replace(/riviere/g, "rivière").replace(/chateau/g, "château")
+          .replace(/ a /g, " à ").replace(/eval /g, "évaluation ");
+}
+(async () => {
+  let d;
+  try { d = await json("data/eau.json"); }
+  catch (e) {
+    echec("synthese", "Série hydrologique indisponible.");
+    ["l-etiage", "onde", "prelevements"].forEach((i) => echec(i, ""));
+    return;
+  }
+  const A = d.annees, an = String(d.annee_courante), cur = A[an];
+  const completes = Object.keys(A).filter((y) => A[y].complete).length;
+  const rang = d.rang_etiage[an];
+  const total = Object.keys(d.rang_etiage).length;
+  const classement = Object.keys(d.rang_etiage).sort((a, b) => d.rang_etiage[a] - d.rang_etiage[b]);
+  const pireAnnee = classement[0];
+
+  document.getElementById("synthese").innerHTML =
+    tuile("Étiage " + an, rang + (rang === 1 ? "ᵉʳ" : "ᵉ"), "sur " + total + " étés", "le plus sévère de la série : " + pireAnnee, rang <= 5 ? "alerte" : null) +
+    tuile("Plus bas débit", nf(cur.min, 1), "l/s", "le " + JOUR(cur.jour_min)) +
+    tuile("Sous 20 l/s", cur.sous_seuil["20"].jours, "jours", cur.sous_seuil["20"].premier ? "depuis le " + JOUR(cur.sous_seuil["20"].premier) : "cette année") +
+    tuile("Module", nf0(d.module_l_s), "l/s", "moyenne sur " + nf0(d.jours) + " jours") +
+    (d.prelevements ? tuile("Prélevé sur la commune", nf0(d.prelevements.par_annee[d.prelevements.derniere_annee]), "m³", "en " + d.prelevements.derniere_annee + ", " + (d.prelevements.usages.join(", ").toLowerCase() || "—")) : "");
+
+  document.getElementById("condense").innerHTML = "<ul>" +
+    "<li>Étiage " + an + "&nbsp;: <strong>" + rang + (rang === 1 ? "ᵉʳ" : "ᵉ") + " plus sévère sur " + total + " étés</strong>, " +
+      "plus bas débit " + nf(cur.min, 1) + " l/s, " + cur.sous_seuil["20"].jours + " jours sous 20 l/s.</li>" +
+    "<li>Le plus sévère de la série&nbsp;: <strong>" + pireAnnee + "</strong>" +
+      (A[pireAnnee] && A[pireAnnee].min === 0 ? ", où la rivière s'est arrêtée" : "") + ".</li>" +
+    "<li><strong>" + classement.slice(0, 10).filter((y) => +y >= 2000).length + " des dix plus bas</strong> depuis " + d.periode[0] + " sont postérieurs à 2000.</li>" +
+    (d.prelevements ? "<li>" + nf0(d.prelevements.par_annee[d.prelevements.derniere_annee]) + " m³ prélevés sur la commune en " +
+      d.prelevements.derniere_annee + ", <strong>en totalité pour l'eau potable</strong>.</li>" : "") +
+    "</ul>";
+
+  /* --- étiages annuels --- */
+  const zone = document.getElementById("g-etiage");
+  const vcn = Object.keys(A).filter((y) => A[y].vcn10 !== null).sort();
+  const b1 = document.createElement("div");
+  b1.className = "graphe";
+  b1.innerHTML = "<h3>Sévérité de l'étiage, chaque année</h3><p class='legende-axe'>VCN10 — la plus faible moyenne sur 10&nbsp;jours consécutifs, en litres par seconde. Échelle logarithmique&nbsp;: plus le point est bas, plus l'année a été sèche.</p><div></div>";
+  zone.appendChild(b1);
+  graphe({ conteneur: b1.lastElementChild, points: vcn.map((y) => ({ cle: y, libelle: y, y: A[y].vcn10 })), unite: "l/s", hauteur: 180, log: true });
+
+  const b2 = document.createElement("div");
+  b2.className = "graphe";
+  b2.innerHTML = "<h3>Jours passés sous 20 litres par seconde</h3><p class='legende-axe'>En dessous de ce seuil, la rivière est à l'étiage sévère et tout prélèvement se discute.</p><div></div>";
+  zone.appendChild(b2);
+  const js = Object.keys(A).sort();
+  graphe({ conteneur: b2.lastElementChild, points: js.map((y) => ({ cle: y, libelle: y, y: A[y].sous_seuil["20"].jours })), type: "barres", unite: "jours", hauteur: 150 });
+
+  const det = document.createElement("details");
+  det.className = "tableau-brut";
+  det.innerHTML = "<summary>Voir les chiffres — étiage de chaque année</summary>" +
+    "<div class='defilant'><table class='donnees'><thead><tr><th>Année</th><th>VCN10</th><th>Minimum</th><th>Date</th><th>Jours &lt; 20 l/s</th><th>Rang</th></tr></thead><tbody>" +
+    js.slice().reverse().map((y) => "<tr><td>" + y + (A[y].complete ? "" : " <span class='nb'>(en cours)</span>") + "</td><td>" + nf(A[y].vcn10, 1) +
+      "</td><td>" + nf(A[y].min, 1) + "</td><td>" + JOUR(A[y].jour_min) + "</td><td>" + A[y].sous_seuil["20"].jours +
+      "</td><td>" + (d.rang_etiage[y] || "—") + "</td></tr>").join("") +
+    "</tbody></table></div>";
+  zone.appendChild(det);
+
+  /* les dix étiages les plus sévères */
+  const pires = classement.slice(0, 10);
+  const recents = pires.filter((y) => +y >= 2000).length;
+  const zeroAn = Object.keys(A).filter((y) => A[y].min === 0);
+  document.getElementById("l-etiage").innerHTML =
+    "<p><strong>Les étiages sévères ne sont plus répartis au hasard dans la série.</strong> Sur les dix plus bas depuis " + d.periode[0] +
+    ", <strong>" + recents + " sont postérieurs à 2000</strong> — " + pires.slice(0, 6).join(", ") + " en tête. " +
+    "Avant 2000, le pire de la série est 1990, et il reste plus haut que six étés du XXI<sup>e</sup> siècle.</p>" +
+    (zeroAn.length ? "<p><strong>Le débit est déjà descendu à zéro.</strong> En " + zeroAn.join(" et en ") +
+      ", le débit journalier est descendu à zéro à la station. Ce n'est pas un défaut de mesure&nbsp;: c'est un cours d'eau de 43 km² de bassin qui cesse de couler. " +
+      "Un stockage d'eau ne se dimensionne donc pas sur l'étiage habituel mais sur <strong>30 à 60&nbsp;jours sans ressource mobilisable</strong>.</p>" : "") +
+    "<p>Le repère de conduite&nbsp;: <strong>si le débit passe sous 20 l/s avant le 15 juillet, l'été sera long</strong>. En " + an + ", c'est arrivé le " +
+    (cur.sous_seuil["20"].premier ? JOUR(cur.sous_seuil["20"].premier) : "—") + ".</p>";
+
+  /* --- courbe de l'année --- */
+  const c = d.courbe.filter((x) => x[0] >= an + "-05-01");
+  const bc = document.createElement("div");
+  bc.className = "graphe";
+  bc.innerHTML = "<h3>Débit journalier, " + an + "</h3><div></div>";
+  document.getElementById("g-annee").appendChild(bc);
+  graphe({
+    conteneur: bc.lastElementChild, hauteur: 200, unite: "l/s", log: true,
+    points: c.map(([t, v, q]) => ({
+      cle: JOUR(t), libelle: JOUR(t), y: v,
+      r0: q ? q[0] : undefined, rm: q ? q[1] : undefined, r1: q ? q[2] : undefined
+    }))
+  });
+
+  /* --- ONDE --- */
+  if (d.onde) {
+    const pa = d.onde.par_annee, ans = Object.keys(pa).sort();
+    const avecAssec = ans.filter((y) => pa[y].assecs > 0);
+    document.getElementById("onde").innerHTML =
+      "<div class='defilant'><table class='donnees'><thead><tr><th>Année</th><th>Passages</th><th>Écoulement faible ou invisible</th><th>Assec</th></tr></thead><tbody>" +
+      ans.slice().reverse().map((y) => "<tr><td>" + y + "</td><td>" + pa[y].observations + "</td><td>" + pa[y].faibles +
+        "</td><td>" + (pa[y].assecs ? "<strong>" + pa[y].assecs + "</strong>" : "0") + "</td></tr>").join("") +
+      "</tbody></table></div>" +
+      "<p>" + nf0(ans.length) + " ans de passages, et des assecs dans " + avecAssec.length + " années seulement&nbsp;: <strong>" + avecAssec.join(", ") +
+      "</strong>. Toutes depuis 2019. Sur un ruisseau de ce calibre, l'arrêt de l'écoulement dure alors deux à trois mois — " +
+      "ce qui exclut de faire reposer l'abreuvement ou l'arrosage sur un ruisseau de tête de bassin.</p>";
+  }
+
+  /* --- prélèvements --- */
+  if (d.prelevements) {
+    const P = d.prelevements, ans = Object.keys(P.par_annee).sort();
+    const a0 = ans[0], a1 = P.derniere_annee;
+    const evol = Math.round(100 * (P.par_annee[a1] / P.par_annee[a0] - 1));
+    document.getElementById("prelevements").innerHTML =
+      "<p>En " + a1 + ", <strong>" + nf0(P.par_annee[a1]) + " m³</strong> ont été prélevés sur la commune, " +
+      "<strong>en totalité pour l'eau potable</strong> — ni irrigation ni industrie déclarées. Depuis " + a0 + ", le total a " +
+      (evol < 0 ? "baissé de " + Math.abs(evol) : "augmenté de " + evol) + "&nbsp;%.</p>" +
+      "<div class='defilant'><table class='donnees'><thead><tr><th>Ouvrage</th><th>m³ en " + a1 + "</th></tr></thead><tbody>" +
+      P.ouvrages.map((o) => "<tr><td>" + nomPropre(o.nom) + "</td><td>" + nf0(o.volume) + "</td></tr>").join("") +
+      "</tbody></table></div>" +
+      "<p><strong>Deux de ces ouvrages portent le nom du lieu</strong>, et une prise en rivière capte la Montane à 1,2 km d'ici. " +
+      "Autrement dit, l'eau d'ici part déjà dans le réseau public. Tout projet de prélèvement du collectif se discutera donc " +
+      "en concurrence avec un captage d'eau potable — mieux vaut le savoir avant l'instruction d'un dossier qu'à ce moment-là. " +
+      "</p>";
+  }
+
+  document.getElementById("horodatage").textContent =
+    "Série recalculée le " + new Date(d.calcule_le).toLocaleDateString("fr-FR", { dateStyle: "long" }) +
+    " · " + nf0(d.jours) + " jours de mesure, " + completes + " années complètes · Licence Ouverte 2.0.";
+})();
+</script>
+<script>
+/* --- L'humidité du sol, réanalyse SIM2 de Météo-France --- */
+(async () => {
+  const JOUR2 = (t) => new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
+  let d;
+  try { d = await json("data/humidite-sol.json"); }
+  catch (e) {
+    ["synthese-sol", "l-sol"].forEach((i) => echec(i, "Série d'humidité du sol indisponible."));
+    return;
+  }
+  const an = String(d.annee_courante);
+  const A = d.annees, cur = A[an] || {};
+  const etes = Object.keys(d.rang_ete).length;
+  const rang = d.rang_ete[an];
+  /* --- tuiles --- */
+  const sswi = d.actuel.sswi, rj = d.actuel.rang_jour;
+  document.getElementById("synthese-sol").innerHTML =
+    tuile("Humidité du sol", nf(d.actuel.swi, 2), "", "au " + JOUR2(d.actuel.date) + " · 1 = capacité au champ, 0 = flétrissement") +
+    tuile("Écart à la normale du jour", (sswi > 0 ? "+" : "") + nf(sswi, 1), "σ",
+          rj && rj[0] === 0 ? "plus sec qu'aucune des " + nf0(rj[1]) + " valeurs de référence à cette date" :
+          sswi <= -2 ? "sécheresse extrême pour la saison" : sswi <= -1.5 ? "sécheresse marquée pour la saison" :
+          sswi <= -1 ? "sol sec pour la saison" : "dans la normale saisonnière",
+          sswi <= -1.5 ? "alerte" : sswi <= -1 ? "attention" : null) +
+    tuile("L'été " + an, rang ? rang + (rang === 1 ? "<sup>er</sup>" : "<sup>e</sup>") + " / " + etes : "—", "",
+          rang === 1 ? "le sol le plus sec de toute la série" : "sur " + etes + " étés depuis " + d.periode[0],
+          rang && rang <= 5 ? "alerte" : null) +
+    tuile("Jours de sécheresse marquée", nf0(cur.sous_1_5 || 0), "j",
+          "en " + an + ", sur " + nf0(cur.jours || 0) + " jours · plus longue suite : " + nf0(cur.serie_max || 0) + " j",
+          (cur.sous_1_5 || 0) > 90 ? "alerte" : null);
+  /* --- courbe de l'année --- */
+  const bc = document.createElement("div");
+  bc.className = "graphe";
+  bc.innerHTML = "<h3>Humidité du sol, " + an + "</h3><div></div>";
+  document.getElementById("g-sol-annee").appendChild(bc);
+  graphe({
+    conteneur: bc.lastElementChild, hauteur: 200, zero: true,
+    points: d.courbe.map(([t, v, q]) => ({
+      cle: JOUR2(t), libelle: JOUR2(t), y: v,
+      r0: q ? q[0] : undefined, rm: q ? q[1] : undefined, r1: q ? q[2] : undefined
+    }))
+  });
+  /* --- jours de sécheresse marquée, par année --- */
+  const ans = Object.keys(A).filter((y) => A[y].complete).sort();
+  const be = document.createElement("div");
+  be.className = "graphe";
+  be.innerHTML = "<h3>Jours de sécheresse marquée, chaque année</h3>" +
+    "<p class='legende-axe'>Nombre de jours de l'année où l'humidité du sol est à plus de 1,5 écart-type sous la normale du jour. " +
+    "C'est le seuil retenu par les services de l'État pour parler de sécheresse des sols. "
+    + "L'année en cours n'y figure pas tant qu'elle n'est pas terminée.</p><div></div>";
+  document.getElementById("g-sol-etes").appendChild(be);
+  graphe({
+    conteneur: be.lastElementChild, type: "barres", hauteur: 190, unite: "j", zero: true,
+    points: ans.map((y) => ({ cle: y, libelle: y, y: A[y].sous_1_5 }))
+  });
+  /* --- lecture --- */
+  const pires = Object.keys(d.rang_ete).sort((a, b) => d.rang_ete[a] - d.rang_ete[b]).slice(0, 8);
+  const recents = pires.filter((y) => +y >= 2000).length;
+  const longs = d.episodes.slice().sort((a, b) => b.jours - a.jours).slice(0, 6);
+  document.getElementById("l-sol").innerHTML =
+    "<p><strong>L'été " + an + " est le plus sec de la série pour le sol</strong>, devant " + pires[1] + " et " + pires[2] + ". " +
+    "Sur les huit étés les plus secs depuis " + d.periode[0] + ", <strong>" + recents + " sont postérieurs à 2000</strong> — " +
+    pires.filter((y) => +y >= 2000).join(", ") + " — et les anciens se réduisent à " +
+    pires.filter((y) => +y < 2000).join(" et ") + ".</p>" +
+    "<p>Ce classement ne recoupe pas celui des étiages de la Montane&nbsp;: " +
+    "un sol peut rester sec des mois après que la rivière est remontée, parce que la pluie d'automne repart au ruissellement " +
+    "avant d'avoir rechargé la réserve. <strong>Pour un jardin, un verger ou une prairie, c'est cette courbe qu'il faut suivre.</strong></p>" +
+    "<h3>Les épisodes les plus longs</h3>" +
+    "<p>Suites d'au moins 20&nbsp;jours consécutifs sous le seuil de sécheresse marquée.</p>" +
+    "<div class='defilant'><table class='donnees'><thead><tr><th>Début</th><th>Fin</th><th>Durée</th><th>Plus bas atteint</th></tr></thead><tbody>" +
+    longs.map((e) => "<tr><td>" + new Date(e.debut).toLocaleDateString("fr-FR", { dateStyle: "long" }) + "</td><td>" +
+      (e.en_cours ? "<em>en cours</em>" : new Date(e.fin).toLocaleDateString("fr-FR", { dateStyle: "long" })) + "</td><td>" +
+      e.jours + " j</td><td>" + nf(e.fond, 1) + " σ</td></tr>").join("") +
+    "</tbody></table></div>" +
+    "<div class='note'><span class='etiquette'>Limites de la maille</span>" +
+    "<p>Le modèle tourne sur une grille de 8 km, avec un sol moyen. Il ne connaît ni le replat du Mons, " +
+    "ni l'acidité et l'aluminium du complexe d'échange, ni la réserve utile réelle de chaque parcelle. " +
+    "Il se lit en <strong>écart d'une année à l'autre</strong>, pas en valeur absolue à la parcelle.</p></div>" +
+    "<div class='note'><span class='etiquette'>Pourquoi nous recalculons l'écart nous-mêmes</span>" +
+    "<p>Le fichier source porte déjà une colonne d'écart à la normale. Elle sature&nbsp;: le 16 décembre 1978, " +
+    "où l'humidité du sol vaut 0,73, et le 16 décembre 1985, où elle vaut 0,57, y portent <strong>la même valeur, " +
+    "−8,17</strong> — deux états de sol différents, un seul chiffre. En hiver, où le sol est presque toujours à sa " +
+    "capacité, la standardisation part en butée. Nous recalculons donc l'écart par le <strong>rang du jour dans " +
+    "l'échantillon de référence</strong> — toutes les valeurs de 1958 à 2020 à moins de 10&nbsp;jours de cette date " +
+    "dans l'année, soit environ 1 300 — ce qui borne l'indicateur par l'échantillon lui-même. " +
+    "Un écart de −3,4 σ signifie alors quelque chose de vérifiable&nbsp;: aucune de ces 1 300 journées n'a été " +
+    "plus sèche.</p></div>";
+  /* --- une ligne de plus au condensé, quand le premier bloc est posé --- */
+  for (let i = 0; i < 40; i++) {
+    const ul = document.querySelector("#condense ul");
+    if (ul) {
+      const li = document.createElement("li");
+      li.innerHTML = "Le sol&nbsp;: été " + an + " <strong>le plus sec des " + etes + " étés</strong> depuis " + d.periode[0] +
+        ", " + nf0(cur.sous_1_5 || 0) + " jours de sécheresse marquée.";
+      ul.appendChild(li);
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 100));
+  }
+})();
+</script>

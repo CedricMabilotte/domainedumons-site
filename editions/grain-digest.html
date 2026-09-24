@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un motif, huit contrôles — le digest portable — édition paginée — Domaine du Mons</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../edition.css?v=29">
+<script>
+window.PagedConfig = {
+  auto: true,
+  after: function () {
+    var b = document.createElement("div");
+    b.className = "barre-edition";
+    b.innerHTML = '<a href="../editions.html">← Éditions</a> <span>Un motif, huit contrôles — le digest portable</span> ' +
+      '<button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button>';
+    document.body.appendChild(b);
+    document.body.setAttribute("data-pret", String(document.querySelectorAll(".pagedjs_page").length));
+  }
+};
+</script>
+<script src="../vendor/paged.polyfill.min.js?v=29"></script>
+</head>
+<body class="a5">
+<article class="chapitre seul" id="grain-digest">
+<h1><span class="titre-courant">Un motif, huit contrôles — le digest portable</span></h1>
+
+<p class="chapeau">Extrait du projet «&nbsp;Domaine du Mons&nbsp;» pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.</p>
+<dl class="cartouche">
+  <div><dt>Famille</dt><dd>Le digest</dd></div>
+  <div><dt>Généricité</dt><dd>GÉNÉRIQUE</dd></div>
+  <div><dt>Statut</dt><dd>EXPLORÉ — production du corpus, non validée par une décision</dd></div>
+  <div><dt>Écrit le</dt><dd>18 septembre 2026</dd></div>
+  <div><dt>Licence</dt><dd>CC BY-SA 4.0 (documentation) / MIT (code)</dd></div>
+</dl>
+<h2>Un seul motif de défaillance, six fois</h2>
+<p>Six enquêtes indépendantes — juridique, climatique, hydrologique, associative, cartographique, topographique — ont produit six erreurs qui n'ont qu'une forme&nbsp;:</p>
+<blockquote><p><strong>Un résultat propre, plausible, et faux — sans que rien dans la sortie ne le signale.</strong></p></blockquote>
+<p>Le mode de défaillance ne se voit pas parce qu'il ne casse rien. La requête est juste, le code tourne, le chiffre s'affiche, et il ressemble à un chiffre qu'on connaît. C'est précisément cette ressemblance qui le fait passer.</p>
+<div class="defilant"><table class="donnees"><thead><tr><th scope="col"></th><th scope="col">l'erreur</th><th scope="col">ce qui l'a révélée</th></tr></thead><tbody><tr><th scope="row"><strong>Le panorama</strong></th><td>Une recherche par les cas trouve les solutions adoptées, pas les solutions disponibles. La recommandation juridique s'est inversée entre deux passes.</td><td>Une seconde passe d'un autre angle</td></tr><tr><th scope="row"><strong>Le seuil emprunté</strong></th><td>Un seuil repris d'une source sans recalage sur la donnée locale décalait un stade phénologique d'un mois.</td><td>Le résultat était inexplicable sur le terrain</td></tr><tr><th scope="row"><strong>L'indicateur en butée</strong></th><td>Une colonne officielle donnait la <strong>même valeur à deux états différents</strong>. Deux faux épisodes dans un tableau publié.</td><td>Une valeur impossible&nbsp;: huit écarts-types</td></tr><tr><th scope="row"><strong>Le registre trop étroit</strong></th><td>Compter des associations dans un fichier qui n'immatricule que celles ayant une existence financière&nbsp;: 1 952 au lieu de 8 340.</td><td>La recherche d'un autre champ</td></tr><tr><th scope="row"><strong>Le code d'erreur mal lu</strong></th><td>Un 504 pris pour «&nbsp;votre requête est mauvaise&nbsp;» alors qu'il dit «&nbsp;l'instance est chargée&nbsp;». Une journée perdue à chercher un contournement.</td><td>La patience, le lendemain</td></tr><tr><th scope="row"><strong>L'inventaire aberrant</strong></th><td>Un algorithme correct sur une donnée correcte&nbsp;: 66&nbsp;% du volume inventorié était un artefact d'ouvrage d'art.</td><td>Ramener le total à une grandeur familière</td></tr></tbody></table></div>
+<h2>Les huit contrôles qui les attrapent</h2>
+<p>Ils coûtent des minutes. Chacun a été écrit après avoir manqué.</p>
+<p class="point" data-n="1"><strong>Demander au registre son critère d'entrée — et sa date.</strong> La question n'est pas «&nbsp;cette source est-elle à jour&nbsp;?&nbsp;» mais <strong>«&nbsp;qu'est-ce qui fait entrer une ligne dans ce fichier&nbsp;?&nbsp;»</strong>, avant la première requête. Un registre ne se trompe jamais sur ce qu'il contient&nbsp;; il se tait sur ce qu'il ne contient pas. Une source renvoie une liste complète — complète de ce qu'elle contient.</p>
+<p>Préférer le registre dont l'<strong>objet même est de dénombrer</strong> la population cherchée, même s'il est plus pénible d'accès qu'une API commode portant une population voisine.</p>
+<p>Et <strong>un catalogue de sources se date, sinon il ment</strong> : trois services publics ou parapublics sur lesquels ce corpus s'appuyait ont fermé ou changé d'adresse dans la même année.</p>
+<p class="point" data-n="2"><strong>Deux sources sur tout dénombrement.</strong> Un chiffre unique n'est pas un chiffre vérifié, aussi propre soit sa provenance. Quand l'écart est notable, <strong>il est lui-même une information</strong> : le rapport entre deux comptages mesure quelque chose, et cette mesure n'existait pas avant de trouver l'erreur.</p>
+<p class="point" data-n="3"><strong>Le test de saturation.</strong> Trier la colonne et chercher des <strong>valeurs identiques, à la précision publiée, sur des entrées différentes</strong>. La question n'est pas «&nbsp;la valeur est-elle grande&nbsp;?&nbsp;» mais «&nbsp;deux entrées différentes donnent-elles la même sortie&nbsp;?&nbsp;». Une valeur impossible est un cadeau&nbsp;; une butée discrète ne se signale pas.</p>
+<p>Et contrôler toute grandeur dérivée <strong>contre la grandeur brute dont elle dérive</strong>.</p>
+<p class="point" data-n="4"><strong>La conversion en grandeur familière.</strong> «&nbsp;3,5 millions de m³&nbsp;» ne dit rien&nbsp;; «&nbsp;quatre mètres de profondeur moyenne sur un plateau&nbsp;» se réfute en une seconde. Publier avec le total <strong>la part portée par ses trois plus gros éléments</strong> : une somme dominée par deux objets décrit ces objets, pas la population.</p>
+<p class="point" data-n="5"><strong>Vérifier qu'un total égale la somme de ses parties.</strong> Le contrôle le plus bête est celui qui trouve. Il a ramené un parc de logements de 292 à 146.</p>
+<p class="point" data-n="6"><strong>Écrire les hypothèses tacites du modèle sur le monde.</strong> Un calcul d'écoulement de surface suppose que l'eau ne circule que par la surface&nbsp;; toute buse viole cette hypothèse sans que rien ne le signale. Les hypothèses non écrites ne sont jamais testées. Croiser avec une source indépendante, <strong>même approximative</strong>.</p>
+<p class="point" data-n="7"><strong>Distinguer les codes d'erreur qui parlent de vous de ceux qui parlent de l'autre.</strong> 400, 404, 422 appellent une correction. 429, 502, 503, 504 appellent une attente qui double. Réessayer vite est la seule réaction qui aggrave la panne qu'on constate. Et mesurer la liaison avant de l'accuser. <strong>Un quota n'est pas une panne</strong> : c'est une information sur le volume demandé, souvent corrigible par le cadrage plutôt que par le code.</p>
+<p class="point" data-n="8"><strong>Éprouver les deux chemins.</strong> Un dossier écrit puis relu n'est pas le même objet&nbsp;: en mémoire une année est un entier, relue depuis un fichier c'est une chaîne. Le défaut n'apparaît que sur l'un des deux chemins, et une relecture ne le voit jamais — seul un essai de bout en bout, dans les deux sens, l'attrape.</p>
+<p><strong>Et, avant tout cela&nbsp;: vérifier la mesure avant de croire ce qu'elle dit.</strong> Quand un contrôle annonce qu'une chose ne marche pas, suspecter d'abord le contrôle. Deux correctifs ont été déployés sur un faux diagnostic parce qu'un harnais réutilisait la même adresse et mesurait l'état précédent. Une sonde de surveillance a signalé une source morte qui allait très bien, parce qu'elle lisait mal une réponse. <strong>Un outil qui crie au loup finit par ne plus être lu</strong> : lui déclarer les réponses attendues, et le faire réessayer avant de conclure.</p>
+<h2>Rendre les corrections cumulatives</h2>
+<p>Les huit contrôles ci-dessus trouvent des erreurs. Sans ce qui suit, ils les trouvent <strong>à chaque fois</strong>, sur chaque nouveau territoire, chaque nouveau jeu de données. Quatre gestes, le jour même, transforment un travail répété en travail qui progresse.</p>
+<p><strong>Une correction sans test n'est pas une correction.</strong> Elle est corrigée pour ce cas-là. Extraire du brut fautif le fragment minimal qui portait l'erreur, l'enregistrer tel quel, écrire l'essai avec sa date, son objet, ce que la sortie affichait et ce qui l'a démasquée. Ces essais-là valent plus que les autres&nbsp;: <strong>ils décrivent des erreurs qui se sont produites, pas des erreurs imaginées.</strong></p>
+<p><strong>Ce qui ne se rejoue pas n'est pas reproductible.</strong> Garder chaque réponse brute telle quelle, avec son empreinte, et une ligne de provenance — adresse, producteur, licence, date. L'épreuve tient en une commande&nbsp;: refaire tout le travail hors ligne, depuis le cache. La première collecte prend des minutes, le rejeu quelques secondes. C'est ce qui distingue un travail vérifiable d'un travail à croire sur parole — et ce qui permet à une source fermée de ne pas emporter l'analyse avec elle.</p>
+<p><strong>Sonder les sources, et comparer au sondage précédent.</strong> Un état daté qui distingue trois choses que rien d'autre ne distingue&nbsp;: un refus temporaire (quota), un refus durable (la source a changé), un injoignable (souvent la liaison). La comparaison est ce qui a de la valeur&nbsp;: elle affiche d'elle-même ce qui a bougé depuis la dernière fois.</p>
+<p><strong>Tenir un journal de ce sur quoi l'outil a réellement tourné.</strong> Une ligne par cas&nbsp;: date, échelle, ce qui a été collecté, ce qui a manqué, ce qui a été signalé. C'est la seule façon de savoir ce que «&nbsp;ça marche&nbsp;» veut dire — sur combien de cas <em>réellement différents</em>, et non sur combien de fois sur le même.</p>
+<p><strong>Ce qui se mesure d'une fois à l'autre</strong> : part de ce qui se collecte sans intervention (doit monter) · manques par cas (doit baisser) · corrections trouvées après coup (doit baisser, et chacune a son test) · délai entre collecte et livraison (doit baisser sans que les corrections montent). Un cinquième compte davantage et ne se mesure pas&nbsp;: <strong>le résultat a-t-il servi à décider quelque chose.</strong></p>
+<h2>Quatre règles d'écriture</h2>
+<p><strong>Séparer la matière du commentaire.</strong> Tant que les deux sont mêlés, le commentaire précède le contrôle. Une fois séparés, le texte ne peut citer qu'un chiffre déjà contrôlé, et la matière n'a plus à être jolie.</p>
+<p><strong>Ne rien imputer.</strong> Une valeur absente vaut «&nbsp;nd&nbsp;» jusque dans le texte final. Une tendance ne s'annonce que si l'intervalle de confiance exclut zéro — sinon on écrit «&nbsp;pas de tendance détectable&nbsp;». Une source qui échoue se déclare, elle ne se comble pas en silence.</p>
+<p><strong>Publier l'incertitude coûte moins cher que publier une certitude fausse.</strong> Une page qui dit «&nbsp;à l'étude&nbsp;» n'a jamais à être rétractée. Marquer dans le texte ce qui est vérifié et ce qui ne l'est pas, et conserver ces marques&nbsp;: sans elles, une information de seconde main devient indiscernable d'un texte contrôlé au bout de trois mois.</p>
+<p><strong>Publier le doute plutôt que de trancher en silence.</strong> Un tri silencieux n'est pas contestable&nbsp;; un doute affiché l'est. C'est la différence entre un travail qu'on peut vous reprendre et un travail qu'il faut vous croire.</p>
+<hr>
+<h2>Trois outils prêts à l'emploi</h2>
+<h3>La grille d'intérêt général</h3>
+<p>Trier un tissu associatif sur ce que les organisations <strong>disent faire</strong>, et non sur leur statut, leur code d'activité ou leur nom.</p>
+<p><strong>Cinq faits font entrer</strong> — un seul suffit, s'il est net&nbsp;: <em>ouverture</em> (mettre un lieu ou une ressource à disposition de non-membres), <em>transmission</em> (former, accompagner des personnes extérieures), <em>commun</em> (prendre soin d'un bien qui n'appartient à personne en particulier), <em>solidarité</em> (aider des personnes en difficulté qui ne sont pas les membres), <em>territoire</em> (soutenir une activité non marchande ou coopérative).</p>
+<p><strong>Trois motifs font sortir</strong>, et l'emportent sauf action déclarée vers l'extérieur <em>en plus</em> : <em>cercle</em>, <em>économique</em>, <em>politique</em>.</p>
+<p><strong>Trois verdicts</strong> : retenu, douteux, hors — et les douteux sont publiés.</p>
+<p>Trois extensions, nées de l'application à un corpus de nature différente&nbsp;: qualifier <strong>la nature de l'acteur</strong> avant d'appliquer les faits, car pour un acteur marchand la transaction ne compte pas et il faut un fait en plus de la vente&nbsp;; publier <strong>la base de preuve</strong> avec chaque verdict — objet déclaré, réseau tiers qui atteste une pratique, ou rien, une fiche sans objet et sans réseau ne pouvant jamais être retenue&nbsp;; distinguer <strong>hors périmètre</strong> de hors intérêt général.</p>
+<p>Écrire la grille <strong>avant</strong> la première lecture, et ne pas l'ajuster après coup. Sa valeur est dans les cas limites&nbsp;: sans eux, ce n'est qu'une déclaration d'intention.</p>
+<h3>Le diagnostic de territoire</h3>
+<p>Produire, à partir des données publiques françaises, un dossier de données daté, sourcé, contrôlé et rejouable — puis le rapport qui s'écrit dessus, puis la boucle qui fait que le territoire suivant coûtera moins cher.</p>
+<p>Deux échelles, qui ne se confondent pas&nbsp;: un lieu (ferme collective, site habité) et une commune rurale. Une étude tient dans un fichier de configuration&nbsp;; changer de territoire, c'est changer ce fichier. Le brut n'est jamais modifié. Les contrôles tournent à chaque collecte. Rien n'est imputé.</p>
+<p>Contre-indication majeure&nbsp;: la chaîne <strong>pré-localise, elle ne qualifie pas</strong>. Zones humides, périmètres de captage, débroussaillement — le critère réglementaire reste pédologique, floristique ou administratif, et le terrain reste à faire.</p>
+<h3>La cartographie honnête</h3>
+<p>Cartes web sans requête sortante, à partir des données publiques françaises. Quatre modes de rendu, trente-cinq règles opposables, et trois refus codés en dur&nbsp;: une choroplèthe d'effectifs bruts, un rayon proportionnel à la valeur, des zones sans donnée coloriées dans la palette. Ils se contournent, en l'écrivant dans la fiche de la carte — donc à un endroit où le lecteur le verra aussi.</p>
+<hr>
+<p><em>CC BY-SA 4.0 pour la documentation, MIT pour le code.</em></p>
+
+<p class="colophon">Collectif du Domaine du Mons — Un motif, huit contrôles — le digest portable. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/grain-digest.html</p>
+</article>
+</body>
+</html>

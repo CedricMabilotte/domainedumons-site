@@ -212,9 +212,10 @@ def main():
     if "--test" in sys.argv:
         return test()
     poser = "--poser" in sys.argv
-    fichiers = [f for f in sorted(glob.glob(os.path.join(RACINE, "*.html")))
-                if os.path.basename(f) not in ENGENDREES]
-    fichiers += sorted(glob.glob(os.path.join(RACINE, "scripts", "pages", "*.html")))
+    # Depuis le 24/09/2026, les pages de la racine sont toutes engendrées par
+    # scripts/gabarit.py : la passe porte sur les sources, dans contenu/.
+    fichiers = sorted(glob.glob(os.path.join(RACINE, "contenu", "pages", "*.html")))
+    fichiers += sorted(glob.glob(os.path.join(RACINE, "contenu", "modules", "*.html")))
     changes, signale = 0, []
     for f in fichiers:
         nom = os.path.relpath(f, RACINE)

@@ -19,6 +19,15 @@
    et « Le fil commun » plantaient sur d.verdicts.retenu et restaient bloquées
    sur « … ». Rien ne le signalait : ni erreur de publication, ni page blanche.
    Un contrôle qui ne tourne pas ne protège de rien.
+6. Liens internes et ancres. Ajouté le 24/09/2026 avec la refonte : trente
+   et une pages engendrées, un menu à trois niveaux, des renvois entre fiches
+   — un lien mort ne se voit qu'en cliquant.
+7. Métadonnées de partage : chaque page annonce une vignette (og:image) ; le
+   fichier doit exister, sinon le lien partagé s'affiche sans image. Si le
+   contrôle échoue après l'ajout d'une page : python3 scripts/editions.py --rendre.
+8. Aucune ressource distante : ni script, ni feuille de style, ni image
+   servis par un tiers. Un lien <a> vers l'extérieur reste permis.
+9. Poids : une page au-delà de 500 Ko (cahier des charges, §6).
 """
 import collections, glob, json, os, re, sys
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -166,8 +175,51 @@ def ombre(v, t):
     return declarations > 1 or any(re.search(m, t) for m in motifs)
 
 
+def liens_internes(nom, t, cache):
+    fautes = []
+    base = os.path.dirname(nom)
+    t = re.sub(r"<script\b.*?</script>", "", t, flags=re.S)   # les chaînes JS ne sont pas des liens
+    for attr, cible in re.findall(r'\s(href|src)="([^"]+)"', t):
+        if re.match(r"(https?:|mailto:|data:|javascript:)", cible) or cible.startswith("//"):
+            continue
+        chemin, _, ancre = cible.partition("#")
+        chemin = chemin.split("?")[0]
+        if not chemin:
+            cible_f, texte = nom, t
+        else:
+            cible_f = os.path.normpath(os.path.join(base, chemin))
+            if not os.path.exists(os.path.join(RACINE, cible_f)):
+                fautes.append("%s : lien vers %s, absent du dépôt" % (nom, cible))
+                continue
+            texte = None
+        if ancre and cible_f.endswith(".html"):
+            if texte is None:
+                if cible_f not in cache:
+                    cache[cible_f] = open(os.path.join(RACINE, cible_f), encoding="utf-8").read()
+                texte = cache[cible_f]
+            if not re.search(r'\sid="%s"' % re.escape(ancre), texte):
+                fautes.append("%s : ancre #%s absente de %s" % (nom, ancre, cible_f))
+    return fautes
+
+
+def distantes(nom, t):
+    fautes = []
+    for balise in re.findall(r"<(?:script|img|link|iframe|source|video|audio)\b[^>]*>", t):
+        if re.search(r'\s(?:src|href)="(?:https?:)?//', balise) and 'rel="canonical"' not in balise \
+                and 'rel="alternate"' not in balise:
+            fautes.append("%s : ressource distante — %s" % (nom, balise[:90]))
+    return fautes
+
+
 def main():
     fautes = []
+    cache = {}
+    for f in sorted(glob.glob(os.path.join(RACINE, "editions", "*.html"))
+                    + glob.glob(os.path.join(RACINE, "visuels", "*.html"))):
+        nom = os.path.relpath(f, RACINE)
+        t = open(f, encoding="utf-8").read()
+        fautes += liens_internes(nom, t, cache)
+        fautes += distantes(nom, t)
     for f in sorted(glob.glob(os.path.join(RACINE, "*.html"))):
         nom = os.path.basename(f)
         t = open(f, encoding="utf-8").read()
@@ -175,7 +227,16 @@ def main():
         for i, n in collections.Counter(ids).items():
             if n > 1:
                 fautes.append("%s : identifiant « %s » présent %d fois" % (nom, i, n))
-        for r in re.findall(r'(?:src|href)="((?:style\.css|site\.js|tdb\.js)[^"]*)"', t):
+        fautes += liens_internes(nom, t, cache)
+        fautes += distantes(nom, t)
+        if os.path.getsize(f) > 500_000:
+            fautes.append("%s : %d Ko, au-delà des 500 Ko du cahier des charges" % (nom, os.path.getsize(f) // 1000))
+        og = re.search(r'property="og:image" content="https://domainedumons\.actitude\.org/([^"]+)"', t)
+        if not og:
+            fautes.append("%s : pas de vignette og:image" % nom)
+        elif not os.path.exists(os.path.join(RACINE, og.group(1))):
+            fautes.append("%s : vignette %s absente — lancer scripts/editions.py --rendre" % (nom, og.group(1)))
+        for r in re.findall(r'(?:src|href)="((?:style\.css|site\.js|tdb\.js|partage\.js)[^"]*)"', t):
             if "?v=" not in r:
                 fautes.append("%s : %s sans numéro de version" % (nom, r))
         for d in set(re.findall(r'"(data/[a-z0-9\-\.]+|dessins/[a-z0-9\-\.]+)"', t)):
@@ -186,5 +247,5 @@ def main():
     if fautes:
         print("\n".join("  ✗ " + x for x in fautes))
         sys.exit(1)
-    print("  ✓ identifiants, versions, fichiers, clés et croquis : rien à signaler")
+    print("  ✓ identifiants, versions, fichiers, clés, croquis, liens, vignettes, poids : rien à signaler")
 main()
