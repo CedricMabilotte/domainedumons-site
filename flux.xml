@@ -8,121 +8,128 @@
   <updated>2026-09-24T12:00:00Z</updated>
   <author><name>Collectif du Domaine du Mons</name><email>contact@actitude.org</email></author>
   <entry>
+    <title>L'année</title>
+    <link href="https://domainedumons.actitude.org/tdb-annee.html"/>
+    <id>https://domainedumons.actitude.org/tdb-annee.html#2026-09-24-0</id>
+    <updated>2026-09-24T12:00:00Z</updated>
+    <summary>24 septembre 2026 — le cumul depuis le 1er janvier reçoit sa règle d'action. Il avait été écarté des tableaux de bord parce qu'il ne déclenchait rien, puis affiché sans elle.</summary>
+  </entry>
+  <entry>
     <title>Mentions et licences</title>
     <link href="https://domainedumons.actitude.org/mentions.html"/>
-    <id>https://domainedumons.actitude.org/mentions.html#2026-09-24-0</id>
+    <id>https://domainedumons.actitude.org/mentions.html#2026-09-24-1</id>
     <updated>2026-09-24T12:00:00Z</updated>
-    <summary>24 septembre 2026 — première version de cette page.</summary>
+    <summary>24 septembre 2026 — première version de cette page, licences arrêtées le même jour.</summary>
   </entry>
   <entry>
     <title>RX-06 — Un inventaire automatique dont le total brut était faux de deux ordres de grandeur</title>
     <link href="https://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html"/>
-    <id>https://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html#2026-09-24-1</id>
+    <id>https://domainedumons.actitude.org/grain-rx-06-inventaire-faux-de-deux-ordres.html#2026-09-24-2</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Retour d'expérience. Un algorithme correct, appliqué à une donnée correcte, a produit un inventaire dont 66 % du volume était un artefact d'infrastructure.</summary>
   </entry>
   <entry>
     <title>RX-05 — Le correctif était d'attendre, pas de changer de code</title>
     <link href="https://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html"/>
-    <id>https://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html#2026-09-24-2</id>
+    <id>https://domainedumons.actitude.org/grain-rx-05-la-patience-comme-correctif.html#2026-09-24-3</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Retour d'expérience. Une extraction de données abandonnée un jour, réussie le lendemain sans qu'une ligne de la requête ait changé.</summary>
   </entry>
   <entry>
     <title>RX-04 — Nous avons compté les associations d'un territoire dans un fichier qui n'en voit qu'un quart</title>
     <link href="https://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html"/>
-    <id>https://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html#2026-09-24-3</id>
+    <id>https://domainedumons.actitude.org/grain-rx-04-source-hors-de-son-domaine.html#2026-09-24-4</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Retour d'expérience. Un chiffre publié, faux d'un facteur quatre, et rien dans la donnée ne le signalait.</summary>
   </entry>
   <entry>
     <title>RX-03 — Un indicateur officiel donnait la même valeur à deux situations différentes</title>
     <link href="https://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html"/>
-    <id>https://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html#2026-09-24-4</id>
+    <id>https://domainedumons.actitude.org/grain-rx-03-indicateur-en-butee.html#2026-09-24-5</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Retour d'expérience. Une colonne d'un fichier public, reprise telle quelle, portait une butée invisible.</summary>
   </entry>
   <entry>
     <title>RX-02 — Un seuil repris de la littérature a produit un résultat nul, qu'on a failli prendre pour une bonne nouvelle</title>
     <link href="https://domainedumons.actitude.org/grain-rx-02-seuil-recale.html"/>
-    <id>https://domainedumons.actitude.org/grain-rx-02-seuil-recale.html#2026-09-24-5</id>
+    <id>https://domainedumons.actitude.org/grain-rx-02-seuil-recale.html#2026-09-24-6</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Retour d'expérience. Une analyse climatique locale, deux versions du même calcul, deux conclusions opposées.</summary>
   </entry>
   <entry>
     <title>PA-02 — L'intérêt général se prouve par les faits, pas par les statuts</title>
     <link href="https://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html"/>
-    <id>https://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html#2026-09-24-6</id>
+    <id>https://domainedumons.actitude.org/grain-pa-02-preuve-par-les-faits.html#2026-09-24-7</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Faire des membres les opérateurs et non les bénéficiaires, puis tenir le comptage au fil de l'eau, dès le premier jour.</summary>
   </entry>
   <entry>
     <title>PA-01 — Le verrou doit être structurel, pas contractuel</title>
     <link href="https://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html"/>
-    <id>https://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html#2026-09-24-7</id>
+    <id>https://domainedumons.actitude.org/grain-pa-01-verrou-structurel.html#2026-09-24-8</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Répartir le pouvoir de vendre entre deux personnes morales qui ne peuvent agir que d'un commun accord, et faire de cet accord une impossibilité pratique.</summary>
   </entry>
   <entry>
     <title>GA-01 — Le faisceau de droits, un gabarit vierge</title>
     <link href="https://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html"/>
-    <id>https://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html#2026-09-24-8</id>
+    <id>https://domainedumons.actitude.org/grain-ga-01-faisceau-de-droits.html#2026-09-24-9</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Décrire le rapport d'un collectif à chacune de ses ressources par cinq droits distincts, plutôt que par la propriété. Le tableau vide, à copier tel quel, et les trois pièges qu'il évite.</summary>
   </entry>
   <entry>
     <title>Un motif, huit contrôles — le digest portable</title>
     <link href="https://domainedumons.actitude.org/grain-digest.html"/>
-    <id>https://domainedumons.actitude.org/grain-digest.html#2026-09-24-9</id>
+    <id>https://domainedumons.actitude.org/grain-digest.html#2026-09-24-10</id>
     <updated>2026-09-24T12:00:00Z</updated>
     <summary>Fiche du Grain mise en ligne. Extrait du projet « Domaine du Mons » pour servir ailleurs. Rien de ce qui suit ne dépend du lieu. Septembre 2026.</summary>
   </entry>
   <entry>
     <title>La cartographie des lieux</title>
     <link href="https://domainedumons.actitude.org/reseau-carte.html"/>
-    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-19-10</id>
+    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-19-11</id>
     <updated>2026-09-19T12:00:00Z</updated>
     <summary>19 septembre 2026 — correction. La page annonçait « 191 lieux portés par des collectifs ». Il y a 191 fiches, au plus 172 lieux distincts, et 75 d'entre eux sont des acteurs marchands. Les verdicts de la grille du 17 septembre sont désormais affichés.</summary>
   </entry>
   <entry>
     <title>La cartographie des lieux</title>
     <link href="https://domainedumons.actitude.org/reseau-carte.html"/>
-    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-17-11</id>
+    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-17-12</id>
     <updated>2026-09-17T12:00:00Z</updated>
     <summary>17 septembre 2026 — l'annuaire est écrit dans la page et non plus par un script : il reste lisible sans JavaScript, au clavier et au lecteur d'écran. La molette rend le défilement à la page. Le zoom est ramené à 12, la fidélité réelle des contours étant plus grossière que ce que le zoom 14 laissait croire.</summary>
   </entry>
   <entry>
     <title>La cartographie des lieux</title>
     <link href="https://domainedumons.actitude.org/reseau-carte.html"/>
-    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-16-12</id>
+    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-16-13</id>
     <updated>2026-09-16T12:00:00Z</updated>
     <summary>16 septembre 2026 — la carte devient navigable : zoom, déplacement, fiche au clic, contours communaux au trait fin. Toujours sans aucune tuile distante.</summary>
   </entry>
   <entry>
     <title>Les associations d'intérêt général</title>
     <link href="https://domainedumons.actitude.org/reseau-associations.html"/>
-    <id>https://domainedumons.actitude.org/reseau-associations.html#2026-09-16-13</id>
+    <id>https://domainedumons.actitude.org/reseau-associations.html#2026-09-16-14</id>
     <updated>2026-09-16T12:00:00Z</updated>
     <summary>16 septembre 2026 — refonte complète. Le recensement repart du Répertoire national des associations et non plus de l'annuaire des entreprises : le total passe de 1 952 à plus de huit mille, parce que l'annuaire des entreprises ne voit que les associations immatriculées. Le tri par mots du nom est remplacé par la lecture de chaque objet déclaré contre une grille écrite d'avance.</summary>
   </entry>
   <entry>
     <title>Le fil commun</title>
     <link href="https://domainedumons.actitude.org/reseau-fil.html"/>
-    <id>https://domainedumons.actitude.org/reseau-fil.html#2026-09-15-14</id>
+    <id>https://domainedumons.actitude.org/reseau-fil.html#2026-09-15-15</id>
     <updated>2026-09-15T12:00:00Z</updated>
     <summary>15 septembre 2026 — proposition écrite, en attente de trois lieux participants.</summary>
   </entry>
   <entry>
     <title>La cartographie des lieux</title>
     <link href="https://domainedumons.actitude.org/reseau-carte.html"/>
-    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-15-15</id>
+    <id>https://domainedumons.actitude.org/reseau-carte.html#2026-09-15-16</id>
     <updated>2026-09-15T12:00:00Z</updated>
     <summary>15 septembre 2026 — première version. Reprise de 191 fiches depuis Transiscope, carte statique de la zone. Aucune fiche vérifiée sur place.</summary>
   </entry>
   <entry>
     <title>Les associations d'intérêt général</title>
     <link href="https://domainedumons.actitude.org/reseau-associations.html"/>
-    <id>https://domainedumons.actitude.org/reseau-associations.html#2026-09-15-16</id>
+    <id>https://domainedumons.actitude.org/reseau-associations.html#2026-09-15-17</id>
     <updated>2026-09-15T12:00:00Z</updated>
     <summary>15 septembre 2026 — première version. Décompte à partir de l'annuaire des entreprises, tri sur les mots du nom déposé.</summary>
   </entry>
