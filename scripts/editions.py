@@ -458,7 +458,11 @@ def rendre(port=8766):
     os.makedirs(os.path.join(ED, "pdf"), exist_ok=True)
     os.makedirs(os.path.join(VIS, "editions"), exist_ok=True)
     with sync_playwright() as p:
-        nav = p.chromium.launch()
+        try:
+            nav = p.chromium.launch()
+        except Exception:
+            # pas de Chromium de playwright installé : on prend le Chrome du système
+            nav = p.chromium.launch(channel="chrome")
         pg = nav.new_page(viewport={"width": 1200, "height": 900})
         for x in liste:
             pg.goto(base + "editions/%s.html" % x["slug"])
