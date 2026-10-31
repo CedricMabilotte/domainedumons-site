@@ -46,3 +46,4 @@ date,t_min_c,t_max_c,t_moy_c,pluie_mm,etp_mm,rafale_max_kmh,debit_montane_l_s,se
 2026-10-27,8.7,17.9,13.1,0.0,1.57,26.3,284.1,crise,zone Corrèze amont
 2026-10-28,5.5,14.0,9.6,0.0,1.82,36.0,216.5,crise,zone Corrèze amont
 2026-10-29,4.1,15.5,8.4,0.0,1.51,35.6,187.2,crise,zone Corrèze amont
+2026-10-30,1.0,14.7,7.5,0.0,1.54,18.0,170.1,alerte_renforcee,zone Corrèze amont
