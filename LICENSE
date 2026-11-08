@@ -1,0 +1,28 @@
+Copyright (c) 2026 Cedric Mabilotte — domainedumons.actitude.org
+
+Ce dépôt contient le site du Domaine du Mons : textes et fiches du Grain (à citer « Collectif du Domaine du Mons »), données, cartes et générateur. Chaque famille a sa licence ; en cas de doute
+sur la famille d'un fichier, la plus protectrice pour le commun s'applique.
+
+1. Textes — pages, fiches, articles, dessins et images de l'auteur :
+   Creative Commons Attribution – Pas d'utilisation commerciale – Partage dans
+   les mêmes conditions 4.0 International (CC BY-NC-SA 4.0)
+   https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr
+   Texte complet : LICENSES/CC-BY-NC-SA-4.0.txt
+
+2. Données — tables, fichiers YAML/JSON/CSV/GeoJSON et cartes produits par le projet :
+   Licence Ouverte 2.0 (Etalab) — https://www.etalab.gouv.fr/licence-ouverte-open-licence/
+
+3. Code — générateurs, scripts, feuilles de style, gabarits et configuration :
+   GNU Affero General Public License, version 3 ou ultérieure (AGPL-3.0-or-later)
+   https://www.gnu.org/licenses/agpl-3.0.html — texte complet : LICENSES/AGPL-3.0.txt
+
+4. Exceptions — sources tierces, à leur propre licence :
+   - les données de data/ et partage/ restent sous Licence Ouverte 2.0 (voir data/LISEZMOI.md) ;
+   - les lieux de la carte repris de Transiscope sont sous CC BY-SA, licence de la source ;
+   - les données dérivées d'OpenStreetMap sont © les contributeurs OpenStreetMap, ODbL ;
+   - Leaflet est sous licence BSD-2-Clause (© Vladimir Agafonkin, CloudMade) ;
+   - Paged.js est sous licence MIT (© Adam Hyde et les contributeurs de Coko Foundation) ;
+   - les données Insee, IGN (Admin Express) et data.gouv.fr reprises sont sous Licence Ouverte 2.0, à citer avec leur source.
+
+Les éditions et PDF diffusés avant le 7 novembre 2026 restent sous la licence
+imprimée dessus. Licences décidées le 2026-11-07 (charte de valorisation, D8-03).
