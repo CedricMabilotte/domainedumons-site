@@ -279,7 +279,7 @@ def composer(x):
                                               tags(x, 6)] if p)
     c["facebook"] = "\n\n".join(p for p in [code + x["titre"], corps, u] if p)
     paras = "".join("<p>%s</p>" % html.escape(p) for p in corps.split("\n\n"))
-    c["substack"] = ("<h3>%s%s</h3>%s<p>%s<a href=\"%s\">Lire sur le site du Domaine du Mons</a></p>"
+    c["substack"] = ("<h3>%s%s</h3>%s<p>%s<a href=\"%s\">Lire sur le site de CoMons</a></p>"
                      % (html.escape(code), html.escape(x["titre"]), paras,
                         ("<em>%s</em> " % html.escape(src)) if src else "", u))
     return c
@@ -391,7 +391,7 @@ def page_relayer(titres):
             fautes += controler(x, composer(x))
     for s in SERIES:
         corps.append(serie_bloc(s))
-    meta = {"titre": "Relayer", "description": "Des extraits du site du Domaine du Mons prêts à publier sur Mastodon, Telegram, Instagram, Facebook et Substack, avec leurs visuels."}
+    meta = {"titre": "Relayer", "description": "Des extraits du site de CoMons prêts à publier sur Mastodon, Telegram, Instagram, Facebook et Substack, avec leurs visuels."}
     frag = "<!--meta\n%s\n-->\n%s" % (json.dumps(meta, ensure_ascii=False, indent=1), "\n".join(corps))
     return frag, fautes
 

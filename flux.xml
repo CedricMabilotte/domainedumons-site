@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
-  <title>Domaine du Mons — nouvelles</title>
+  <title>CoMons — nouvelles</title>
   <subtitle>Les pages et les fiches du site, à chaque version datée.</subtitle>
   <link href="https://comons.actitude.org/flux.xml" rel="self"/>
   <link href="https://comons.actitude.org/"/>
   <id>https://comons.actitude.org/</id>
   <updated>2026-09-24T12:00:00Z</updated>
-  <author><name>Collectif du Domaine du Mons</name><email>contact@actitude.org</email></author>
+  <author><name>CoMons, Collectif du Mons</name><email>contact@actitude.org</email></author>
   <entry>
     <title>L'année</title>
     <link href="https://comons.actitude.org/tdb-annee.html"/>
