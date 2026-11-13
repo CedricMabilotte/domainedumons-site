@@ -277,7 +277,7 @@ def emporter(f):
     <li><a href="contenu/grain/{n}.md">Source Markdown</a></li>
     <li><a href="relayer.html#x-{s}">Extraits à relayer</a></li>
   </ul>
-  <p class="citer">Citer&nbsp;: Collectif du Domaine du Mons, «&nbsp;{t}&nbsp;», fiche {c}, {d}. {lic}.</p>
+  <p class="citer">Citer&nbsp;: CoMons, Collectif du Mons, «&nbsp;{t}&nbsp;», fiche {c}, {d}. {lic}.</p>
 </div>""".format(p=f["page"][:-5], n=f["nom"], s=f["page"][:-5], t=html.escape(f["titre"]),
                  c=f["code"], d=date_fr(f["meta"].get("date", "")),
                  lic=html.escape(f["meta"].get("licence", "CC BY-SA 4.0")),
@@ -344,7 +344,7 @@ def ressources(fiches):
 <p>Trois fiches du corpus attendent. Deux portent sur le choix de l'instrument juridique&nbsp;: une recommandation juridique ne passe du corpus au site qu'après avis professionnel, et le rendez-vous avec le notaire n'a pas eu lieu. La troisième décrit une chaîne d'outils de diagnostic territorial qui n'est pas encore distribuée publiquement.</p>
 <h2 id="reprendre">Reprendre une fiche</h2>
 <p>Copiez, adaptez, republiez, en citant la source et sous la même licence. Si une fiche vous a servi, <a href="nous-joindre.html">dites-le-nous</a>&nbsp;: c'est la seule mesure qui nous intéresse, et nous la notons dans le registre d'intérêt général.</p>""")
-    meta = {"titre": "Ressources", "description": "Le Grain du Domaine du Mons : retours d'expérience, patterns et gabarits génériques, sous licence libre, à reprendre tels quels par d'autres collectifs."}
+    meta = {"titre": "Ressources", "description": "Le Grain de CoMons : retours d'expérience, patterns et gabarits génériques, sous licence libre, à reprendre tels quels par d'autres collectifs."}
     return "<!--meta\n%s\n-->\n%s\n" % (json.dumps(meta, ensure_ascii=False, indent=1),
                                        typo("\n".join(blocs)))
 

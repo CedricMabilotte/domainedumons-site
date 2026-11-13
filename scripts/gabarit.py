@@ -40,7 +40,7 @@ RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENU = os.path.join(RACINE, "contenu")
 BUILD = os.path.join(RACINE, "build")
 SITE = "https://comons.actitude.org/"
-NOM = "Domaine du Mons"
+NOM = "CoMons"
 
 # Le numéro de version des ressources, en un seul endroit. À incrémenter dès
 # que style.css, site.js, tdb.js ou partage.js changent : sinon un visiteur
@@ -333,7 +333,7 @@ def texte_seul(s):
 
 def tete(page, meta, gabarit):
     titre = meta["titre"]
-    t_complet = NOM + " — collectif expérimental" if page == "index.html" else "%s — %s" % (titre, NOM)
+    t_complet = "CoMons : Collectif du Mons, Vitrac-sur-Montane (Corrèze)" if page == "index.html" else "%s — %s" % (titre, NOM)
     desc = meta["description"]
     url = SITE + ("" if page == "index.html" else page)
     image = SITE + "visuels/og/%s.png" % page[:-5]
@@ -350,7 +350,7 @@ def tete(page, meta, gabarit):
 <meta name="description" content="{d}">
 <link rel="canonical" href="{u}">
 <meta property="og:type" content="{ogt}">
-<meta property="og:site_name" content="Domaine du Mons">
+<meta property="og:site_name" content="CoMons : Collectif du Mons">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="{ti}">
 <meta property="og:description" content="{d}">
@@ -360,7 +360,7 @@ def tete(page, meta, gabarit):
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{alt}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" type="application/atom+xml" title="Domaine du Mons — nouvelles" href="flux.xml">
+<link rel="alternate" type="application/atom+xml" title="CoMons — nouvelles" href="flux.xml">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 {liens}<link rel="stylesheet" href="style.css">
 </head>
@@ -399,8 +399,8 @@ def navigation(page):
                     "« %s »" % libelle, cle, "\n".join(sous)))
     return """<div class="bandeau">
   <div class="bandeau-contenu">
-    <p class="titre"><a href="index.html">Domaine du Mons</a></p>
-    <p class="sous-titre">Vitrac-sur-Montane, Corrèze</p>
+    <p class="titre"><a href="index.html">CoMons</a></p>
+    <p class="sous-titre">Collectif du Mons, Vitrac-sur-Montane (Corrèze)</p>
     <nav aria-label="Navigation principale">
       <ul>
 %s
@@ -462,7 +462,7 @@ def bloc_relayer(page, meta):
 def pied():
     return """<footer>
   <div>
-    <p>Collectif du Domaine du Mons — Vitrac-sur-Montane (19). <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
+    <p>CoMons&nbsp;: Collectif du Mons, au Domaine du Mons, Vitrac-sur-Montane (19). Tout CoMons ici&nbsp;! <a href="mailto:contact@actitude.org">contact@actitude.org</a></p>
     <ul>
       <li><a href="index.html">Le lieu</a></li>
       <li><a href="liberer-la-terre.html">Libérer la terre</a></li>
@@ -586,13 +586,13 @@ def flux(faites):
   </entry>""".format(t=e(titre), u=e(SITE + page), d=d.isoformat(), i=i, s=e(texte)))
     xml = """<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
-  <title>Domaine du Mons — nouvelles</title>
+  <title>CoMons — nouvelles</title>
   <subtitle>Les pages et les fiches du site, à chaque version datée.</subtitle>
   <link href="{s}flux.xml" rel="self"/>
   <link href="{s}"/>
   <id>{s}</id>
   <updated>{m}T12:00:00Z</updated>
-  <author><name>Collectif du Domaine du Mons</name><email>contact@actitude.org</email></author>
+  <author><name>CoMons, Collectif du Mons</name><email>contact@actitude.org</email></author>
 {e}
 </feed>
 """.format(s=SITE, m=maj, e="\n".join(entrees))

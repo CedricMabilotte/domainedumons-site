@@ -86,7 +86,7 @@ def page_html(titre, corps, classe="a5", apres_js=""):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{t} — édition paginée — Domaine du Mons</title>
+<title>{t} — édition paginée — CoMons</title>
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../edition.css">
 {style}<script>
@@ -122,7 +122,7 @@ def couverture(sur, titre, chapeau, croquis=None, lignes=()):
   <h1>{t}</h1>
   <p class="chapeau">{c}</p>
   {svg}
-  <div class="pied"><p><strong>Domaine du Mons</strong> — collectif expérimental, Vitrac-sur-Montane (Corrèze)</p>{p}<p>comons.actitude.org</p></div>
+  <div class="pied"><p><strong>CoMons</strong> : Collectif du Mons, Vitrac-sur-Montane (Corrèze)</p>{p}<p>comons.actitude.org</p></div>
 </section>""".format(s=sur, t=titre, c=chapeau, svg=svg, p=pied)
 
 
@@ -143,7 +143,7 @@ def fiche_chapitre(page):
     return ident, code, titre, """<article class="chapitre" id="{i}">
 <h1>{cd}<span class="titre-courant">{t}</span></h1>
 {r}
-<p class="colophon">Collectif du Domaine du Mons — {cc}{t2}. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: comons.actitude.org/{p}</p>
+<p class="colophon">CoMons, Collectif du Mons — {cc}{t2}. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: comons.actitude.org/{p}</p>
 </article>""".format(i=ident, cd=('<span class="code-fiche">%s</span>' % code) if code else "",
                      t=titre, r=reste, cc=(code + ", ") if code else "", t2=re.sub(r"<[^>]+>", "", titre), p=page)
 
@@ -180,7 +180,7 @@ def editions_grain():
     corps = (couverture("Le Grain — cahier", "Ce qui se transporte",
                         "Retours d'expérience, patterns et gabarits génériques, écrits pour être repris tels quels par d'autres collectifs.",
                         "dessins/boucle.svg", ("%d fiches · %s · CC BY-SA 4.0" % (len(chapitres), DATE),))
-             + verso("<p>Ce cahier rassemble les fiches publiées du Grain du Domaine du Mons. Chacune existe aussi en ligne, "
+             + verso("<p>Ce cahier rassemble les fiches publiées du Grain de CoMons. Chacune existe aussi en ligne, "
                      "en version A5 séparée et en Markdown. Textes sous licence CC BY-SA 4.0 : copiez, adaptez, republiez, "
                      "en citant la source et sous la même licence.</p><p>Composé avec Paged.js. Aucune fiche n'est un avis "
                      "juridique ; celles qui touchent au droit disent leurs sources et leurs limites.</p>")
@@ -296,7 +296,7 @@ def page_editions(liste):
 </ul>
 """.format(g="\n".join(i for x, i in zip(liste, items) if x["genre"] in ("fiche", "cahier")),
            p="\n".join(i for x, i in zip(liste, items) if x["genre"] not in ("fiche", "cahier")))
-    meta = {"titre": "Éditions à imprimer", "description": "Les pages du site et les fiches du Grain du Domaine du Mons en éditions paginées A5 et A4, composées avec Paged.js."}
+    meta = {"titre": "Éditions à imprimer", "description": "Les pages du site et les fiches du Grain de CoMons en éditions paginées A5 et A4, composées avec Paged.js."}
     os.makedirs(os.path.join(RACINE, "build", "pages"), exist_ok=True)
     open(os.path.join(RACINE, "build", "pages", "editions.html"), "w", encoding="utf-8").write(
         "<!--meta\n%s\n-->\n%s" % (json.dumps(meta, ensure_ascii=False, indent=1), corps))
@@ -305,7 +305,7 @@ def page_editions(liste):
 
 # --------------------------------------------------------------- visuels
 
-TETE = '<div class="v-tete"><strong>Domaine du Mons</strong><span>{r}</span></div>'
+TETE = '<div class="v-tete"><strong>CoMons</strong><span>{r}</span></div>'
 
 
 def pied(x, source=True):
@@ -412,7 +412,7 @@ def planche():
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Visuels {f} — Domaine du Mons</title>
+<title>Visuels {f} — CoMons</title>
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../visuels.css">
 <style>@page {{ size: {l}px {h}px; margin: 0; }}</style>
@@ -428,7 +428,7 @@ def planche():
         open(os.path.join(VIS, fmt + ".html"), "w", encoding="utf-8").write(G.versionner(texte, "../"))
     liens = "".join('<li><a href="%s.html">%s</a> — %d visuels, %d × %d</li>' % (f, f, len(par[f]), *TAILLES[f]) for f in TAILLES)
     open(os.path.join(VIS, "planche.html"), "w", encoding="utf-8").write(
-        '<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Planches de visuels — Domaine du Mons</title>'
+        '<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Planches de visuels — CoMons</title>'
         '<meta name="robots" content="noindex"><link rel="stylesheet" href="../style.css?v=%d"></head><body><main>'
         '<h1>Planches de visuels</h1><p>Une planche par format, composée avec Paged.js&nbsp;; chaque page est un visuel. '
         'Les images découpées sont dans les dossiers du même nom. Retour à <a href="../relayer.html">Relayer</a>.</p>'
