@@ -74,9 +74,9 @@ FORMATS_PAGE = {
     "a4": "@page { size: A4; margin: 20mm 20mm 22mm 22mm; } @page :left { margin: 20mm 22mm 22mm 20mm; }",
     "paysage": ("@page { size: A4 landscape; margin: 12mm 14mm 14mm; "
                 "@top-right { content: 'Le faisceau de droits — gabarit GA-01'; } "
-                "@bottom-right { content: 'domainedumons.actitude.org · CC BY-SA 4.0'; } } "
+                "@bottom-right { content: 'comons.actitude.org · CC BY-SA 4.0'; } } "
                 "@page :left { margin: 12mm 14mm 14mm; @top-left { content: none; } "
-                "@bottom-left { content: counter(page); } @bottom-right { content: 'domainedumons.actitude.org · CC BY-SA 4.0'; } }"),
+                "@bottom-left { content: counter(page); } @bottom-right { content: 'comons.actitude.org · CC BY-SA 4.0'; } }"),
 }
 
 
@@ -122,7 +122,7 @@ def couverture(sur, titre, chapeau, croquis=None, lignes=()):
   <h1>{t}</h1>
   <p class="chapeau">{c}</p>
   {svg}
-  <div class="pied"><p><strong>Domaine du Mons</strong> — collectif expérimental, Vitrac-sur-Montane (Corrèze)</p>{p}<p>domainedumons.actitude.org</p></div>
+  <div class="pied"><p><strong>Domaine du Mons</strong> — collectif expérimental, Vitrac-sur-Montane (Corrèze)</p>{p}<p>comons.actitude.org</p></div>
 </section>""".format(s=sur, t=titre, c=chapeau, svg=svg, p=pied)
 
 
@@ -143,7 +143,7 @@ def fiche_chapitre(page):
     return ident, code, titre, """<article class="chapitre" id="{i}">
 <h1>{cd}<span class="titre-courant">{t}</span></h1>
 {r}
-<p class="colophon">Collectif du Domaine du Mons — {cc}{t2}. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: domainedumons.actitude.org/{p}</p>
+<p class="colophon">Collectif du Domaine du Mons — {cc}{t2}. Fiche du Grain, CC BY-SA 4.0. Version en ligne&nbsp;: comons.actitude.org/{p}</p>
 </article>""".format(i=ident, cd=('<span class="code-fiche">%s</span>' % code) if code else "",
                      t=titre, r=reste, cc=(code + ", ") if code else "", t2=re.sub(r"<[^>]+>", "", titre), p=page)
 
@@ -207,7 +207,7 @@ def edition_projet():
                         "dessins/coupe.svg", ("Livret A5 · %s" % DATE,))
              + verso("<p>Ce livret reprend trois pages du site, telles qu'elles sont en ligne à la date d'édition. Le montage "
                      "juridique est en cours de constitution : les statuts et les actes seront publiés dès qu'ils seront "
-                     "signés. Version à jour : domainedumons.actitude.org.</p>")
+                     "signés. Version à jour : comons.actitude.org.</p>")
              + '<nav class="sommaire-edition"><h2>Sommaire</h2><ol>%s</ol></nav>' % som
              + "".join(parties))
     ecrire("le-projet", page_html("Le projet — livret", corps))
@@ -310,7 +310,7 @@ TETE = '<div class="v-tete"><strong>Domaine du Mons</strong><span>{r}</span></di
 
 def pied(x, source=True):
     src = ('<span class="v-source">Source : %s</span>' % G.e(x["source"])) if source and x.get("source") else "<span></span>"
-    url = "domainedumons.actitude.org/" + x["page"].replace("index.html", "")
+    url = "comons.actitude.org/" + x["page"].replace("index.html", "")
     return '<div class="v-pied">%s<span class="url">%s</span></div>' % (src, G.e(url))
 
 

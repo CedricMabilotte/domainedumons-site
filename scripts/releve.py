@@ -19,7 +19,7 @@ COLS = ["date", "t_min_c", "t_max_c", "t_moy_c", "pluie_mm", "etp_mm",
 
 
 def get(url, timeout=45):
-    req = urllib.request.Request(url, headers={"User-Agent": "domainedumons.actitude.org/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "comons.actitude.org/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.load(r)
 

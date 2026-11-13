@@ -39,7 +39,7 @@ import partage  # noqa: E402  les extraits à relayer, calculés sur data/
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENU = os.path.join(RACINE, "contenu")
 BUILD = os.path.join(RACINE, "build")
-SITE = "https://domainedumons.actitude.org/"
+SITE = "https://comons.actitude.org/"
 NOM = "Domaine du Mons"
 
 # Le numéro de version des ressources, en un seul endroit. À incrémenter dès

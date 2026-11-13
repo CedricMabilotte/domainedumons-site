@@ -24,7 +24,7 @@ RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SORTIE = os.path.join(RACINE, "data", "terrain.json")
 LAT, LON = 45.351433, 1.931875
 INSEE = "19287"
-UA = {"User-Agent": "domainedumons.actitude.org/1.0"}
+UA = {"User-Agent": "comons.actitude.org/1.0"}
 
 
 def get(url, timeout=60):

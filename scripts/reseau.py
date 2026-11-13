@@ -24,7 +24,7 @@ RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LAT, LON = 45.351433, 1.931875
 RAYON = 45                      # km à vol d'oiseau ≈ 1 h de route sur ces routes
 DEPS = ["19", "23", "87", "15", "63", "24", "46"]
-UA = {"User-Agent": "domainedumons.actitude.org/1.0"}
+UA = {"User-Agent": "comons.actitude.org/1.0"}
 
 
 def get(url, essais=3, attente=1.5):

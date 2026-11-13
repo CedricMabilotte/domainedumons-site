@@ -18,7 +18,7 @@ VARS = "temperature_2m_min,temperature_2m_max,temperature_2m_mean,precipitation_
 
 
 def get(url, timeout=60):
-    req = urllib.request.Request(url, headers={"User-Agent": "domainedumons.actitude.org/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "comons.actitude.org/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.load(r)
 

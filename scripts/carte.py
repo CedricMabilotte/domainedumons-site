@@ -19,7 +19,7 @@ LAT, LON = 45.351433, 1.931875
 RAYON = 45.0
 DEPS = ["19", "23", "87", "15", "46"]
 LARGEUR = 900.0
-UA = {"User-Agent": "domainedumons.actitude.org/1.0"}
+UA = {"User-Agent": "comons.actitude.org/1.0"}
 TOL = 0.0045          # tolérance pour le SVG statique, en degrés (~350 m)
 TOL_FIN = 0.0012      # tolérance pour le GeoJSON, plus fine : la carte Leaflet zoome
 
