@@ -35,7 +35,7 @@ def main():
         u = WMS % (couche, X0 - h, Y0 - h, X0 + h, Y0 + h, PX, PX)
         print("  %s…" % libelle)
         with urllib.request.urlopen(urllib.request.Request(
-                u, headers={"User-Agent": "domainedumons.actitude.org/1.0"}), timeout=180) as r:
+                u, headers={"User-Agent": "comons.actitude.org/1.0"}), timeout=180) as r:
             brut = r.read()
         im = Image.open(io.BytesIO(brut)).convert("RGB")
         ext = im.convert("L").getextrema()

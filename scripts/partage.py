@@ -27,7 +27,7 @@ import html, json, os, re, sys
 from urllib.parse import quote
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = "https://domainedumons.actitude.org/"
+SITE = "https://comons.actitude.org/"
 MOINS = "−"
 NBSP = " "
 

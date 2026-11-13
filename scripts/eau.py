@@ -22,7 +22,7 @@ STATION = "P361401001"
 ONDE = "P1320001"
 INSEE = "19287"
 SEUILS = [50, 20, 10]          # l/s — repères d'étiage
-UA = {"User-Agent": "domainedumons.actitude.org/1.0"}
+UA = {"User-Agent": "comons.actitude.org/1.0"}
 
 
 def get(url, essais=3):

@@ -231,7 +231,7 @@ def main():
         fautes += distantes(nom, t)
         if os.path.getsize(f) > 500_000:
             fautes.append("%s : %d Ko, au-delà des 500 Ko du cahier des charges" % (nom, os.path.getsize(f) // 1000))
-        og = re.search(r'property="og:image" content="https://domainedumons\.actitude\.org/([^"]+)"', t)
+        og = re.search(r'property="og:image" content="https://comons\.actitude\.org/([^"]+)"', t)
         if not og:
             fautes.append("%s : pas de vignette og:image" % nom)
         elif not os.path.exists(os.path.join(RACINE, og.group(1))):

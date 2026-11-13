@@ -46,7 +46,7 @@ def dalle(nom):
         u = WMS % (COUCHES[nom], X0 - h, Y0 - h, X0 + h, Y0 + h, N, N)
         print("  téléchargement %s (%d×%d)…" % (nom, N, N))
         with urllib.request.urlopen(urllib.request.Request(
-                u, headers={"User-Agent": "domainedumons.actitude.org/1.0"}), timeout=300) as r:
+                u, headers={"User-Agent": "comons.actitude.org/1.0"}), timeout=300) as r:
             open(f, "wb").write(r.read())
     a = tifffile.imread(f).astype(np.float64)
     a[a < -1000] = np.nan

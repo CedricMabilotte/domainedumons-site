@@ -36,7 +36,7 @@ ZIP = "https://media.interieur.gouv.fr/rna/rna_waldec_%s.zip" % MILLESIME
 NOMEN = ("https://journal-officiel-datadila.opendatasoft.com/api/explore/v2.1"
          "/catalog/datasets/joafe_domaine_activite/exports/json")
 DEPS = ["19", "23", "87", "15", "63", "24", "46"]
-UA = {"User-Agent": "domainedumons.actitude.org/1.0"}
+UA = {"User-Agent": "comons.actitude.org/1.0"}
 
 # Les familles de la nomenclature officielle susceptibles de porter un fait
 # d'intérêt général. Elles ne suffisent pas à retenir — elles délimitent le

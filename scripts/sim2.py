@@ -91,7 +91,7 @@ def completer():
     lignes = lire_csv()
     print("  téléchargement du fichier courant…")
     with urllib.request.urlopen(urllib.request.Request(
-            LATEST, headers={"User-Agent": "domainedumons.actitude.org/1.0"}), timeout=300) as r:
+            LATEST, headers={"User-Agent": "comons.actitude.org/1.0"}), timeout=300) as r:
         brut = gzip.decompress(r.read()).decode("utf-8", "replace")
     entetes, n = None, 0
     for ligne in csv.reader(io.StringIO(brut), delimiter=";"):
